@@ -5,6 +5,12 @@ module.exports = {
     author: `Greggoms`,
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-netlify-identity`,
+      options: {
+        url: `https://ptocalculator.netlify.app/`, // required!
+      },
+    },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     {
