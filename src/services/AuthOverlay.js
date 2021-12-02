@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 
 import { useIdentityContext } from "react-netlify-identity-gotrue"
-import { LoginForm } from "../services/auth"
+import { LoginForm } from "./auth"
 
 export const AuthOverlay = () => {
   const identity = useIdentityContext()

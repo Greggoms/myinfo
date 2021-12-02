@@ -2,8 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import { LoginForm } from "../services/auth"
-import { AuthOverlay } from "../components/AuthOverlay"
+import { Signup } from "../services/Signup"
 
 const IndexPage = () => {
   return (
@@ -16,8 +15,7 @@ const IndexPage = () => {
           You are logged in, so check your{" "}
           <Link to="/app/profile">profile</Link>
         </p>
-        <LoginForm />
-        <AuthOverlay />
+        <Signup />
       </div>
     </Layout>
   )
