@@ -6,9 +6,11 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-plugin-netlify-identity`,
+      resolve: `gatsby-plugin-netlify-identity-gotrue`,
       options: {
-        url: `https://ptocalculator.netlify.app/`, // required!
+        url: `https://ptocalculator.netlify.app`, // ❗REQUIRED❗
+        // Do _not_ include any path (/.netlify/identity, etc.) and
+        // leave the trailing slash off.
       },
     },
     `gatsby-plugin-react-helmet`,

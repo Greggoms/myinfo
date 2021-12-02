@@ -5,10 +5,7 @@ import { columns, data } from "./Database"
 
 export const ReactTable = () => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable(
-      { columns, data, initialState: { hiddenColumns: ["position"] } },
-      useSortBy
-    )
+    useTable({ columns, data }, useSortBy)
 
   return (
     <TableContainer {...getTableProps()}>
@@ -54,6 +51,15 @@ const TableContainer = styled.table`
 
   tbody tr:nth-child(odd) {
     background: #eee;
+  }
+
+  th {
+    border-top: 1px solid #333;
+    border-left: 1px solid #333;
+  }
+
+  th:last-child {
+    border-right: 1px solid #333;
   }
 
   th,

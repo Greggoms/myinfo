@@ -16,7 +16,6 @@ const DashboardPage = () => (
       </p>
       <p style={{ marginBottom: 0 }}>Regular Name - Associate</p>
     </div>
-    {/* <Table /> */}
     <ReactTable />
   </Layout>
 )

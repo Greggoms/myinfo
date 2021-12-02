@@ -18,6 +18,14 @@
   box-sizing: border-box;
 }
 
+[data-reach-dialog-overlay] {
+  position: absolute !important;
+}
+
+body {
+  margin-right: 0px !important;
+}
+
 html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
