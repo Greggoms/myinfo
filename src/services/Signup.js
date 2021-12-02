@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import { navigate } from "@reach/router"
-const netlifyIdentity = require("netlify-identity-widget")
+const netlifyIdentity =
+  typeof window !== `undefined` ? require("netlify-identity-widget") : null
 
 export const Signup = () => {
   useEffect(() => {
