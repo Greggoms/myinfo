@@ -2,7 +2,8 @@ import React from "react"
 import { Theme } from "./src/themes/Theme"
 import Layout from "./src/components/layout"
 const { createGlobalStyle, ThemeProvider } = require("styled-components")
-const netlifyIdentity = require("netlify-identity-widget")
+const netlifyIdentity =
+  typeof window !== `undefined` ? require("netlify-identity-widget") : null
 
 export const wrapRootElement = ({ element, props }) => {
   netlifyIdentity.init()
