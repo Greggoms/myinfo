@@ -20,13 +20,13 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <div className="container">
+      <LayoutContainer>
         <div className="content">
           <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
           <MainContainer>{children}</MainContainer>
         </div>
         <Footer />
-      </div>
+      </LayoutContainer>
     </>
   )
 }
@@ -39,4 +39,18 @@ export default Layout
 
 const MainContainer = styled.main`
   padding: 0 3rem;
+`
+const LayoutContainer = styled.div`
+  /*///////////////////////////
+  // Keeps footer at bottom. //
+  ///////////////////////////*/
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  .content {
+    flex-grow: 1;
+  }
+  /*/////////////////////////*/
 `

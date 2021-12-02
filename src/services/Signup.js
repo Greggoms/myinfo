@@ -1,4 +1,5 @@
 import React, { useEffect } from "react"
+import { navigate } from "@reach/router"
 const netlifyIdentity = require("netlify-identity-widget")
 
 export const Signup = () => {
@@ -7,6 +8,11 @@ export const Signup = () => {
     netlifyIdentity.store.user &&
       netlifyIdentity.refresh().then(jwt => console.log(jwt))
     console.log(netlifyIdentity)
+  }, [])
+
+  useEffect(() => {
+    netlifyIdentity.on("login", user => navigate("/"))
+    netlifyIdentity.on("logout", user => navigate("/"))
   }, [])
   const Logout = () => {
     netlifyIdentity.open()

@@ -1,5 +1,4 @@
 import React from "react"
-import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { Signup } from "../services/Signup"
 const netlifyIdentity = require("netlify-identity-widget")
@@ -7,7 +6,7 @@ const netlifyIdentity = require("netlify-identity-widget")
 const IndexPage = () => {
   console.log(netlifyIdentity.store.user)
   return (
-    <Layout>
+    <>
       <Seo title="Home" />
       <div>
         <h1>
@@ -34,7 +33,7 @@ const IndexPage = () => {
           </ul>
         )}
       </div>
-    </Layout>
+    </>
   )
 }
 

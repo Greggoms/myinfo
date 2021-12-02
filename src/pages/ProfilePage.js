@@ -1,13 +1,11 @@
 import * as React from "react"
 import { Profile } from "../components/Profile"
 import { data } from "../components/Database"
-
-import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 const ProfilePage = () => {
   return (
-    <Layout>
+    <>
       <Seo title="Your Profile" />
       {data.map(
         (
@@ -40,7 +38,7 @@ const ProfilePage = () => {
           )
         }
       )}
-    </Layout>
+    </>
   )
 }
 
