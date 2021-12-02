@@ -50,7 +50,12 @@ export const LoginForm = ({ navigateTarget }) => {
     </div>
   ) : (
     <div className="w-full max-w-xs">
-      <form className="pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        name="Login"
+        className="pt-6 pb-8 mb-4"
+        onSubmit={handleSubmit(onSubmit)}
+        data-netlify="true"
+      >
         <div className="mb-4">
           <label
             htmlFor="email"

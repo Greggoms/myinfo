@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { LoginForm } from "../services/auth"
+import { AuthOverlay } from "../components/AuthOverlay"
 
 const IndexPage = () => {
   return (
@@ -16,6 +17,7 @@ const IndexPage = () => {
           <Link to="/app/profile">profile</Link>
         </p>
         <LoginForm />
+        <AuthOverlay />
       </div>
     </Layout>
   )
