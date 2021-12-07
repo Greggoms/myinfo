@@ -17,21 +17,10 @@ const IndexPage = () => {
             : "User"}
         </h1>
         <Signup />
-        {netlifyIdentity.store.user !== null && (
-          <ul>
-            <li>someones here</li>
-            {/* <li>Email: {netlifyIdentity.currentUser.email}</li>
-            <li>ID: {netlifyIdentity.currentUser.id}</li>
-            <li>
-              Role(s): {netlifyIdentity.currentUser.app_metadata.roles.map(role => role)}
-            </li>
-            <li>Created: {netlifyIdentity.currentUser.created_at}</li>
-            <li>Confirmation Sent: {netlifyIdentity.currentUser.confirmation_sent_at}</li>
-            <li>Confirmed: {netlifyIdentity.currentUser.confirmation_sent_at}</li>
-            <li>Last Updated: {netlifyIdentity.currentUser.updated_at}</li>
-            <li>Signup Method: {netlifyIdentity.currentUser.currentUser_metadata.signupSource}</li>
-            <li>Provider: {netlifyIdentity.currentUser.app_metadata.provider}</li> */}
-          </ul>
+        {netlifyIdentity.store.user === null ? (
+          <h2>Knock knock, anyone there?</h2>
+        ) : (
+          <h2>Now that you're here. Check out your profile!</h2>
         )}
       </div>
     </>
