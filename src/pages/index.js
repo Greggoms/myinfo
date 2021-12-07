@@ -2,7 +2,7 @@ import React from "react"
 import Seo from "../components/seo"
 import { Signup } from "../services/Signup"
 const netlifyIdentity =
-  typeof window !== `undefined` ? require("netlify-identity-widget") : false
+  typeof window !== `undefined` ? require("netlify-identity-widget") : null
 
 const IndexPage = () => {
   if (typeof window !== `undefined`) {
