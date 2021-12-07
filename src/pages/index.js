@@ -14,9 +14,9 @@ const IndexPage = () => {
       <div>
         <h1>
           Hello{" "}
-          {netlifyIdentity.store.user
-            ? netlifyIdentity.store.user.user_metadata.full_name
-            : "User"}
+          {netlifyIdentity.store.user === null
+            ? "User"
+            : netlifyIdentity.store.user.user_metadata.full_name}
         </h1>
         <Signup />
         {netlifyIdentity.store.user === null ? (
