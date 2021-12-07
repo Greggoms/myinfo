@@ -12,8 +12,8 @@ export const Signup = () => {
   }, [])
 
   useEffect(() => {
-    netlifyIdentity.on("login", user => navigate("/"))
-    netlifyIdentity.on("logout", user => navigate("/"))
+    netlifyIdentity.on("login", () => navigate("/"))
+    netlifyIdentity.on("logout", () => navigate("/"))
   }, [])
   const Logout = () => {
     netlifyIdentity.open()
