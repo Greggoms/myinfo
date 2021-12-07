@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import { Nav } from "./Nav"
+import { Signup } from "../services/Signup"
 
 export const Header = ({ siteTitle }) => (
   <HeaderContainer>
@@ -10,6 +11,7 @@ export const Header = ({ siteTitle }) => (
       <h1>
         <Link to="/">{siteTitle}</Link>
       </h1>
+      <Signup />
       <Nav />
     </HeaderContents>
   </HeaderContainer>
@@ -39,6 +41,7 @@ const HeaderContents = styled.div`
 
   h1 {
     margin: 0;
+    flex: 1;
   }
 
   a {
