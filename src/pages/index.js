@@ -2,10 +2,12 @@ import React from "react"
 import Seo from "../components/seo"
 import { Signup } from "../services/Signup"
 const netlifyIdentity =
-  typeof window !== `undefined` ? require("netlify-identity-widget") : null
+  typeof window !== `undefined` ? require("netlify-identity-widget") : false
 
 const IndexPage = () => {
-  console.log(netlifyIdentity.store.user)
+  if (typeof window !== `undefined`) {
+    console.log(netlifyIdentity.store.user)
+  }
   return (
     <>
       <Seo title="Home" />

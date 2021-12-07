@@ -6,10 +6,13 @@ const netlifyIdentity =
   typeof window !== `undefined` ? require("netlify-identity-widget") : null
 
 export const wrapRootElement = ({ element, props }) => {
-  netlifyIdentity.init()
-  netlifyIdentity.store.user &&
-    netlifyIdentity.refresh().then(jwt => console.log(jwt))
-  console.log(netlifyIdentity)
+  if (typeof window !== `undefined`) {
+    netlifyIdentity.init()
+    netlifyIdentity.store.user &&
+      netlifyIdentity.refresh().then(jwt => console.log(jwt))
+    console.log(netlifyIdentity)
+  }
+
   return (
     <>
       <ThemeProvider theme={Theme}>
