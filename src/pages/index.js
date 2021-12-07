@@ -14,12 +14,12 @@ const IndexPage = () => {
       <div>
         <h1>
           Hello{" "}
-          {netlifyIdentity.store.user === null
+          {netlifyIdentity.store.user === null || `undefined`
             ? "User"
             : netlifyIdentity.store.user.user_metadata.full_name}
         </h1>
         <Signup />
-        {netlifyIdentity.store.user === null ? (
+        {netlifyIdentity.store.user === null || `undefined` ? (
           <h2>Knock knock, anyone there?</h2>
         ) : (
           <h2>Now that you're here. Check out your profile!</h2>
