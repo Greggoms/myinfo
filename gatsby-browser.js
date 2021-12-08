@@ -6,11 +6,10 @@ const { createGlobalStyle, ThemeProvider } = require("styled-components")
 const netlifyIdentity = require("netlify-identity-widget")
 
 export const wrapRootElement = ({ element, props }) => {
+  const user = netlifyIdentity.store.user
   if (isBrowser) {
     netlifyIdentity.init()
-    netlifyIdentity.store.user &&
-      netlifyIdentity.refresh().then(jwt => console.log(jwt))
-    console.log(netlifyIdentity)
+    user && netlifyIdentity.refresh()
   }
 
   return (

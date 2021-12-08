@@ -1,13 +1,11 @@
-import * as React from "react"
+import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import { Nav } from "./Nav"
 import { Signup } from "../services/Signup"
-const netlifyIdentity = require("netlify-identity-widget")
 
 export const Header = ({ siteTitle }) => {
-  const user = netlifyIdentity.store.user
   return (
     <HeaderContainer>
       <HeaderContents>
@@ -15,7 +13,7 @@ export const Header = ({ siteTitle }) => {
           <Link to="/">{siteTitle}</Link>
         </h1>
         <Signup />
-        {user === null ? false : <Nav />}
+        <Nav />
       </HeaderContents>
     </HeaderContainer>
   )

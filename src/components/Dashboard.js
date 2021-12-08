@@ -1,8 +1,8 @@
-import * as React from "react"
-import Seo from "../components/seo"
-import { ReactTable } from "../components/ReactTable"
+import React from "react"
+import Seo from "./seo"
+import { ReactTable } from "./ReactTable"
 
-const DashboardPage = () => (
+export const Dashboard = () => (
   <>
     <Seo title="Home" />
     <div>
@@ -17,5 +17,3 @@ const DashboardPage = () => (
     <ReactTable />
   </>
 )
-
-export default DashboardPage

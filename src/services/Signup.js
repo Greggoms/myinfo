@@ -3,19 +3,40 @@ import { navigate } from "@reach/router"
 import styled from "styled-components"
 const netlifyIdentity = require("netlify-identity-widget")
 
+// export function IsAuthenticated() {
+//   const user = netlifyIdentity.store.user
+//   const [JWT, setJWT] = useState("")
+//   const [authentic, setAuthentic] = useState(user !== null ? true : false)
+//   if (user !== null) {
+//     netlifyIdentity.refresh().then(jwt => {
+//       setJWT(jwt)
+//       JWT !== "" && setAuthentic(true)
+//       console.log(`Authenticated: ${jwt}`)
+//       console.log(authentic)
+//     })
+//   } else if (user === null) {
+//     console.log("No Token. Unauthenticated")
+//     setTimeout(() => {
+//       navigate("/")
+//     }, 3000)
+//   }
+//   return authentic
+// }
+
 export const Signup = () => {
   const user = netlifyIdentity.store.user
-  const [isLoggedIn, setIsLoggedIn] = useState(user ? true : false)
+  const [isLoggedIn, setIsLoggedIn] = useState(user !== null ? true : false)
   useEffect(() => {
     netlifyIdentity.init()
     user && netlifyIdentity.refresh().then(jwt => console.log(jwt))
-    console.log(netlifyIdentity)
+    // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
     netlifyIdentity.on("login", user => {
       navigate("/")
       setIsLoggedIn(true)
+      console.log(netlifyIdentity)
     })
     netlifyIdentity.on("logout", user => {
       navigate("/")
@@ -24,7 +45,6 @@ export const Signup = () => {
   }, [])
   const Logout = () => {
     netlifyIdentity.logout()
-    console.log("Logged out")
   }
   return (
     <LogContainer>
@@ -65,21 +85,3 @@ const LogContainer = styled.div`
     font-size: 12pt;
   }
 `
-
-// export const IsAuthenticated = () => {
-//   const user = netlifyIdentity.store.user
-//   const [JWT, setJWT] = useState("")
-//   const [authentic, setAuthentic] = useState(JWT !== "" ? true : false)
-//   if (user !== null) {
-//     netlifyIdentity.refresh().then(jwt => {
-//       setJWT(jwt)
-//       JWT !== "" && setAuthentic(true)
-//       console.log(`Authenticated: ${jwt}`)
-//     })
-//   } else if (user === null) {
-//     setAuthentic(false)
-//     console.log("No Token. Unauthenticated")
-//     navigate("/")
-//   }
-//   return authentic
-// }

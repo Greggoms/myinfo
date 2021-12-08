@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "gatsby"
 import Seo from "../components/seo"
 const netlifyIdentity = require("netlify-identity-widget")
 
@@ -10,7 +11,10 @@ const IndexPage = () => {
       <div>
         <h1>Hey {user ? user.user_metadata.full_name : "There!"}</h1>
         {user ? (
-          <h2>Now that you're here. Check out your profile!</h2>
+          <h2>
+            Now that you're here, check out your{" "}
+            <Link to="/app/profile">profile!</Link>
+          </h2>
         ) : (
           <h2>Knock knock, anyone there?</h2>
         )}
