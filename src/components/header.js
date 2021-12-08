@@ -4,18 +4,22 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import { Nav } from "./Nav"
 import { Signup } from "../services/Signup"
+const netlifyIdentity = require("netlify-identity-widget")
 
-export const Header = ({ siteTitle }) => (
-  <HeaderContainer>
-    <HeaderContents>
-      <h1>
-        <Link to="/">{siteTitle}</Link>
-      </h1>
-      <Signup />
-      <Nav />
-    </HeaderContents>
-  </HeaderContainer>
-)
+export const Header = ({ siteTitle }) => {
+  const user = netlifyIdentity.store.user
+  return (
+    <HeaderContainer>
+      <HeaderContents>
+        <h1>
+          <Link to="/">{siteTitle}</Link>
+        </h1>
+        <Signup />
+        {user === null ? false : <Nav />}
+      </HeaderContents>
+    </HeaderContainer>
+  )
+}
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
