@@ -1,14 +1,20 @@
 import React from "react"
 import { Link } from "gatsby"
+import styled from "styled-components"
 
 export const Nav = () => {
   return (
     <>
-      <nav>
-        <Link to="/Dashboard">Dashboard</Link>
-      </nav>
-
-      {/* <Link to="/ProfilePage">Profile</Link> */}
+      <NavContainer>
+        <Link to="/app/profile">Profile</Link>
+        <Link to="/app/dashboard">Dashboard</Link>
+      </NavContainer>
     </>
   )
 }
+
+const NavContainer = styled.nav`
+  a:first-child {
+    margin-right: 0.5rem;
+  }
+`

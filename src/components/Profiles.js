@@ -1,9 +1,9 @@
 import * as React from "react"
-import { Profile } from "../components/Profile"
-import { data } from "../components/Database"
-import Seo from "../components/seo"
+import Profile from "./Profile"
+import { data } from "./Database"
+import Seo from "./seo"
 
-const ProfilePage = () => {
+export const Profiles = () => {
   return (
     <>
       <Seo title="Your Profile" />
@@ -41,5 +41,3 @@ const ProfilePage = () => {
     </>
   )
 }
-
-export default ProfilePage

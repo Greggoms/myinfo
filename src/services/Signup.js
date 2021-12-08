@@ -3,9 +3,6 @@ import { navigate } from "@reach/router"
 import styled from "styled-components"
 const netlifyIdentity = require("netlify-identity-widget")
 
-// const netlifyIdentity =
-//   typeof window !== `undefined` ? require("netlify-identity-widget") : null
-
 export const Signup = () => {
   const user = netlifyIdentity.store.user
   const [isLoggedIn, setIsLoggedIn] = useState(user ? true : false)
@@ -68,3 +65,21 @@ const LogContainer = styled.div`
     font-size: 12pt;
   }
 `
+
+// export const IsAuthenticated = () => {
+//   const user = netlifyIdentity.store.user
+//   const [JWT, setJWT] = useState("")
+//   const [authentic, setAuthentic] = useState(JWT !== "" ? true : false)
+//   if (user !== null) {
+//     netlifyIdentity.refresh().then(jwt => {
+//       setJWT(jwt)
+//       JWT !== "" && setAuthentic(true)
+//       console.log(`Authenticated: ${jwt}`)
+//     })
+//   } else if (user === null) {
+//     setAuthentic(false)
+//     console.log("No Token. Unauthenticated")
+//     navigate("/")
+//   }
+//   return authentic
+// }

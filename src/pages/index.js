@@ -1,6 +1,5 @@
 import React from "react"
 import Seo from "../components/seo"
-// import { isBrowser } from "../services/isBrowser"
 const netlifyIdentity = require("netlify-identity-widget")
 
 const IndexPage = () => {
