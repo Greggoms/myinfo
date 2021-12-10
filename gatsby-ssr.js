@@ -10,6 +10,7 @@ export const wrapRootElement = ({ element, props }) => {
   if (isBrowser) {
     netlifyIdentity.init()
     user && netlifyIdentity.refresh()
+    console.log(user)
   }
 
   return (

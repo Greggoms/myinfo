@@ -1,4 +1,3 @@
-import React from "react"
 import { differenceInCalendarDays } from "date-fns"
 
 const currentYear = new Date().getFullYear()
@@ -70,8 +69,8 @@ export const columns = [
 
 export const data = [
   {
-    firstName: <em>Justin (Gary)</em>,
-    lastName: <em>Adkins</em>,
+    firstName: "Justin (Gary)",
+    lastName: "Adkins",
     location: "AR Jacksonville",
     hireDate: hireDate(2021, 8, 11),
     lifetimePTO: lifetimePTO(2021, 8, 11),
@@ -220,8 +219,8 @@ export const data = [
     position: "Associate",
   },
   {
-    firstName: <strong>Chase</strong>,
-    lastName: <strong>Cook</strong>,
+    firstName: "Chase",
+    lastName: "Cook",
     location: "VW Arkadelphia",
     hireDate: hireDate(2020, 6, 25),
     lifetimePTO: lifetimePTO(2020, 6, 25),
@@ -230,8 +229,8 @@ export const data = [
     position: "Manager",
   },
   {
-    firstName: <strong>Natasha</strong>,
-    lastName: <strong>Crawford</strong>,
+    firstName: "Natasha",
+    lastName: "Crawford",
     location: "VW HS Albert Pike",
     hireDate: hireDate(2018, 8, 13),
     lifetimePTO: lifetimePTO(2018, 8, 13),
@@ -240,8 +239,8 @@ export const data = [
     position: "Manager",
   },
   {
-    firstName: <em>Joseph</em>,
-    lastName: <em>Derossitt</em>,
+    firstName: "Joseph",
+    lastName: "Derossitt",
     location: "VW HS Central Ave",
     hireDate: hireDate(2020, 12, 3),
     lifetimePTO: lifetimePTO(2020, 12, 3),
@@ -280,8 +279,8 @@ export const data = [
     position: "Associate",
   },
   {
-    firstName: <strong>Jaren</strong>,
-    lastName: <strong>Evans</strong>,
+    firstName: "Jaren",
+    lastName: "Evans",
     location: "VW Benton",
     hireDate: hireDate(2018, 12, 16),
     lifetimePTO: lifetimePTO(2018, 12, 16),
@@ -310,8 +309,8 @@ export const data = [
     position: "Associate",
   },
   {
-    firstName: <em>Kelcye</em>,
-    lastName: <em>Fry</em>,
+    firstName: "Kelcye",
+    lastName: "Fry",
     location: "VW Arkadelphia",
     hireDate: hireDate(2021, 5, 29),
     lifetimePTO: lifetimePTO(2021, 5, 29),
@@ -371,8 +370,8 @@ export const data = [
     position: "Associate",
   },
   {
-    firstName: <strong>Ethan</strong>,
-    lastName: <strong>Holland</strong>,
+    firstName: "Ethan",
+    lastName: "Holland",
     location: "VW North LR",
     hireDate: hireDate(2020, 3, 17),
     lifetimePTO: lifetimePTO(2020, 3, 17),
@@ -412,8 +411,8 @@ export const data = [
     position: "Associate",
   },
   {
-    firstName: <em>Brett</em>,
-    lastName: <em>Hula</em>,
+    firstName: "Brett",
+    lastName: "Hula",
     location: "AR Maumelle",
     hireDate: hireDate(2021, 6, 5),
     lifetimePTO: lifetimePTO(2021, 6, 5),
@@ -432,8 +431,8 @@ export const data = [
     position: "Associate",
   },
   {
-    firstName: <strong>Corbin</strong>,
-    lastName: <strong>Jenkins</strong>,
+    firstName: "Corbin",
+    lastName: "Jenkins",
     location: "AR Maumelle",
     hireDate: hireDate(2018, 1, 11),
     lifetimePTO: lifetimePTO(2018, 1, 11),
@@ -452,8 +451,8 @@ export const data = [
     position: "Associate",
   },
   {
-    firstName: <strong>Terry</strong>,
-    lastName: <strong>Julian</strong>,
+    firstName: "Terry",
+    lastName: "Julian",
     location: "VW Rodney Parham",
     hireDate: hireDate(2018, 10, 8),
     lifetimePTO: lifetimePTO(2018, 10, 8),
@@ -462,8 +461,8 @@ export const data = [
     position: "Manager",
   },
   {
-    firstName: <strong>Chris</strong>,
-    lastName: <strong>Kelley</strong>,
+    firstName: "Chris",
+    lastName: "Kelley",
     location: "VW/AR Chenal",
     hireDate: hireDate(2020, 3, 23),
     lifetimePTO: lifetimePTO(2020, 3, 23),
@@ -492,8 +491,8 @@ export const data = [
     position: "Associate",
   },
   {
-    firstName: <em>Tony</em>,
-    lastName: <em>Kifer</em>,
+    firstName: "Tony",
+    lastName: "Kifer",
     location: "AR Otter Creek",
     hireDate: hireDate(2021, 6, 24),
     lifetimePTO: lifetimePTO(2021, 6, 24),
@@ -522,8 +521,8 @@ export const data = [
     position: "Associate",
   },
   {
-    firstName: <strong>David</strong>,
-    lastName: <strong>Lenderman</strong>,
+    firstName: "David",
+    lastName: "Lenderman",
     location: "AR Otter Creek",
     hireDate: hireDate(2018, 1, 11),
     lifetimePTO: lifetimePTO(2018, 1, 11),
@@ -552,16 +551,6 @@ export const data = [
     position: "Associate",
   },
   {
-    firstName: "Michael",
-    lastName: "Martin",
-    location: "VW North LR",
-    hireDate: hireDate(2019, 11, 19),
-    lifetimePTO: lifetimePTO(2019, 11, 19),
-    remainingPTO: remainingPTO(2019, 11, 19, 0, false),
-    daysUntil10Hrs: daysUntil10Hrs(2019, 11, 19),
-    position: "Associate",
-  },
-  {
     firstName: "Micheal",
     lastName: "Martin",
     location: "VW North LR",
@@ -582,8 +571,8 @@ export const data = [
     position: "Associate",
   },
   {
-    firstName: <em>Jay</em>,
-    lastName: <em>Myles</em>,
+    firstName: "Jay",
+    lastName: "Myles",
     location: "VW Benton",
     hireDate: hireDate(2020, 7, 20),
     lifetimePTO: lifetimePTO(2020, 7, 20),
@@ -592,8 +581,8 @@ export const data = [
     position: "Assitant Manager",
   },
   {
-    firstName: <strong>Jack</strong>,
-    lastName: <strong>Newton</strong>,
+    firstName: "Jack",
+    lastName: "Newton",
     location: "AR University",
     hireDate: hireDate(2018, 1, 11),
     lifetimePTO: lifetimePTO(2018, 1, 11),
@@ -612,8 +601,8 @@ export const data = [
     position: "Associate",
   },
   {
-    firstName: <em>Adam</em>,
-    lastName: <em>Reed</em>,
+    firstName: "Adam",
+    lastName: "Reed",
     location: "VW Rodney Parham",
     hireDate: hireDate(2020, 11, 30),
     lifetimePTO: lifetimePTO(2020, 11, 30),
@@ -642,8 +631,8 @@ export const data = [
     position: "Associate",
   },
   {
-    firstName: <em>Nick</em>,
-    lastName: <em>Rodriguez</em>,
+    firstName: "Nick",
+    lastName: "Rodriguez",
     location: "VW North LR",
     hireDate: hireDate(2020, 6, 8),
     lifetimePTO: lifetimePTO(2020, 6, 8),
@@ -652,8 +641,8 @@ export const data = [
     position: "Assistant Manager",
   },
   {
-    firstName: <strong>David</strong>,
-    lastName: <strong>Rose</strong>,
+    firstName: "David",
+    lastName: "Rose",
     location: "AR Sherwood",
     hireDate: hireDate(2019, 12, 21),
     lifetimePTO: lifetimePTO(2019, 12, 21),
@@ -662,8 +651,8 @@ export const data = [
     position: "Manager",
   },
   {
-    firstName: <strong>Adam</strong>,
-    lastName: <strong>Russell</strong>,
+    firstName: "Adam",
+    lastName: "Russell",
     location: "VW Bryant",
     hireDate: hireDate(2018, 5, 7),
     lifetimePTO: lifetimePTO(2018, 5, 7),
@@ -682,8 +671,8 @@ export const data = [
     position: "Associate",
   },
   {
-    firstName: <em>Simon</em>,
-    lastName: <em>Sharp</em>,
+    firstName: "Simon",
+    lastName: "Sharp",
     location: "VW HS Albert Pike",
     hireDate: hireDate(2020, 2, 15),
     lifetimePTO: lifetimePTO(2020, 2, 15),
@@ -692,8 +681,8 @@ export const data = [
     position: "Assistant Manager",
   },
   {
-    firstName: <em>Clayton</em>,
-    lastName: <em>Simpkins</em>,
+    firstName: "Clayton",
+    lastName: "Simpkins",
     location: "VW Bryant",
     hireDate: hireDate(2019, 3, 11),
     lifetimePTO: lifetimePTO(2019, 3, 11),
@@ -732,9 +721,9 @@ export const data = [
     position: "Associate",
   },
   {
-    firstName: <strong>Trevor</strong>,
-    lastName: <strong>Torgerson</strong>,
-    location: "VW Texarkana",
+    firstName: "Trevor",
+    lastName: "Torgerson",
+    location: "AR Texarkana",
     hireDate: hireDate(2021, 5, 5),
     lifetimePTO: lifetimePTO(2021, 5, 5),
     remainingPTO: remainingPTO(2021, 5, 5, 0, false),
@@ -762,8 +751,8 @@ export const data = [
     position: "Associate",
   },
   {
-    firstName: <em>Jonathon</em>,
-    lastName: <em>Warner</em>,
+    firstName: "Jonathon",
+    lastName: "Warner",
     location: "AR University",
     hireDate: hireDate(2021, 3, 6),
     lifetimePTO: lifetimePTO(2021, 3, 6),
@@ -772,8 +761,8 @@ export const data = [
     position: "Assistant Manager",
   },
   {
-    firstName: <em>Seth</em>,
-    lastName: <em>Willis</em>,
+    firstName: "Seth",
+    lastName: "Willis",
     location: "AR University",
     hireDate: hireDate(2019, 11, 11),
     lifetimePTO: lifetimePTO(2019, 11, 11),
@@ -782,8 +771,8 @@ export const data = [
     position: "Assistant Manager",
   },
   {
-    firstName: <em>Brandon</em>,
-    lastName: <em>Willman</em>,
+    firstName: "Brandon",
+    lastName: "Willman",
     location: "VW/AR Chenal",
     hireDate: hireDate(2020, 5, 4),
     lifetimePTO: lifetimePTO(2020, 5, 4),
@@ -792,8 +781,8 @@ export const data = [
     position: "Assistant Manager",
   },
   {
-    firstName: <strong>Alex</strong>,
-    lastName: <strong>Wools</strong>,
+    firstName: "Alex",
+    lastName: "Wools",
     location: "AR Jacksonville",
     hireDate: hireDate(2019, 10, 14),
     lifetimePTO: lifetimePTO(2019, 10, 14),

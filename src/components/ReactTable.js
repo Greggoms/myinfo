@@ -47,7 +47,7 @@ export const ReactTable = () => {
 const TableContainer = styled.table`
   width: 100%;
   max-width: 105rem;
-  margin: 0 auto;
+  margin: 3rem 0 auto;
 
   tbody tr:nth-child(odd) {
     background: #eee;

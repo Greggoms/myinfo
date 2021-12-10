@@ -5,6 +5,13 @@ const netlifyIdentity = require("netlify-identity-widget")
 
 const IndexPage = () => {
   const user = netlifyIdentity.store.user
+  let profileUrl
+  if (user !== null) {
+    profileUrl = `/app/profile/${user.id}`
+    return profileUrl
+  } else {
+    profileUrl = `/app/profile/no-user`
+  }
   return (
     <>
       <Seo title="Home" />
@@ -13,7 +20,7 @@ const IndexPage = () => {
         {user ? (
           <h2>
             Now that you're here, check out your{" "}
-            <Link to="/app/profile">profile!</Link>
+            <Link to={profileUrl}>profile!</Link>
           </h2>
         ) : (
           <h2>Knock knock, anyone there?</h2>

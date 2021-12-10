@@ -36,7 +36,7 @@ export const Signup = () => {
     netlifyIdentity.on("login", user => {
       navigate("/")
       setIsLoggedIn(true)
-      console.log(netlifyIdentity)
+      console.log(user.id)
     })
     netlifyIdentity.on("logout", user => {
       navigate("/")
