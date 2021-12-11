@@ -1,11 +1,14 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Seo from "./seo"
 import { ReactTable } from "./ReactTable"
 const netlifyIdentity = require("netlify-identity-widget")
 
 export const Dashboard = () => {
   const user = netlifyIdentity.currentUser()
-  let role = (user && user.app_metadata.roles.map(role => role)) || ""
+  const role =
+    user && user.app_metadata.roles
+      ? user.app_metadata.roles.map(role => role)
+      : null
   if (role == "Admin") {
     return (
       <>
@@ -18,7 +21,6 @@ export const Dashboard = () => {
       <>
         <Seo title="Dashboard" />
         <h2>You need Admin Rights for this.</h2>
-        <h2>Your role: {role}</h2>
       </>
     )
   }
