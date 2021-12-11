@@ -55,6 +55,8 @@ const IndexPage = () => {
 export default IndexPage
 
 const IndexPageContainer = styled.div`
+  margin: 0 auto;
+  max-width: 960px;
   h1 {
     margin-bottom: 1rem;
   }

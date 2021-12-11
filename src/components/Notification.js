@@ -6,5 +6,7 @@ export const Notification = props => {
 }
 
 const NotificationContainer = styled.h2`
+  margin: 0 auto;
+  max-width: 960px;
   color: red;
 `

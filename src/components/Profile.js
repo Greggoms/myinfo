@@ -9,7 +9,12 @@ export const Profile = () => {
       <Seo
         title={user ? `${user.user_metadata.full_name}'s Profile` : "Profile"}
       />
-      <div>
+      <div
+        style={{
+          maxWidth: "960px",
+          margin: "0 auto",
+        }}
+      >
         <h2>{user && user.user_metadata.full_name}'s Profile</h2>
         <p>Account Email: {user && user.email}</p>
         <p>ID: {user && user.id}</p>
