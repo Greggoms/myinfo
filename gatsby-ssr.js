@@ -1,7 +1,8 @@
-import React from "react"
+import React, { useState } from "react"
 import { Theme } from "./src/themes/Theme"
 import Layout from "./src/components/layout"
 import { isBrowser } from "./src/services/isBrowser"
+import { ClientOnly } from "./src/services/ClientOnly"
 const { createGlobalStyle, ThemeProvider } = require("styled-components")
 const netlifyIdentity = require("netlify-identity-widget")
 
@@ -12,14 +13,13 @@ export const wrapRootElement = ({ element, props }) => {
     user && netlifyIdentity.refresh()
     console.log(user)
   }
-
   return (
-    <>
+    <ClientOnly>
       <ThemeProvider theme={Theme}>
         <GlobalStyles />
         <Layout {...props}>{element}</Layout>
       </ThemeProvider>
-    </>
+    </ClientOnly>
   )
 }
 
