@@ -5,9 +5,7 @@ const netlifyIdentity = require("netlify-identity-widget")
 
 export const Dashboard = () => {
   const user = netlifyIdentity.currentUser()
-  const role = user.app_metadata.roles
-    ? user.app_metadata.roles.map(role => role)
-    : null
+  const role = user ? user.app_metadata.roles.map(role => role) : null
   if (role == "Admin") {
     return (
       <>
