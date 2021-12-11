@@ -5,7 +5,7 @@ const netlifyIdentity = require("netlify-identity-widget")
 
 export const Dashboard = () => {
   const user = netlifyIdentity.currentUser()
-  const role = user ? user.app_metadata.roles.map(role => role) : null
+  let role = (user && user.app_metadata.roles.map(role => role)) || ""
   if (role == "Admin") {
     return (
       <>
@@ -13,7 +13,7 @@ export const Dashboard = () => {
         <ReactTable />
       </>
     )
-  } else if (role !== null) {
+  } else {
     return (
       <>
         <Seo title="Dashboard" />
