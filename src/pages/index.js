@@ -4,7 +4,8 @@ import Seo from "../components/seo"
 const netlifyIdentity = require("netlify-identity-widget")
 
 const IndexPage = () => {
-  const user = netlifyIdentity.store.user
+  const user = netlifyIdentity.currentUser()
+
   return (
     <>
       <Seo title="Home" />
@@ -16,7 +17,34 @@ const IndexPage = () => {
             <Link to="/app/profile">profile!</Link>
           </h2>
         ) : (
-          <h2>Knock knock, anyone there?</h2>
+          <>
+            <p>
+              Get started by{" "}
+              <button
+                onClick={() => {
+                  netlifyIdentity.init()
+                  netlifyIdentity.open("login")
+                }}
+                style={{ textDecoration: "underline", cursor: "pointer" }}
+              >
+                Logging in
+              </button>
+              !
+            </p>
+            <p>
+              New around here?{" "}
+              <button
+                onClick={() => {
+                  netlifyIdentity.init()
+                  netlifyIdentity.open("signup")
+                }}
+                style={{ textDecoration: "underline", cursor: "pointer" }}
+              >
+                Create an account
+              </button>
+              .
+            </p>
+          </>
         )}
       </div>
     </>

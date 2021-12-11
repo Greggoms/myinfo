@@ -29,7 +29,7 @@ Header.defaultProps = {
 
 const HeaderContainer = styled.header`
   background: #333;
-  margin=bottom: 1.45rem;
+  margin-bottom: 1.45rem;
 `
 
 const HeaderContents = styled.div`

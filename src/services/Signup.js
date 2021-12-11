@@ -3,48 +3,26 @@ import { navigate } from "@reach/router"
 import styled from "styled-components"
 const netlifyIdentity = require("netlify-identity-widget")
 
-// export function IsAuthenticated() {
-//   const user = netlifyIdentity.store.user
-//   const [JWT, setJWT] = useState("")
-//   const [authentic, setAuthentic] = useState(user !== null ? true : false)
-//   if (user !== null) {
-//     netlifyIdentity.refresh().then(jwt => {
-//       setJWT(jwt)
-//       JWT !== "" && setAuthentic(true)
-//       console.log(`Authenticated: ${jwt}`)
-//       console.log(authentic)
-//     })
-//   } else if (user === null) {
-//     console.log("No Token. Unauthenticated")
-//     setTimeout(() => {
-//       navigate("/")
-//     }, 3000)
-//   }
-//   return authentic
-// }
-
 export const Signup = () => {
-  const user = netlifyIdentity.store.user
-  const [isLoggedIn, setIsLoggedIn] = useState(user !== null ? true : false)
-  useEffect(() => {
-    netlifyIdentity.init()
-    user && netlifyIdentity.refresh().then(jwt => console.log(jwt))
-    // eslint-disable-next-line
-  }, [])
+  const user = netlifyIdentity.currentUser()
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    user !== null && user.token !== null ? true : false
+  )
 
   useEffect(() => {
     netlifyIdentity.on("login", user => {
-      navigate("/")
       setIsLoggedIn(true)
-      console.log(user.id)
+      navigate("/app/profile")
+      console.log(user)
     })
-    netlifyIdentity.on("logout", user => {
-      navigate("/")
+    netlifyIdentity.on("logout", () => {
       setIsLoggedIn(false)
+      navigate("/")
     })
   }, [])
   const Logout = () => {
     netlifyIdentity.logout()
+    console.log(user)
   }
   return (
     <LogContainer>

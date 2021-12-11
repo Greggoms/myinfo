@@ -3,7 +3,7 @@ import { Notification } from "./Notification"
 const netlifyIdentity = require("netlify-identity-widget")
 
 const PrivateRoute = ({ component: Component, location, ...rest }) => {
-  const user = netlifyIdentity.store.user
+  const user = netlifyIdentity.currentUser()
   if (
     !user &&
     (location.pathname === `/app/profile` ||
