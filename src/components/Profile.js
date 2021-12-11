@@ -18,7 +18,7 @@ export const Profile = () => {
           Confirmation Email Sent:{" "}
           {user && user.confirmation_sent_at
             ? user.confirmation_sent_at.slice(0, 10)
-            : `Not sent?`}
+            : `Not sent? Thats a problem...`}
         </p>
         <p>Email Confirmed: {user && user.confirmed_at.slice(0, 10)}</p>
         <p>

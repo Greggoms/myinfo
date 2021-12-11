@@ -27,15 +27,15 @@ export const Signup = () => {
   return (
     <LogContainer>
       {isLoggedIn ? (
-        <>
+        <ModalButtonContainer>
           <span>Welcome {user.user_metadata.full_name},</span>
           <button onClick={Logout}>Logout</button>
-        </>
+        </ModalButtonContainer>
       ) : (
-        <>
+        <ModalButtonContainer>
           <button onClick={() => netlifyIdentity.open("login")}>Login</button>
           <button onClick={() => netlifyIdentity.open("signup")}>Signup</button>
-        </>
+        </ModalButtonContainer>
       )}
     </LogContainer>
   )
@@ -43,7 +43,11 @@ export const Signup = () => {
 
 const LogContainer = styled.div`
   display: flex;
-  margin-right: 2rem;
+  justify-content: space-between;
+  width: 100%;
+  @media only screen and (min-width: 600px) {
+    margin-right: 2rem;
+  }
 
   button:first-child {
     margin-right: 1rem;
@@ -61,5 +65,14 @@ const LogContainer = styled.div`
     color: ${props => props.theme.cubePalette.light};
     margin-right: 0.5rem;
     font-size: 12pt;
+  }
+`
+const ModalButtonContainer = styled.div`
+  /* max-width: 12rem; */
+  display: flex;
+  justify-content: space-between;
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+    margin: 0rem 0 2rem;
   }
 `

@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import { Nav } from "./Nav"
@@ -12,19 +11,13 @@ export const Header = ({ siteTitle }) => {
         <h1>
           <Link to="/">{siteTitle}</Link>
         </h1>
-        <Signup />
-        <Nav />
+        <div className="navigation">
+          <Signup />
+          <Nav />
+        </div>
       </HeaderContents>
     </HeaderContainer>
   )
-}
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
 }
 
 const HeaderContainer = styled.header`
@@ -41,6 +34,10 @@ const HeaderContents = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 
+  @media only screen and (max-width: 600px) {
+    align-items: center;
+  }
+
   h1 {
     margin: 0;
     flex: 1;
@@ -49,5 +46,14 @@ const HeaderContents = styled.div`
   a {
     color: white;
     text-decoration: none;
+  }
+
+  .navigation {
+    flex: 1;
+    display: flex;
+    @media only screen and (max-width: 600px) {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 `

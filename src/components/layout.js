@@ -38,7 +38,9 @@ Layout.propTypes = {
 export default Layout
 
 const MainContainer = styled.main`
-  padding: 0 3rem;
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 0 1.0875rem;
 `
 const LayoutContainer = styled.div`
   /*///////////////////////////

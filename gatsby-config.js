@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `PTO Calculator`,
-    description: `my pto calc`,
+    title: `My Info`,
+    description: `Come here to see your employee stats. Made with some cool technology.`,
     author: `Greggoms`,
   },
   plugins: [
