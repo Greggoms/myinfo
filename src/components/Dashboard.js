@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import Seo from "./seo"
 import { ReactTable } from "./ReactTable"
 const netlifyIdentity = require("netlify-identity-widget")
@@ -9,6 +9,7 @@ export const Dashboard = () => {
     user && user.app_metadata.roles
       ? user.app_metadata.roles.map(role => role)
       : null
+  // eslint-disable-next-line
   if (role == "Admin") {
     return (
       <>
