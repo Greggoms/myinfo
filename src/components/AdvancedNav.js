@@ -3,7 +3,7 @@ import { AdminNav } from "./AdminNav"
 import { NormalNav } from "./NormalNav"
 const netlifyIdentity = require("netlify-identity-widget")
 
-export const Nav = () => {
+export const AdvancedNav = () => {
   // My attempt to refresh the nav to show restricted links
   // only when a user is logged in.
   // Result: No crashing, but the update only occurs

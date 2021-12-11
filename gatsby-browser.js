@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { Theme } from "./src/themes/Theme"
 import Layout from "./src/components/layout"
 import { isBrowser } from "./src/services/isBrowser"

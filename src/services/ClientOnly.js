@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
+import styled from "styled-components"
 
 export const ClientOnly = ({ children }) => {
   const [hasMounted, setHasmounted] = useState(false)
@@ -11,5 +12,24 @@ export const ClientOnly = ({ children }) => {
     return null
   }
 
-  return children
+  return <PageRefreshContainer>{children}</PageRefreshContainer>
 }
+
+const PageRefreshContainer = styled.div`
+  animation-duration: 0.5s;
+  animation-name: appear;
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+    }
+
+    75% {
+      opacity: 0.75;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+`
