@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import { Nav } from "./Nav"
 import { Signup } from "../services/Signup"
-import { HeaderContainer, HeaderContents } from "../elements"
+import { HeaderContainer, HeaderContents } from "../elements/HeaderElements"
 
 export const Header = ({ siteTitle }) => {
   return (
