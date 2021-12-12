@@ -32,6 +32,7 @@ const GlobalStyles = createGlobalStyle`
 
 body, html {
     font-family: ${Theme.fonts.main};
+    font-display: fallback; /* <- this can be added to each @font-face definition */
     height: 100%;
     background-color: ${Theme.cubePalette.light};
     
