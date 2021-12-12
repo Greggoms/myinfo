@@ -27,7 +27,7 @@ const ProfilePage = () => {
     <>
       <Seo title={user && `${user.user_metadata.full_name}'s Profile`} />
       <h1 style={{ textAlign: "center" }}>
-        {user.user_metadata.full_name}'s Profile
+        {user && user.user_metadata.full_name}'s Profile
       </h1>
       <ProfileContainer>
         {ptoInfo ? (
