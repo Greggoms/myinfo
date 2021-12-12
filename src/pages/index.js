@@ -1,7 +1,11 @@
 import React from "react"
 import { Link } from "gatsby"
 import Seo from "../components/seo"
-import styled from "styled-components"
+import {
+  IndexPageContainer,
+  ButtonLinkContainer,
+  CTAContainer,
+} from "../elements"
 const netlifyIdentity = require("netlify-identity-widget")
 
 const IndexPage = () => {
@@ -15,36 +19,52 @@ const IndexPage = () => {
         {user ? (
           <h2>
             Now that you're here, check out your{" "}
-            <Link to="/app/profile">profile!</Link>
+            <ButtonLinkContainer>
+              <Link to="/app/profile">profile!</Link>
+            </ButtonLinkContainer>
           </h2>
         ) : (
           <>
-            <p>
-              Get started by{" "}
+            <CTAContainer>
               <ButtonLinkContainer
+                className="primary"
                 onClick={() => {
                   netlifyIdentity.init()
                   netlifyIdentity.open("login")
                 }}
-                style={{ textDecoration: "underline", cursor: "pointer" }}
               >
-                Logging in
+                Login
               </ButtonLinkContainer>
-              !
-            </p>
-            <p>
-              New around here?{" "}
               <ButtonLinkContainer
+                className="secondary"
                 onClick={() => {
                   netlifyIdentity.init()
                   netlifyIdentity.open("signup")
                 }}
-                style={{ textDecoration: "underline", cursor: "pointer" }}
+                style={{ background: "inherit !important" }}
               >
                 Create an account
               </ButtonLinkContainer>
-              .
-            </p>
+            </CTAContainer>
+            <div className="intro">
+              <p>
+                This is the place where you can view some of your employee
+                imformation.
+              </p>
+              <p>
+                Please sign up before trying to view your profile. You will be
+                able to see your info once you have confirmed your email.
+              </p>
+              <p>
+                PTO info can be viewed once I manually connect it after you
+                create your account. This will take ~5min if created between
+                9am-5pm mon-fri.
+              </p>
+              <p>
+                Consider this website in beta. There are many more visual and
+                fuctional improvements to add.
+              </p>
+            </div>
           </>
         )}
       </div>
@@ -53,20 +73,3 @@ const IndexPage = () => {
 }
 
 export default IndexPage
-
-const IndexPageContainer = styled.div`
-  margin: 0 auto;
-  max-width: 960px;
-  h1 {
-    margin-bottom: 1rem;
-  }
-  p {
-    margin-bottom: 2rem;
-  }
-`
-
-const ButtonLinkContainer = styled.button`
-  border: none;
-  background: rgba(181, 218, 255, 0.5);
-  padding: 0.2rem 0.1rem;
-`

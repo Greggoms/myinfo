@@ -76,6 +76,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 8, 11),
     remainingPTO: remainingPTO(2021, 8, 11, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 8, 11),
+    email: "",
     position: "Assistant Manager",
   },
   {
@@ -86,6 +87,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 11, 23),
     remainingPTO: remainingPTO(2021, 11, 23, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 11, 23),
+    email: "",
     position: "Associate",
   },
   {
@@ -96,6 +98,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 11, 22),
     remainingPTO: remainingPTO(2021, 11, 22, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 11, 22),
+    email: "",
     position: "Associate",
   },
   {
@@ -106,6 +109,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 11, 18),
     remainingPTO: remainingPTO(2021, 11, 18, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 11, 18),
+    email: "",
     position: "Associate",
   },
   {
@@ -116,6 +120,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 8, 23),
     remainingPTO: remainingPTO(2021, 8, 23, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 8, 23),
+    email: "",
     position: "Associate",
   },
   {
@@ -126,6 +131,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 7, 12),
     remainingPTO: remainingPTO(2021, 7, 12, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 7, 12),
+    email: "",
     position: "Associate",
   },
   {
@@ -136,6 +142,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 8, 30),
     remainingPTO: remainingPTO(2021, 8, 30, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 8, 30),
+    email: "",
     position: "Associate",
   },
   {
@@ -146,6 +153,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 8, 30),
     remainingPTO: remainingPTO(2021, 8, 30, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 8, 30),
+    email: "",
     position: "Associate",
   },
   {
@@ -156,6 +164,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 10, 4),
     remainingPTO: remainingPTO(2021, 10, 4, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 10, 4),
+    email: "",
     position: "Associate",
   },
   {
@@ -166,6 +175,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 5, 10),
     remainingPTO: remainingPTO(2021, 5, 10, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 5, 10),
+    email: "",
     position: "Associate",
   },
   {
@@ -176,6 +186,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2017, 8, 14),
     remainingPTO: remainingPTO(2017, 8, 14, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2017, 8, 14),
+    email: "rpggamer1337man@gmail.com",
     position: "Associate",
   },
   {
@@ -186,6 +197,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 8, 25),
     remainingPTO: remainingPTO(2021, 8, 25, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 8, 25),
+    email: "",
     position: "Associate",
   },
   {
@@ -196,6 +208,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 11, 8),
     remainingPTO: remainingPTO(2021, 11, 8, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 11, 8),
+    email: "",
     position: "Associate",
   },
   {
@@ -206,6 +219,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 5, 11),
     remainingPTO: remainingPTO(2021, 5, 11, 4, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 5, 11),
+    email: "",
     position: "Associate",
   },
   {
@@ -216,6 +230,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 4, 19),
     remainingPTO: remainingPTO(2021, 4, 19, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 4, 19),
+    email: "",
     position: "Associate",
   },
   {
@@ -226,6 +241,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2020, 6, 25),
     remainingPTO: remainingPTO(2020, 6, 25, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2020, 6, 25),
+    email: "",
     position: "Manager",
   },
   {
@@ -236,6 +252,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2018, 8, 13),
     remainingPTO: remainingPTO(2018, 8, 13, 48, false),
     daysUntil10Hrs: daysUntil10Hrs(2018, 8, 13),
+    email: "",
     position: "Manager",
   },
   {
@@ -246,6 +263,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2020, 12, 3),
     remainingPTO: remainingPTO(2020, 12, 3, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2020, 12, 3),
+    email: "",
     position: "Assistant Manager",
   },
   {
@@ -256,6 +274,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 5, 11),
     remainingPTO: remainingPTO(2021, 5, 11, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 5, 11),
+    email: "",
     position: "Associate",
   },
   {
@@ -266,6 +285,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 11, 29),
     remainingPTO: remainingPTO(2021, 11, 29, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 11, 29),
+    email: "",
     position: "Associate",
   },
   {
@@ -276,6 +296,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 11, 2),
     remainingPTO: remainingPTO(2021, 11, 2, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 11, 2),
+    email: "",
     position: "Associate",
   },
   {
@@ -286,6 +307,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2018, 12, 16),
     remainingPTO: remainingPTO(2018, 12, 16, 117, 7),
     daysUntil10Hrs: daysUntil10Hrs(2018, 12, 16),
+    email: "",
     position: "Manager",
   },
   // {
@@ -296,6 +318,7 @@ export const data = [
   //   lifetimePTO: lifetimePTO(2021, 9, 25),
   //   remainingPTO: remainingPTO(2021, 9, 25, 0, false),
   //   daysUntil10Hrs: daysUntil10Hrs(2021, 9, 25),
+  //   email: "",
   //   position: "Associate",
   // },
   {
@@ -306,6 +329,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2016, 6, 15),
     remainingPTO: remainingPTO(2016, 6, 15, 64, false),
     daysUntil10Hrs: daysUntil10Hrs(2016, 6, 15),
+    email: "",
     position: "Associate",
   },
   {
@@ -316,6 +340,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 5, 29),
     remainingPTO: remainingPTO(2021, 5, 29, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 5, 29),
+    email: "",
     position: "Assistant Manager",
   },
   {
@@ -326,6 +351,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 3, 29),
     remainingPTO: remainingPTO(2021, 3, 29, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 3, 29),
+    email: "",
     position: "Associate",
   },
   {
@@ -336,6 +362,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 7, 8),
     remainingPTO: remainingPTO(2021, 7, 8, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 7, 8),
+    email: "",
     position: "Associate",
   },
   {
@@ -346,6 +373,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2020, 9, 14),
     remainingPTO: remainingPTO(2020, 9, 14, 0, 24),
     daysUntil10Hrs: daysUntil10Hrs(2020, 9, 14),
+    email: "",
     position: "Associate",
     extraHours: 24,
   },
@@ -357,6 +385,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2017, 5, 23),
     remainingPTO: remainingPTO(2017, 5, 23, 80, false),
     daysUntil10Hrs: daysUntil10Hrs(2017, 5, 23),
+    email: "",
     position: "Associate",
   },
   {
@@ -367,6 +396,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 9, 6),
     remainingPTO: remainingPTO(2021, 9, 6, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 9, 6),
+    email: "",
     position: "Associate",
   },
   {
@@ -377,6 +407,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2020, 3, 17),
     remainingPTO: remainingPTO(2020, 3, 17, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2020, 3, 17),
+    email: "",
     position: "Manager",
   },
   {
@@ -387,6 +418,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 1, 6),
     remainingPTO: remainingPTO(2021, 1, 6, 30, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 1, 6),
+    email: "",
     position: "Associate",
   },
   {
@@ -397,6 +429,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 3, 5),
     remainingPTO: remainingPTO(2021, 3, 5, 30, 10),
     daysUntil10Hrs: daysUntil10Hrs(2021, 3, 5),
+    email: "",
     position: "Associate",
     extraHours: 10,
   },
@@ -408,6 +441,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 11, 1),
     remainingPTO: remainingPTO(2021, 11, 1, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 11, 1),
+    email: "",
     position: "Associate",
   },
   {
@@ -418,6 +452,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 6, 5),
     remainingPTO: remainingPTO(2021, 6, 5, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 6, 5),
+    email: "",
     position: "Assistant Manager",
   },
   {
@@ -428,6 +463,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 7, 26),
     remainingPTO: remainingPTO(2021, 7, 26, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 7, 26),
+    email: "",
     position: "Associate",
   },
   {
@@ -438,6 +474,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2018, 1, 11),
     remainingPTO: remainingPTO(2018, 1, 11, 66, false),
     daysUntil10Hrs: daysUntil10Hrs(2018, 1, 11),
+    email: "",
     position: "Manager",
   },
   {
@@ -448,6 +485,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 5, 3),
     remainingPTO: remainingPTO(2021, 5, 3, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 5, 3),
+    email: "",
     position: "Associate",
   },
   {
@@ -458,6 +496,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2018, 10, 8),
     remainingPTO: remainingPTO(2018, 10, 8, 45, false),
     daysUntil10Hrs: daysUntil10Hrs(2018, 10, 8),
+    email: "",
     position: "Manager",
   },
   {
@@ -468,6 +507,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2020, 3, 23),
     remainingPTO: remainingPTO(2020, 3, 23, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2020, 3, 23),
+    email: "",
     position: "Manager",
   },
   {
@@ -478,6 +518,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 7, 14),
     remainingPTO: remainingPTO(2021, 7, 14, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 7, 14),
+    email: "",
     position: "Associate",
   },
   {
@@ -488,6 +529,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 10, 13),
     remainingPTO: remainingPTO(2021, 10, 13, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 10, 13),
+    email: "",
     position: "Associate",
   },
   {
@@ -498,6 +540,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 6, 24),
     remainingPTO: remainingPTO(2021, 6, 24, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 6, 24),
+    email: "",
     position: "Assistant Manager",
   },
   {
@@ -508,6 +551,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 9, 1),
     remainingPTO: remainingPTO(2021, 9, 1, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 9, 1),
+    email: "",
     position: "Associate",
   },
   {
@@ -518,6 +562,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 9, 18),
     remainingPTO: remainingPTO(2021, 9, 18, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 9, 18),
+    email: "",
     position: "Associate",
   },
   {
@@ -528,6 +573,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2018, 1, 11),
     remainingPTO: remainingPTO(2018, 1, 11, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2018, 1, 11),
+    email: "",
     position: "Manager",
   },
   {
@@ -538,6 +584,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 3, 8),
     remainingPTO: remainingPTO(2021, 3, 8, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 3, 8),
+    email: "",
     position: "Associate",
   },
   {
@@ -548,6 +595,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 3, 1),
     remainingPTO: remainingPTO(2021, 3, 1, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 3, 1),
+    email: "",
     position: "Associate",
   },
   {
@@ -558,6 +606,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2019, 11, 19),
     remainingPTO: remainingPTO(2019, 11, 19, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2019, 11, 19),
+    email: "",
     position: "Associate",
   },
   {
@@ -568,6 +617,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 6, 8),
     remainingPTO: remainingPTO(2021, 6, 8, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 6, 8),
+    email: "",
     position: "Associate",
   },
   {
@@ -578,6 +628,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2020, 7, 20),
     remainingPTO: remainingPTO(2020, 7, 20, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2020, 7, 20),
+    email: "",
     position: "Assitant Manager",
   },
   {
@@ -588,6 +639,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2018, 1, 11),
     remainingPTO: remainingPTO(2018, 1, 11, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2018, 1, 11),
+    email: "",
     position: "Manager",
   },
   {
@@ -598,6 +650,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2016, 7, 26),
     remainingPTO: remainingPTO(2016, 7, 26, 64, false),
     daysUntil10Hrs: daysUntil10Hrs(2016, 7, 26),
+    email: "",
     position: "Associate",
   },
   {
@@ -608,6 +661,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2020, 11, 30),
     remainingPTO: remainingPTO(2020, 11, 30, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2020, 11, 30),
+    email: "",
     position: "Assistant Manager",
   },
   {
@@ -618,6 +672,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2017, 8, 14),
     remainingPTO: remainingPTO(2017, 8, 14, 48, false),
     daysUntil10Hrs: daysUntil10Hrs(2017, 8, 14),
+    email: "",
     position: "Associate",
   },
   {
@@ -628,6 +683,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2020, 11, 23),
     remainingPTO: remainingPTO(2020, 11, 23, 8, false),
     daysUntil10Hrs: daysUntil10Hrs(2020, 11, 23),
+    email: "",
     position: "Associate",
   },
   {
@@ -638,6 +694,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2020, 6, 8),
     remainingPTO: remainingPTO(2020, 6, 8, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2020, 6, 8),
+    email: "",
     position: "Assistant Manager",
   },
   {
@@ -648,6 +705,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2019, 12, 21),
     remainingPTO: remainingPTO(2019, 12, 21, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2019, 12, 21),
+    email: "",
     position: "Manager",
   },
   {
@@ -658,6 +716,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2018, 5, 7),
     remainingPTO: remainingPTO(2018, 5, 7, 48, false),
     daysUntil10Hrs: daysUntil10Hrs(2018, 5, 7),
+    email: "",
     position: "Manager",
   },
   {
@@ -668,6 +727,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2020, 12, 17),
     remainingPTO: remainingPTO(2020, 12, 17, 8, false),
     daysUntil10Hrs: daysUntil10Hrs(2020, 12, 17),
+    email: "",
     position: "Associate",
   },
   {
@@ -678,6 +738,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2020, 2, 15),
     remainingPTO: remainingPTO(2020, 2, 15, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2020, 2, 15),
+    email: "",
     position: "Assistant Manager",
   },
   {
@@ -688,6 +749,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2019, 3, 11),
     remainingPTO: remainingPTO(2019, 3, 11, 40, false),
     daysUntil10Hrs: daysUntil10Hrs(2019, 3, 11),
+    email: "",
     position: "Assistant Manager",
   },
   {
@@ -698,6 +760,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 3, 8),
     remainingPTO: remainingPTO(2021, 3, 8, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 3, 8),
+    email: "",
     position: "Associate",
   },
   {
@@ -708,6 +771,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 9, 6),
     remainingPTO: remainingPTO(2021, 9, 6, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 9, 6),
+    email: "",
     position: "Associate",
   },
   {
@@ -718,6 +782,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 7, 27),
     remainingPTO: remainingPTO(2021, 7, 27, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 7, 27),
+    email: "",
     position: "Associate",
   },
   {
@@ -728,6 +793,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 5, 5),
     remainingPTO: remainingPTO(2021, 5, 5, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 5, 5),
+    email: "",
     position: "Manager",
   },
   {
@@ -738,6 +804,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 2, 19),
     remainingPTO: remainingPTO(2021, 2, 19, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 2, 19),
+    email: "",
     position: "Associate",
   },
   {
@@ -748,6 +815,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 4, 4),
     remainingPTO: remainingPTO(2021, 4, 4, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 4, 4),
+    email: "",
     position: "Associate",
   },
   {
@@ -758,6 +826,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 3, 6),
     remainingPTO: remainingPTO(2021, 3, 6, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 3, 6),
+    email: "",
     position: "Assistant Manager",
   },
   {
@@ -768,6 +837,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2019, 11, 11),
     remainingPTO: remainingPTO(2019, 11, 11, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2019, 11, 11),
+    email: "",
     position: "Assistant Manager",
   },
   {
@@ -778,6 +848,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2020, 5, 4),
     remainingPTO: remainingPTO(2020, 5, 4, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2020, 5, 4),
+    email: "",
     position: "Assistant Manager",
   },
   {
@@ -788,6 +859,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2019, 10, 14),
     remainingPTO: remainingPTO(2019, 10, 14, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2019, 10, 14),
+    email: "",
     position: "Manager",
   },
   {
@@ -798,6 +870,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2021, 10, 11),
     remainingPTO: remainingPTO(2021, 10, 11, 0, false),
     daysUntil10Hrs: daysUntil10Hrs(2021, 10, 11),
+    email: "",
     position: "Associate",
   },
 ]

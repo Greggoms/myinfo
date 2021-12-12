@@ -1,8 +1,8 @@
 import React from "react"
 import { Link } from "gatsby"
-import styled from "styled-components"
 import { Nav } from "./Nav"
 import { Signup } from "../services/Signup"
+import { HeaderContainer, HeaderContents } from "../elements"
 
 export const Header = ({ siteTitle }) => {
   return (
@@ -19,41 +19,3 @@ export const Header = ({ siteTitle }) => {
     </HeaderContainer>
   )
 }
-
-const HeaderContainer = styled.header`
-  background: #333;
-  margin-bottom: 1.45rem;
-`
-
-const HeaderContents = styled.div`
-  margin: 0 auto;
-  max-width: 960px;
-  padding: 1.45rem 1.0875rem;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-
-  @media only screen and (max-width: 600px) {
-    align-items: center;
-  }
-
-  h1 {
-    margin: 0;
-    flex: 1;
-  }
-
-  a {
-    color: white;
-    text-decoration: none;
-  }
-
-  .navigation {
-    flex: 1;
-    display: flex;
-    @media only screen and (max-width: 600px) {
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-`

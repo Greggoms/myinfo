@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
-import styled from "styled-components"
+import { NavContainer } from "../elements"
 
 export const Nav = () => {
   return (
@@ -10,14 +10,3 @@ export const Nav = () => {
     </NavContainer>
   )
 }
-
-const NavContainer = styled.nav`
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
-  a:first-child {
-    margin-right: 0.5rem;
-  }
-`

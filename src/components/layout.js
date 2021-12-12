@@ -1,10 +1,9 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import styled from "styled-components"
-
-import { Header } from "./header"
+import { Header } from "./Header"
 import { Footer } from "./Footer"
+import { LayoutContainer, MainContainer } from "../elements"
 import "./layout.css"
 
 const Layout = ({ children }) => {
@@ -36,22 +35,3 @@ Layout.propTypes = {
 }
 
 export default Layout
-
-const MainContainer = styled.main`
-  margin: 0 auto;
-  padding: 0 1.0875rem;
-`
-const LayoutContainer = styled.div`
-  /*///////////////////////////
-  // Keeps footer at bottom. //
-  ///////////////////////////*/
-
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-
-  .content {
-    flex-grow: 1;
-  }
-  /*/////////////////////////*/
-`

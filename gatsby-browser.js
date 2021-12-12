@@ -34,7 +34,17 @@ body, html {
     font-family: ${Theme.fonts.main};
     height: 100%;
     background-color: ${Theme.cubePalette.light};
-}
+    
+  }
+  
+  html html iframe #netlify-identity-widget {
+    .modalContainer {
+      justify-content: center !important;
+    }
+    .modalDialog {
+      flex-grow: 0 !important;
+    }
+  }
     
 body {
     margin-right: 0px !important;

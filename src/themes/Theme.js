@@ -11,6 +11,16 @@ export const Theme = {
     light: "#faf8ff",
     facebook: "#5891ed",
   },
+  grayscale: {
+    light1: "#F2F2F2",
+    light2: "#BFBFBF",
+    light3: "#8C8C8C",
+    light4: "#8C8C8C",
+    dark1: "#737373",
+    dark2: "#595959",
+    dark3: "#404040",
+    dark4: "#333333",
+  },
   spacings: {
     xxSmall: ".25rem",
     xSmall: ".5rem",

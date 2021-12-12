@@ -1,7 +1,11 @@
 import React from "react"
 import Seo from "./seo"
 import { ReactTable } from "./ReactTable"
-import styled from "styled-components"
+import { Notification } from "../components/Notification"
+import {
+  DashboardPageContainer,
+  DashboardPageErrorContainer,
+} from "../elements"
 const netlifyIdentity = require("netlify-identity-widget")
 
 export const Dashboard = () => {
@@ -22,17 +26,8 @@ export const Dashboard = () => {
     return (
       <DashboardPageErrorContainer>
         <Seo title="Dashboard" />
-        <h2>You need Admin Rights for this.</h2>
+        <Notification message="You need Admin Rights for this." />
       </DashboardPageErrorContainer>
     )
   }
 }
-
-const DashboardPageContainer = styled.div`
-  margin: 0 auto;
-  max-width: 100rem;
-`
-const DashboardPageErrorContainer = styled.div`
-  margin: 0 auto;
-  max-width: 960px;
-`

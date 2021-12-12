@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
-import styled from "styled-components"
+import { NavContainer } from "../elements"
 
 export const NormalNav = () => {
   return (
@@ -9,9 +9,3 @@ export const NormalNav = () => {
     </NavContainer>
   )
 }
-
-const NavContainer = styled.nav`
-  a:first-child {
-    /* margin-right: 0.5rem; */
-  }
-`

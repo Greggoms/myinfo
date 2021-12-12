@@ -1,7 +1,7 @@
 import React from "react"
 import { useTable, useSortBy } from "react-table"
-import styled from "styled-components"
 import { columns, data } from "./Database"
+import { TableContainer } from "../elements"
 
 export const ReactTable = () => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
@@ -43,27 +43,3 @@ export const ReactTable = () => {
     </TableContainer>
   )
 }
-
-const TableContainer = styled.table`
-  width: 100%;
-  max-width: 105rem;
-  margin: 3rem 0 auto;
-
-  tbody tr:nth-child(odd) {
-    background: #eee;
-  }
-
-  th {
-    border-top: 1px solid #333;
-    border-left: 1px solid #333;
-  }
-
-  th:last-child {
-    border-right: 1px solid #333;
-  }
-
-  th,
-  td {
-    padding: 0.5rem 1.5rem !important;
-  }
-`
