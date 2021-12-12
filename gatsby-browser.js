@@ -2,7 +2,7 @@ import React from "react"
 import { Theme } from "./src/themes/Theme"
 import Layout from "./src/components/layout"
 import { isBrowser } from "./src/services/isBrowser"
-import { ClientOnly } from "./src/services/ClientOnly"
+// import { ClientOnly } from "./src/services/ClientOnly"
 const { createGlobalStyle, ThemeProvider } = require("styled-components")
 const netlifyIdentity = require("netlify-identity-widget")
 
@@ -15,10 +15,10 @@ export const wrapRootElement = ({ element, props }) => {
   }
   return (
     <ThemeProvider theme={Theme}>
-      <ClientOnly>
-        <GlobalStyles />
-        <Layout {...props}>{element}</Layout>
-      </ClientOnly>
+      {/* <ClientOnly> */}
+      <GlobalStyles />
+      <Layout {...props}>{element}</Layout>
+      {/* </ClientOnly> */}
     </ThemeProvider>
   )
 }
