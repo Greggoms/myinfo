@@ -6,6 +6,7 @@ import {
   DashboardPageContainer,
   DashboardPageErrorContainer,
 } from "../elements"
+import Svg from "../images/svg/lock.svg"
 const netlifyIdentity = require("netlify-identity-widget")
 
 const DashboardPage = () => {
@@ -27,6 +28,9 @@ const DashboardPage = () => {
       <DashboardPageErrorContainer>
         <Seo title="Dashboard" />
         <Notification message="You need Admin Rights for this." />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Svg style={{ maxWidth: "30rem", opacity: 0.5 }} />
+        </div>
       </DashboardPageErrorContainer>
     )
   }
