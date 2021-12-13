@@ -2,7 +2,6 @@ import React from "react"
 import { Theme } from "./src/themes/Theme"
 import Layout from "./src/components/layout"
 import { isBrowser } from "./src/services/isBrowser"
-// import { ClientOnly } from "./src/services/ClientOnly"
 const { createGlobalStyle, ThemeProvider } = require("styled-components")
 const netlifyIdentity = require("netlify-identity-widget")
 
@@ -15,10 +14,8 @@ export const wrapRootElement = ({ element, props }) => {
   }
   return (
     <ThemeProvider theme={Theme}>
-      {/* <ClientOnly> */}
       <GlobalStyles />
       <Layout {...props}>{element}</Layout>
-      {/* </ClientOnly> */}
     </ThemeProvider>
   )
 }
@@ -34,7 +31,7 @@ body, html {
     font-family: ${Theme.fonts.main};
     font-display: fallback; /* <- this can be added to each @font-face definition */
     height: 100%;
-    background-color: ${Theme.cubePalette.light};
+    background-color: ${Theme.grayscale.dark3};
     
   }
   

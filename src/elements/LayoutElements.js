@@ -16,7 +16,7 @@ export const LayoutContainer = styled.div`
 
   .content {
     flex-grow: 1;
-    background: ${props => props.theme.grayscale.light3};
+    background: ${props => props.theme.grayscale.dark2};
   }
   /*/////////////////////////*/
 `

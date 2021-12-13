@@ -12,7 +12,7 @@ export const IndexPageContainer = styled.div`
   }
   p {
     margin-bottom: 2rem;
-    line-height: 20pt;
+    font-size: 18pt;
   }
 
   .intro {
@@ -32,13 +32,13 @@ export const CTAContainer = styled.section`
   .primary {
     background: inherit;
     padding: 0.7rem 1.5rem;
-    border: 1px solid ${props => props.theme.grayscale.dark4};
+    border: 3px solid ${props => props.theme.colors.link};
     border-radius: 0.5rem;
     color: ${props => props.theme.grayscale.light1};
 
     :hover {
       color: ${props => props.theme.grayscale.light1};
-      background: ${props => props.theme.grayscale.dark4};
+      background: ${props => props.theme.colors.purple};
     }
   }
 
@@ -58,20 +58,17 @@ export const ButtonLinkContainer = styled.button`
   cursor: pointer;
   a:link {
     border: none;
-    color: black;
   }
   a:visited {
-    color: black;
   }
   a:hover {
-    color: ${props => props.theme.grayscale.light1};
-    background: ${props => props.theme.grayscale.dark4};
+    color: ${props => props.theme.colors.green};
   }
   a:active {
   }
   a {
+    color: ${props => props.theme.colors.link};
     transition: all 0.3s ease;
     padding: 0.2rem 0.1rem 0.5rem;
-    background: rgba(181, 218, 255);
   }
 `

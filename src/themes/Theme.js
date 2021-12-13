@@ -3,19 +3,16 @@ export const Theme = {
     main: "Muli, sans-serif",
     code: "Roboto Main, monospace",
   },
-  cubePalette: {
-    text: "#333333",
+  colors: {
+    purple: "#B149BF",
+    green: "#09A603",
     link: "#00c5d6",
-    accent: "#e8d5b5",
-    dark: "#101032",
-    light: "#faf8ff",
-    facebook: "#5891ed",
   },
   grayscale: {
     light1: "#F2F2F2",
     light2: "#BFBFBF",
     light3: "#8C8C8C",
-    light4: "#8C8C8C",
+    light4: "#808080",
     dark1: "#737373",
     dark2: "#595959",
     dark3: "#404040",

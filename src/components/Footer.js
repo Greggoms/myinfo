@@ -5,9 +5,9 @@ export const Footer = () => {
   return (
     <FooterContainer>
       <FooterContents>
-        © {new Date().getFullYear()}, Built with
+        Built with
         {` `}
-        <a href="https://www.gatsbyjs.com">Gatsby</a>
+        <a href="https://www.gatsbyjs.com">Gatsby</a> by Greggoms
       </FooterContents>
     </FooterContainer>
   )

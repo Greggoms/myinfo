@@ -10,6 +10,8 @@ export const LogContainer = styled.div`
 
   button:first-child {
     margin-right: 1rem;
+    text-decoration: none;
+    border-bottom: 2px solid ${props => props.theme.colors.link};
   }
 
   button {

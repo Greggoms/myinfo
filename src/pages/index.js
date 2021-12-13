@@ -49,16 +49,18 @@ const IndexPage = () => {
             <div className="intro">
               <p>
                 This is the place where you can view some of your employee
-                imformation.
+                information.
               </p>
               <p>
-                Please sign up before trying to view your profile. You will be
-                able to see your info once you have confirmed your email.
+                Sign up before trying to view your profile. Please use a name I
+                can recognize so I know who's signing up.
               </p>
               <p>
                 PTO info can be viewed once I manually connect it after you
-                create your account. This will take ~5min if created between
-                9am-5pm mon-fri.
+                create your account. This shouldn't take long, but keep in mind
+                the website will have to be rebuilt everytime an account is
+                added. I'll keep an eye out for signups and try to hook you up
+                asap. If I'm taking too long then dm me on the groupme.
               </p>
               <p>
                 Consider this website in beta. There are many more visual and
