@@ -418,7 +418,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2017, 5, 23),
     remainingPTO: remainingPTO(2017, 5, 23, 80, false),
     daysUntil10Hrs: daysUntil10Hrs(2017, 5, 23),
-    email: "",
+    email: "natehardister@gmail.com",
     position: "Associate",
   },
   {
