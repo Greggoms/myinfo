@@ -1,7 +1,7 @@
 import React from "react"
 import { Notification } from "./Notification"
 import Seo from "./seo"
-import Svg from "../images/svg/lock.svg"
+import Svg from "../svg/lock.svg"
 const netlifyIdentity = require("netlify-identity-widget")
 
 const PrivateRoute = ({ component: Component, location, ...rest }) => {
@@ -11,9 +11,9 @@ const PrivateRoute = ({ component: Component, location, ...rest }) => {
       <>
         <Seo title="Profile" />
         <Notification message="You must be logged in to view your profile." />
-        <object style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
           <Svg style={{ maxWidth: "30rem", opacity: 0.5 }} />
-        </object>
+        </div>
       </>
     )
   } else if (!user && location.pathname === `/app/dashboard`) {
@@ -21,9 +21,9 @@ const PrivateRoute = ({ component: Component, location, ...rest }) => {
       <>
         <Seo title="Dashboard" />
         <Notification message="You must be logged in to see the dashboard." />
-        <object style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
           <Svg style={{ maxWidth: "30rem", opacity: 0.5 }} />
-        </object>
+        </div>
       </>
     )
   }

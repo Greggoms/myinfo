@@ -6,7 +6,7 @@ import {
   DashboardPageContainer,
   DashboardPageErrorContainer,
 } from "../elements"
-import Svg from "../images/svg/lock.svg"
+import Svg from "../svg/lock.svg"
 const netlifyIdentity = require("netlify-identity-widget")
 
 const DashboardPage = () => {
