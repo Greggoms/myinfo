@@ -29,7 +29,13 @@ const DashboardPage = () => {
         <Seo title="Dashboard" />
         <Notification message="You need Admin Rights for this." />
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <Svg style={{ maxWidth: "30rem", opacity: 0.5 }} />
+          <Svg
+            style={{
+              maxWidth: "30rem",
+              opacity: 0.5,
+              display: "inline !important",
+            }}
+          />
         </div>
       </DashboardPageErrorContainer>
     )

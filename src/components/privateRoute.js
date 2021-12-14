@@ -12,7 +12,13 @@ const PrivateRoute = ({ component: Component, location, ...rest }) => {
         <Seo title="Profile" />
         <Notification message="You must be logged in to view your profile." />
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <Svg style={{ maxWidth: "30rem", opacity: 0.5 }} />
+          <Svg
+            style={{
+              maxWidth: "30rem",
+              opacity: 0.5,
+              display: "inline !important",
+            }}
+          />
         </div>
       </>
     )
@@ -22,7 +28,13 @@ const PrivateRoute = ({ component: Component, location, ...rest }) => {
         <Seo title="Dashboard" />
         <Notification message="You must be logged in to see the dashboard." />
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <Svg style={{ maxWidth: "30rem", opacity: 0.5 }} />
+          <Svg
+            style={{
+              maxWidth: "30rem",
+              opacity: 0.5,
+              display: "inline !important",
+            }}
+          />
         </div>
       </>
     )
