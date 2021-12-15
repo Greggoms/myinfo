@@ -52,15 +52,10 @@ const IndexPage = () => {
                 information.
               </p>
               <p>
-                Sign up before trying to view your profile. Please use a name I
-                can recognize so I know who's signing up.
-              </p>
-              <p>
-                PTO info can be viewed once I manually connect it after you
-                create your account. This shouldn't take long, but keep in mind
-                the website will have to be rebuilt everytime an account is
-                added. I'll keep an eye out for signups and try to hook you up
-                asap. If I'm taking too long then dm me on the groupme.
+                Sign up using the email you use to login to Lightspeed if you
+                want instant access to PTO info. If you choose another email, I
+                will have to manually connect you to your PTO info. You can
+                choose any username you want.
               </p>
               <p>
                 Consider this website in beta. There are many more visual and
