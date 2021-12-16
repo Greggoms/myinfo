@@ -14,9 +14,10 @@ const PrivateRoute = ({ component: Component, location, ...rest }) => {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Svg
             style={{
+              width: "100%",
               maxWidth: "30rem",
+              height: "100%",
               opacity: 0.5,
-              display: "inline !important",
             }}
           />
         </div>
@@ -30,9 +31,10 @@ const PrivateRoute = ({ component: Component, location, ...rest }) => {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Svg
             style={{
+              width: "100%",
               maxWidth: "30rem",
+              height: "100%",
               opacity: 0.5,
-              display: "inline !important",
             }}
           />
         </div>

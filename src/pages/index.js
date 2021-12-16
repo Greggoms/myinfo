@@ -1,11 +1,13 @@
 import React from "react"
 import { Link } from "gatsby"
+
 import Seo from "../components/seo"
 import {
   IndexPageContainer,
   ButtonLinkContainer,
   CTAContainer,
 } from "../elements"
+
 const netlifyIdentity = require("netlify-identity-widget")
 
 const IndexPage = () => {
@@ -14,6 +16,7 @@ const IndexPage = () => {
   return (
     <IndexPageContainer>
       <Seo title="Home" />
+
       <div>
         <h1>Hey {user ? user.user_metadata.full_name : "There!"}</h1>
         {user ? (
@@ -52,7 +55,7 @@ const IndexPage = () => {
                 information.
               </p>
               <p>
-                Sign up using the email you use to login to Lightspeed if you
+                Sign up with the email you use to login to Lightspeed if you
                 want instant access to PTO info. If you choose another email, I
                 will have to manually connect you to your PTO info. You can
                 choose any username you want.
