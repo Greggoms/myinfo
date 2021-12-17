@@ -13,16 +13,9 @@ export const ProfileContainer = styled.section`
 `
 
 export const DatabaseProfileContainer = styled.section`
-  h3 {
-    font-size: 26pt;
-    @media only screen and (max-width: 600px) {
-      font-size: 24pt;
-    }
-  }
-
   .highlights {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
     grid-row-gap: 2rem;
     grid-column-gap: 0.5rem;
     text-align: center;
@@ -38,8 +31,61 @@ export const DatabaseProfileContainer = styled.section`
       @media only screen and (max-width: 600px) {
         height: 8rem;
       }
+
+      h3 {
+        font-size: 26pt;
+        @media only screen and (max-width: 600px) {
+          font-size: 24pt;
+        }
+      }
+
+      h4 {
+        font-size: 17pt;
+      }
     }
+  }
+
+  .special-h2 {
+    margin-bottom: 0;
+  }
+
+  hr {
+    border-top: 2px solid ${props => props.theme.colors.link};
+    width: 40%;
+    margin: 0 auto;
   }
 `
 
+export const RequestsContainer = styled.section`
+  display: flex;
+  justify-content: space-around;
+  grid-column-gap: 1rem;
+
+  max-width: 55rem;
+  margin: 2rem auto 0;
+
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+
+  ul {
+    li {
+      margin-left: 2rem;
+    }
+  }
+
+  .pending-requests {
+    margin: 0 0 1.5rem;
+    h3 {
+      text-decoration: underline;
+      text-decoration-color: ${props => props.theme.colors.purple};
+    }
+  }
+  .accepted-requests {
+    h3 {
+      text-decoration: underline;
+      text-decoration-color: ${props => props.theme.colors.green};
+    }
+  }
+`
 export const NetlifyIdentityContainer = styled.section``

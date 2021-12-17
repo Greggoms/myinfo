@@ -4,6 +4,7 @@ import {
   ProfileContainer,
   NetlifyIdentityContainer,
   DatabaseProfileContainer,
+  RequestsContainer,
 } from "../elements"
 import { data } from "../components/Database"
 const netlifyIdentity = require("netlify-identity-widget")
@@ -36,40 +37,93 @@ const ProfilePage = () => {
               <h2>PTO Info</h2>
               <div className="highlights">
                 <div className="highlight">
-                  <h3>{ptoInfo.remainingPTO} hours</h3>
+                  <h3>{ptoInfo.remainingPTO} Hours</h3>
+                  <hr />
                   <p>Remaining PTO</p>
                 </div>
                 <div className="highlight">
-                  <h3>{ptoInfo.daysUntil10Hrs}</h3>
-                  <p>Days until +10Hrs</p>
+                  <h3>{ptoInfo.daysUntil10Hrs} Days</h3>
+                  <hr />
+                  <p>+10Hrs</p>
                 </div>
-                <div className="highlight">
-                  <h3>
-                    <p>{ptoInfo.lifetimePTO} hours</p>
-                  </h3>
-                  <p>Lifetime PTO</p>
-                </div>
+              </div>
+              <div>
+                <h2 className="special-h2">PTO Usage</h2>
+                {ptoInfo.pending && (
+                  <p>
+                    Pending hours are NOT subtracted from remaining PTO. The
+                    remaining hours are adjusted once the request is "Accepted".
+                  </p>
+                )}
+                <RequestsContainer>
+                  <div className="pending-requests requests">
+                    <h3>Pending</h3>
+                    {ptoInfo.pending ? (
+                      ptoInfo.pending.map((request, index) => (
+                        <ul key={index}>
+                          <li>
+                            {request.dates.length === 1
+                              ? `${request.dates} `
+                              : `${request.dates[0]} to ${request.dates[1]} `}
+                            using {request.hours} hours.
+                          </li>
+                        </ul>
+                      ))
+                    ) : (
+                      <p>No pending requests.</p>
+                    )}
+                  </div>
+                  <div className="accepted-requests requests">
+                    <h3>Accepted</h3>
+                    {ptoInfo.accepted ? (
+                      ptoInfo.accepted.map((request, index) => (
+                        <ul key={index}>
+                          <li>
+                            {request.dates.length === 1
+                              ? `${request.dates} `
+                              : `${request.dates[0]} to ${request.dates[1]} `}
+                            using {request.hours} hours.
+                          </li>
+                        </ul>
+                      ))
+                    ) : (
+                      <p>
+                        You haven't used any PTO. You might have some pending.
+                      </p>
+                    )}
+                  </div>
+                </RequestsContainer>
               </div>
             </DatabaseProfileContainer>
             <DatabaseProfileContainer>
               <h2>More Info</h2>
               <div className="highlights">
                 <div className="highlight">
-                  <h3>
+                  <h4>
+                    <p>{ptoInfo.lifetimePTO} hours</p>
+                  </h4>
+                  <hr />
+                  <p>Lifetime PTO</p>
+                </div>
+                <div className="highlight">
+                  <h4>
                     <p>{ptoInfo.location}</p>
-                  </h3>
+                  </h4>
+                  <hr />
                   <p>Location</p>
                 </div>
                 <div className="highlight">
-                  <h3>
+                  <h4>
                     <p>{ptoInfo.hireDate}</p>
-                  </h3>
+                  </h4>
+                  <hr />
                   <p>Hire Date</p>
                 </div>
                 <div className="highlight">
-                  <h3>
+                  <h4>
                     <p>{ptoInfo.position}</p>
-                  </h3>
+                  </h4>
+                  <hr />
                   <p>Position</p>
                 </div>
               </div>
