@@ -13,7 +13,7 @@ export const DashboardPageErrorContainer = styled.div`
 export const EmployeeViewContainer = styled.section`
   .selected-component {
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns: 1fr 0;
     grid-template-rows: 1fr 0;
     transition: all 30s ease;
   }

@@ -29,7 +29,7 @@ const DashboardPage = () => {
       },
       inactive: {
         gridRow: 2,
-        gridColumn: 1,
+        gridColumn: 2,
         transform: "scale(0)",
       },
     }
