@@ -1,5 +1,6 @@
 export * from "./ClientOnlyElements"
 export * from "./DashboardElements"
+export * from "./DashboardProfileElements"
 export * from "./FooterElements"
 export * from "./HeaderElements"
 export * from "./IndexPageElements"

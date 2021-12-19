@@ -309,7 +309,7 @@ export const data = [
     remainingPTO: remainingPTO(2021, 8, 25, 0, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2021, 8, 25),
     email: "montycanada91@gmail.com",
-    position: "Assistant Manager",
+    position: "Assist Mngr",
   },
   {
     firstName: "River",
@@ -331,7 +331,7 @@ export const data = [
     remainingPTO: remainingPTO(2021, 8, 11, 0, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2021, 8, 11),
     email: "jadkins210@outlook.com",
-    position: "Assistant Manager",
+    position: "Assist Mngr",
   },
   {
     firstName: "Andrew",
@@ -403,7 +403,7 @@ export const data = [
     remainingPTO: remainingPTO(2021, 6, 24, 0, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2021, 6, 24),
     email: "tkifer0329@gmail.com",
-    position: "Assistant Manager",
+    position: "Assist Mngr",
   },
   {
     firstName: "Cody",
@@ -425,7 +425,7 @@ export const data = [
     remainingPTO: remainingPTO(2021, 6, 5, 0, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2021, 6, 5),
     email: "brett.hula0@gmail.com",
-    position: "Assistant Manager",
+    position: "Assist Mngr",
   },
   {
     firstName: "Kelcye",
@@ -436,7 +436,7 @@ export const data = [
     remainingPTO: remainingPTO(2021, 5, 29, 0, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2021, 5, 29),
     email: "kelcye.sfry@gmail.com",
-    position: "Assistant Manager",
+    position: "Assist Mngr",
   },
   {
     firstName: "Colten",
@@ -569,7 +569,7 @@ export const data = [
     remainingPTO: remainingPTO(2021, 3, 6, 0, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2021, 3, 6),
     email: "knojyle@gmail.com",
-    position: "Assistant Manager",
+    position: "Assist Mngr",
   },
   {
     firstName: "Paige",
@@ -660,7 +660,7 @@ export const data = [
     remainingPTO: remainingPTO(2020, 12, 3, 0, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2020, 12, 3),
     email: "joederossitt@gmail.com",
-    position: "Assistant Manager",
+    position: "Assist Mngr",
   },
   {
     firstName: "Adam",
@@ -671,7 +671,7 @@ export const data = [
     remainingPTO: remainingPTO(2020, 11, 30, 0, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2020, 11, 30),
     email: "drumandbuglemello@gmail.com",
-    position: "Assistant Manager",
+    position: "Assist Mngr",
   },
   {
     firstName: "Alejandro",
@@ -717,7 +717,7 @@ export const data = [
     remainingPTO: remainingPTO(2020, 7, 20, 0, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2020, 7, 20),
     email: "jmyles1315@gmail.com",
-    position: "Assitant Manager",
+    position: "Assist Mngr",
   },
   {
     firstName: "Chase",
@@ -750,7 +750,7 @@ export const data = [
     remainingPTO: remainingPTO(2020, 5, 4, 0, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2020, 5, 4),
     email: "bwillman95@gmail.com",
-    position: "Assistant Manager",
+    position: "Assist Mngr",
   },
   {
     firstName: "Chris",
@@ -783,7 +783,7 @@ export const data = [
     remainingPTO: remainingPTO(2020, 2, 15, 0, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2020, 2, 15),
     email: "simonsosorry@icloud.com",
-    position: "Assistant Manager",
+    position: "Assist Mngr",
   },
   {
     firstName: "Micheal",
@@ -805,7 +805,7 @@ export const data = [
     remainingPTO: remainingPTO(2019, 11, 11, 0, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2019, 11, 11),
     email: "SirSeththeBrave@gmail.com",
-    position: "Assistant Manager",
+    position: "Assist Mngr",
   },
   {
     firstName: "Alex",
@@ -827,7 +827,7 @@ export const data = [
     remainingPTO: remainingPTO(2019, 3, 11, 40, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2019, 3, 11),
     email: "claybank56@gmail.com",
-    position: "Assistant Manager",
+    position: "Assist Mngr",
     accepted: [
       {
         dates: ["Unknown"],

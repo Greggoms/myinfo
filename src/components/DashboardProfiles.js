@@ -1,12 +1,11 @@
-import * as React from "react"
-import Profile from "./Profile"
+import React from "react"
 import { data } from "./Database"
-import Seo from "./seo"
+import { DashboardProfile } from "./DashboardProfile"
+import { DashboardProfilesContainer } from "../elements"
 
-export const Profiles = () => {
+export const DashboardProfiles = () => {
   return (
-    <>
-      <Seo title="Your Profile" />
+    <DashboardProfilesContainer>
       {data.map(
         (
           {
@@ -18,12 +17,15 @@ export const Profiles = () => {
             remainingPTO,
             daysUntil10Hrs,
             position,
+            email,
             extraHours,
+            pending,
+            accepted,
           },
           index
         ) => {
           return (
-            <Profile
+            <DashboardProfile
               key={index}
               firstName={firstName}
               lastName={lastName}
@@ -34,10 +36,13 @@ export const Profiles = () => {
               daysUntil10Hrs={daysUntil10Hrs}
               position={position}
               extraHours={extraHours}
+              email={email}
+              pending={pending}
+              accepted={accepted}
             />
           )
         }
       )}
-    </>
+    </DashboardProfilesContainer>
   )
 }
