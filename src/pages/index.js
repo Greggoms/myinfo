@@ -60,10 +60,6 @@ const IndexPage = () => {
                 will have to manually connect you to your PTO info. You can
                 choose any username you want.
               </p>
-              <p>
-                Consider this website in beta. There are many more visual and
-                fuctional improvements to add.
-              </p>
             </div>
           </>
         )}

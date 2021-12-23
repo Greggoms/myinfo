@@ -1,9 +1,12 @@
 import styled from "styled-components"
 
 export const TableContainer = styled.table`
+  grid-column: 1;
+  grid-row: 1;
+  z-index: 1;
   width: 100%;
   max-width: 105rem;
-  margin: 3rem auto;
+  margin: 0 auto;
 
   tbody tr:nth-child(odd) {
     background: ${props => props.theme.grayscale.dark1};
