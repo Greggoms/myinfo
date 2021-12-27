@@ -108,17 +108,6 @@ export const data = [
     position: "Associate",
   },
   {
-    firstName: "RaQuan",
-    lastName: "Hamp",
-    location: "VW HS Albert Pike",
-    hireDate: hireDate(2021, 11, 30),
-    lifetimePTO: lifetimePTO(2021, 11, 30),
-    remainingPTO: remainingPTO(2021, 11, 30, 0, false, 0),
-    daysUntil10Hrs: daysUntil10Hrs(2021, 11, 30),
-    email: "therayreel@gmail.com",
-    position: "Associate",
-  },
-  {
     firstName: "Micheal",
     lastName: "Kifer",
     location: "Warehouse",
@@ -138,17 +127,6 @@ export const data = [
     remainingPTO: remainingPTO(2021, 11, 23, 0, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2021, 11, 23),
     email: "learza_rowan@yahoo.com",
-    position: "Associate",
-  },
-  {
-    firstName: "Bailey",
-    lastName: "Carroway",
-    location: "AR Maumelle",
-    hireDate: hireDate(2021, 11, 22),
-    lifetimePTO: lifetimePTO(2021, 11, 22),
-    remainingPTO: remainingPTO(2021, 11, 22, 0, false, 0),
-    daysUntil10Hrs: daysUntil10Hrs(2021, 11, 22),
-    email: "bailey.carroway67@gmail.com",
     position: "Associate",
   },
   {
@@ -176,7 +154,7 @@ export const data = [
   {
     firstName: "Zach",
     lastName: "Ehemann",
-    location: "AR Sherwood",
+    location: "AR Jacksonville",
     hireDate: hireDate(2021, 11, 2),
     lifetimePTO: lifetimePTO(2021, 11, 2),
     remainingPTO: remainingPTO(2021, 11, 2, 0, false, 0),
@@ -234,11 +212,11 @@ export const data = [
     location: "Warehouse",
     hireDate: hireDate(2021, 9, 18),
     lifetimePTO: lifetimePTO(2021, 9, 18),
-    remainingPTO: remainingPTO(2021, 9, 18, 0, false, 10),
+    remainingPTO: remainingPTO(2021, 9, 18, 10, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2021, 9, 18),
     email: "justinm.lee1221@gmail.com",
     position: "Associate",
-    pending: [
+    accepted: [
       {
         dates: ["12/23/2021", "12/26/2021"],
         hours: 10,
@@ -419,13 +397,13 @@ export const data = [
   {
     firstName: "Brett",
     lastName: "Hula",
-    location: "AR Maumelle",
+    location: "AR Jacksonville",
     hireDate: hireDate(2021, 6, 5),
     lifetimePTO: lifetimePTO(2021, 6, 5),
     remainingPTO: remainingPTO(2021, 6, 5, 0, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2021, 6, 5),
     email: "brett.hula0@gmail.com",
-    position: "Assist Mngr",
+    position: "Manager",
   },
   {
     firstName: "Kelcye",
@@ -505,28 +483,28 @@ export const data = [
     location: "Warehouse",
     hireDate: hireDate(2021, 4, 19),
     lifetimePTO: lifetimePTO(2021, 4, 19),
-    remainingPTO: remainingPTO(2021, 4, 19, 0, false, 16),
+    remainingPTO: remainingPTO(2021, 4, 19, 16, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2021, 4, 19),
     email: "xclusive828@gmail.com",
     position: "Associate",
-    pending: [
+    accepted: [
       {
         dates: ["12/15/2021", "12/16/2021"],
         hours: 16,
       },
     ],
   },
-  {
-    firstName: "Thomas",
-    lastName: "Ward",
-    location: "VW Rodney Parham",
-    hireDate: hireDate(2021, 4, 4),
-    lifetimePTO: lifetimePTO(2021, 4, 4),
-    remainingPTO: remainingPTO(2021, 4, 4, 0, false, 0),
-    daysUntil10Hrs: daysUntil10Hrs(2021, 4, 4),
-    email: "TAustinW@pm.me",
-    position: "Associate",
-  },
+  // {
+  //   firstName: "Thomas",
+  //   lastName: "Ward",
+  //   location: "VW Rodney Parham",
+  //   hireDate: hireDate(2021, 4, 4),
+  //   lifetimePTO: lifetimePTO(2021, 4, 4),
+  //   remainingPTO: remainingPTO(2021, 4, 4, 0, false, 0),
+  //   daysUntil10Hrs: daysUntil10Hrs(2021, 4, 4),
+  //   email: "TAustinW@pm.me",
+  //   position: "Associate",
+  // },
   {
     firstName: "Reece (Ben)",
     lastName: "Frye",
@@ -595,11 +573,11 @@ export const data = [
     location: "Warehouse",
     hireDate: hireDate(2021, 3, 1),
     lifetimePTO: lifetimePTO(2021, 3, 1),
-    remainingPTO: remainingPTO(2021, 3, 1, 0, false, 8),
+    remainingPTO: remainingPTO(2021, 3, 1, 8, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2021, 3, 1),
     email: "joe.mapili@gmail.com",
     position: "Associate",
-    pending: [
+    accepted: [
       {
         dates: ["12/17/2021"],
         hours: 8,
@@ -652,17 +630,6 @@ export const data = [
     ],
   },
   {
-    firstName: "Joseph",
-    lastName: "Derossitt",
-    location: "VW HS Central Ave",
-    hireDate: hireDate(2020, 12, 3),
-    lifetimePTO: lifetimePTO(2020, 12, 3),
-    remainingPTO: remainingPTO(2020, 12, 3, 0, false, 0),
-    daysUntil10Hrs: daysUntil10Hrs(2020, 12, 3),
-    email: "joederossitt@gmail.com",
-    position: "Assist Mngr",
-  },
-  {
     firstName: "Adam",
     lastName: "Reed",
     location: "VW Rodney Parham",
@@ -679,17 +646,15 @@ export const data = [
     location: "Warehouse",
     hireDate: hireDate(2020, 11, 23),
     lifetimePTO: lifetimePTO(2020, 11, 23),
-    remainingPTO: remainingPTO(2020, 11, 23, 8, false, 8),
+    remainingPTO: remainingPTO(2020, 11, 23, 16, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2020, 11, 23),
     email: "alejandro.robles11508@gmail.com",
     position: "Associate",
-    pending: [
+    accepted: [
       {
         dates: ["12/17/2021"],
         hours: 8,
       },
-    ],
-    accepted: [
       {
         dates: ["Unknown"],
         hours: 8,
@@ -841,11 +806,19 @@ export const data = [
     location: "VW Benton",
     hireDate: hireDate(2018, 12, 16),
     lifetimePTO: lifetimePTO(2018, 12, 16),
-    remainingPTO: remainingPTO(2018, 12, 16, 117, false, 7),
+    remainingPTO: remainingPTO(2018, 12, 16, 124, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2018, 12, 16),
     email: "jaren.evans.13@gmail.com",
     position: "Manager",
     accepted: [
+      {
+        dates: ["12/16/2021"],
+        hours: 5,
+      },
+      {
+        dates: ["12/14/2021"],
+        hours: 2,
+      },
       {
         dates: ["Sometime between 11/15/21 & 11/28/21"],
         hours: 10,
@@ -853,16 +826,6 @@ export const data = [
       {
         dates: ["Unknown"],
         hours: 107,
-      },
-    ],
-    pending: [
-      {
-        dates: ["12/14/2021"],
-        hours: 2,
-      },
-      {
-        dates: ["12/16/2021"],
-        hours: 5,
       },
     ],
   },
@@ -996,17 +959,15 @@ export const data = [
     location: "Warehouse",
     hireDate: hireDate(2016, 7, 26),
     lifetimePTO: lifetimePTO(2016, 7, 26),
-    remainingPTO: remainingPTO(2016, 7, 26, 64, false, 4),
+    remainingPTO: remainingPTO(2016, 7, 26, 68, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2016, 7, 26),
     email: "teddyoswald@yahoo.com",
     position: "Associate",
-    pending: [
+    accepted: [
       {
         dates: ["12/13/2021"],
         hours: 4,
       },
-    ],
-    accepted: [
       {
         dates: ["Unknown"],
         hours: 60,
@@ -1019,11 +980,15 @@ export const data = [
     location: "Warehouse",
     hireDate: hireDate(2016, 6, 15),
     lifetimePTO: lifetimePTO(2016, 6, 15),
-    remainingPTO: remainingPTO(2016, 6, 15, 64, false, 0),
+    remainingPTO: remainingPTO(2016, 6, 15, 80, false, 0),
     daysUntil10Hrs: daysUntil10Hrs(2016, 6, 15),
     email: "thedrfreeze@gmail.com",
     position: "Associate",
     accepted: [
+      {
+        dates: ["Sometime Between 12/13/2021 - 12/26/2021"],
+        hours: 16,
+      },
       {
         dates: ["11/24/2021"],
         hours: 8,
