@@ -894,7 +894,7 @@ export const data = [
     lifetimePTO: lifetimePTO(2018, 1, 11),
     remainingPTO: remainingPTO(2018, 1, 11, 66, 0),
     daysUntil10Hrs: daysUntil10Hrs(2018, 1, 11),
-    email: "Jcorbin39@yahoo.com",
+    email: "corbinjenkins35@yahoo.com",
     position: "Manager",
     accepted: [{ dates: ["Unknown"], hours: 66 }],
   },
