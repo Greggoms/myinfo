@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { addDays } from "date-fns"
 import Seo from "../components/seo"
 import {
   ProfileContainer,
@@ -24,6 +25,20 @@ const ProfilePage = () => {
     // eslint-disable-next-line
   }, [])
 
+  const currentYear = new Date().getFullYear()
+  const currentMonth = parseInt(new Date().getMonth())
+  const currentDay = new Date().getDate()
+
+  const dateFor10Hrs = () => {
+    const result = addDays(
+      new Date(currentYear, currentMonth, currentDay),
+      ptoInfo.daysUntil10Hrs
+    )
+    return `${parseInt(
+      result.getMonth() + 1
+    )}/${result.getDate()}/${result.getFullYear()}`
+  }
+
   return (
     <>
       <Seo title={user && `${user.user_metadata.full_name}'s Profile`} />
@@ -44,7 +59,7 @@ const ProfilePage = () => {
                 <div className="highlight">
                   <h3>{ptoInfo.daysUntil10Hrs} Days</h3>
                   <hr />
-                  <p>+10Hrs</p>
+                  <p>+10hrs on {dateFor10Hrs()}</p>
                 </div>
               </div>
               <div>

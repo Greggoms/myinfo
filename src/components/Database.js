@@ -1,8 +1,9 @@
+// import React from "react"
 import { differenceInCalendarDays } from "date-fns"
 
-const currentYear = new Date().getFullYear()
-const currentMonth = parseInt(new Date().getMonth() + 1)
-const currentDay = new Date().getDate()
+export const currentYear = new Date().getFullYear()
+export const currentMonth = parseInt(new Date().getMonth() + 1)
+export const currentDay = new Date().getDate()
 const lifetimePTO = (hireYear, hireMonth, hireDay) => {
   const result = differenceInCalendarDays(
     new Date(currentYear, currentMonth, currentDay),
