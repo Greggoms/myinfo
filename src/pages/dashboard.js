@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import Seo from "../components/seo"
 import { ReactTable } from "../components/ReactTable"
 import { DashboardProfiles } from "../components/DashboardProfiles"
+import { DashboardPayRaises } from "../components/DashboardPayRaises"
 import { Notification } from "../components/Notification"
 import {
   DashboardPageContainer,
@@ -14,7 +15,10 @@ const netlifyIdentity = require("netlify-identity-widget")
 const DashboardPage = () => {
   const [tableIsActive, setTableIsActive] = useState(true)
   const [profileIsActive, setProfileIsActive] = useState(false)
+  const [payRaiseIsActive, setPayRaiseIsActive] = useState(false)
+
   const user = netlifyIdentity.currentUser()
+
   const role =
     user && user.app_metadata.roles
       ? user.app_metadata.roles.map(role => role)
@@ -40,8 +44,9 @@ const DashboardPage = () => {
           <div className="button-container">
             <button
               onClick={() => {
-                setTableIsActive(!tableIsActive)
-                setProfileIsActive(!profileIsActive)
+                setTableIsActive(true)
+                setProfileIsActive(false)
+                setPayRaiseIsActive(false)
               }}
               style={
                 tableIsActive ? { color: "#F2F2F2" } : { color: "#595959" }
@@ -51,14 +56,27 @@ const DashboardPage = () => {
             </button>
             <button
               onClick={() => {
-                setProfileIsActive(!profileIsActive)
-                setTableIsActive(!tableIsActive)
+                setProfileIsActive(true)
+                setTableIsActive(false)
+                setPayRaiseIsActive(false)
               }}
               style={
                 profileIsActive ? { color: "#F2F2F2" } : { color: "#595959" }
               }
             >
               Cards
+            </button>
+            <button
+              onClick={() => {
+                setPayRaiseIsActive(true)
+                setProfileIsActive(false)
+                setTableIsActive(false)
+              }}
+              style={
+                payRaiseIsActive ? { color: "#F2F2F2" } : { color: "#595959" }
+              }
+            >
+              Pay Raises
             </button>
           </div>
           <div className="selected-component">
@@ -67,6 +85,9 @@ const DashboardPage = () => {
             </div>
             <div style={profileIsActive ? styles.active : styles.inactive}>
               <DashboardProfiles />
+            </div>
+            <div style={payRaiseIsActive ? styles.active : styles.inactive}>
+              <DashboardPayRaises />
             </div>
           </div>
         </EmployeeViewContainer>

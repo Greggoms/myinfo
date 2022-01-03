@@ -9,6 +9,7 @@ export const DashboardProfilesContainer = styled.section`
 
   background: ${props => props.theme.grayscale.dark2};
 `
+
 export const DashboardProfileContainer = styled.section`
   background: ${props => props.theme.grayscale.dark3};
   padding: 1.5rem;
@@ -43,5 +44,10 @@ export const DashboardProfileContainer = styled.section`
     border-top: 2px solid ${props => props.theme.colors.link};
     width: 40%;
     margin: 0.5rem 0;
+  }
+
+  .hire-date,
+  .promotion-date {
+    margin-bottom: 1rem;
   }
 `

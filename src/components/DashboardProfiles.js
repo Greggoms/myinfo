@@ -18,7 +18,6 @@ export const DashboardProfiles = () => {
             daysUntil10Hrs,
             position,
             email,
-            extraHours,
             pending,
             accepted,
           },
@@ -35,7 +34,6 @@ export const DashboardProfiles = () => {
               remainingPTO={remainingPTO}
               daysUntil10Hrs={daysUntil10Hrs}
               position={position}
-              extraHours={extraHours}
               email={email}
               pending={pending}
               accepted={accepted}
