@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
 export const MainContainer = styled.main`
-  margin: 0 auto;
   padding: 0 1.0875rem;
   color: ${props => props.theme.grayscale.light1};
 `
