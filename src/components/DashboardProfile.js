@@ -8,14 +8,13 @@ export const DashboardProfile = props => {
         <h2>
           {props.firstName} {props.lastName}
         </h2>
-        <hr />
         <p>{props.email}</p>
         <p>
           {props.location} - {props.position}
         </p>
-        <p>{props.hireDate}</p>
+        <hr />
       </div>
-      <h3 style={{ margin: "1rem 0", textAlign: "center" }}>
+      <h3 style={{ margin: "2rem 0 0", textAlign: "center" }}>
         {props.remainingPTO} hours
       </h3>
       <div className="request-details">

@@ -5,6 +5,7 @@ export const DashboardProfilesContainer = styled.section`
   grid-row: 1;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  align-items: flex-start;
   grid-gap: 2rem;
 
   background: ${props => props.theme.grayscale.dark2};
@@ -49,5 +50,22 @@ export const DashboardProfileContainer = styled.section`
   .hire-date,
   .promotion-date {
     margin-bottom: 1rem;
+  }
+
+  .pay-raise-effect {
+    display: grid;
+
+    section {
+      animation: 1s ease appear;
+    }
+
+    @keyframes appear {
+      0% {
+        opacity: 0.1;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
   }
 `
