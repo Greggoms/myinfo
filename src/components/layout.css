@@ -201,15 +201,6 @@ textarea {
   -webkit-appearance: button;
   font: inherit;
 }
-* {
-  box-sizing: inherit;
-}
-*:before {
-  box-sizing: inherit;
-}
-*:after {
-  box-sizing: inherit;
-}
 h2 {
   color: inherit;
   font-weight: bold;
