@@ -19,13 +19,11 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <ClientOnly>
-      <LayoutContainer>
-        <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-        <MainContainer>{children}</MainContainer>
-        <Footer />
-      </LayoutContainer>
-    </ClientOnly>
+    <LayoutContainer>
+      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+      <MainContainer>{children}</MainContainer>
+      <Footer />
+    </LayoutContainer>
   )
 }
 
