@@ -1,4 +1,4 @@
-import * as React from "react"
+import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { ClientOnly } from "../services/ClientOnly"
@@ -19,11 +19,15 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <LayoutContainer>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <MainContainer>{children}</MainContainer>
-      <Footer />
-    </LayoutContainer>
+    <ClientOnly>
+      <LayoutContainer>
+        <div className="content">
+          <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+          <MainContainer>{children}</MainContainer>
+        </div>
+        <Footer />
+      </LayoutContainer>
+    </ClientOnly>
   )
 }
 

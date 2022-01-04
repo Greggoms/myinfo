@@ -28,7 +28,7 @@ const GlobalStyles = createGlobalStyle`
 
 *:before,
 *:after {
- box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body, html {
@@ -36,21 +36,19 @@ body, html {
   font-display: fallback; /* <- this can be added to each @font-face definition */
   height: 100%;
   background-color: ${Theme.grayscale.dark3};
+}
   
-  position: relative;
+html html iframe #netlify-identity-widget {
+  .modalContainer {
+    justify-content: center !important;
   }
-  
-  html html iframe #netlify-identity-widget {
-    .modalContainer {
-      justify-content: center !important;
-    }
-    .modalDialog {
-      flex-grow: 0 !important;
-    }
+  .modalDialog {
+    flex-grow: 0 !important;
   }
+}
     
 body {
-    margin-right: 0px !important;
+  margin-right: 0px !important;
 }
 
 [data-reach-dialog-overlay] {
