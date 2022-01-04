@@ -11,13 +11,12 @@ export const LayoutContainer = styled.div`
   // Keeps footer at bottom. //
   ///////////////////////////*/
 
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  background: ${props => props.theme.grayscale.dark2};
+  min-height: 100vh; /* will cover the 100% of viewport */
+  overflow: hidden;
+  display: block;
+  position: relative;
+  padding-bottom: 65px; /* height of your footer */
 
-  .content {
-    flex: 1;
-    background: ${props => props.theme.grayscale.dark2};
-  }
-  /*/////////////////////////*/
+  /*/ ////////////////////////*/
 `

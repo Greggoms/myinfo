@@ -26,12 +26,18 @@ const GlobalStyles = createGlobalStyle`
   box-sizing: border-box;
 }
 
+*:before,
+*:after {
+ box-sizing: border-box;
+}
+
 body, html {
-    font-family: ${Theme.fonts.main};
-    font-display: fallback; /* <- this can be added to each @font-face definition */
-    height: 100%;
-    background-color: ${Theme.grayscale.dark3};
-    
+  font-family: ${Theme.fonts.main};
+  font-display: fallback; /* <- this can be added to each @font-face definition */
+  height: 100%;
+  background-color: ${Theme.grayscale.dark3};
+  
+  position: relative;
   }
   
   html html iframe #netlify-identity-widget {
