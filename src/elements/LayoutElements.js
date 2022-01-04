@@ -11,9 +11,13 @@ export const LayoutContainer = styled.div`
   // Keeps footer at bottom. //
   ///////////////////////////*/
 
+  .___gatsby {
+    height: 100%;
+  }
+
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
 
   .content {
     flex: 1;
