@@ -11,7 +11,7 @@ export const LayoutContainer = styled.div`
   // Keeps footer at bottom. //
   ///////////////////////////*/
 
-  .___gatsby {
+  #___gatsby {
     height: 100%;
   }
 
