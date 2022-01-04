@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const HeaderContainer = styled.header`
   background: ${props => props.theme.grayscale.dark4};
-  margin-bottom: 1.45rem;
+  // margin-bottom: 1.45rem;
 `
 
 export const HeaderContents = styled.div`

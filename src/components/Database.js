@@ -854,7 +854,7 @@ export const data = [
     firstName: "Levyn",
     lastName: "Lewis",
     location: "AR Otter Creek",
-    position: "Assistant Manager",
+    position: "Assist Mngr",
     email: "lewislevyn@gmail.com",
     hireDate: hireDate(2021, 3, 8),
     lifetimePTO: lifetimePTO(2021, 3, 8),

@@ -24,7 +24,8 @@ export const DashboardPayRaises = () => {
           index
         ) => {
           return (
-            timeForRaise === true && (
+            timeForRaise === true &&
+            pay.toString() < eligible && (
               <DashboardPayRaise
                 key={index}
                 firstName={firstName}

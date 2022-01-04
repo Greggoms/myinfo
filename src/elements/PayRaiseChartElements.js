@@ -7,8 +7,6 @@ export const PayRaiseChartContainer = styled.section`
     text-align: center;
     margin: 1rem 0;
   }
-  .pay-guide {
-  }
 
   h3:first-child {
     grid-column: 1;

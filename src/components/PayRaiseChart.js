@@ -1,6 +1,7 @@
 import React from "react"
 import { PayRaiseTable } from "../services/PayRaiseGuide"
 import { PayRaiseChartContainer } from "../elements"
+import "../components/animations.css"
 
 export const PayRaiseChart = props => {
   const handleSetPayChart = () => {
@@ -174,7 +175,9 @@ export const PayRaiseChart = props => {
     }
   }
   return (
-    <PayRaiseChartContainer>
+    <PayRaiseChartContainer
+      className={props.position === "Associate" ? "associate" : "manager"}
+    >
       <div className="position-select">
         <h2>Position</h2>
         <p>{props.position}</p>

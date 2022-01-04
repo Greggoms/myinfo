@@ -1,0 +1,55 @@
+/********************************/
+/*--------- ANIMATIONS ---------*/
+/********************************/
+
+.associate {
+  animation: 1s ease appear;
+  animation-fill-mode: forwards;
+}
+.manager {
+  animation: 1s ease appear2;
+  animation-fill-mode: forwards;
+}
+.associate-div {
+  animation: 0.5s ease disappear;
+  animation-fill-mode: forwards;
+}
+.manager-div {
+  animation: 0.5s ease disappear2;
+  animation-fill-mode: forwards;
+}
+@keyframes appear {
+  from {
+    height: 0;
+  }
+  to {
+    height: 375px;
+  }
+}
+@keyframes appear2 {
+  from {
+    height: 0;
+  }
+  to {
+    height: 275px;
+  }
+}
+@keyframes disappear {
+  from {
+    height: 375px;
+  }
+  to {
+    height: 0;
+  }
+}
+@keyframes disappear2 {
+  from {
+    height: 275px;
+  }
+  to {
+    height: 0;
+  }
+}
+/********************************/
+/*------- END ANIMATIONS -------*/
+/********************************/

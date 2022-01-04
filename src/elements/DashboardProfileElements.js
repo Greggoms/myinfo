@@ -54,18 +54,18 @@ export const DashboardProfileContainer = styled.section`
 
   .pay-raise-effect {
     display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr min-content;
 
-    section {
-      animation: 1s ease appear;
+    .basic-info {
+      grid-column: 1;
+      grid-row: 1;
+      flex: 1;
     }
 
-    @keyframes appear {
-      0% {
-        opacity: 0.1;
-      }
-      100% {
-        opacity: 1;
-      }
+    section {
+      grid-column: 1;
+      grid-row: ${props => (props.active ? "0" : "2")};
     }
   }
 `
