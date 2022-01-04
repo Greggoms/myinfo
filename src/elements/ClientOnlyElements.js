@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
 export const PageRefreshContainer = styled.div`
+  height: 100%;
   animation-duration: 0.5s;
   animation-name: appear;
 
