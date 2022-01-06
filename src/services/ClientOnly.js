@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import scrollTo from "gatsby-plugin-smoothscroll"
 import { PageRefreshContainer } from "../elements"
 
 export const ClientOnly = ({ children }) => {
@@ -6,6 +7,7 @@ export const ClientOnly = ({ children }) => {
 
   useEffect(() => {
     setHasmounted(true)
+    scrollTo("#top")
   }, [])
 
   if (!hasMounted) {
