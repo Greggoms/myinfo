@@ -19,7 +19,7 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <ClientOnly id="top">
+    <ClientOnly>
       <LayoutContainer>
         <div className="content">
           <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
