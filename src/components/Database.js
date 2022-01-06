@@ -1243,7 +1243,7 @@ export const data = [
     firstName: "Clayton",
     lastName: "Simpkins",
     location: "VW Bryant",
-    email: "claybank56@gmail.com",
+    email: "Claybank56@gmail.com",
     position: "Assist Mngr",
     hireDate: hireDate(2019, 3, 11),
     lifetimePTO: lifetimePTO(2019, 3, 11),
