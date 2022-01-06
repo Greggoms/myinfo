@@ -34,7 +34,6 @@ const GlobalStyles = createGlobalStyle`
 body, html {
   font-family: ${Theme.fonts.main};
   font-display: fallback; /* <- this can be added to each @font-face definition */
-  // height: 100%;
   background-color: ${Theme.grayscale.dark3};
 }
   
@@ -45,10 +44,6 @@ html html iframe #netlify-identity-widget {
   .modalDialog {
     flex-grow: 0 !important;
   }
-}
-    
-body {
-  margin-right: 0px !important;
 }
 
 [data-reach-dialog-overlay] {
