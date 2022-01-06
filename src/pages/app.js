@@ -6,7 +6,7 @@ import DashboardPage from "./dashboard"
 
 const App = () => {
   return (
-    <Router>
+    <Router primary={false}>
       <PrivateRoute path="/app/profile" component={ProfilePage} />
       <PrivateRoute path="/app/dashboard" component={DashboardPage} />
     </Router>
