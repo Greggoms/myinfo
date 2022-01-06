@@ -6,13 +6,13 @@ import { HeaderContainer, HeaderContents } from "../elements"
 
 export const Header = ({ siteTitle }) => {
   return (
-    <HeaderContainer id="top">
+    <HeaderContainer>
       <HeaderContents>
         <h1>
           <Link to="/">{siteTitle}</Link>
         </h1>
+        <Signup />
         <div className="navigation">
-          <Signup />
           <Nav />
         </div>
       </HeaderContents>

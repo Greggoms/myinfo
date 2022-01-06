@@ -1,11 +1,12 @@
 import styled from "styled-components"
 
 export const LogContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  @media only screen and (min-width: 600px) {
-    margin-right: 2rem;
+  grid-column: 1 / -1;
+  grid-row: 2;
+
+  @media only screen and (min-width: 500px) {
+    grid-column: 2;
+    grid-row: 1;
   }
 
   button:first-child {
@@ -17,23 +18,22 @@ export const LogContainer = styled.div`
   button {
     background: none;
     border: none;
-    color: ${props => props.theme.grayscale.light1};
+    color: ${props => props.theme.grayscale.light2};
     cursor: pointer;
     text-decoration: underline;
   }
 
   span {
-    color: ${props => props.theme.grayscale.light1};
+    color: ${props => props.theme.grayscale.light2};
     margin-right: 0.5rem;
     font-size: 12pt;
+    width: 100%;
+    min-width: min-content;
+    max-width: max-content;
   }
 `
 export const ModalButtonContainer = styled.div`
-  /* max-width: 12rem; */
   display: flex;
-  justify-content: space-between;
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    margin: 0rem 0 2rem;
-  }
+  /* justify-content: space-around; */
+  align-items: flex-end;
 `

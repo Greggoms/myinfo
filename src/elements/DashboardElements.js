@@ -18,7 +18,8 @@ export const EmployeeViewContainer = styled.section`
     transition: all 30s ease;
   }
   .button-container {
-    margin: 3rem auto;
+    margin: 0 auto;
+    margin-bottom: 3rem;
     display: flex;
     justify-content: space-between;
     max-width: 25rem;

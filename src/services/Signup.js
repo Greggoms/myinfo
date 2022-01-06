@@ -12,7 +12,7 @@ export const Signup = () => {
   useEffect(() => {
     netlifyIdentity.on("login", user => {
       setIsLoggedIn(true)
-      navigate("/app/profile#top")
+      navigate("/app/profile")
       console.log(user)
     })
     netlifyIdentity.on("logout", () => {

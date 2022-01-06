@@ -13,9 +13,9 @@ import Svg from "../svg/lock.svg"
 const netlifyIdentity = require("netlify-identity-widget")
 
 const DashboardPage = () => {
-  const [tableIsActive, setTableIsActive] = useState(true)
+  const [tableIsActive, setTableIsActive] = useState(false)
   const [profileIsActive, setProfileIsActive] = useState(false)
-  const [payRaiseIsActive, setPayRaiseIsActive] = useState(false)
+  const [payRaiseIsActive, setPayRaiseIsActive] = useState(true)
 
   const user = netlifyIdentity.currentUser()
 

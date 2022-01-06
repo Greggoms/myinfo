@@ -19,15 +19,15 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <ClientOnly>
-      <LayoutContainer>
-        <div className="content">
-          <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+    <LayoutContainer>
+      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+      <div className="content">
+        <ClientOnly>
           <MainContainer>{children}</MainContainer>
-        </div>
-        <Footer />
-      </LayoutContainer>
-    </ClientOnly>
+        </ClientOnly>
+      </div>
+      <Footer />
+    </LayoutContainer>
   )
 }
 
