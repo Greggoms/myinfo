@@ -7,27 +7,26 @@ export const DashboardPayRaises = () => {
   return (
     <DashboardProfilesContainer>
       {data.map(
-        (
-          {
-            firstName,
-            lastName,
-            location,
-            hireDate,
-            position,
-            email,
-            monthsWorked,
-            promotionDate,
-            timeForRaise,
-            pay,
-            eligible,
-          },
-          index
-        ) => {
+        ({
+          id,
+          firstName,
+          lastName,
+          location,
+          hireDate,
+          position,
+          email,
+          monthsWorked,
+          promotionDate,
+          timeForRaise,
+          pay,
+          eligible,
+        }) => {
           return (
             timeForRaise === true &&
             pay.toString() < eligible && (
               <DashboardPayRaise
-                key={index}
+                key={id}
+                id={id}
                 firstName={firstName}
                 lastName={lastName}
                 location={location}

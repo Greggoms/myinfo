@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { PayRaiseChart } from "./PayRaiseChart"
+import scrollTo from "gatsby-plugin-smoothscroll"
 import { DashboardProfileContainer } from "../elements"
 
 export const DashboardPayRaise = props => {
@@ -7,6 +8,9 @@ export const DashboardPayRaise = props => {
 
   const handleShowPayChart = () => {
     setShowPayChart(!showPayChart)
+    if (showPayChart === false) {
+      scrollTo(`#a${props.id}`)
+    }
   }
 
   const handleShowPayChartKeyDown = event => {
@@ -19,8 +23,10 @@ export const DashboardPayRaise = props => {
     }
   }
 
+  const id = `a${props.id}`
+
   return (
-    <DashboardProfileContainer>
+    <DashboardProfileContainer id={id}>
       <div className="pay-raise-effect">
         <div className="basic-info">
           <h2>

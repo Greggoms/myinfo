@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { AdminNav } from "./AdminNav"
 import { NormalNav } from "./NormalNav"
 const netlifyIdentity = require("netlify-identity-widget")
@@ -10,22 +10,14 @@ export const AdvancedNav = () => {
   //         after a full page reload.
 
   const user = netlifyIdentity.currentUser()
-  const [role, setRole] = useState(
-    user ? user.app_metadata.roles.map(role => role) : ""
+  // eslint-disable-next-line
+  return user ? (
+    user.email === "rpggamer1337man@gmail.com" ? (
+      <AdminNav />
+    ) : (
+      <NormalNav />
+    )
+  ) : (
+    <NormalNav />
   )
-  useEffect(() => {
-    // eslint-disable-next-line
-    if (role == "Admin") {
-      setRole("Admin")
-      // eslint-disable-next-line
-    } else if (role == "Manager") {
-      setRole("Manager")
-    } else {
-      setRole("")
-    }
-  }, [user, role])
-
-  if (role === "Admin") {
-    return <AdminNav />
-  } else return <NormalNav />
 }

@@ -1,4 +1,5 @@
 import { differenceInCalendarDays, differenceInCalendarMonths } from "date-fns"
+import { v4 as uuidv4 } from "uuid"
 import { PayRaiseTable } from "../services/PayRaiseGuide"
 
 export const currentYear = new Date().getFullYear()
@@ -155,6 +156,7 @@ export const columns = [
 
 export const data = [
   {
+    id: uuidv4(),
     firstName: "Drake",
     lastName: "Gallion",
     location: "VW/AR Chenal",
@@ -173,6 +175,7 @@ export const data = [
     pay: 11,
   },
   {
+    id: uuidv4(),
     firstName: "Jake",
     lastName: "Elrod",
     location: "VW North LR",
@@ -191,6 +194,7 @@ export const data = [
     pay: 11,
   },
   {
+    id: uuidv4(),
     firstName: "Micheal",
     lastName: "Kifer",
     location: "Warehouse",
@@ -209,6 +213,7 @@ export const data = [
     pay: 11,
   },
   {
+    id: uuidv4(),
     firstName: "Johnathan",
     lastName: "Garcia",
     location: "AR Texarkana",
@@ -227,6 +232,7 @@ export const data = [
     pay: 11,
   },
   {
+    id: uuidv4(),
     firstName: "Timothy",
     lastName: "Crawford",
     location: "AR University",
@@ -245,6 +251,7 @@ export const data = [
     pay: 11,
   },
   {
+    id: uuidv4(),
     firstName: "Brandon",
     lastName: "Chamblee",
     location: "VW Jacksonville",
@@ -263,6 +270,7 @@ export const data = [
     pay: 11,
   },
   {
+    id: uuidv4(),
     firstName: "Zach",
     lastName: "Ehemann",
     location: "AR Jacksonville",
@@ -281,6 +289,7 @@ export const data = [
     pay: 11,
   },
   {
+    id: uuidv4(),
     firstName: "Damon",
     lastName: "Hoover",
     location: "AR Sherwood",
@@ -299,6 +308,7 @@ export const data = [
     pay: 11.5,
   },
   {
+    id: uuidv4(),
     firstName: "Maya",
     lastName: "Kewak",
     location: "VW HS Albert Pike",
@@ -317,6 +327,7 @@ export const data = [
     pay: 11,
   },
   {
+    id: uuidv4(),
     firstName: "Richard",
     lastName: "Wyllia",
     location: "AR Otter Creek",
@@ -335,6 +346,7 @@ export const data = [
     pay: 11,
   },
   {
+    id: uuidv4(),
     firstName: "Caleb",
     lastName: "Borders",
     location: "VW North LR",
@@ -353,6 +365,7 @@ export const data = [
     pay: 11,
   },
   {
+    id: uuidv4(),
     firstName: "Justin",
     lastName: "Lee",
     location: "Warehouse",
@@ -377,6 +390,7 @@ export const data = [
     pay: 11,
   },
   {
+    id: uuidv4(),
     firstName: "Rolland",
     lastName: "Strong",
     location: "VW Bryant",
@@ -395,6 +409,7 @@ export const data = [
     pay: 11,
   },
   {
+    id: uuidv4(),
     firstName: "Garrett",
     lastName: "Hatzell",
     location: "AR University",
@@ -413,6 +428,7 @@ export const data = [
     pay: 11.5,
   },
   {
+    id: uuidv4(),
     firstName: "Lauren",
     lastName: "Forthman",
     location: "VW Benton",
@@ -431,6 +447,7 @@ export const data = [
     pay: 11,
   },
   {
+    id: uuidv4(),
     firstName: "Ricki",
     lastName: "Boas",
     location: "AR Sherwood",
@@ -450,6 +467,7 @@ export const data = [
     pay: 12,
   },
   {
+    id: uuidv4(),
     firstName: "Evan",
     lastName: "Atkinson",
     location: "VW Bryant",
@@ -468,6 +486,7 @@ export const data = [
     pay: 11,
   },
   {
+    id: uuidv4(),
     firstName: "Ra'Shawn",
     lastName: "Canada",
     location: "AR Maumelle",
@@ -487,6 +506,7 @@ export const data = [
     pay: 13.5,
   },
   {
+    id: uuidv4(),
     firstName: "River",
     lastName: "Allbritton",
     location: "Warehouse",
@@ -505,6 +525,7 @@ export const data = [
     pay: 12.5,
   },
   {
+    id: uuidv4(),
     firstName: "Justin (Gary)",
     lastName: "Adkins",
     location: "VW Jacksonville",
@@ -524,6 +545,7 @@ export const data = [
     pay: 13.5,
   },
   {
+    id: uuidv4(),
     firstName: "Andrew",
     lastName: "Thompson",
     location: "VW Jacksonville",
@@ -542,6 +564,7 @@ export const data = [
     pay: 12,
   },
   {
+    id: uuidv4(),
     firstName: "Jonathon",
     lastName: "Janssen",
     location: "AR Maumelle",
@@ -560,6 +583,7 @@ export const data = [
     pay: 11.25,
   },
   {
+    id: uuidv4(),
     firstName: "Horace",
     lastName: "Kelley",
     location: "VW Rodney Parham",
@@ -578,6 +602,7 @@ export const data = [
     pay: 12,
   },
   {
+    id: uuidv4(),
     firstName: "Nicholas (Nick)",
     lastName: "Ammons",
     location: "VW Benton",
@@ -602,6 +627,7 @@ export const data = [
     pay: 12.25,
   },
   {
+    id: uuidv4(),
     firstName: "Austin",
     lastName: "Gilbert",
     location: "VW HS Central Ave",
@@ -620,6 +646,7 @@ export const data = [
     pay: 12,
   },
   {
+    id: uuidv4(),
     firstName: "Tony",
     lastName: "Kifer",
     location: "AR Otter Creek",
@@ -638,6 +665,7 @@ export const data = [
     pay: 12.5,
   },
   {
+    id: uuidv4(),
     firstName: "Cody",
     lastName: "Morrison",
     location: "VW HS Albert Pike",
@@ -656,6 +684,7 @@ export const data = [
     pay: 12.5,
   },
   {
+    id: uuidv4(),
     firstName: "Brett",
     lastName: "Hula",
     location: "AR Jacksonville",
@@ -675,6 +704,7 @@ export const data = [
     pay: 15,
   },
   {
+    id: uuidv4(),
     firstName: "Kelcye",
     lastName: "Fry",
     location: "VW Arkadelphia",
@@ -694,6 +724,7 @@ export const data = [
     pay: 13.5,
   },
   {
+    id: uuidv4(),
     firstName: "Colten",
     lastName: "Eastworth",
     location: "VW Rodney Parham",
@@ -712,6 +743,7 @@ export const data = [
     pay: 12,
   },
   {
+    id: uuidv4(),
     firstName: "Colton",
     lastName: "Childers",
     location: "VW Benton",
@@ -736,6 +768,7 @@ export const data = [
     pay: 12.25,
   },
   {
+    id: uuidv4(),
     firstName: "John",
     lastName: "Brewster",
     location: "VW Bryant",
@@ -754,6 +787,7 @@ export const data = [
     pay: 12.5,
   },
   {
+    id: uuidv4(),
     firstName: "Trevor",
     lastName: "Torgerson",
     location: "AR Texarkana",
@@ -773,6 +807,7 @@ export const data = [
     pay: 15,
   },
   {
+    id: uuidv4(),
     firstName: "Josh",
     lastName: "Jones",
     location: "VW HS Central Ave",
@@ -791,6 +826,7 @@ export const data = [
     pay: 12.5,
   },
   {
+    id: uuidv4(),
     firstName: "Myles",
     lastName: "Clark",
     location: "Warehouse",
@@ -815,6 +851,7 @@ export const data = [
     pay: 12.5,
   },
   {
+    id: uuidv4(),
     firstName: "Reece (Ben)",
     lastName: "Frye",
     location: "VW HS Albert Pike",
@@ -833,6 +870,7 @@ export const data = [
     pay: 12.5,
   },
   {
+    id: uuidv4(),
     firstName: "Ethan",
     lastName: "Smith",
     location: "AR University",
@@ -851,6 +889,7 @@ export const data = [
     pay: 11.5,
   },
   {
+    id: uuidv4(),
     firstName: "Levyn",
     lastName: "Lewis",
     location: "AR Otter Creek",
@@ -870,6 +909,7 @@ export const data = [
     pay: 12.5,
   },
   {
+    id: uuidv4(),
     firstName: "Paige",
     lastName: "Boozer (Holmes)",
     location: "AR University",
@@ -895,6 +935,7 @@ export const data = [
     pay: 13.5,
   },
   {
+    id: uuidv4(),
     firstName: "Joseph",
     lastName: "Mapili",
     location: "Warehouse",
@@ -919,6 +960,7 @@ export const data = [
     pay: 12.5,
   },
   {
+    id: uuidv4(),
     firstName: "Amy",
     lastName: "Ward",
     location: "VW Benton",
@@ -937,6 +979,7 @@ export const data = [
     pay: 12.25,
   },
   {
+    id: uuidv4(),
     firstName: "Kevin",
     lastName: "Holmes",
     location: "VW North LR",
@@ -962,6 +1005,7 @@ export const data = [
     pay: 12.5,
   },
   {
+    id: uuidv4(),
     firstName: "Thadeus",
     lastName: "Samuelson",
     location: "Warehouse",
@@ -986,6 +1030,7 @@ export const data = [
     pay: 13.5,
   },
   {
+    id: uuidv4(),
     firstName: "Adam",
     lastName: "Reed",
     location: "VW Rodney Parham",
@@ -1005,6 +1050,7 @@ export const data = [
     pay: 13.75,
   },
   {
+    id: uuidv4(),
     firstName: "Alejandro",
     lastName: "Robles",
     location: "Warehouse",
@@ -1033,6 +1079,7 @@ export const data = [
     pay: 12.5,
   },
   {
+    id: uuidv4(),
     firstName: "Leif",
     lastName: "Gregan",
     location: "Warehouse",
@@ -1051,6 +1098,7 @@ export const data = [
     pay: 12.5,
   },
   {
+    id: uuidv4(),
     firstName: "Jay",
     lastName: "Myles",
     location: "VW Benton",
@@ -1070,6 +1118,7 @@ export const data = [
     pay: 14.5,
   },
   {
+    id: uuidv4(),
     firstName: "Chase",
     lastName: "Cook",
     location: "VW Arkadelphia",
@@ -1089,6 +1138,7 @@ export const data = [
     pay: 15,
   },
   {
+    id: uuidv4(),
     firstName: "Nick",
     lastName: "Rodriguez",
     location: "AR Sherwood",
@@ -1108,6 +1158,7 @@ export const data = [
     pay: 15,
   },
   {
+    id: uuidv4(),
     firstName: "Brandon",
     lastName: "Willman",
     location: "VW/AR Chenal",
@@ -1127,6 +1178,7 @@ export const data = [
     pay: 13.75,
   },
   {
+    id: uuidv4(),
     firstName: "Chris",
     lastName: "Kelley",
     location: "VW/AR Chenal",
@@ -1146,6 +1198,7 @@ export const data = [
     pay: 15,
   },
   {
+    id: uuidv4(),
     firstName: "Ethan",
     lastName: "Holland",
     location: "VW North LR",
@@ -1165,6 +1218,7 @@ export const data = [
     pay: 17.5,
   },
   {
+    id: uuidv4(),
     firstName: "Simon",
     lastName: "Sharp",
     location: "VW HS Albert Pike",
@@ -1184,6 +1238,7 @@ export const data = [
     pay: 14.5,
   },
   {
+    id: uuidv4(),
     firstName: "Micheal",
     lastName: "Martin",
     location: "VW North LR",
@@ -1202,6 +1257,7 @@ export const data = [
     pay: 15,
   },
   {
+    id: uuidv4(),
     firstName: "Seth",
     lastName: "Willis",
     location: "AR University",
@@ -1221,6 +1277,7 @@ export const data = [
     pay: 14,
   },
   {
+    id: uuidv4(),
     firstName: "Alex",
     lastName: "Wools",
     location: "VW Jacksonville",
@@ -1240,6 +1297,7 @@ export const data = [
     pay: 15,
   },
   {
+    id: uuidv4(),
     firstName: "Clayton",
     lastName: "Simpkins",
     location: "VW Bryant",
@@ -1265,6 +1323,7 @@ export const data = [
     pay: 14.25,
   },
   {
+    id: uuidv4(),
     firstName: "Jaren",
     lastName: "Evans",
     location: "VW Benton",
@@ -1302,6 +1361,7 @@ export const data = [
     pay: 15.25,
   },
   {
+    id: uuidv4(),
     firstName: "Terry",
     lastName: "Julian",
     location: "VW Rodney Parham",
@@ -1327,6 +1387,7 @@ export const data = [
     pay: 20,
   },
   {
+    id: uuidv4(),
     firstName: "Natasha",
     lastName: "Crawford",
     location: "VW HS Albert Pike",
@@ -1356,6 +1417,7 @@ export const data = [
     pay: 20,
   },
   {
+    id: uuidv4(),
     firstName: "Adam",
     lastName: "Russell",
     location: "VW Bryant",
@@ -1381,6 +1443,7 @@ export const data = [
     pay: 15.25,
   },
   {
+    id: uuidv4(),
     firstName: "Jack",
     lastName: "Newton",
     location: "Warehouse",
@@ -1399,6 +1462,7 @@ export const data = [
     pay: 39600,
   },
   {
+    id: uuidv4(),
     firstName: "David",
     lastName: "Lenderman",
     location: "AR Otter Creek",
@@ -1418,6 +1482,7 @@ export const data = [
     pay: 17.5,
   },
   {
+    id: uuidv4(),
     firstName: "Corbin",
     lastName: "Jenkins",
     location: "AR Maumelle",
@@ -1438,6 +1503,7 @@ export const data = [
     pay: 15,
   },
   {
+    id: uuidv4(),
     firstName: "Isaac",
     lastName: "Rivera",
     location: "Warehouse",
@@ -1457,6 +1523,7 @@ export const data = [
     pay: 18.75,
   },
   {
+    id: uuidv4(),
     firstName: "Greg",
     lastName: "Burton",
     location: "Warehouse",
@@ -1475,6 +1542,7 @@ export const data = [
     pay: 36000,
   },
   {
+    id: uuidv4(),
     firstName: "Nathanael",
     lastName: "Hardister",
     location: "Warehouse",
@@ -1494,6 +1562,7 @@ export const data = [
     pay: 55200,
   },
   {
+    id: uuidv4(),
     firstName: "Tyler",
     lastName: "Oswald",
     location: "Warehouse",
@@ -1522,6 +1591,7 @@ export const data = [
     pay: 54960,
   },
   {
+    id: uuidv4(),
     firstName: "James",
     lastName: "Freeze",
     location: "Warehouse",
@@ -1554,6 +1624,7 @@ export const data = [
     pay: 18.75,
   },
   {
+    id: uuidv4(),
     firstName: "Supreet",
     lastName: "Momi",
     location: "Warehouse",
@@ -1572,6 +1643,7 @@ export const data = [
     pay: 21120,
   },
   {
+    id: uuidv4(),
     firstName: "Kaylyn",
     lastName: "Ray",
     location: "Warehouse",
