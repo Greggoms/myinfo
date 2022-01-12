@@ -141,11 +141,11 @@ export const columns = [
     accessor: "hireDate",
   },
   {
-    Header: "Lifetime PTO Hours",
+    Header: "Lifetime PTO",
     accessor: "lifetimePTO",
   },
   {
-    Header: "Remaining PTO Hours",
+    Header: "Remaining PTO",
     accessor: "remainingPTO",
   },
   {

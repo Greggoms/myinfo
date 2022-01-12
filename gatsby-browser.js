@@ -36,15 +36,6 @@ body, html {
   font-display: fallback; /* <- this can be added to each @font-face definition */
   background-color: ${Theme.grayscale.dark3};
 }
-  
-#netlify-identity-widget {
-  .modalContainer {
-    justify-content: center !important;
-  }
-  .modalDialog {
-    flex-grow: 0 !important;
-  }
-}
 
 [data-reach-dialog-overlay] {
   position: absolute !important;

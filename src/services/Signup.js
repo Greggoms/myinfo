@@ -12,14 +12,13 @@ export const Signup = () => {
   const handleModalClose = () => {
     setTimeout(() => {
       netlifyIdentity.close()
-    }, 3000)
+    }, 0)
   }
 
   useEffect(() => {
-    netlifyIdentity.on("login", user => {
+    netlifyIdentity.on("login", () => {
       setIsLoggedIn(true)
       navigate("/app/profile")
-      console.log(user)
       handleModalClose()
     })
   }, [])
@@ -32,7 +31,6 @@ export const Signup = () => {
 
   const Logout = () => {
     netlifyIdentity.logout()
-    console.log(user)
   }
 
   return (
