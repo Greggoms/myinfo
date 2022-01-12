@@ -16,7 +16,7 @@ const ProfilePage = () => {
 
   // Attempt to match pto info from the Database to the
   // Netlify identity user by email matching.
-  // It works!! next challenege: let mngrs see employee profiles.
+  // It works!!
   useEffect(() => {
     const person = user
       ? data.find(person => person.email === user.email)

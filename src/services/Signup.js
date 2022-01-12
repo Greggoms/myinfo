@@ -9,21 +9,32 @@ export const Signup = () => {
     user !== null && user.token !== null ? true : false
   )
 
+  const handleModalClose = () => {
+    setTimeout(() => {
+      netlifyIdentity.close()
+    }, 3000)
+  }
+
   useEffect(() => {
     netlifyIdentity.on("login", user => {
       setIsLoggedIn(true)
       navigate("/app/profile")
       console.log(user)
+      handleModalClose()
     })
+  }, [])
+  useEffect(() => {
     netlifyIdentity.on("logout", () => {
       setIsLoggedIn(false)
       navigate("/")
     })
   }, [])
+
   const Logout = () => {
     netlifyIdentity.logout()
     console.log(user)
   }
+
   return (
     <LogContainer>
       {isLoggedIn ? (

@@ -9,7 +9,7 @@ export const ClientOnly = ({ children }) => {
   }, [])
 
   if (!hasMounted) {
-    return null
+    return <p>LOADING</p>
   }
 
   return <PageRefreshContainer>{children}</PageRefreshContainer>

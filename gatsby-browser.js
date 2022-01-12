@@ -37,7 +37,7 @@ body, html {
   background-color: ${Theme.grayscale.dark3};
 }
   
-html html iframe #netlify-identity-widget {
+#netlify-identity-widget {
   .modalContainer {
     justify-content: center !important;
   }
