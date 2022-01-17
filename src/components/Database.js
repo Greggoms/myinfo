@@ -1554,11 +1554,17 @@ export const data = [
     hireDate: hireDate(2018, 5, 7),
     lifetimePTO: lifetimePTO(2018, 5, 7),
     daysUntil10Hrs: daysUntil10Hrs(2018, 5, 7),
-    remainingPTO: remainingPTO(2018, 5, 7, 48, 0),
+    remainingPTO: remainingPTO(2018, 5, 7, 48, 24),
     accepted: [
       {
         dates: ["Unknown"],
         hours: 48,
+      },
+    ],
+    pending: [
+      {
+        dates: ["2/23/2022", "2/25/2022"],
+        hours: 24,
       },
     ],
     monthsWorked: {

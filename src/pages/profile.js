@@ -19,7 +19,9 @@ const ProfilePage = () => {
   // It works!!
   useEffect(() => {
     const person = user
-      ? data.find(person => person.email === user.email)
+      ? data.find(
+          person => person.email.toLowerCase() === user.email.toLowerCase()
+        )
       : null
     setPtoInfo(person)
     // eslint-disable-next-line
