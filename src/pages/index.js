@@ -55,10 +55,15 @@ const IndexPage = () => {
                 information.
               </p>
               <p>
-                Sign up with the email you use to login to Lightspeed if you
-                want instant access to PTO info. If you choose another email, I
-                will have to manually connect you to your PTO info. You can
-                choose any username you want.
+                If this is your first time here, create an account with the
+                email you use to login to Lightspeed if you want instant access
+                to PTO info. If you choose another email, I will have to
+                manually connect you to your PTO info.
+              </p>
+              <p>
+                Once your account is created, you will be emailed a confirmation
+                link. You MUST confirm to be allowed to sign in. Upon
+                confirmation, you will be sent to your profile page.
               </p>
             </div>
           </>
