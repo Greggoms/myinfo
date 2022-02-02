@@ -1,11 +1,19 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
+import firebase from "firebase/compat/app"
+import "firebase/compat/auth"
 import { Notification } from "./Notification"
 import Seo from "./seo"
 import Svg from "../svg/lock.svg"
-const netlifyIdentity = require("netlify-identity-widget")
 
 const PrivateRoute = ({ component: Component, location, ...rest }) => {
-  const user = netlifyIdentity.currentUser()
+  const [user, setUser] = useState([])
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(user => {
+      setUser(user)
+    })
+  }, [user])
+
   if (!user && location.pathname === `/app/profile`) {
     return (
       <>

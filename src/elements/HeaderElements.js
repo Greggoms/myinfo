@@ -13,7 +13,6 @@ export const HeaderContents = styled.div`
   justify-items: center;
   align-items: center;
   grid-row-gap: 10px;
-}
 
   @media only screen and (max-width: 1000px) {
     margin: 0;
@@ -23,26 +22,46 @@ export const HeaderContents = styled.div`
   @media only screen and (max-width: 600px) {
     margin: 0;
   }
-  
+
   @media only screen and (min-width: 500px) {
     grid-template-rows: 70px 65px;
     align-items: flex-end;
   }
   @media only screen and (min-width: 800px) {
-     grid-template-rows: 70px 20px;
-     grid-template-columns: 1fr 2fr 2fr;
-    }
-  
+    grid-template-rows: 70px 20px;
+    grid-template-columns: 1fr 2fr 2fr;
+  }
+
   h1 {
     margin: 0;
     grid-column: 1 / -1;
     grid-row: 1;
     align-self: flex-end;
- 
 
     @media only screen and (min-width: 500px) {
       grid-column: 1;
     }
+  }
+
+  .login-status {
+    color: ${props => props.theme.grayscale.light1};
+    display: flex;
+    grid-column: 1 / -1;
+    grid-row: 2;
+
+    @media only screen and (min-width: 500px) {
+      grid-column: 2;
+      grid-row: 1;
+    }
+  }
+
+  button {
+    cursor: pointer;
+    text-decoration: underline;
+    margin-left: 5px;
+    background: inherit;
+    border: none;
+    color: inherit;
   }
 
   a {
@@ -59,7 +78,7 @@ export const HeaderContents = styled.div`
       grid-row: 2;
       align-self: center;
     }
-    
+
     @media only screen and (min-width: 800px) {
       grid-column: 3;
       grid-row: 1;

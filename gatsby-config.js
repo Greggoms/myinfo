@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `My Info`,
@@ -8,7 +12,6 @@ module.exports = {
     `gatsby-plugin-netlify`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-smoothscroll`,
-
     {
       resolve: "gatsby-plugin-react-svg",
       options: {

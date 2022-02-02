@@ -4,7 +4,6 @@ export const DashboardPageContainer = styled.div`
   margin: 0 auto;
   margin-bottom: 3rem;
   max-width: 100rem;
-  transition: all 3s ease;
 `
 export const DashboardPageErrorContainer = styled.div`
   margin: 0 auto;
@@ -15,14 +14,13 @@ export const EmployeeViewContainer = styled.section`
     display: grid;
     grid-template-columns: 1fr 0;
     grid-template-rows: 1fr 0;
-    transition: all 30s ease;
   }
   .button-container {
     margin: 0 auto;
     margin-bottom: 3rem;
     display: flex;
     justify-content: space-between;
-    max-width: 25rem;
+    max-width: 40rem;
 
     button {
       border: none;

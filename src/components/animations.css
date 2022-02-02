@@ -10,14 +10,14 @@
   animation: 1s ease appear2;
   animation-fill-mode: forwards;
 }
-.associate-div {
+/* .associate-div {
   animation: 0.5s ease disappear1;
-  animation-fill-mode: forwards;
+  animation-fill-mode: reverse;
 }
 .manager-div {
   animation: 0.5s ease disappear2;
-  animation-fill-mode: forwards;
-}
+  animation-fill-mode: reverse;
+} */
 @keyframes appear1 {
   from {
     height: 0;

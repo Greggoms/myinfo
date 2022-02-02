@@ -1,30 +1,34 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import firebase from "firebase/compat/app"
+import "firebase/compat/auth"
 import Seo from "../components/seo"
 import { ReactTable } from "../components/ReactTable"
-import { DashboardProfiles } from "../components/DashboardProfiles"
-import { DashboardPayRaises } from "../components/DashboardPayRaises"
+import { EmployeesList } from "../services/FireDatabase"
+import { EditEmployee } from "../components/EditEmployee"
 import { Notification } from "../components/Notification"
 import {
   DashboardPageContainer,
   DashboardPageErrorContainer,
   EmployeeViewContainer,
+  DashboardProfilesContainer,
 } from "../elements"
 import Svg from "../svg/lock.svg"
-const netlifyIdentity = require("netlify-identity-widget")
 
 const DashboardPage = () => {
-  const [tableIsActive, setTableIsActive] = useState(false)
+  const [tableIsActive, setTableIsActive] = useState(true)
   const [profileIsActive, setProfileIsActive] = useState(false)
-  const [payRaiseIsActive, setPayRaiseIsActive] = useState(true)
+  const [payRaiseIsActive, setPayRaiseIsActive] = useState(false)
+  const [editEmployeeIsActive, setEditEmployeeIsActive] = useState(false)
+  const [user, setUser] = useState([])
 
-  const user = netlifyIdentity.currentUser()
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(user => {
+      setUser(user)
+    })
+  }, [user])
 
-  const role =
-    user && user.app_metadata.roles
-      ? user.app_metadata.roles.map(role => role)
-      : null
   // eslint-disable-next-line
-  if (role == "Admin") {
+  if (user && user.role === "admin") {
     const styles = {
       active: {
         gridRow: 1,
@@ -39,7 +43,7 @@ const DashboardPage = () => {
     }
     return (
       <DashboardPageContainer>
-        <Seo title={`${user.user_metadata.full_name}'s Dashboard`} />
+        <Seo title={`${user.firstName}'s Dashboard`} />
         <EmployeeViewContainer>
           <div className="button-container">
             <button
@@ -47,6 +51,7 @@ const DashboardPage = () => {
                 setTableIsActive(true)
                 setProfileIsActive(false)
                 setPayRaiseIsActive(false)
+                setEditEmployeeIsActive(false)
               }}
               style={
                 tableIsActive ? { color: "#F2F2F2" } : { color: "#595959" }
@@ -59,6 +64,7 @@ const DashboardPage = () => {
                 setProfileIsActive(true)
                 setTableIsActive(false)
                 setPayRaiseIsActive(false)
+                setEditEmployeeIsActive(false)
               }}
               style={
                 profileIsActive ? { color: "#F2F2F2" } : { color: "#595959" }
@@ -71,6 +77,7 @@ const DashboardPage = () => {
                 setPayRaiseIsActive(true)
                 setProfileIsActive(false)
                 setTableIsActive(false)
+                setEditEmployeeIsActive(false)
               }}
               style={
                 payRaiseIsActive ? { color: "#F2F2F2" } : { color: "#595959" }
@@ -78,39 +85,60 @@ const DashboardPage = () => {
             >
               Pay Raises
             </button>
+            <button
+              onClick={() => {
+                setPayRaiseIsActive(false)
+                setProfileIsActive(false)
+                setTableIsActive(false)
+                setEditEmployeeIsActive(true)
+              }}
+              style={
+                editEmployeeIsActive
+                  ? { color: "#F2F2F2" }
+                  : { color: "#595959" }
+              }
+            >
+              Edit Employee
+            </button>
           </div>
           <div className="selected-component">
             <div style={tableIsActive ? styles.active : styles.inactive}>
               <ReactTable />
             </div>
             <div style={profileIsActive ? styles.active : styles.inactive}>
-              <DashboardProfiles />
+              <DashboardProfilesContainer>
+                <EmployeesList layout="profile" />
+              </DashboardProfilesContainer>
             </div>
             <div style={payRaiseIsActive ? styles.active : styles.inactive}>
-              <DashboardPayRaises />
+              <DashboardProfilesContainer>
+                <EmployeesList layout="payraise" />
+              </DashboardProfilesContainer>
+            </div>
+            <div style={editEmployeeIsActive ? styles.active : styles.inactive}>
+              <EditEmployee />
             </div>
           </div>
         </EmployeeViewContainer>
       </DashboardPageContainer>
     )
-  } else {
-    return (
-      <DashboardPageErrorContainer>
-        <Seo title="Dashboard" />
-        <Notification message="You need Admin Rights for this." />
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <Svg
-            style={{
-              width: "100%",
-              maxWidth: "30rem",
-              height: "100%",
-              opacity: 0.5,
-            }}
-          />
-        </div>
-      </DashboardPageErrorContainer>
-    )
   }
+  return (
+    <DashboardPageErrorContainer>
+      <Seo title="Dashboard" />
+      <Notification message="You need Admin Rights for this." />
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Svg
+          style={{
+            width: "100%",
+            maxWidth: "30rem",
+            height: "100%",
+            opacity: 0.5,
+          }}
+        />
+      </div>
+    </DashboardPageErrorContainer>
+  )
 }
 
 export default DashboardPage

@@ -1,0 +1,23 @@
+#firebaseui_container {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: flex-end;
+}
+
+.firebaseui-container {
+  width: 100%;
+  max-width: 420px !important;
+}
+
+.firebaseui-idp-list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.firebaseui-idp-list li {
+  margin-bottom: 0 !important;
+}
+
+.firebaseui-card-content:first-child {
+  padding: 0 !important;
+}
