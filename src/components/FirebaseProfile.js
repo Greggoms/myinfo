@@ -3,7 +3,11 @@ import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore"
 import { useForm } from "react-hook-form"
-import { addDays } from "date-fns"
+import {
+  addDays,
+  differenceInCalendarDays,
+  differenceInCalendarMonths,
+} from "date-fns"
 import Seo from "../components/seo"
 import {
   ProfileContainer,
@@ -16,13 +20,14 @@ export const FirebaseProfile = props => {
   const [uid, setUid] = useState("")
   const [details, setDetails] = useState([])
   const [submitted, setSubmitted] = useState(null)
+  const [hasHireDate, setHasHireDate] = useState(false)
   const { register, handleSubmit } = useForm()
   const db = getFirestore()
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
       setUser(user)
-      setUid(user.uid)
+      user && setUid(user.uid)
     })
   }, [user])
 
@@ -39,7 +44,19 @@ export const FirebaseProfile = props => {
         "Re-running useEffect to fill a previously undefined variable"
       )
     }
+    // eslint-disable-next-line
   }, [uid, submitted])
+
+  useEffect(() => {
+    if (
+      details.hireDate !== undefined &&
+      !isNaN(details.hireDate[0]) &&
+      !isNaN(details.hireDate[1]) &&
+      !isNaN(details.hireDate[2])
+    ) {
+      setHasHireDate(true)
+    }
+  }, [details])
 
   const onSubmit = async data => {
     try {
@@ -48,29 +65,71 @@ export const FirebaseProfile = props => {
       await updateDoc(doc(db, `users/${uid}`), {
         position: `${data.position}`,
         location: `${data.location}`,
+        hireDate: [data.hireYear, data.hireMonth, data.hireDay],
       })
       setSubmitted(true)
       setSubmitted(null)
+      if (
+        !isNaN(data.hireYear) &&
+        !isNaN(data.hireMonth) &&
+        !isNaN(data.hireDay)
+      ) {
+        setHasHireDate(true)
+      }
     } catch (err) {
       console.log("Error updating/reading document: ", err)
     }
   }
 
-  // const currentYear = new Date().getFullYear()
-  // const currentMonth = parseInt(new Date().getMonth())
-  // const currentDay = new Date().getDate()
+  const currentYear = new Date().getFullYear()
+  const currentMonth = parseInt(new Date().getMonth() + 1)
+  const currentDay = new Date().getDate()
 
-  // const dateFor10Hrs = () => {
-  //   const result = addDays(
-  //     new Date(currentYear, currentMonth, currentDay),
-  //     props.daysUntil10Hrs
-  //   )
-  //   return `${parseInt(
-  //     result.getMonth() + 1
-  //   )}/${result.getDate()}/${result.getFullYear()}`
-  // }
+  const remainingPTO = (hireYear, hireMonth, hireDay, hoursUsed, pending) => {
+    const result = differenceInCalendarDays(
+      new Date(currentYear, currentMonth, currentDay),
+      new Date(hireYear, hireMonth, hireDay)
+    )
+    return pending
+      ? `${Math.floor(result / 91) * 10 - hoursUsed} - (${pending
+          .map(({ hours }) => hours)
+          .join(` + `)} Pending)`
+      : Math.floor(result / 91) * 10 - hoursUsed
+  }
 
-  // console.log(watch("example")) // watch input value by passing the name of it
+  const daysUntil10Hrs = (hireYear, hireMonth, hireDay) => {
+    const result = differenceInCalendarDays(
+      new Date(currentYear, currentMonth, currentDay),
+      new Date(hireYear, hireMonth, hireDay)
+    )
+    return 91 - (result % 91)
+  }
+
+  const dateFor10Hrs = (hireYear, hireMonth, hireDay) => {
+    const result = addDays(
+      new Date(currentYear, currentMonth, currentDay),
+      daysUntil10Hrs(hireYear, hireMonth, hireDay)
+    )
+    return `${parseInt(
+      result.getMonth()
+    )}/${result.getDate()}/${result.getFullYear()}`
+  }
+
+  const lifetimePTO = (hireYear, hireMonth, hireDay) => {
+    const result = differenceInCalendarDays(
+      new Date(currentYear, currentMonth, currentDay),
+      new Date(hireYear, hireMonth, hireDay)
+    )
+    return Math.floor(result / 91) * 10
+  }
+
+  const monthsWorked = (year, month, day) => {
+    const result = differenceInCalendarMonths(
+      new Date(currentYear, currentMonth, currentDay),
+      new Date(year, month, day)
+    )
+    return result
+  }
 
   return (
     <>
@@ -82,12 +141,32 @@ export const FirebaseProfile = props => {
       <ProfileContainer>
         <>
           <DatabaseProfileContainer>
-            {submitted === null && !details.position && !details.location && (
+            {(!details.position || !details.location || !hasHireDate) && (
               <form onSubmit={handleSubmit(onSubmit)}>
-                <h3>Get Started on your Profile!</h3>
+                <div style={{ display: "flex" }}>
+                  <h3>Get Started on your Profile!</h3>
+                  <p className="tooltip">
+                    ?
+                    <span className="tooltiptext">
+                      The only required fields are position and location. Don't
+                      worry if you mess up. I can always adjust values on my
+                      end.
+                    </span>
+                  </p>
+                </div>
                 {!details.position && (
                   <label>
-                    What is your position?
+                    <div>
+                      What is your position?{" "}
+                      <span style={{ color: "#F25C69" }}>*</span>
+                      <p className="tooltip">
+                        ?
+                        <span className="tooltiptext">
+                          This is how I determine your eligibilty for raises.
+                        </span>
+                      </p>
+                    </div>
+
                     <select {...register("position")} defaultValue="Associate">
                       <option value="Associate">Associate</option>
                       <option value="Assist Mngr">Assistant Manager</option>
@@ -97,7 +176,10 @@ export const FirebaseProfile = props => {
                 )}
                 {!details.location && (
                   <label>
-                    Which location do you work at?
+                    <div>
+                      Which location do you work at?{" "}
+                      <span style={{ color: "#F25C69" }}>*</span>
+                    </div>
                     <select
                       {...register("location")}
                       defaultValue="AR Jacksonville"
@@ -130,47 +212,134 @@ export const FirebaseProfile = props => {
                   </label>
                 )}
 
-                <input type="submit" value="Submit" />
+                {!hasHireDate && (
+                  <>
+                    <div className="special-div">
+                      When were you hired?
+                      <div className="tooltip">
+                        ?
+                        <span className="tooltiptext">
+                          Filling this in results in the bulk of your profile
+                          being populated. If you aren't sure then I'll fill it
+                          in on my end.
+                          <ul>
+                            <li>Must be valid whole numbers.</li>
+                            <li>Examples:</li>
+                            <ul>
+                              <li>Hired on Feb 8th 2022 </li>
+                              <li>Correct: 2022/2/8</li>
+                              <li>Correct: 2022/02/08</li>
+                            </ul>
+                          </ul>
+                        </span>
+                      </div>
+                    </div>
+                    <div className="hire-date-inputs">
+                      <label>
+                        <span>Year</span>
+                        <input
+                          {...register("hireYear", {
+                            minLength: 4,
+                            maxLength: 4,
+                            valueAsNumber: true,
+                          })}
+                          placeholder="2022"
+                          type="number"
+                        />
+                      </label>
+                      <label>
+                        <span>Month</span>
+                        <input
+                          {...register("hireMonth", {
+                            valueAsNumber: true,
+                          })}
+                          placeholder="1, 9, 12 etc..."
+                          type="number"
+                          min={1}
+                          max={12}
+                        />
+                      </label>
+                      <label>
+                        <span>Day</span>
+                        <input
+                          {...register("hireDay", {
+                            valueAsNumber: true,
+                          })}
+                          placeholder="1, 15, 31 etc..."
+                          type="number"
+                          min={1}
+                          max={31}
+                        />
+                      </label>
+                    </div>
+                  </>
+                )}
+
+                <input type="submit" value="Submit" className="submit-btn" />
               </form>
             )}
-            {/* <h2>PTO Info</h2>
+            <h2>PTO Info</h2>
             <div className="highlights">
               <div className="highlight">
-                <h3>
-                  {props.remainingPTO > 0
-                    ? `${props.remainingPTO}hrs`
-                    : props.remainingPTO}
-                </h3>
+                {hasHireDate ? (
+                  <h3>
+                    {remainingPTO(
+                      details.hireDate[0],
+                      details.hireDate[1],
+                      details.hireDate[2],
+                      details.hoursUsed ? details.hoursUsed : 0,
+                      details.pending ? details.pending : 0
+                    )}
+                    hrs
+                  </h3>
+                ) : (
+                  <p>Waiting...</p>
+                )}
                 <hr />
                 <p>Remaining PTO</p>
               </div>
               <div className="highlight">
-                <h3>
-                  {props.daysUntil10Hrs !== "N/A"
-                    ? `${props.daysUntil10Hrs} Days`
-                    : props.daysUntil10Hrs}
-                </h3>
+                {hasHireDate ? (
+                  <h3>
+                    {daysUntil10Hrs(
+                      details.hireDate[0],
+                      details.hireDate[1],
+                      details.hireDate[2]
+                    )}{" "}
+                    Days
+                  </h3>
+                ) : (
+                  <p>Waiting...</p>
+                )}
                 <hr />
-                <p>
-                  +10hrs on{" "}
-                  {props.daysUntil10Hrs !== "N/A" ? dateFor10Hrs() : `Never`}
-                </p>
+                {hasHireDate ? (
+                  <p>
+                    +10hrs on{" "}
+                    {dateFor10Hrs(
+                      details.hireDate[0],
+                      details.hireDate[1],
+                      details.hireDate[2]
+                    )}
+                  </p>
+                ) : (
+                  <p>+10hrs on ???</p>
+                )}
               </div>
             </div>
             <div>
               <h2 className="special-h2">PTO Usage</h2>
-              {props.pending && (
+              {details.pending ? (
                 <p>
                   Pending hours are NOT subtracted from remaining PTO. The
                   remaining hours are adjusted once the request is "Accepted".
                 </p>
-              )}
+              ) : null}
               <RequestsContainer>
                 <div className="pending-requests requests">
                   <h3>Pending</h3>
-                  {props.pending ? (
+                  {details.pending ? (
                     <ul>
-                      {props.pending.map((request, index) =>
+                      {details.pending.map((request, index) =>
                         request.dates.length > 1 ? (
                           <li key={index}>
                             Pending: {request.dates[0]} to {request.dates[1]}{" "}
@@ -190,9 +359,9 @@ export const FirebaseProfile = props => {
                 </div>
                 <div className="accepted-requests requests">
                   <h3>Accepted</h3>
-                  {props.accepted ? (
+                  {details.accepted ? (
                     <ul>
-                      {props.accepted.map((request, index) =>
+                      {details.accepted.map((request, index) =>
                         request.dates.length > 1 ? (
                           <li key={index}>
                             Accepted: {request.dates[0]} to {request.dates[1]}{" "}
@@ -215,20 +384,25 @@ export const FirebaseProfile = props => {
               </RequestsContainer>
             </div>
           </DatabaseProfileContainer>
-          <DatabaseProfileContainer>*/}
+          <DatabaseProfileContainer>
             <h2>More Info</h2>
             <div className="highlights">
-              {/* <div className="highlight">
-                <h4>
-                  <p>
-                    {props.lifetimePTO >= 0
-                      ? `${props.lifetimePTO}hrs`
-                      : props.lifetimePTO}
-                  </p>
-                </h4>
+              <div className="highlight">
+                {hasHireDate ? (
+                  <h4>
+                    {lifetimePTO(
+                      details.hireDate[0],
+                      details.hireDate[1],
+                      details.hireDate[2]
+                    )}
+                    hrs
+                  </h4>
+                ) : (
+                  <p>Waiting...</p>
+                )}
                 <hr />
                 <p>Lifetime PTO</p>
-              </div> */}
+              </div>
               <div className="highlight">
                 {details.location ? (
                   <h4>{details.location && details.location}</h4>
@@ -238,13 +412,28 @@ export const FirebaseProfile = props => {
                 <hr />
                 <p>Location</p>
               </div>
-              {/* <div className="highlight">
-                <h4>
-                  <p>{props.hireDate}</p>
-                </h4>
+              <div className="highlight">
+                {hasHireDate ? (
+                  <h4>
+                    {details.hireDate[1]}/{details.hireDate[2]}/
+                    {details.hireDate[0]}
+                  </h4>
+                ) : (
+                  <p>Waiting...</p>
+                )}
                 <hr />
-                <p>Hire Date - {props.monthsWorkedTotal} months ago</p>
-              </div> */}
+                <p>
+                  Hire Date -{" "}
+                  {hasHireDate
+                    ? monthsWorked(
+                        details.hireDate[0],
+                        details.hireDate[1],
+                        details.hireDate[2]
+                      )
+                    : "???"}{" "}
+                  months ago
+                </p>
+              </div>
               <div className="highlight">
                 {details.position ? (
                   <h4>{details.position}</h4>
@@ -254,10 +443,20 @@ export const FirebaseProfile = props => {
                 <hr />
                 <p>
                   Position -{" "}
-                  {/*props.monthsWorkedAsPosition
-                    ? props.monthsWorkedAsPosition
-                  : props.monthsWorkedTotal*/}{" "}
-                  months ago
+                  {details.promotionDate
+                    ? monthsWorked(
+                        details.promotionDate[0],
+                        details.promotionDate[1],
+                        details.promotionDate[2]
+                      )
+                    : hasHireDate
+                    ? monthsWorked(
+                        details.hireDate[0],
+                        details.hireDate[1],
+                        details.hireDate[2]
+                      )
+                    : "???"}{" "}
+                  months
                 </p>
               </div>
             </div>

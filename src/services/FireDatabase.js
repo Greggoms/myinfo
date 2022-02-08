@@ -128,72 +128,8 @@ export const FireUser = () => {
     })
   }, [user])
 
-  if (
-    user /*&&
-    user.email.toLowerCase() === firebase.auth().currentUser.email.toLowerCase()*/
-  ) {
-    return (
-      <FirebaseProfile
-        key={user.email ? user.email : `No Key`}
-        firstName={user.firstName}
-        lastName={user.lastName}
-        email={user.email ? user.email : "No Email"}
-        location={user.location ? user.location : `No Location`}
-        hireDate={
-          user.hireDate
-            ? `${user.hireDate[0]}/${user.hireDate[1]}/${user.hireDate[2]}`
-            : `No Hire Date`
-        }
-        position={user.position ? user.position : `No Position`}
-        pay={user.pay ? user.pay : `No Pay`}
-        remainingPTO={
-          user.hireDate
-            ? remainingPTO(
-                user.hireDate[0],
-                user.hireDate[1],
-                user.hireDate[2],
-                user.hoursUsed,
-                user.pending
-              )
-            : `None`
-        }
-        lifetimePTO={
-          user.hireDate
-            ? lifetimePTO(user.hireDate[0], user.hireDate[1], user.hireDate[2])
-            : `None`
-        }
-        daysUntil10Hrs={
-          user.hireDate
-            ? daysUntil10Hrs(
-                user.hireDate[0],
-                user.hireDate[1],
-                user.hireDate[2]
-              )
-            : `N/A`
-        }
-        timeForRaise={
-          user.hireDate
-            ? timeForRaise(user.hireDate[0], user.hireDate[1], user.hireDate[2])
-            : `N/A`
-        }
-        monthsWorkedTotal={
-          user.hireDate
-            ? monthsWorked(user.hireDate[0], user.hireDate[1], user.hireDate[2])
-            : null
-        }
-        monthsWorkedAsPosition={
-          user.promotionDate
-            ? monthsWorked(
-                user.promotionDate[0],
-                user.promotionDate[1],
-                user.promotionDate[2]
-              )
-            : null
-        }
-        accepted={user.accepted ? user.accepted : null}
-        pending={user.pending ? user.pending : null}
-      />
-    )
+  if (user) {
+    return <FirebaseProfile />
   } else {
     return (
       <div

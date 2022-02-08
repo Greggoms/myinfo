@@ -10,7 +10,9 @@ const PrivateRoute = ({ component: Component, location, ...rest }) => {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
-      setUser(user)
+      if (user) {
+        setUser(user)
+      }
     })
   }, [user])
 
@@ -23,7 +25,7 @@ const PrivateRoute = ({ component: Component, location, ...rest }) => {
           <Svg
             style={{
               width: "100%",
-              maxWidth: "30rem",
+              maxWidth: "25rem",
               height: "100%",
               opacity: 0.5,
             }}
@@ -40,7 +42,7 @@ const PrivateRoute = ({ component: Component, location, ...rest }) => {
           <Svg
             style={{
               width: "100%",
-              maxWidth: "30rem",
+              maxWidth: "25rem",
               height: "100%",
               opacity: 0.5,
             }}

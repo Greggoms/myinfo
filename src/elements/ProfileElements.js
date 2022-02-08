@@ -14,12 +14,81 @@ export const ProfileContainer = styled.section`
   form {
     display: flex;
     flex-direction: column;
+    grid-row-gap: 20px;
     width: 100%;
-    max-width: 40rem;
+    max-width: 325px;
+    margin: 0 auto;
+
+    h3 {
+      text-align: center;
+    }
+
+    .special-div {
+      margin-bottom: -20px;
+    }
 
     label {
       display: flex;
       flex-direction: column;
+    }
+    .hire-date-inputs {
+      display: flex;
+      grid-gap: 5px;
+      flex-direction: row;
+
+      span {
+        font-size: 9pt;
+        margin-bottom: -5px;
+      }
+
+      input {
+        max-width: 125px;
+      }
+    }
+
+    select {
+      max-width: min-content;
+    }
+
+    .submit-btn {
+      max-width: 100px;
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      background: ${props => props.theme.grayscale.dark3};
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      text-align: center;
+      margin-left: 10px;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 350px;
+      background-color: ${props => props.theme.grayscale.dark4};
+      color: ${props => props.theme.grayscale.light1};
+      text-align: left;
+      border-radius: 6px;
+      padding: 10px;
+
+      /* Position the tooltip */
+      position: absolute;
+      left: 30px;
+      z-index: 1;
+
+      ul {
+        margin-left: 20px;
+      }
+      ul ul {
+        margin-left: 30px;
+      }
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
     }
   }
 `
