@@ -4,7 +4,7 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `My Info`,
+    title: `vwLogin`,
     description: `Come here to see your employee stats. Made with some cool technology.`,
     author: `Greggoms`,
   },

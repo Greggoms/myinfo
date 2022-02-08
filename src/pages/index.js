@@ -7,10 +7,15 @@ import { IndexPageContainer, ButtonLinkContainer } from "../elements"
 
 const IndexPage = () => {
   const [user, setUser] = useState([])
+  const [firstName, setFirstName] = useState("")
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
       setUser(user)
+      if (user) {
+        const str = user.displayName.split(" ")
+        setFirstName(str[0])
+      }
     })
   }, [user])
 
@@ -18,7 +23,7 @@ const IndexPage = () => {
     <IndexPageContainer>
       <Seo title="Home" />
       <div>
-        <h1>Hey {user ? user.displayName : "There"}!</h1>
+        <h1>Hey {user ? firstName : "There"}!</h1>
         {user ? (
           <section className="welcome">
             <h2>

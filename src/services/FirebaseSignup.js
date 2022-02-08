@@ -43,12 +43,14 @@ const uiConfig = {
         const user = authResult.user
         const uid = user.uid
         const name = user.displayName
+        const email = user.email
         console.log("uid: " + uid)
 
         // Add a new document to Firestore
         await setDoc(doc(db, "users", uid), {
           id: uid,
           name: name,
+          email: email,
         })
       } catch (err) {
         console.log("Error adding document: ", err)

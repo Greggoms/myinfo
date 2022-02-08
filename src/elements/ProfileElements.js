@@ -10,6 +10,18 @@ export const ProfileContainer = styled.section`
   h2 {
     margin-bottom: 1rem;
   }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 40rem;
+
+    label {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 `
 
 export const DatabaseProfileContainer = styled.section`
