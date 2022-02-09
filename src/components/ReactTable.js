@@ -1,11 +1,22 @@
-import React, { useMemo } from "react"
+import React, { useState, useEffect, useMemo } from "react"
+import { getFirestore, collection, getDocs, query } from "firebase/firestore"
 import { useSortBy, useTable } from "react-table"
-import { EmployeesTable } from "../services/FireDatabase"
 import { differenceInCalendarDays } from "date-fns"
 import { TableContainer } from "../elements"
 
 export const ReactTable = () => {
-  const employeeList = EmployeesTable()
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    const db = getFirestore()
+    async function getUsers() {
+      const q = query(collection(db, "users"))
+
+      const querySnapshot = await getDocs(q)
+      setUsers(querySnapshot.docs.map(res => res.data()))
+    }
+    getUsers()
+  }, [])
 
   const currentYear = new Date().getFullYear()
   const currentMonth = parseInt(new Date().getMonth() + 1)
@@ -40,70 +51,65 @@ export const ReactTable = () => {
 
   const data = useMemo(
     () =>
-      employeeList.map(
-        ({
-          firstName,
-          lastName,
-          location,
-          position,
-          hireDate,
-          pending,
-          hoursUsed,
-        }) => {
+      users.map(
+        ({ name, location, position, hireDate, pending, hoursUsed }) => {
           return {
-            col1: firstName,
-            col2: lastName,
-            col3: position,
-            col4: location,
-            col5: `${hireDate[0]}/${hireDate[1]}/${hireDate[2]}`,
-            col6: lifetimePTO(hireDate[0], hireDate[1], hireDate[2]),
-            col7: remainingPTO(
-              hireDate[0],
-              hireDate[1],
-              hireDate[2],
-              hoursUsed,
-              pending
-            ),
-            col8: daysUntil10Hrs(hireDate[0], hireDate[1], hireDate[2]),
+            col1: name,
+            col2: position ? position : "No Position",
+            col3: location ? location : "No Location",
+            col4: hireDate
+              ? `${hireDate[0]}/${hireDate[1]}/${hireDate[2]}`
+              : `No Hire Date`,
+            col5: hireDate
+              ? lifetimePTO(hireDate[0], hireDate[1], hireDate[2])
+              : `No Hire Date`,
+            col6: hireDate
+              ? remainingPTO(
+                  hireDate[0],
+                  hireDate[1],
+                  hireDate[2],
+                  hoursUsed ? hoursUsed : 0,
+                  pending
+                )
+              : `No Hire Date`,
+            col7: hireDate
+              ? daysUntil10Hrs(hireDate[0], hireDate[1], hireDate[2])
+              : `No Hire Date`,
           }
         }
       ),
     // eslint-disable-next-line
-    [employeeList]
+    [users]
   )
   const columns = useMemo(
     () => [
       {
-        Header: "First Name",
+        Header: "Full Name",
         accessor: "col1",
       },
       {
-        Header: "Last Name",
+        Header: "Position",
         accessor: "col2",
       },
       {
-        Header: "Position",
+        Header: "Location",
         accessor: "col3",
       },
       {
-        Header: "Location",
+        Header: "Hire Date",
         accessor: "col4",
       },
       {
-        Header: "Hire Date",
+        Header: "Lifetime PTO",
         accessor: "col5",
       },
       {
-        Header: "Lifetime PTO",
+        Header: "Remaining PTO",
         accessor: "col6",
       },
       {
-        Header: "Remaining PTO",
-        accessor: "col7",
-      },
-      {
         Header: "Days until +10hrs",
-        accessor: "col8",
+        accessor: "col7",
       },
     ],
     []

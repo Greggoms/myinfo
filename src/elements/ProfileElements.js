@@ -18,9 +18,24 @@ export const ProfileContainer = styled.section`
     width: 100%;
     max-width: 325px;
     margin: 0 auto;
+    margin-bottom: 50px;
+
+    @media ${props => props.theme.breakpoints.mobile} {
+    }
+
+    .get-started {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
     h3 {
       text-align: center;
+
+      span {
+        font-size: 12pt;
+        font-weight: normal;
+      }
     }
 
     .special-div {
@@ -33,8 +48,12 @@ export const ProfileContainer = styled.section`
     }
     .hire-date-inputs {
       display: flex;
-      grid-gap: 5px;
       flex-direction: row;
+      grid-gap: 5px;
+
+      @media ${props => props.theme.breakpoints.mobile} {
+        flex-direction: column;
+      }
 
       span {
         font-size: 9pt;
@@ -76,8 +95,15 @@ export const ProfileContainer = styled.section`
 
       /* Position the tooltip */
       position: absolute;
-      left: 30px;
+      left: 0;
+      top: 25px;
       z-index: 1;
+
+      @media ${props => props.theme.breakpoints.tablet} {
+        width: 200px;
+        left: -325%;
+        margin: 0 auto;
+      }
 
       ul {
         margin-left: 20px;
@@ -85,6 +111,19 @@ export const ProfileContainer = styled.section`
       ul ul {
         margin-left: 30px;
       }
+    }
+
+    .tooltiptext-modal {
+      position: relative;
+      display: inline-block;
+      width: 80vw;
+      transform: translateX(-90%);
+
+      background-color: ${props => props.theme.grayscale.dark4};
+      color: ${props => props.theme.grayscale.light1};
+      border-radius: 6px;
+      padding: 10px;
+      z-index: 2;
     }
 
     .tooltip:hover .tooltiptext {

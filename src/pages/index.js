@@ -10,13 +10,20 @@ const IndexPage = () => {
   const [firstName, setFirstName] = useState("")
 
   useEffect(() => {
+    let isMounted = true
     firebase.auth().onAuthStateChanged(user => {
-      setUser(user)
-      if (user) {
+      if (user && isMounted) {
         const str = user.displayName.split(" ")
+        setUser(user)
         setFirstName(str[0])
+      } else {
+        setUser(null)
+        setFirstName(null)
       }
     })
+    return () => {
+      isMounted = false
+    }
   }, [user])
 
   return (
@@ -29,7 +36,7 @@ const IndexPage = () => {
             <h2>
               Now that you're here, check out your{" "}
               <ButtonLinkContainer>
-                <Link to="/app/profile">profile!</Link>
+                <Link to="/profile">profile!</Link>
               </ButtonLinkContainer>
             </h2>
             {user.email && (

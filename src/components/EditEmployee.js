@@ -1,9 +1,26 @@
 import React from "react"
-import {
-  AddEmployee,
-  RemoveEmployee,
-  UpdateEmployee,
-} from "../services/FireDatabase"
+
+const AddEmployee = () => {
+  return (
+    <div>
+      <p>Add Employee</p>
+    </div>
+  )
+}
+const RemoveEmployee = () => {
+  return (
+    <div>
+      <p>Remove Employee</p>
+    </div>
+  )
+}
+const UpdateEmployee = () => {
+  return (
+    <div>
+      <p>Update Employee</p>
+    </div>
+  )
+}
 
 export const EditEmployee = () => {
   return (

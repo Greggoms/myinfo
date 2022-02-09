@@ -5,7 +5,7 @@ import { NavContainer } from "../elements"
 export const NormalNav = () => {
   return (
     <NavContainer>
-      <Link to="/app/profile">Profile</Link>
+      <Link to="/profile">Profile</Link>
     </NavContainer>
   )
 }

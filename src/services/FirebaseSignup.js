@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react"
 // Import FirebaseAuth and firebase.
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
-import { getFirestore, doc, setDoc } from "firebase/firestore"
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 
 // css
@@ -46,14 +46,28 @@ const uiConfig = {
         const email = user.email
         console.log("uid: " + uid)
 
-        // Add a new document to Firestore
-        await setDoc(doc(db, "users", uid), {
-          id: uid,
-          name: name,
-          email: email,
-        })
+        const docRef = doc(db, `users/${uid}`)
+        async function getUserDetails() {
+          const docSnap = await getDoc(docRef)
+          if (docSnap.data() === undefined) {
+            await setDoc(doc(db, "users", uid), {
+              id: uid,
+              name: name,
+              email: email,
+            })
+          } else {
+            await setDoc(doc(db, "users", uid, { merge: true }), {
+              id: uid,
+              name: name,
+              email: email,
+            })
+          }
+        }
+        getUserDetails()
       } catch (err) {
-        console.log("Error adding document: ", err)
+        console.log(
+          "Re-running useEffect to fill a previously undefined variable"
+        )
       }
       // Avoid redirects after sign-in.
       return false

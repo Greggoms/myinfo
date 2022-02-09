@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react"
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
+import { getFirestore, doc, getDoc } from "firebase/firestore"
 import Seo from "../components/seo"
+import { FirebaseDashboardProfile } from "../components/FirebaseDashboardProfile"
 import { ReactTable } from "../components/ReactTable"
-import { EmployeesList } from "../services/FireDatabase"
 import { EditEmployee } from "../components/EditEmployee"
 import { Notification } from "../components/Notification"
 import {
@@ -15,20 +16,48 @@ import {
 import Svg from "../svg/lock.svg"
 
 const DashboardPage = () => {
-  const [tableIsActive, setTableIsActive] = useState(true)
-  const [profileIsActive, setProfileIsActive] = useState(false)
+  const [user, setUser] = useState()
+  const [uid, setUid] = useState("")
+  const [details, setDetails] = useState([])
+  const [tableIsActive, setTableIsActive] = useState(false)
+  const [profileIsActive, setProfileIsActive] = useState(true)
   const [payRaiseIsActive, setPayRaiseIsActive] = useState(false)
   const [editEmployeeIsActive, setEditEmployeeIsActive] = useState(false)
-  const [user, setUser] = useState([])
+  const db = getFirestore()
 
   useEffect(() => {
+    let isMounted = true
     firebase.auth().onAuthStateChanged(user => {
-      setUser(user)
+      if (user && isMounted) {
+        setUser(user)
+        setUid(user.uid)
+      } else {
+        setUser(null)
+      }
     })
+    return () => {
+      isMounted = false
+    }
   }, [user])
 
+  useEffect(() => {
+    try {
+      const docRef = doc(db, `users/${uid}`)
+      async function getUserDetails() {
+        const docSnap = await getDoc(docRef)
+        setDetails(docSnap.data())
+      }
+      getUserDetails()
+    } catch {
+      console.log(
+        "Re-running useEffect to fill a previously undefined variable"
+      )
+    }
+    // eslint-disable-next-line
+  }, [uid])
+
   // eslint-disable-next-line
-  if (user && user.role === "admin") {
+  if (user && details.role === "admin") {
     const styles = {
       active: {
         gridRow: 1,
@@ -107,12 +136,12 @@ const DashboardPage = () => {
             </div>
             <div style={profileIsActive ? styles.active : styles.inactive}>
               <DashboardProfilesContainer>
-                <EmployeesList layout="profile" />
+                <FirebaseDashboardProfile layout="profile" />
               </DashboardProfilesContainer>
             </div>
             <div style={payRaiseIsActive ? styles.active : styles.inactive}>
               <DashboardProfilesContainer>
-                <EmployeesList layout="payraise" />
+                <FirebaseDashboardProfile layout="payraise" />
               </DashboardProfilesContainer>
             </div>
             <div style={editEmployeeIsActive ? styles.active : styles.inactive}>
@@ -131,7 +160,7 @@ const DashboardPage = () => {
         <Svg
           style={{
             width: "100%",
-            maxWidth: "30rem",
+            maxWidth: "25rem",
             height: "100%",
             opacity: 0.5,
           }}
