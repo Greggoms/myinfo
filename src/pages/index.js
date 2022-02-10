@@ -89,13 +89,6 @@ const IndexPage = () => {
                           </a>
                         </li>
                       </ul>
-                      <li className="point">Other Changes</li>
-                      <ul>
-                        <li>
-                          Anything that would change the info of your profile,
-                          such as moving to work at a different location.
-                        </li>
-                      </ul>
                     </ul>
                   </div>
                   <div>
@@ -149,12 +142,38 @@ const IndexPage = () => {
               This is the place where you can view some of your employee
               information.
             </p>
-            <p>
-              Sign in with the email you use to login to Lightspeed if you want
-              instant access to your info. If you would like to use a different
-              email, DM me on GroupMe or send an email to payroll with the one
-              you'd like to use.
-            </p>
+            <h4>Updates!</h4>
+            <ul>
+              <li>
+                Introducing{" "}
+                <a
+                  href="https://firebase.google.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Google Firebase
+                </a>
+                !
+              </li>
+              <ul>
+                <li>
+                  Email doesn't matter anymore! You can now signup/login with
+                  any email you want. No need to keep me updated.
+                </li>
+                <li>
+                  Your profile will have a form you should fill out. Watch the
+                  magic happen!
+                </li>
+                <li>
+                  Once you sign up, I'll fill in your PTO <i>usage</i>{" "}
+                  information (if you have any) on the database end.
+                </li>
+              </ul>
+            </ul>
+            <h4 style={{ marginTop: "50px" }}>Coming Next</h4>
+            <ul>
+              <li>Request PTO usage directly from your profile.</li>
+            </ul>
           </div>
         )}
       </div>

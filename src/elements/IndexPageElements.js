@@ -33,6 +33,23 @@ export const IndexPageContainer = styled.div`
   .intro {
     margin: 0 auto;
     max-width: 30rem;
+
+    h4 {
+      font-size: 16pt;
+      margin-bottom: 10px;
+    }
+    ul {
+      margin-left: 15px;
+    }
+
+    ul li {
+      margin-bottom: 5px;
+    }
+
+    ul ul {
+      margin-left: 30px;
+      margin-bottom: 20px;
+    }
   }
 
   .welcome {

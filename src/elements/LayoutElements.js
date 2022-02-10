@@ -13,7 +13,6 @@ export const LayoutContainer = styled.div`
   flex-direction: column; */
 
   display: grid;
-  grid-template-columns: 1;
   grid-template-rows: min-content 1fr min-content;
   height: 100vh;
 

@@ -1,14 +1,34 @@
 import styled from "styled-components"
 
 export const ProfileContainer = styled.section`
-  max-width: 70rem;
+  max-width: 80rem;
   margin: 1rem auto;
   line-height: 20pt;
   display: grid;
+  grid-template-columns: 100px 1fr;
   grid-gap: 2rem;
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    grid-template-columns: 1fr;
+  }
+
+  section {
+    grid-column: 2;
+    @media ${props => props.theme.breakpoints.tablet} {
+      grid-column: 1;
+    }
+  }
 
   h2 {
     margin-bottom: 1rem;
+  }
+
+  .toggle-form-btn {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: flex-start;
+    cursor: pointer;
+    max-width: 200px;
   }
 
   form {
@@ -17,21 +37,9 @@ export const ProfileContainer = styled.section`
     grid-row-gap: 20px;
     width: 100%;
     max-width: 325px;
-    margin: 0 auto;
     margin-bottom: 50px;
 
-    @media ${props => props.theme.breakpoints.mobile} {
-    }
-
-    .get-started {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
     h3 {
-      text-align: center;
-
       span {
         font-size: 12pt;
         font-weight: normal;
@@ -69,8 +77,25 @@ export const ProfileContainer = styled.section`
       max-width: min-content;
     }
 
+    .buttons {
+      display: flex;
+      align-items: flex-end;
+    }
+
     .submit-btn {
       max-width: 100px;
+      margin-right: 15px;
+    }
+
+    .edit-btn {
+      background: inherit;
+      border: none;
+      text-decoration: underline;
+      color: ${props => props.theme.grayscale.light1};
+    }
+
+    input[type="button"]:disabled {
+      color: ${props => props.theme.grayscale.light3};
     }
 
     .tooltip {
@@ -208,4 +233,3 @@ export const RequestsContainer = styled.section`
     }
   }
 `
-export const NetlifyIdentityContainer = styled.section``

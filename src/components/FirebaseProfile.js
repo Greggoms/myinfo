@@ -19,6 +19,12 @@ export const FirebaseProfile = () => {
   const [user, setUser] = useState()
   const [uid, setUid] = useState("")
   const [details, setDetails] = useState([])
+  const [positionDisabled, setPositionDisabled] = useState(false)
+  const [locationDisabled, setLocationDisabled] = useState(false)
+  const [hireDateDisabled, setHireDateDisabled] = useState(false)
+  const [submitBtnDisabled, setSubmitBtnDisabled] = useState(false)
+  const [editBtnDisabled, setEditBtnDisabled] = useState(true)
+  const [toggleEditBtn, setToggleEditBtn] = useState(false)
   const [hasDocument, setHasDocument] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const [submitted, setSubmitted] = useState(null)
@@ -47,10 +53,10 @@ export const FirebaseProfile = () => {
       const docRef = doc(db, `users/${uid}`)
       async function getUserDetails() {
         const docSnap = await getDoc(docRef)
-        setDetails(docSnap.data())
         if (docSnap.data() === undefined) {
           setHasDocument(false)
         }
+        setDetails(docSnap.data())
       }
       getUserDetails()
     } catch {
@@ -74,16 +80,37 @@ export const FirebaseProfile = () => {
   }, [details])
 
   useEffect(() => {
-    if (
-      details &&
-      (details.position === undefined ||
-        details.location === undefined ||
-        details.hireDate === undefined)
-    ) {
-      setShowForm(true)
-    } else {
-      setShowForm(false)
+    if (details && details.position) {
+      setPositionDisabled(true)
+    } else if (!details) {
+      setPositionDisabled(false)
     }
+    if (details && details.location) {
+      setLocationDisabled(true)
+    } else if (!details) {
+      setLocationDisabled(false)
+    }
+    if (details && details.hireDate) {
+      setHireDateDisabled(true)
+    } else if (!details) {
+      setHireDateDisabled(false)
+    }
+  }, [details])
+
+  useEffect(() => {
+    if (details && details.position && details.location && details.hireDate) {
+      setSubmitBtnDisabled(true)
+      setEditBtnDisabled(false)
+    } else if (
+      toggleEditBtn &&
+      details.position &&
+      details.location &&
+      details.hireDate
+    ) {
+      setSubmitBtnDisabled(toggleEditBtn)
+      setEditBtnDisabled(false)
+    }
+    // eslint-disable-next-line
   }, [details])
 
   const onSubmit = async data => {
@@ -102,11 +129,38 @@ export const FirebaseProfile = () => {
           hireDate: [data.hireYear, data.hireMonth, data.hireDay],
         })
       }
+
+      if (
+        data.position &&
+        data.location &&
+        data.hireYear &&
+        data.hireMonth &&
+        data.hireDay
+      ) {
+        setShowForm(false)
+      }
+
       setSubmitted(true)
       setSubmitted(null)
+      setToggleEditBtn(!toggleEditBtn)
     } catch (err) {
       console.log("Error updating/reading document: ", err)
     }
+  }
+
+  const handleFormEdit = () => {
+    if (toggleEditBtn) {
+      setPositionDisabled(true)
+      setLocationDisabled(true)
+      setHireDateDisabled(true)
+      setSubmitBtnDisabled(true)
+    } else {
+      setPositionDisabled(false)
+      setLocationDisabled(false)
+      setHireDateDisabled(false)
+      setSubmitBtnDisabled(false)
+    }
+    return setToggleEditBtn(!toggleEditBtn)
   }
 
   const currentYear = new Date().getFullYear()
@@ -171,138 +225,187 @@ export const FirebaseProfile = () => {
         />
         <ProfileContainer>
           <>
+            <button
+              className="toggle-form-btn"
+              onClick={() => setShowForm(!showForm)}
+            >
+              {showForm ? "Hide" : "Show"} Form
+            </button>
             <DatabaseProfileContainer>
               {showForm && (
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <div className="get-started">
-                    <h3>Get Started on your Profile!</h3>
-                  </div>
-                  {!details.position && (
-                    <label>
-                      <div>
-                        What is your position?{" "}
-                        <span style={{ color: "#F25C69" }}>*</span>
-                        <div className="tooltip">
-                          ?
-                          <span className="tooltiptext">
-                            This is how I determine your eligibilty for raises.
-                          </span>
-                        </div>
+                  <h3>Get Started on your Profile!</h3>
+                  <label>
+                    <div>
+                      What is your position?{" "}
+                      <span style={{ color: "#F25C69" }}>*</span>
+                      <div className="tooltip">
+                        ?
+                        <span className="tooltiptext">
+                          This is how I determine your eligibilty for raises.
+                        </span>
                       </div>
+                    </div>
 
-                      <select
-                        {...register("position")}
-                        defaultValue="Associate"
-                      >
-                        <option value="Associate">Associate</option>
-                        <option value="Assist Mngr">Assistant Manager</option>
-                        <option value="Manager">Manager</option>
-                      </select>
-                    </label>
-                  )}
-                  {!details.location && (
-                    <label>
-                      <div>
-                        Which location do you work at?{" "}
-                        <span style={{ color: "#F25C69" }}>*</span>
-                      </div>
-                      <select
-                        {...register("location")}
-                        defaultValue="AR Jacksonville"
-                      >
-                        <option value="AR Jacksonville">AR Jacksonville</option>
-                        <option value="AR Maumelle">AR Maumelle</option>
-                        <option value="AR Otter Creek">AR Otter Creek</option>
-                        <option value="AR Sherwood">AR Sherwood</option>
-                        <option value="AR Texarkana">AR Texarkana</option>
-                        <option value="AR University">AR University</option>
-                        <option value="VW/AR Chenal Pkwy">
-                          VW/AR Chenal Pkwy
-                        </option>
-                        <option value="VW Arkadelphia">VW Arkadelphia</option>
-                        <option value="VW Benton">VW Benton</option>
-                        <option value="VW Bryant">VW Bryant</option>
-                        <option value="VW HS Albert Pike">
-                          VW HS Albert Pike
-                        </option>
-                        <option value="VW HS Central Ave">
-                          VW HS Central Ave
-                        </option>
-                        <option value="VW Jacksonville">VW Jacksonville</option>
-                        <option value="VW North Little Rock">
-                          VW North Little Rock
-                        </option>
-                        <option value="VW Rodney Parham">
-                          VW Rodney Parham
-                        </option>
-                        <option value="Warehouse">Warehouse</option>
-                      </select>
-                    </label>
-                  )}
-
-                  {!hasHireDate && (
-                    <>
-                      <div className="special-div">
-                        When were you hired?
-                        <div className="tooltip">
-                          ?
-                          <span className="tooltiptext">
-                            Filling this in results in the bulk of your profile
-                            being populated. If you aren't sure then I'll fill
-                            it in on my end.
+                    <select
+                      {...register("position")}
+                      defaultValue={
+                        details.position ? details.position : "Associate"
+                      }
+                      style={{
+                        cursor: positionDisabled ? "not-allowed" : "auto",
+                      }}
+                      disabled={positionDisabled}
+                    >
+                      <option value="Associate">Associate</option>
+                      <option value="Assist Mngr">Assistant Manager</option>
+                      <option value="Manager">Manager</option>
+                    </select>
+                  </label>
+                  <label>
+                    <div>
+                      Which location do you work at?{" "}
+                      <span style={{ color: "#F25C69" }}>*</span>
+                    </div>
+                    <select
+                      {...register("location")}
+                      defaultValue={
+                        details.location ? details.location : "AR Jacksonville"
+                      }
+                      style={{
+                        cursor: locationDisabled ? "not-allowed" : "auto",
+                      }}
+                      disabled={locationDisabled}
+                    >
+                      <option value="AR Cabot">AR Cabot</option>
+                      <option value="AR Jacksonville">AR Jacksonville</option>
+                      <option value="AR Maumelle">AR Maumelle</option>
+                      <option value="AR Otter Creek">AR Otter Creek</option>
+                      <option value="AR Sherwood">AR Sherwood</option>
+                      <option value="AR Texarkana">AR Texarkana</option>
+                      <option value="AR University">AR University</option>
+                      <option value="VW/AR Chenal Pkwy">
+                        VW/AR Chenal Pkwy
+                      </option>
+                      <option value="VW Arkadelphia">VW Arkadelphia</option>
+                      <option value="VW Benton">VW Benton</option>
+                      <option value="VW Bryant">VW Bryant</option>
+                      <option value="VW HS Albert Pike">
+                        VW HS Albert Pike
+                      </option>
+                      <option value="VW HS Central Ave">
+                        VW HS Central Ave
+                      </option>
+                      <option value="VW Jacksonville">VW Jacksonville</option>
+                      <option value="VW North Little Rock">
+                        VW North Little Rock
+                      </option>
+                      <option value="VW Rodney Parham">VW Rodney Parham</option>
+                      <option value="Warehouse">Warehouse</option>
+                    </select>
+                  </label>
+                  <>
+                    <div className="special-div">
+                      When were you hired?
+                      <div className="tooltip">
+                        ?
+                        <span className="tooltiptext">
+                          Filling this in results in the bulk of your profile
+                          being populated. If you aren't sure then I'll fill it
+                          in on my end.
+                          <ul>
+                            <li>Must be valid whole numbers.</li>
+                            <li>Example: Hired on Feb 8th 2022</li>
                             <ul>
-                              <li>Must be valid whole numbers.</li>
-                              <li>Example: Hired on Feb 8th 2022</li>
-                              <ul>
-                                <li>Correct: 2022/2/8</li>
-                                <li>Correct: 2022/02/08</li>
-                              </ul>
+                              <li>Correct: 2022/2/8</li>
+                              <li>Correct: 2022/02/08</li>
                             </ul>
-                          </span>
-                        </div>
+                          </ul>
+                        </span>
                       </div>
-                      <div className="hire-date-inputs">
-                        <label>
-                          <span>Year</span>
-                          <input
-                            {...register("hireYear", {
-                              minLength: 4,
-                              maxLength: 4,
-                              valueAsNumber: true,
-                            })}
-                            placeholder="2022"
-                            type="number"
-                          />
-                        </label>
-                        <label>
-                          <span>Month</span>
-                          <input
-                            {...register("hireMonth", {
-                              valueAsNumber: true,
-                            })}
-                            placeholder="1, 9, 12 etc..."
-                            type="number"
-                            min={1}
-                            max={12}
-                          />
-                        </label>
-                        <label>
-                          <span>Day</span>
-                          <input
-                            {...register("hireDay", {
-                              valueAsNumber: true,
-                            })}
-                            placeholder="1, 15, 31 etc..."
-                            type="number"
-                            min={1}
-                            max={31}
-                          />
-                        </label>
-                      </div>
-                    </>
-                  )}
-
-                  <input type="submit" value="Submit" className="submit-btn" />
+                    </div>
+                    <div className="hire-date-inputs">
+                      <label>
+                        <span>Year</span>
+                        <input
+                          {...register("hireYear", {
+                            minLength: 4,
+                            maxLength: 4,
+                            valueAsNumber: true,
+                          })}
+                          placeholder={
+                            details.hireDate ? details.hireDate[0] : "2022"
+                          }
+                          type="number"
+                          style={{
+                            cursor: hireDateDisabled ? "not-allowed" : "auto",
+                          }}
+                          disabled={hireDateDisabled}
+                        />
+                      </label>
+                      <label>
+                        <span>Month</span>
+                        <input
+                          {...register("hireMonth", {
+                            valueAsNumber: true,
+                          })}
+                          placeholder={
+                            details.hireDate
+                              ? details.hireDate[1]
+                              : "1, 9, 12 etc..."
+                          }
+                          type="number"
+                          min={1}
+                          max={12}
+                          style={{
+                            cursor: hireDateDisabled ? "not-allowed" : "auto",
+                          }}
+                          disabled={hireDateDisabled}
+                        />
+                      </label>
+                      <label>
+                        <span>Day</span>
+                        <input
+                          {...register("hireDay", {
+                            valueAsNumber: true,
+                          })}
+                          placeholder={
+                            details.hireDate
+                              ? details.hireDate[2]
+                              : "1, 15, 31 etc..."
+                          }
+                          type="number"
+                          min={1}
+                          max={31}
+                          style={{
+                            cursor: hireDateDisabled ? "not-allowed" : "auto",
+                          }}
+                          disabled={hireDateDisabled}
+                        />
+                      </label>
+                    </div>
+                  </>
+                  <div className="buttons">
+                    <input
+                      type="submit"
+                      value="Submit"
+                      className="submit-btn"
+                      style={{
+                        cursor: submitBtnDisabled ? "not-allowed" : "pointer",
+                      }}
+                      disabled={submitBtnDisabled}
+                    />
+                    <input
+                      type="button"
+                      value={toggleEditBtn ? "Cancel" : "Edit Form"}
+                      style={{
+                        cursor: editBtnDisabled ? "not-allowed" : "pointer",
+                      }}
+                      className="edit-btn"
+                      onClick={handleFormEdit}
+                      disabled={editBtnDisabled}
+                    />
+                  </div>
                 </form>
               )}
               <h2>PTO Info</h2>
