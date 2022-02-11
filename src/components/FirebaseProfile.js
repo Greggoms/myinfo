@@ -53,10 +53,11 @@ export const FirebaseProfile = () => {
       const docRef = doc(db, `users/${uid}`)
       async function getUserDetails() {
         const docSnap = await getDoc(docRef)
-        if (docSnap.data() === undefined) {
+        if (docSnap.exists()) {
+          setDetails(docSnap.data())
+        } else {
           setHasDocument(false)
         }
-        setDetails(docSnap.data())
       }
       getUserDetails()
     } catch {
@@ -80,37 +81,44 @@ export const FirebaseProfile = () => {
   }, [details])
 
   useEffect(() => {
-    if (details && details.position) {
-      setPositionDisabled(true)
-    } else if (!details) {
+    if (details.position === `undefined` || !details.positon) {
       setPositionDisabled(false)
+    } else {
+      setPositionDisabled(true)
     }
-    if (details && details.location) {
-      setLocationDisabled(true)
-    } else if (!details) {
+    if (details.location === `undefined` || !details.location) {
       setLocationDisabled(false)
+    } else {
+      setLocationDisabled(true)
     }
-    if (details && details.hireDate) {
-      setHireDateDisabled(true)
-    } else if (!details) {
+    if (
+      !details.hireDate ||
+      isNaN(details.hireDate[0]) ||
+      isNaN(details.hireDate[1]) ||
+      isNaN(details.hireDate[2])
+    ) {
       setHireDateDisabled(false)
+    } else {
+      setHireDateDisabled(true)
     }
   }, [details])
 
   useEffect(() => {
-    if (details && details.position && details.location && details.hireDate) {
-      setSubmitBtnDisabled(true)
-      setEditBtnDisabled(false)
-    } else if (
-      toggleEditBtn &&
-      details.position &&
-      details.location &&
-      details.hireDate
+    if (
+      details.position !== `undefined` &&
+      details.location !== `undefined` &&
+      details.hireDate &&
+      !isNaN(details.hireDate[0]) &&
+      !isNaN(details.hireDate[1]) &&
+      !isNaN(details.hireDate[2])
     ) {
-      setSubmitBtnDisabled(toggleEditBtn)
       setEditBtnDisabled(false)
+      setSubmitBtnDisabled(true)
+      setShowForm(false)
+    } else {
+      setSubmitBtnDisabled(false)
+      setShowForm(true)
     }
-    // eslint-disable-next-line
   }, [details])
 
   const onSubmit = async data => {
@@ -131,18 +139,16 @@ export const FirebaseProfile = () => {
       }
 
       if (
-        data.position &&
-        data.location &&
-        data.hireYear &&
-        data.hireMonth &&
-        data.hireDay
+        data.position !== `undefined` &&
+        data.location !== `undefined` &&
+        !isNaN(data.hireYear) &&
+        !isNaN(data.hireMonth) &&
+        !isNaN(data.hireDay)
       ) {
         setShowForm(false)
       }
-
       setSubmitted(true)
       setSubmitted(null)
-      setToggleEditBtn(!toggleEditBtn)
     } catch (err) {
       console.log("Error updating/reading document: ", err)
     }
@@ -234,7 +240,7 @@ export const FirebaseProfile = () => {
             <DatabaseProfileContainer>
               {showForm && (
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <h3>Get Started on your Profile!</h3>
+                  <h3>Manage your profile</h3>
                   <label>
                     <div>
                       What is your position?{" "}
@@ -246,17 +252,16 @@ export const FirebaseProfile = () => {
                         </span>
                       </div>
                     </div>
-
+                    {}
                     <select
                       {...register("position")}
-                      defaultValue={
-                        details.position ? details.position : "Associate"
-                      }
+                      defaultValue={details.position ? details.position : ""}
                       style={{
                         cursor: positionDisabled ? "not-allowed" : "auto",
                       }}
                       disabled={positionDisabled}
                     >
+                      <option value={undefined}>Select an Option</option>
                       <option value="Associate">Associate</option>
                       <option value="Assist Mngr">Assistant Manager</option>
                       <option value="Manager">Manager</option>
@@ -269,14 +274,13 @@ export const FirebaseProfile = () => {
                     </div>
                     <select
                       {...register("location")}
-                      defaultValue={
-                        details.location ? details.location : "AR Jacksonville"
-                      }
+                      defaultValue={details.location ? details.location : ""}
                       style={{
                         cursor: locationDisabled ? "not-allowed" : "auto",
                       }}
                       disabled={locationDisabled}
                     >
+                      <option value="">Select an Option</option>
                       <option value="AR Cabot">AR Cabot</option>
                       <option value="AR Jacksonville">AR Jacksonville</option>
                       <option value="AR Maumelle">AR Maumelle</option>
@@ -326,24 +330,6 @@ export const FirebaseProfile = () => {
                     </div>
                     <div className="hire-date-inputs">
                       <label>
-                        <span>Year</span>
-                        <input
-                          {...register("hireYear", {
-                            minLength: 4,
-                            maxLength: 4,
-                            valueAsNumber: true,
-                          })}
-                          placeholder={
-                            details.hireDate ? details.hireDate[0] : "2022"
-                          }
-                          type="number"
-                          style={{
-                            cursor: hireDateDisabled ? "not-allowed" : "auto",
-                          }}
-                          disabled={hireDateDisabled}
-                        />
-                      </label>
-                      <label>
                         <span>Month</span>
                         <input
                           {...register("hireMonth", {
@@ -377,6 +363,24 @@ export const FirebaseProfile = () => {
                           type="number"
                           min={1}
                           max={31}
+                          style={{
+                            cursor: hireDateDisabled ? "not-allowed" : "auto",
+                          }}
+                          disabled={hireDateDisabled}
+                        />
+                      </label>
+                      <label>
+                        <span>Year</span>
+                        <input
+                          {...register("hireYear", {
+                            minLength: 4,
+                            maxLength: 4,
+                            valueAsNumber: true,
+                          })}
+                          placeholder={
+                            details.hireDate ? details.hireDate[0] : "2022"
+                          }
+                          type="number"
                           style={{
                             cursor: hireDateDisabled ? "not-allowed" : "auto",
                           }}

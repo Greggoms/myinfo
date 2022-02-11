@@ -6,16 +6,21 @@ import { TableContainer } from "../elements"
 
 export const ReactTable = () => {
   const [users, setUsers] = useState([])
+  const db = getFirestore()
 
   useEffect(() => {
-    const db = getFirestore()
-    async function getUsers() {
-      const q = query(collection(db, "users"))
+    try {
+      async function getUsers() {
+        const q = query(collection(db, "users"))
 
-      const querySnapshot = await getDocs(q)
-      setUsers(querySnapshot.docs.map(res => res.data()))
+        const querySnapshot = await getDocs(q)
+        setUsers(querySnapshot.docs.map(res => res.data()))
+      }
+      getUsers()
+    } catch (err) {
+      console.log("ERROR: ", err)
     }
-    getUsers()
+    // eslint-disable-next-line
   }, [])
 
   const currentYear = new Date().getFullYear()
@@ -53,17 +58,19 @@ export const ReactTable = () => {
     () =>
       users.map(
         ({ name, location, position, hireDate, pending, hoursUsed }) => {
+          const fullName = name.split(" ")
           return {
-            col1: name,
-            col2: position ? position : "No Position",
-            col3: location ? location : "No Location",
-            col4: hireDate
+            col1: fullName[0],
+            col2: fullName[1],
+            col3: position ? position : "No Position",
+            col4: location ? location : "No Location",
+            col5: hireDate
               ? `${hireDate[0]}/${hireDate[1]}/${hireDate[2]}`
               : `No Hire Date`,
-            col5: hireDate
+            col6: hireDate
               ? lifetimePTO(hireDate[0], hireDate[1], hireDate[2])
               : `No Hire Date`,
-            col6: hireDate
+            col7: hireDate
               ? remainingPTO(
                   hireDate[0],
                   hireDate[1],
@@ -72,7 +79,7 @@ export const ReactTable = () => {
                   pending
                 )
               : `No Hire Date`,
-            col7: hireDate
+            col8: hireDate
               ? daysUntil10Hrs(hireDate[0], hireDate[1], hireDate[2])
               : `No Hire Date`,
           }
@@ -84,32 +91,36 @@ export const ReactTable = () => {
   const columns = useMemo(
     () => [
       {
-        Header: "Full Name",
+        Header: "First Name",
         accessor: "col1",
       },
       {
-        Header: "Position",
+        Header: "Last Name",
         accessor: "col2",
       },
       {
-        Header: "Location",
+        Header: "Position",
         accessor: "col3",
       },
       {
-        Header: "Hire Date",
+        Header: "Location",
         accessor: "col4",
       },
       {
-        Header: "Lifetime PTO",
+        Header: "Hire Date",
         accessor: "col5",
       },
       {
-        Header: "Remaining PTO",
+        Header: "Lifetime PTO",
         accessor: "col6",
       },
       {
-        Header: "Days until +10hrs",
+        Header: "Remaining PTO",
         accessor: "col7",
+      },
+      {
+        Header: "Days until +10hrs",
+        accessor: "col8",
       },
     ],
     []

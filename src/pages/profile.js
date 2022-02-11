@@ -10,16 +10,20 @@ const ProfilePage = () => {
   const [user, setUser] = useState()
 
   useEffect(() => {
-    let isMounted = true
-    firebase.auth().onAuthStateChanged(user => {
-      if (user && isMounted) {
-        setUser(user)
-      } else {
-        setUser(null)
+    try {
+      let isMounted = true
+      firebase.auth().onAuthStateChanged(user => {
+        if (user && isMounted) {
+          setUser(user)
+        } else {
+          setUser(null)
+        }
+      })
+      return () => {
+        isMounted = false
       }
-    })
-    return () => {
-      isMounted = false
+    } catch (err) {
+      console.log("ERROR: ", err)
     }
   }, [user])
 

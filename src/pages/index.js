@@ -10,19 +10,23 @@ const IndexPage = () => {
   const [firstName, setFirstName] = useState("")
 
   useEffect(() => {
-    let isMounted = true
-    firebase.auth().onAuthStateChanged(user => {
-      if (user && isMounted) {
-        const str = user.displayName.split(" ")
-        setUser(user)
-        setFirstName(str[0])
-      } else {
-        setUser(null)
-        setFirstName(null)
+    try {
+      let isMounted = true
+      firebase.auth().onAuthStateChanged(user => {
+        if (user && isMounted) {
+          const str = user.displayName.split(" ")
+          setUser(user)
+          setFirstName(str[0])
+        } else {
+          setUser(null)
+          setFirstName(null)
+        }
+      })
+      return () => {
+        isMounted = false
       }
-    })
-    return () => {
-      isMounted = false
+    } catch (err) {
+      console.log("ERROR: ", err)
     }
   }, [user])
 

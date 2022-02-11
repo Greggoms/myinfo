@@ -9,8 +9,8 @@ export const PayRaiseChart = props => {
       return (
         <>
           <div className="month-amount">
-            <h3>Month</h3>
-            <h3>Amount</h3>
+            <h3 className="month-header">Month</h3>
+            <h3 className="amount-header">Amount</h3>
             <div
               className={
                 props.month >= 0 && props.month < 3 ? "active" : "inactive"
@@ -86,8 +86,8 @@ export const PayRaiseChart = props => {
       return (
         <>
           <div className="month-amount">
-            <h3>Month</h3>
-            <h3>Amount</h3>
+            <h3 className="month-header">Month</h3>
+            <h3 className="amount-header">Amount</h3>
             <div
               className={
                 props.month >= 0 && props.month < 6 ? "active" : "inactive"
@@ -131,8 +131,8 @@ export const PayRaiseChart = props => {
       return (
         <>
           <div className="month-amount">
-            <h3>Month</h3>
-            <h3>Amount</h3>
+            <h3 className="month-header">Month</h3>
+            <h3 className="amount-header">Amount</h3>
             <div
               className={
                 props.month >= 0 && props.month < 6 ? "active" : "inactive"

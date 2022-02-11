@@ -34,10 +34,10 @@ export const Header = ({ siteTitle }) => {
       const docRef = doc(db, `users/${uid}`)
       async function getUserDetails() {
         const docSnap = await getDoc(docRef)
-        if (docSnap.data() === undefined) {
-          setDetails([])
-        } else {
+        if (docSnap.exists()) {
           setDetails(docSnap.data())
+        } else {
+          setDetails([])
         }
       }
       getUserDetails()

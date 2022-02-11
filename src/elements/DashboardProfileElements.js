@@ -1,10 +1,8 @@
 import styled from "styled-components"
 
 export const DashboardProfilesContainer = styled.section`
-  grid-column: 1;
-  grid-row: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(18rem, max-content));
   align-items: flex-start;
   grid-gap: 2rem;
 

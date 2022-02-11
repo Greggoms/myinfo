@@ -23,7 +23,7 @@
     height: 0;
   }
   to {
-    height: 375px;
+    height: 380px;
   }
 }
 @keyframes appear2 {
@@ -36,7 +36,7 @@
 }
 @keyframes disappear1 {
   from {
-    height: 375px;
+    height: 380px;
   }
   to {
     height: 0;

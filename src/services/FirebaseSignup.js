@@ -35,28 +35,27 @@ const uiConfig = {
     // When Sign-in is successful, create a doc in the users collection
     // and set the doc.id equal to the user uid.
     // I'm using this approach to hopefully query for a single doc instead of 75+ each time a user goes to their profile.
-    // Another side effect may be the irrelevance of emails - hooray if so!
+    // Another side effect is the irrelevance of email matching - hooray!
     // https://github.com/firebase/firebaseui-web/issues/813
     // https://firebase.google.com/docs/firestore/manage-data/add-data
     signInSuccessWithAuthResult: async authResult => {
+      const user = authResult.user
+      const uid = user.uid
+      const name = user.displayName
+      const email = user.email
+      console.log("uid: " + uid)
+      const docRef = doc(db, `users/${uid}`)
       try {
-        const user = authResult.user
-        const uid = user.uid
-        const name = user.displayName
-        const email = user.email
-        console.log("uid: " + uid)
-
-        const docRef = doc(db, `users/${uid}`)
         async function getUserDetails() {
           const docSnap = await getDoc(docRef)
-          if (docSnap.data() === undefined) {
-            await setDoc(doc(db, "users", uid), {
+          if (docSnap.exists()) {
+            await setDoc(doc(db, "users", uid, { merge: true }), {
               id: uid,
               name: name,
               email: email,
             })
           } else {
-            await setDoc(doc(db, "users", uid, { merge: true }), {
+            await setDoc(doc(db, "users", uid), {
               id: uid,
               name: name,
               email: email,

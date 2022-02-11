@@ -20,23 +20,27 @@ const DashboardPage = () => {
   const [uid, setUid] = useState("")
   const [details, setDetails] = useState([])
   const [tableIsActive, setTableIsActive] = useState(false)
-  const [profileIsActive, setProfileIsActive] = useState(true)
-  const [payRaiseIsActive, setPayRaiseIsActive] = useState(false)
+  const [profileIsActive, setProfileIsActive] = useState(false)
+  const [payRaiseIsActive, setPayRaiseIsActive] = useState(true)
   const [editEmployeeIsActive, setEditEmployeeIsActive] = useState(false)
   const db = getFirestore()
 
   useEffect(() => {
-    let isMounted = true
-    firebase.auth().onAuthStateChanged(user => {
-      if (user && isMounted) {
-        setUser(user)
-        setUid(user.uid)
-      } else {
-        setUser(null)
+    try {
+      let isMounted = true
+      firebase.auth().onAuthStateChanged(user => {
+        if (user && isMounted) {
+          setUser(user)
+          setUid(user.uid)
+        } else {
+          setUser(null)
+        }
+      })
+      return () => {
+        isMounted = false
       }
-    })
-    return () => {
-      isMounted = false
+    } catch (err) {
+      console.log("ERROR: ", err)
     }
   }, [user])
 
