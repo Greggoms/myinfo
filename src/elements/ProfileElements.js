@@ -39,6 +39,13 @@ export const ProfileContainer = styled.section`
     max-width: 325px;
     margin-bottom: 50px;
 
+    .react-date-picker__inputGroup__input {
+      color: ${props => props.theme.grayscale.light1};
+    }
+    .react-date-picker__wrapper {
+      flex-grow: 0;
+    }
+
     h3 {
       span {
         font-size: 12pt;
@@ -92,10 +99,27 @@ export const ProfileContainer = styled.section`
       border: none;
       text-decoration: underline;
       color: ${props => props.theme.grayscale.light1};
+      cursor: pointer;
     }
 
     input[type="button"]:disabled {
       color: ${props => props.theme.grayscale.light3};
+    }
+    input[type="number"]:disabled {
+      color: ${props => props.theme.grayscale.dark2};
+    }
+    .react-date-picker {
+      cursor: "auto";
+    }
+    .react-date-picker__button__icon {
+      stroke: ${props => props.theme.colors.link};
+    }
+    .react-date-picker__button:enabled:hover svg {
+      stroke: ${props => props.theme.colors.green};
+    }
+    .react-date-picker--disabled {
+      background: ${props => props.theme.grayscale.dark3};
+      cursor: "not-allowed";
     }
 
     .tooltip {

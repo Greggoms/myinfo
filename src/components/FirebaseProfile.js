@@ -3,10 +3,12 @@ import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore"
 import { useForm } from "react-hook-form"
+import DatePicker from "react-date-picker"
 import {
   addDays,
   differenceInCalendarDays,
   differenceInCalendarMonths,
+  format,
 } from "date-fns"
 import Seo from "../components/seo"
 import {
@@ -19,18 +21,20 @@ export const FirebaseProfile = () => {
   const [user, setUser] = useState()
   const [uid, setUid] = useState("")
   const [details, setDetails] = useState([])
-  const [positionDisabled, setPositionDisabled] = useState(false)
-  const [locationDisabled, setLocationDisabled] = useState(false)
-  const [hireDateDisabled, setHireDateDisabled] = useState(false)
-  const [submitBtnDisabled, setSubmitBtnDisabled] = useState(false)
-  const [editBtnDisabled, setEditBtnDisabled] = useState(true)
+  const [formDisabled, setFormDisabled] = useState(false)
   const [toggleEditBtn, setToggleEditBtn] = useState(false)
   const [hasDocument, setHasDocument] = useState(true)
   const [showForm, setShowForm] = useState(false)
-  const [submitted, setSubmitted] = useState(null)
+  const [submitted, setSubmitted] = useState(false)
   const [hasHireDate, setHasHireDate] = useState(false)
-  const { register, handleSubmit } = useForm()
+  const [value, onChange] = useState(new Date())
+  const [date, setDate] = useState([])
   const db = getFirestore()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
 
   useEffect(() => {
     let isMounted = true
@@ -77,94 +81,25 @@ export const FirebaseProfile = () => {
       !isNaN(details.hireDate[2])
     ) {
       setHasHireDate(true)
+      setFormDisabled(true)
+    }
+    if (details && details.position && details.location && details.hireDate) {
+      setFormDisabled(true)
+    } else {
+      setFormDisabled(false)
     }
   }, [details])
 
   useEffect(() => {
-    if (details.position === `undefined` || !details.positon) {
-      setPositionDisabled(false)
-    } else {
-      setPositionDisabled(true)
-    }
-    if (details.location === `undefined` || !details.location) {
-      setLocationDisabled(false)
-    } else {
-      setLocationDisabled(true)
-    }
-    if (
-      !details.hireDate ||
-      isNaN(details.hireDate[0]) ||
-      isNaN(details.hireDate[1]) ||
-      isNaN(details.hireDate[2])
-    ) {
-      setHireDateDisabled(false)
-    } else {
-      setHireDateDisabled(true)
-    }
-  }, [details])
-
-  useEffect(() => {
-    if (
-      details.position !== `undefined` &&
-      details.location !== `undefined` &&
-      details.hireDate &&
-      !isNaN(details.hireDate[0]) &&
-      !isNaN(details.hireDate[1]) &&
-      !isNaN(details.hireDate[2])
-    ) {
-      setEditBtnDisabled(false)
-      setSubmitBtnDisabled(true)
-      setShowForm(false)
-    } else {
-      setSubmitBtnDisabled(false)
-      setShowForm(true)
-    }
-  }, [details])
-
-  const onSubmit = async data => {
-    try {
-      // Update current user's document on Firestore
-      await updateDoc(doc(db, `users/${uid}`), {
-        position: `${data.position}`,
-        location: `${data.location}`,
-      })
-      if (
-        !isNaN(data.hireYear) &&
-        !isNaN(data.hireMonth) &&
-        !isNaN(data.hireDay)
-      ) {
-        await updateDoc(doc(db, `users/${uid}`), {
-          hireDate: [data.hireYear, data.hireMonth, data.hireDay],
-        })
-      }
-
-      if (
-        data.position !== `undefined` &&
-        data.location !== `undefined` &&
-        !isNaN(data.hireYear) &&
-        !isNaN(data.hireMonth) &&
-        !isNaN(data.hireDay)
-      ) {
-        setShowForm(false)
-      }
-      setSubmitted(true)
-      setSubmitted(null)
-    } catch (err) {
-      console.log("Error updating/reading document: ", err)
-    }
-  }
+    const date = format(value, "yyyy-M-d").split("-")
+    setDate(date)
+  }, [value])
 
   const handleFormEdit = () => {
     if (toggleEditBtn) {
-      setPositionDisabled(true)
-      setLocationDisabled(true)
-      setHireDateDisabled(true)
-      setSubmitBtnDisabled(true)
+      setFormDisabled(true)
     } else {
-      setPositionDisabled(false)
-      setLocationDisabled(false)
-      setHireDateDisabled(false)
-      setSubmitBtnDisabled(false)
+      setFormDisabled(false)
     }
     return setToggleEditBtn(!toggleEditBtn)
   }
@@ -219,6 +154,26 @@ export const FirebaseProfile = () => {
     return result
   }
 
+  const onSubmit = data => {
+    try {
+      console.log(data)
+      console.log(date)
+      // Update current user's document on Firestore
+      async function updateFireDoc() {
+        await updateDoc(doc(db, `users/${uid}`), {
+          position: `${data.position}`,
+          location: `${data.location}`,
+          hireDate: [date[0], date[1], date[2]],
+        })
+      }
+      setSubmitted(true)
+      setSubmitted(false)
+      updateFireDoc()
+    } catch (err) {
+      console.log("Error updating/reading document: ", err)
+    }
+  }
+
   if (details && hasDocument) {
     return (
       <>
@@ -242,30 +197,30 @@ export const FirebaseProfile = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <h3>Manage your profile</h3>
                   <label>
-                    <div>
+                    <p>
                       What is your position?{" "}
                       <span style={{ color: "#F25C69" }}>*</span>
-                      <div className="tooltip">
-                        ?
-                        <span className="tooltiptext">
-                          This is how I determine your eligibilty for raises.
-                        </span>
-                      </div>
-                    </div>
-                    {}
+                    </p>
                     <select
-                      {...register("position")}
+                      {...register("position", {
+                        required: true,
+                      })}
                       defaultValue={details.position ? details.position : ""}
                       style={{
-                        cursor: positionDisabled ? "not-allowed" : "auto",
+                        cursor: formDisabled ? "not-allowed" : "auto",
                       }}
-                      disabled={positionDisabled}
+                      disabled={formDisabled}
                     >
-                      <option value={undefined}>Select an Option</option>
+                      <option value="">Select an Option</option>
                       <option value="Associate">Associate</option>
                       <option value="Assist Mngr">Assistant Manager</option>
                       <option value="Manager">Manager</option>
                     </select>
+                    <br />
+                    {errors.position && errors.position.type === "required" && (
+                      <span>You must choose a position.</span>
+                    )}
+                    <br />
                   </label>
                   <label>
                     <div>
@@ -273,12 +228,14 @@ export const FirebaseProfile = () => {
                       <span style={{ color: "#F25C69" }}>*</span>
                     </div>
                     <select
-                      {...register("location")}
+                      {...register("location", {
+                        required: true,
+                      })}
                       defaultValue={details.location ? details.location : ""}
                       style={{
-                        cursor: locationDisabled ? "not-allowed" : "auto",
+                        cursor: formDisabled ? "not-allowed" : "auto",
                       }}
-                      disabled={locationDisabled}
+                      disabled={formDisabled}
                     >
                       <option value="">Select an Option</option>
                       <option value="AR Cabot">AR Cabot</option>
@@ -307,86 +264,36 @@ export const FirebaseProfile = () => {
                       <option value="VW Rodney Parham">VW Rodney Parham</option>
                       <option value="Warehouse">Warehouse</option>
                     </select>
+                    <br />
+                    {errors.location && errors.location.type === "required" && (
+                      <span>You must choose a location.</span>
+                    )}
+                    <br />
                   </label>
                   <>
                     <div className="special-div">
-                      When were you hired?
-                      <div className="tooltip">
-                        ?
-                        <span className="tooltiptext">
-                          Filling this in results in the bulk of your profile
-                          being populated. If you aren't sure then I'll fill it
-                          in on my end.
-                          <ul>
-                            <li>Must be valid whole numbers.</li>
-                            <li>Example: Hired on Feb 8th 2022</li>
-                            <ul>
-                              <li>Correct: 2022/2/8</li>
-                              <li>Correct: 2022/02/08</li>
-                            </ul>
-                          </ul>
-                        </span>
-                      </div>
+                      <p>
+                        When were you hired?{" "}
+                        <span style={{ color: "#F25C69" }}>*</span>
+                      </p>
                     </div>
                     <div className="hire-date-inputs">
-                      <label>
-                        <span>Month</span>
-                        <input
-                          {...register("hireMonth", {
-                            valueAsNumber: true,
-                          })}
-                          placeholder={
-                            details.hireDate
-                              ? details.hireDate[1]
-                              : "1, 9, 12 etc..."
-                          }
-                          type="number"
-                          min={1}
-                          max={12}
-                          style={{
-                            cursor: hireDateDisabled ? "not-allowed" : "auto",
-                          }}
-                          disabled={hireDateDisabled}
-                        />
-                      </label>
-                      <label>
-                        <span>Day</span>
-                        <input
-                          {...register("hireDay", {
-                            valueAsNumber: true,
-                          })}
-                          placeholder={
-                            details.hireDate
-                              ? details.hireDate[2]
-                              : "1, 15, 31 etc..."
-                          }
-                          type="number"
-                          min={1}
-                          max={31}
-                          style={{
-                            cursor: hireDateDisabled ? "not-allowed" : "auto",
-                          }}
-                          disabled={hireDateDisabled}
-                        />
-                      </label>
-                      <label>
-                        <span>Year</span>
-                        <input
-                          {...register("hireYear", {
-                            minLength: 4,
-                            maxLength: 4,
-                            valueAsNumber: true,
-                          })}
-                          placeholder={
-                            details.hireDate ? details.hireDate[0] : "2022"
-                          }
-                          type="number"
-                          style={{
-                            cursor: hireDateDisabled ? "not-allowed" : "auto",
-                          }}
-                          disabled={hireDateDisabled}
-                        />
-                      </label>
+                      <DatePicker
+                        onChange={onChange}
+                        value={value}
+                        calendarClassName="date-picker"
+                        clearIcon={null}
+                        disabled={formDisabled}
+                        defaultValue={
+                          details.hireDate
+                            ? new Date(
+                                details.hireDate[0],
+                                details.hireDate[1],
+                                details.hireDate[2]
+                              )
+                            : new Date()
+                        }
+                      />
                     </div>
                   </>
                   <div className="buttons">
@@ -395,19 +302,19 @@ export const FirebaseProfile = () => {
                       value="Submit"
                       className="submit-btn"
                       style={{
-                        cursor: submitBtnDisabled ? "not-allowed" : "pointer",
+                        cursor: formDisabled ? "not-allowed" : "pointer",
                       }}
-                      disabled={submitBtnDisabled}
+                      disabled={formDisabled}
                     />
                     <input
                       type="button"
                       value={toggleEditBtn ? "Cancel" : "Edit Form"}
-                      style={{
-                        cursor: editBtnDisabled ? "not-allowed" : "pointer",
-                      }}
+                      // style={{
+                      //   cursor: editBtnDisabled ? "not-allowed" : "pointer",
+                      // }}
                       className="edit-btn"
                       onClick={handleFormEdit}
-                      disabled={editBtnDisabled}
+                      // disabled={editBtnDisabled}
                     />
                   </div>
                 </form>
