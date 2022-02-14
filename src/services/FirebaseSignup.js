@@ -11,15 +11,25 @@ import "./firebaseUI.css"
 
 // Configure Firebase.
 const config = {
-  apiKey: process.env.GATSBY_FIREBASE_API_KEY,
-  authDomain: process.env.GATSBY_FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.GATSBY_FIREBASE_DATABASE_URL,
-  projectId: process.env.GATSBY_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.GATSBY_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.GATSBY_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.GATSBY_FIREBASE_APP_ID,
-  measurementId: process.env.GATSBY_FIREBASE_MEASUREMENT_ID,
+  apiKey: "AIzaSyCB2NJpiOfX2BgIZUNGhZMGqFVnAlq16ik",
+  authDomain: "vwlogin-5ddeb.firebaseapp.com",
+  databaseURL: "https://vwlogin-5ddeb-default-rtdb.firebaseio.com/",
+  projectId: "vwlogin-5ddeb",
+  storageBucket: "vwlogin-5ddeb.appspot.com",
+  messagingSenderId: "468280709799",
+  appId: "1:468280709799:web:cb555ea0f547d759ddc182",
+  measurementId: "G-ST0MGGQBQP",
 }
+// const config = {
+//   apiKey: process.env.GATSBY_FIREBASE_API_KEY,
+//   authDomain: process.env.GATSBY_FIREBASE_AUTH_DOMAIN,
+//   databaseURL: process.env.GATSBY_FIREBASE_DATABASE_URL,
+//   projectId: process.env.GATSBY_FIREBASE_PROJECT_ID,
+//   storageBucket: process.env.GATSBY_FIREBASE_STORAGE_BUCKET,
+//   messagingSenderId: process.env.GATSBY_FIREBASE_MESSAGING_SENDER_ID,
+//   appId: process.env.GATSBY_FIREBASE_APP_ID,
+//   measurementId: process.env.GATSBY_FIREBASE_MEASUREMENT_ID,
+// }
 
 const firebaseApp = firebase.initializeApp(config)
 const db = getFirestore(firebaseApp)
