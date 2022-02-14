@@ -56,7 +56,9 @@ export const Header = ({ siteTitle }) => {
           <h1>
             <Link to="/">{siteTitle}</Link>
           </h1>
-          <p style={{ color: "#f9f9f9", display: "flex" }}>Please sign in</p>
+          <div className="login-status">
+            <p style={{ color: "#f9f9f9", display: "flex" }}>Please sign in</p>
+          </div>
 
           <div className="navigation">
             <NormalNav />

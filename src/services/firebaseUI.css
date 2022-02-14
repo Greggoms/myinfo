@@ -13,9 +13,10 @@
   display: flex;
   justify-content: space-around;
 }
-
-.firebaseui-idp-list li {
-  margin-bottom: 0 !important;
+@media only screen and (max-width: 500px) {
+  .firebaseui-idp-list {
+    flex-direction: column;
+  }
 }
 
 .firebaseui-card-content:first-child {

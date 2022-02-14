@@ -155,7 +155,7 @@ export const FirebaseProfile = () => {
               />
 
               <h2>PTO Info</h2>
-              <div className="highlights">
+              <div className="highlights main-highlights">
                 <div className="highlight">
                   {hasHireDate ? (
                     <h3>
