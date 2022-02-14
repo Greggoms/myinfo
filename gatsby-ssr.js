@@ -1,16 +1,9 @@
 import React from "react"
 import { Theme } from "./src/themes/Theme"
 import Layout from "./src/components/layout"
-import { isBrowser } from "./src/services/isBrowser"
 const { createGlobalStyle, ThemeProvider } = require("styled-components")
-const netlifyIdentity = require("netlify-identity-widget")
 
 export const wrapRootElement = ({ element, props }) => {
-  const user = netlifyIdentity.currentUser()
-  if (isBrowser) {
-    netlifyIdentity.init()
-    user && netlifyIdentity.refresh()
-  }
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyles />
