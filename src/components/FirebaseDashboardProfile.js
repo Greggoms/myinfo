@@ -40,6 +40,7 @@ export const FirebaseDashboardProfile = props => {
           hoursUsed={user.hoursUsed}
           pending={user.pending}
           accepted={user.accepted}
+          insurance={user.insurance}
         />
       ))
     : list.map(user => (
@@ -57,6 +58,7 @@ export const FirebaseDashboardProfile = props => {
           hoursUsed={user.hoursUsed}
           pending={user.pending}
           accepted={user.accepted}
+          insurance={user.insurance}
         />
       ))
 }

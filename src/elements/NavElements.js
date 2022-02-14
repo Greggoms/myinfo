@@ -6,7 +6,7 @@ export const NavContainer = styled.nav`
     display: flex;
     justify-content: flex-start;
   }
-  a:first-child {
-    margin-right: 1.5rem;
+  a:nth-child(even) {
+    margin-left: 1.5rem;
   }
 `

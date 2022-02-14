@@ -39,7 +39,13 @@ export const HeaderContents = styled.div`
     align-self: flex-end;
 
     @media only screen and (min-width: 500px) {
+      grid-column: 1/-1;
+      grid-row: 1;
+    }
+
+    @media only screen and (min-width: 800px) {
       grid-column: 1;
+      grid-row: 1;
     }
   }
 
@@ -50,8 +56,15 @@ export const HeaderContents = styled.div`
     grid-row: 2;
 
     @media only screen and (min-width: 500px) {
+      grid-column: 1;
+      grid-row: 2;
+      align-self: center;
+    }
+
+    @media only screen and (min-width: 800px) {
       grid-column: 2;
       grid-row: 1;
+      align-self: flex-end;
     }
   }
 
@@ -74,7 +87,7 @@ export const HeaderContents = styled.div`
     grid-row: 3;
 
     @media only screen and (min-width: 500px) {
-      grid-column: 1/-1;
+      grid-column: 2;
       grid-row: 2;
       align-self: center;
     }

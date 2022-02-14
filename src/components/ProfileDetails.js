@@ -121,6 +121,19 @@ export const ProfileDetails = props => {
           : 0}{" "}
         hours
       </h3>
+      <p className="insurance">
+        Insurance:{" "}
+        {props.insurance
+          ? "Yes"
+          : props.hireDate &&
+            monthsWorked(
+              props.hireDate[0],
+              props.hireDate[1],
+              props.hireDate[2]
+            ) < 3
+          ? "Not Eligible"
+          : "No"}
+      </p>
       <div className="request-details">
         {props.pending ? (
           <>

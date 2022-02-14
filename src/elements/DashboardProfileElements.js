@@ -27,7 +27,10 @@ export const DashboardProfileContainer = styled.section`
     text-decoration-color: ${props => props.theme.colors.green};
   }
 
-  .request-details {
+  .insurance {
+    margin: 10px 0;
+  }
+  .request-details:last-child {
     margin: 2rem 0 0;
   }
 

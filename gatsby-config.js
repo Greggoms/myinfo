@@ -9,7 +9,6 @@ module.exports = {
     author: `Greggoms`,
   },
   plugins: [
-    `gatsby-plugin-netlify`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-smoothscroll`,
     {

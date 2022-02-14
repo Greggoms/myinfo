@@ -169,14 +169,14 @@ const IndexPage = () => {
                   magic happen!
                 </li>
                 <li>
-                  Once you sign up, I'll fill in your PTO <i>usage</i>{" "}
+                  Once you sign up, I'll fill in your PTO <em>usage</em>{" "}
                   information (if you have any) on the database end.
                 </li>
               </ul>
             </ul>
             <h4 style={{ marginTop: "50px" }}>Coming Next</h4>
             <ul>
-              <li>Request PTO usage directly from your profile.</li>
+              <li>Let me know if there are any features you'd like to see!</li>
             </ul>
           </div>
         )}

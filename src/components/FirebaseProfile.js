@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react"
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
-import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore"
-import { useForm } from "react-hook-form"
-import DatePicker from "react-date-picker"
+import { getFirestore, doc, getDoc } from "firebase/firestore"
 import {
   addDays,
   differenceInCalendarDays,
   differenceInCalendarMonths,
-  format,
 } from "date-fns"
 import Seo from "../components/seo"
 import {
@@ -16,25 +13,18 @@ import {
   DatabaseProfileContainer,
   RequestsContainer,
 } from "../elements"
+import { ProfileForm } from "./ProfileForm"
 
 export const FirebaseProfile = () => {
   const [user, setUser] = useState()
   const [uid, setUid] = useState("")
   const [details, setDetails] = useState([])
-  const [formDisabled, setFormDisabled] = useState(false)
-  const [toggleEditBtn, setToggleEditBtn] = useState(false)
   const [hasDocument, setHasDocument] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [hasHireDate, setHasHireDate] = useState(false)
-  const [value, onChange] = useState(new Date())
-  const [date, setDate] = useState([])
+
   const db = getFirestore()
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm()
 
   useEffect(() => {
     let isMounted = true
@@ -81,27 +71,11 @@ export const FirebaseProfile = () => {
       !isNaN(details.hireDate[2])
     ) {
       setHasHireDate(true)
-      setFormDisabled(true)
-    }
-    if (details && details.position && details.location && details.hireDate) {
-      setFormDisabled(true)
-    } else {
-      setFormDisabled(false)
     }
   }, [details])
 
-  useEffect(() => {
-    const date = format(value, "yyyy-M-d").split("-")
-    setDate(date)
-  }, [value])
-
-  const handleFormEdit = () => {
-    if (toggleEditBtn) {
-      setFormDisabled(true)
-    } else {
-      setFormDisabled(false)
-    }
-    return setToggleEditBtn(!toggleEditBtn)
+  const handleFormSubmitted = () => {
+    setSubmitted(!submitted)
   }
 
   const currentYear = new Date().getFullYear()
@@ -154,26 +128,6 @@ export const FirebaseProfile = () => {
     return result
   }
 
-  const onSubmit = data => {
-    try {
-      console.log(data)
-      console.log(date)
-      // Update current user's document on Firestore
-      async function updateFireDoc() {
-        await updateDoc(doc(db, `users/${uid}`), {
-          position: `${data.position}`,
-          location: `${data.location}`,
-          hireDate: [date[0], date[1], date[2]],
-        })
-      }
-      setSubmitted(true)
-      setSubmitted(false)
-      updateFireDoc()
-    } catch (err) {
-      console.log("Error updating/reading document: ", err)
-    }
-  }
-
   if (details && hasDocument) {
     return (
       <>
@@ -193,132 +147,13 @@ export const FirebaseProfile = () => {
               {showForm ? "Hide" : "Show"} Form
             </button>
             <DatabaseProfileContainer>
-              {showForm && (
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <h3>Manage your profile</h3>
-                  <label>
-                    <p>
-                      What is your position?{" "}
-                      <span style={{ color: "#F25C69" }}>*</span>
-                    </p>
-                    <select
-                      {...register("position", {
-                        required: true,
-                      })}
-                      defaultValue={details.position ? details.position : ""}
-                      style={{
-                        cursor: formDisabled ? "not-allowed" : "auto",
-                      }}
-                      disabled={formDisabled}
-                    >
-                      <option value="">Select an Option</option>
-                      <option value="Associate">Associate</option>
-                      <option value="Assist Mngr">Assistant Manager</option>
-                      <option value="Manager">Manager</option>
-                    </select>
-                    <br />
-                    {errors.position && errors.position.type === "required" && (
-                      <span>You must choose a position.</span>
-                    )}
-                    <br />
-                  </label>
-                  <label>
-                    <div>
-                      Which location do you work at?{" "}
-                      <span style={{ color: "#F25C69" }}>*</span>
-                    </div>
-                    <select
-                      {...register("location", {
-                        required: true,
-                      })}
-                      defaultValue={details.location ? details.location : ""}
-                      style={{
-                        cursor: formDisabled ? "not-allowed" : "auto",
-                      }}
-                      disabled={formDisabled}
-                    >
-                      <option value="">Select an Option</option>
-                      <option value="AR Cabot">AR Cabot</option>
-                      <option value="AR Jacksonville">AR Jacksonville</option>
-                      <option value="AR Maumelle">AR Maumelle</option>
-                      <option value="AR Otter Creek">AR Otter Creek</option>
-                      <option value="AR Sherwood">AR Sherwood</option>
-                      <option value="AR Texarkana">AR Texarkana</option>
-                      <option value="AR University">AR University</option>
-                      <option value="VW/AR Chenal Pkwy">
-                        VW/AR Chenal Pkwy
-                      </option>
-                      <option value="VW Arkadelphia">VW Arkadelphia</option>
-                      <option value="VW Benton">VW Benton</option>
-                      <option value="VW Bryant">VW Bryant</option>
-                      <option value="VW HS Albert Pike">
-                        VW HS Albert Pike
-                      </option>
-                      <option value="VW HS Central Ave">
-                        VW HS Central Ave
-                      </option>
-                      <option value="VW Jacksonville">VW Jacksonville</option>
-                      <option value="VW North Little Rock">
-                        VW North Little Rock
-                      </option>
-                      <option value="VW Rodney Parham">VW Rodney Parham</option>
-                      <option value="Warehouse">Warehouse</option>
-                    </select>
-                    <br />
-                    {errors.location && errors.location.type === "required" && (
-                      <span>You must choose a location.</span>
-                    )}
-                    <br />
-                  </label>
-                  <>
-                    <div className="special-div">
-                      <p>
-                        When were you hired?{" "}
-                        <span style={{ color: "#F25C69" }}>*</span>
-                      </p>
-                    </div>
-                    <div className="hire-date-inputs">
-                      <DatePicker
-                        onChange={onChange}
-                        value={value}
-                        calendarClassName="date-picker"
-                        clearIcon={null}
-                        disabled={formDisabled}
-                        defaultValue={
-                          details.hireDate
-                            ? new Date(
-                                details.hireDate[0],
-                                details.hireDate[1],
-                                details.hireDate[2]
-                              )
-                            : new Date()
-                        }
-                      />
-                    </div>
-                  </>
-                  <div className="buttons">
-                    <input
-                      type="submit"
-                      value="Submit"
-                      className="submit-btn"
-                      style={{
-                        cursor: formDisabled ? "not-allowed" : "pointer",
-                      }}
-                      disabled={formDisabled}
-                    />
-                    <input
-                      type="button"
-                      value={toggleEditBtn ? "Cancel" : "Edit Form"}
-                      // style={{
-                      //   cursor: editBtnDisabled ? "not-allowed" : "pointer",
-                      // }}
-                      className="edit-btn"
-                      onClick={handleFormEdit}
-                      // disabled={editBtnDisabled}
-                    />
-                  </div>
-                </form>
-              )}
+              <ProfileForm
+                uid={uid}
+                details={details}
+                showForm={showForm}
+                handleFormSubmitted={handleFormSubmitted}
+              />
+
               <h2>PTO Info</h2>
               <div className="highlights">
                 <div className="highlight">
@@ -429,22 +264,6 @@ export const FirebaseProfile = () => {
               <h2>More Info</h2>
               <div className="highlights">
                 <div className="highlight">
-                  {hasHireDate ? (
-                    <h4>
-                      {lifetimePTO(
-                        details.hireDate[0],
-                        details.hireDate[1],
-                        details.hireDate[2]
-                      )}
-                      hrs
-                    </h4>
-                  ) : (
-                    <p>Waiting...</p>
-                  )}
-                  <hr />
-                  <p>Lifetime PTO</p>
-                </div>
-                <div className="highlight">
                   {details.location ? (
                     <h4>{details.location && details.location}</h4>
                   ) : (
@@ -452,28 +271,6 @@ export const FirebaseProfile = () => {
                   )}
                   <hr />
                   <p>Location</p>
-                </div>
-                <div className="highlight">
-                  {hasHireDate ? (
-                    <h4>
-                      {details.hireDate[1]}/{details.hireDate[2]}/
-                      {details.hireDate[0]}
-                    </h4>
-                  ) : (
-                    <p>Waiting...</p>
-                  )}
-                  <hr />
-                  <p>
-                    Hire Date -{" "}
-                    {hasHireDate
-                      ? monthsWorked(
-                          details.hireDate[0],
-                          details.hireDate[1],
-                          details.hireDate[2]
-                        )
-                      : "???"}{" "}
-                    months ago
-                  </p>
                 </div>
                 <div className="highlight">
                   {details.position ? (
@@ -498,6 +295,61 @@ export const FirebaseProfile = () => {
                         )
                       : "???"}{" "}
                     months
+                  </p>
+                </div>
+                <div className="highlight">
+                  {hasHireDate ? (
+                    <h4>
+                      {details.hireDate[1]}/{details.hireDate[2]}/
+                      {details.hireDate[0]}
+                    </h4>
+                  ) : (
+                    <p>Waiting...</p>
+                  )}
+                  <hr />
+                  <p>
+                    Hire Date -{" "}
+                    {hasHireDate
+                      ? monthsWorked(
+                          details.hireDate[0],
+                          details.hireDate[1],
+                          details.hireDate[2]
+                        )
+                      : "???"}{" "}
+                    months ago
+                  </p>
+                </div>
+                <div className="highlight">
+                  {hasHireDate ? (
+                    <h4>
+                      {lifetimePTO(
+                        details.hireDate[0],
+                        details.hireDate[1],
+                        details.hireDate[2]
+                      )}
+                      hrs
+                    </h4>
+                  ) : (
+                    <p>Waiting...</p>
+                  )}
+                  <hr />
+                  <p>Lifetime PTO</p>
+                </div>
+
+                <div className="highlight">
+                  <h4>Insurance</h4>
+                  <hr />
+                  <p>
+                    {details.insurance
+                      ? "Yes"
+                      : hasHireDate &&
+                        monthsWorked(
+                          details.hireDate[0],
+                          details.hireDate[1],
+                          details.hireDate[2]
+                        ) < 3
+                      ? "Not eligible yet"
+                      : "No"}
                   </p>
                 </div>
               </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react"
 import { getFirestore, collection, getDocs, query } from "firebase/firestore"
 import { useSortBy, useTable } from "react-table"
-import { differenceInCalendarDays } from "date-fns"
+import { differenceInCalendarDays, differenceInCalendarMonths } from "date-fns"
 import { TableContainer } from "../elements"
 
 export const ReactTable = () => {
@@ -27,13 +27,6 @@ export const ReactTable = () => {
   const currentMonth = parseInt(new Date().getMonth() + 1)
   const currentDay = new Date().getDate()
 
-  const lifetimePTO = (hireYear, hireMonth, hireDay) => {
-    const result = differenceInCalendarDays(
-      new Date(currentYear, currentMonth, currentDay),
-      new Date(hireYear, hireMonth, hireDay)
-    )
-    return Math.floor(result / 91) * 10
-  }
   const remainingPTO = (hireYear, hireMonth, hireDay, hoursUsed, pending) => {
     const result = differenceInCalendarDays(
       new Date(currentYear, currentMonth, currentDay),
@@ -54,10 +47,26 @@ export const ReactTable = () => {
     return 91 - (result % 91)
   }
 
+  const monthsWorked = (year, month, day) => {
+    const result = differenceInCalendarMonths(
+      new Date(currentYear, currentMonth, currentDay),
+      new Date(year, month, day)
+    )
+    return result
+  }
+
   const data = useMemo(
     () =>
       users.map(
-        ({ name, location, position, hireDate, pending, hoursUsed }) => {
+        ({
+          name,
+          location,
+          position,
+          hireDate,
+          pending,
+          hoursUsed,
+          insurance,
+        }) => {
           const fullName = name.split(" ")
           return {
             col1: fullName[0],
@@ -67,9 +76,12 @@ export const ReactTable = () => {
             col5: hireDate
               ? `${hireDate[0]}/${hireDate[1]}/${hireDate[2]}`
               : `No Hire Date`,
-            col6: hireDate
-              ? lifetimePTO(hireDate[0], hireDate[1], hireDate[2])
-              : `No Hire Date`,
+            col6: insurance
+              ? "Yes"
+              : hireDate &&
+                monthsWorked(hireDate[0], hireDate[1], hireDate[2]) < 3
+              ? "Not Eligible"
+              : "No",
             col7: hireDate
               ? remainingPTO(
                   hireDate[0],
@@ -111,7 +123,7 @@ export const ReactTable = () => {
         accessor: "col5",
       },
       {
-        Header: "Lifetime PTO",
+        Header: "Insurance Opt-in",
         accessor: "col6",
       },
       {
