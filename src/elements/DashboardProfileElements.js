@@ -4,6 +4,7 @@ export const DashboardProfilesContainer = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(18rem, max-content));
   align-items: flex-start;
+  justify-content: center;
   grid-gap: 2rem;
 
   background: ${props => props.theme.grayscale.dark2};
