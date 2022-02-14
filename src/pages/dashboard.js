@@ -76,7 +76,13 @@ const DashboardPage = () => {
     }
     return (
       <DashboardPageContainer>
-        <Seo title={`${user.firstName}'s Dashboard`} />
+        <Seo
+          title={
+            details && details.name
+              ? `${details.name}'s Dashboard`
+              : `Dashboard`
+          }
+        />
         <EmployeeViewContainer>
           <div className="button-container">
             <button
