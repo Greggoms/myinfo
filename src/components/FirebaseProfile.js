@@ -76,6 +76,7 @@ export const FirebaseProfile = () => {
 
   const handleFormSubmitted = () => {
     setSubmitted(!submitted)
+    setShowForm(false)
   }
 
   const currentYear = new Date().getFullYear()
@@ -147,12 +148,13 @@ export const FirebaseProfile = () => {
               {showForm ? "Hide" : "Show"} Form
             </button>
             <DatabaseProfileContainer>
-              <ProfileForm
-                uid={uid}
-                details={details}
-                showForm={showForm}
-                handleFormSubmitted={handleFormSubmitted}
-              />
+              {showForm && (
+                <ProfileForm
+                  uid={uid}
+                  details={details}
+                  handleFormSubmitted={handleFormSubmitted}
+                />
+              )}
 
               <h2>PTO Info</h2>
               <div className="highlights main-highlights">
