@@ -22,7 +22,6 @@
     "gatsby-plugin-styled-components": "^5.3.0",
     "gatsby-source-filesystem": "^4.1.2",
     "gatsby-transformer-sharp": "^4.1.0",
-    "netlify-identity-widget": "^1.9.2",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-date-picker": "^8.4.0",
@@ -32,7 +31,6 @@
     "react-hook-form": "^7.26.1",
     "react-router": "5.2.0",
     "react-router-dom": "5.2.0",
-    "react-router-scroll-top": "^0.2.1",
     "react-table": "^7.7.0",
     "styled-components": "^5.3.3",
     "uuid": "^8.3.2"
