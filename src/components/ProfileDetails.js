@@ -151,9 +151,7 @@ export const ProfileDetails = props => {
               </ul>
             ))}
           </>
-        ) : (
-          <p>No pending requests.</p>
-        )}
+        ) : null}
       </div>
       <div className="request-details">
         {props.accepted ? (
@@ -172,9 +170,7 @@ export const ProfileDetails = props => {
               </ul>
             ))}
           </>
-        ) : (
-          <p>No PTO usage | Pending request</p>
-        )}
+        ) : null}
       </div>
     </DashboardProfileContainer>
   ) : props.hireDate &&
@@ -212,7 +208,8 @@ export const ProfileDetails = props => {
             <div className="promotion-date">
               <h4>Promotion Date</h4>
               <p>
-                {props.promotionDate} (
+                {props.promotionDate[1]}/{props.promotionDate[2]}/
+                {props.promotionDate[0]} (
                 {monthsWorked(
                   props.promotionDate[0],
                   props.promotionDate[1],

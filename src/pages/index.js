@@ -131,7 +131,16 @@ const IndexPage = () => {
                           <li>
                             Direct Deposit Form - Need Account and Routing #'s
                           </li>
-                          <li>W-4 Form - Be sure to fill out the SSN</li>
+                          <li>
+                            <a
+                              href="https://www.irs.gov/pub/irs-pdf/fw4.pdf"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              W-4 Form
+                            </a>{" "}
+                            - Be sure to fill out the SSN
+                          </li>
                         </ul>
                       </ul>
                     </ul>
