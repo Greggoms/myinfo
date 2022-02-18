@@ -151,9 +151,7 @@ export const ProfileDetails = props => {
               </ul>
             ))}
           </>
-        ) : (
-          <p>No pending requests.</p>
-        )}
+        ) : null}
       </div>
       <div className="request-details">
         {props.accepted ? (
@@ -172,19 +170,24 @@ export const ProfileDetails = props => {
               </ul>
             ))}
           </>
-        ) : (
-          <p>No PTO usage | Pending request</p>
-        )}
+        ) : null}
       </div>
     </DashboardProfileContainer>
   ) : props.hireDate &&
     props.pay <
-      eligibleAmount(
-        props.hireDate[0],
-        props.hireDate[1],
-        props.hireDate[2],
-        props.position
-      ) ? (
+      (props.promotionDate
+        ? eligibleAmount(
+            props.promotionDate[0],
+            props.promotionDate[1],
+            props.promotionDate[2],
+            props.position
+          )
+        : eligibleAmount(
+            props.hireDate[0],
+            props.hireDate[1],
+            props.hireDate[2],
+            props.position
+          )) ? (
     <DashboardProfileContainer>
       <div className="pay-raise-effect" id={`a${props.id}`}>
         <div className="basic-info">
@@ -212,7 +215,8 @@ export const ProfileDetails = props => {
             <div className="promotion-date">
               <h4>Promotion Date</h4>
               <p>
-                {props.promotionDate} (
+                {props.promotionDate[1]}/{props.promotionDate[2]}/
+                {props.promotionDate[0]} (
                 {monthsWorked(
                   props.promotionDate[0],
                   props.promotionDate[1],

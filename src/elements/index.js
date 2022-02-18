@@ -1,4 +1,5 @@
 export * from "./ClientOnlyElements"
+export * from "./ContactPageElements"
 export * from "./DashboardElements"
 export * from "./DashboardProfileElements"
 export * from "./FooterElements"
