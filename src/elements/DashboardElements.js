@@ -19,7 +19,8 @@ export const EmployeeViewContainer = styled.section`
     margin: 0 auto;
     margin-bottom: 3rem;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    grid-gap: 15px;
     max-width: 40rem;
 
     button {
