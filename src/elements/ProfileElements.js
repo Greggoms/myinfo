@@ -38,6 +38,7 @@ export const DatabaseProfileContainer = styled.section`
   .main-highlights {
     margin-bottom: 20px;
   }
+
   .highlights {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));

@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useMemo } from "react"
-import { getFirestore, collection, getDocs, query } from "firebase/firestore"
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  orderBy,
+} from "firebase/firestore"
 import { useSortBy, useTable } from "react-table"
 import { differenceInCalendarDays, differenceInCalendarMonths } from "date-fns"
 import { TableContainer } from "../elements"
@@ -11,7 +17,7 @@ export const ReactTable = () => {
   useEffect(() => {
     try {
       async function getUsers() {
-        const q = query(collection(db, "users"))
+        const q = query(collection(db, "users"), orderBy("hireDate", "desc"))
 
         const querySnapshot = await getDocs(q)
         setUsers(querySnapshot.docs.map(res => res.data()))
@@ -63,37 +69,40 @@ export const ReactTable = () => {
           location,
           position,
           hireDate,
+          pay,
           pending,
           hoursUsed,
           insurance,
         }) => {
           const fullName = name.split(" ")
+          // fname, lname, position, pay, remainingPTO, Daysuntil, HireDate, insurance, location
           return {
             col1: fullName[0],
             col2: fullName[1],
             col3: position ? position : "No Position",
-            col4: location ? location : "No Location",
+            col4: pay ? pay : "No Pay",
             col5: hireDate
-              ? `${hireDate[0]}/${hireDate[1]}/${hireDate[2]}`
-              : `No Hire Date`,
-            col6: insurance
-              ? "Yes"
-              : hireDate &&
-                monthsWorked(hireDate[0], hireDate[1], hireDate[2]) < 3
-              ? "Not Eligible"
-              : "No",
-            col7: hireDate
-              ? remainingPTO(
+              ? `${remainingPTO(
                   hireDate[0],
                   hireDate[1],
                   hireDate[2],
                   hoursUsed ? hoursUsed : 0,
                   pending
-                )
+                )} hrs`
               : `No Hire Date`,
-            col8: hireDate
-              ? daysUntil10Hrs(hireDate[0], hireDate[1], hireDate[2])
+            col6: hireDate
+              ? `${daysUntil10Hrs(hireDate[0], hireDate[1], hireDate[2])} days`
               : `No Hire Date`,
+            col7: hireDate
+              ? `${hireDate[0]}/${hireDate[1]}/${hireDate[2]}`
+              : `No Hire Date`,
+            col8: insurance
+              ? "Yes"
+              : hireDate &&
+                monthsWorked(hireDate[0], hireDate[1], hireDate[2]) < 3
+              ? "Not Eligible"
+              : "No",
+            col9: location ? location : "No Location",
           }
         }
       ),
@@ -115,24 +124,28 @@ export const ReactTable = () => {
         accessor: "col3",
       },
       {
-        Header: "Location",
+        Header: "Pay",
         accessor: "col4",
       },
       {
-        Header: "Hire Date",
+        Header: "PTO",
         accessor: "col5",
       },
       {
-        Header: "Insurance Opt-in",
+        Header: "+10hrs",
         accessor: "col6",
       },
       {
-        Header: "Remaining PTO",
+        Header: "Hire Date",
         accessor: "col7",
       },
       {
-        Header: "Days until +10hrs",
+        Header: "Insurance",
         accessor: "col8",
+      },
+      {
+        Header: "Location",
+        accessor: "col9",
       },
     ],
     []

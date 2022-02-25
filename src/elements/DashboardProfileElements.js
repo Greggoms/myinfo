@@ -49,25 +49,25 @@ export const DashboardProfileContainer = styled.section`
     margin: 0.5rem 0;
   }
 
-  .hire-date,
-  .promotion-date {
-    margin-bottom: 1rem;
+  .update-pay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
   }
 
-  .pay-raise-effect {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr min-content;
+  button {
+    border: 2px solid ${props => props.theme.colors.link};
+    background: inherit;
+    color: ${props => props.theme.grayscale.light1};
+    padding: 2px 5px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
 
-    .basic-info {
-      grid-column: 1;
-      grid-row: 1;
-      flex: 1;
-    }
-
-    section {
-      grid-column: 1;
-      grid-row: ${props => (props.active ? "0" : "2")};
-    }
+  button:disabled {
+    border: 2px solid ${props => props.theme.grayscale.dark2};
+    color: ${props => props.theme.grayscale.light4};
+    cursor: not-allowed;
   }
 `

@@ -124,22 +124,38 @@ const IndexPage = () => {
                       <ul>
                         <li>I will notice them during payroll.</li>
                         <li>
-                          If they'd like to get paid, I need these things from
-                          them:
+                          If they'd like to get paid, they need to complete
+                          these. It's best to fill these out on a desktop
+                          computer (password is 123456):
                         </li>
                         <ul>
                           <li>
-                            Direct Deposit Form - Need Account and Routing #'s
-                          </li>
-                          <li>
                             <a
-                              href="https://www.irs.gov/pub/irs-pdf/fw4.pdf"
+                              href="https://www.pdffiller.com/en/link_to_fill/937375912.htm"
                               target="_blank"
                               rel="noopener noreferrer"
                             >
                               W-4 Form
-                            </a>{" "}
-                            - Be sure to fill out the SSN
+                            </a>
+                          </li>
+                          <li style={{ marginLeft: "90px" }}>
+                            For the "Employers Only" section, just put the
+                            location you work at. "Vapor World Hot Springs" or
+                            "Abby Road Maumelle" for example. Your hire date is
+                            also required.
+                          </li>
+                          <li>
+                            <a
+                              href="https://www.pdffiller.com/en/link_to_fill/661161714.htm"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              Direct Deposit Form
+                            </a>
+                          </li>
+                          <li style={{ marginLeft: "90px" }}>
+                            We will issue a paper check if I don't recieve this
+                            in time
                           </li>
                         </ul>
                       </ul>
