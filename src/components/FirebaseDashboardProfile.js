@@ -11,6 +11,7 @@ import { ProfileDetails } from "./ProfileDetails"
 export const FirebaseDashboardProfile = props => {
   const [list, setList] = useState([])
   const [refresh, setRefresh] = useState(false)
+  const [inputText, setInputText] = useState("")
   const db = getFirestore()
 
   useEffect(() => {
@@ -35,30 +36,36 @@ export const FirebaseDashboardProfile = props => {
     setRefresh(!refresh)
   }
 
-  return props.layout === "profile"
-    ? list.map(user => (
+  const inputHandler = e => {
+    //convert input text to lower case
+    setInputText(e.target.value.toLowerCase())
+  }
+
+  const filteredData = list.filter(el => {
+    //if no input the return the original
+    if (inputText === "") {
+      return el
+    }
+    //return the item which contains the user input
+    else {
+      return el.name.toLowerCase().includes(inputText)
+    }
+  })
+  return (
+    <>
+      {/* // https://dev.to/salehmubashar/search-bar-in-react-js-545l */}
+      <input
+        id="searchbar"
+        type="text"
+        onChange={inputHandler}
+        label="Search"
+        placeholder="Search for an Employee"
+      />
+      {filteredData.map(user => (
         <ProfileDetails
           key={user.id}
-          layout="profile"
           id={user.id}
-          name={user.name}
-          email={user.email}
-          location={user.location}
-          position={user.position}
-          hireDate={user.hireDate}
-          promotionDate={user.promotionDate}
-          hoursUsed={user.hoursUsed}
-          pending={user.pending}
-          accepted={user.accepted}
-          insurance={user.insurance}
-          lastRaise={user.lastRaise}
-        />
-      ))
-    : list.map(user => (
-        <ProfileDetails
-          key={user.id}
-          layout="payraise"
-          id={user.id}
+          layout={props.layout}
           name={user.name}
           email={user.email}
           location={user.location}
@@ -73,5 +80,7 @@ export const FirebaseDashboardProfile = props => {
           lastRaise={user.lastRaise}
           handleRefresh={handleRefresh}
         />
-      ))
+      ))}
+    </>
+  )
 }

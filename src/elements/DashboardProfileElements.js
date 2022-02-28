@@ -2,12 +2,18 @@ import styled from "styled-components"
 
 export const DashboardProfilesContainer = styled.section`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, max-content));
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  grid-template-rows: min-content auto;
   align-items: flex-start;
   justify-content: center;
   grid-gap: 2rem;
-
   background: ${props => props.theme.grayscale.dark2};
+
+  #searchbar {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    padding: 5px;
+  }
 `
 
 export const DashboardProfileContainer = styled.section`
@@ -61,7 +67,7 @@ export const DashboardProfileContainer = styled.section`
     background: inherit;
     color: ${props => props.theme.grayscale.light1};
     padding: 2px 5px;
-    margin-top: 10px;
+    margin-top: 20px;
     cursor: pointer;
   }
 

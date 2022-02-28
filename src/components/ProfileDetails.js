@@ -6,6 +6,7 @@ import { DashboardProfileContainer } from "../elements"
 export const ProfileDetails = props => {
   const db = getFirestore()
   const [checked, setChecked] = useState(false)
+  const [basicInfo, setBasicInfo] = useState(false)
   const currentYear = new Date().getFullYear()
   const currentMonth = parseInt(new Date().getMonth() + 1)
   const currentDay = new Date().getDate()
