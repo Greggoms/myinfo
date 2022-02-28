@@ -41,14 +41,14 @@ export const FirebaseDashboardProfile = props => {
     setInputText(e.target.value.toLowerCase())
   }
 
-  const filteredData = list.filter(el => {
+  const filteredData = list.filter(employee => {
     //if no input the return the original
     if (inputText === "") {
-      return el
+      return employee
     }
     //return the item which contains the user input
     else {
-      return el.name.toLowerCase().includes(inputText)
+      return employee.name.toLowerCase().includes(inputText)
     }
   })
   return (
@@ -81,6 +81,9 @@ export const FirebaseDashboardProfile = props => {
           handleRefresh={handleRefresh}
         />
       ))}
+      {filteredData.length === 0 && (
+        <h3 className="nomatch">No Match! Try another search.</h3>
+      )}
     </>
   )
 }

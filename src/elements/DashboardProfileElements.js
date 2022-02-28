@@ -10,9 +10,19 @@ export const DashboardProfilesContainer = styled.section`
   background: ${props => props.theme.grayscale.dark2};
 
   #searchbar {
+    justify-self: center;
     grid-row: 1;
     grid-column: 1 / -1;
+
+    width: 100%;
+    max-width: 500px;
     padding: 5px;
+  }
+
+  .nomatch {
+    justify-self: center;
+    grid-row: 2;
+    grid-column: 1 / -1;
   }
 `
 
