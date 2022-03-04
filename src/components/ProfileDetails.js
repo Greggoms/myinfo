@@ -58,15 +58,19 @@ export const ProfileDetails = props => {
         <p>
           <strong>Hire Date</strong>
         </p>
-        <p>
-          {props.hireDate[1]}/{props.hireDate[2]}/{props.hireDate[0]} (
-          {monthsWorked(
-            props.hireDate[0],
-            props.hireDate[1],
-            props.hireDate[2]
-          )}{" "}
-          months)
-        </p>
+        {props.hireDate ? (
+          <p>
+            {props.hireDate[1]}/{props.hireDate[2]}/{props.hireDate[0]} (
+            {monthsWorked(
+              props.hireDate[0],
+              props.hireDate[1],
+              props.hireDate[2]
+            )}{" "}
+            months)
+          </p>
+        ) : (
+          <p>Waiting...</p>
+        )}
       </div>
       {props.promotionDate && (
         <div style={{ marginTop: "10px" }}>
