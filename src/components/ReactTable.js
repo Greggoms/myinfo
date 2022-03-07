@@ -17,7 +17,7 @@ export const ReactTable = () => {
   useEffect(() => {
     try {
       async function getUsers() {
-        const q = query(collection(db, "users"), orderBy("hireDate", "desc"))
+        const q = query(collection(db, "users"), orderBy("name"))
 
         const querySnapshot = await getDocs(q)
         setUsers(querySnapshot.docs.map(res => res.data()))
@@ -98,10 +98,18 @@ export const ReactTable = () => {
               : `No Hire Date`,
             col8: insurance
               ? "Yes"
-              : hireDate &&
-                monthsWorked(hireDate[0], hireDate[1], hireDate[2]) < 3
-              ? "Not Eligible"
-              : "No",
+              : hireDate
+              ? monthsWorked(hireDate[0], hireDate[1], hireDate[2]) < 3
+                ? "Not Eligible"
+                : "No"
+              : "No Hire Date",
+            // col8: insurance
+            //   ? "Yes"
+            //   : hireDate
+            //   ? monthsWorked(hireDate[0], hireDate[1], hireDate[2]) < 3
+            //     ? "Not Eligible"
+            //     : "No Hire Date"
+            //   : "No",
             col9: location ? location : "No Location",
           }
         }

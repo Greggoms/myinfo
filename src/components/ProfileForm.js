@@ -120,13 +120,13 @@ export const ProfileForm = props => {
           >
             <option value="">Select an Option</option>
             <option value="AR Cabot">AR Cabot</option>
+            <option value="AR Chenal Pkwy">AR Chenal Pkwy</option>
             <option value="AR Jacksonville">AR Jacksonville</option>
             <option value="AR Maumelle">AR Maumelle</option>
             <option value="AR Otter Creek">AR Otter Creek</option>
             <option value="AR Sherwood">AR Sherwood</option>
             <option value="AR Texarkana">AR Texarkana</option>
             <option value="AR University">AR University</option>
-            <option value="VW/AR Chenal Pkwy">VW/AR Chenal Pkwy</option>
             <option value="VW Arkadelphia">VW Arkadelphia</option>
             <option value="VW Benton">VW Benton</option>
             <option value="VW Bryant">VW Bryant</option>

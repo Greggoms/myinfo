@@ -105,57 +105,55 @@ export const ProfileDetails = props => {
           </p>
         </div>
       )}
-      <p className="insurance">
+      <p className="p">
         Insurance:{" "}
         {props.insurance
           ? "Yes"
-          : props.hireDate &&
-            monthsWorked(
+          : props.hireDate
+          ? monthsWorked(
               props.hireDate[0],
               props.hireDate[1],
               props.hireDate[2]
             ) < 3
-          ? "Not Eligible"
-          : "No"}
+            ? "Not Eligible"
+            : "No"
+          : "No Hire Date"}
       </p>
-      <div className="request-details">
-        {props.pending ? (
-          <>
-            <h4 key="pending-request" className="pending">
-              Pending
-            </h4>
-            {props.pending.map((request, index) => (
-              <ul key={index}>
-                <li>
-                  {request.dates.length === 1
-                    ? `${request.dates} `
-                    : `${request.dates[0]} to ${request.dates[1]} `}
-                  using {request.hours} hours.
-                </li>
-              </ul>
-            ))}
-          </>
-        ) : null}
-      </div>
-      <div className="request-details">
-        {props.accepted ? (
-          <>
-            <h4 key="accepted-request" className="accepted">
-              Accepted
-            </h4>
-            {props.accepted.map((request, index) => (
-              <ul key={index}>
-                <li>
-                  {request.dates.length === 1
-                    ? `${request.dates} `
-                    : `${request.dates[0]} to ${request.dates[1]} `}
-                  using {request.hours} hours.
-                </li>
-              </ul>
-            ))}
-          </>
-        ) : null}
-      </div>
+      <p className="p">Pay: {props.pay ? props.pay : `No Pay`}</p>
+      {props.pending ? (
+        <div className="request-details">
+          <h4 key="pending-request" className="pending">
+            Pending
+          </h4>
+          {props.pending.map((request, index) => (
+            <ul key={index}>
+              <li>
+                {request.dates.length === 1
+                  ? `${request.dates} `
+                  : `${request.dates[0]} to ${request.dates[1]} `}
+                using {request.hours} hours.
+              </li>
+            </ul>
+          ))}
+        </div>
+      ) : null}
+      {props.accepted ? (
+        <div className="request-details">
+          <h4 key="accepted-request" className="accepted">
+            Accepted
+          </h4>
+          {props.accepted.map((request, index) => (
+            <ul key={index}>
+              <li>
+                {request.dates.length === 1
+                  ? `${request.dates} `
+                  : `${request.dates[0]} to ${request.dates[1]} `}
+                using {request.hours} hours.
+              </li>
+            </ul>
+          ))}
+        </div>
+      ) : null}
     </DashboardProfileContainer>
   ) : props.lastRaise &&
     handleIsEligible(

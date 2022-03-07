@@ -44,11 +44,12 @@ export const DashboardProfileContainer = styled.section`
     text-decoration-color: ${props => props.theme.colors.green};
   }
 
-  .insurance {
-    margin: 10px 0;
+  .request-details {
+    margin-top: 2rem;
   }
-  .request-details:last-child {
-    margin: 2rem 0 0;
+
+  .p {
+    margin: 10px 0;
   }
 
   ul {
