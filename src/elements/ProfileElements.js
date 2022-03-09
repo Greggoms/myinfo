@@ -1,8 +1,11 @@
 import styled from "styled-components"
 
 export const ProfileContainer = styled.section`
-  max-width: 80rem;
-  margin: 0 auto;
+  grid-column: 2 / span 6;
+  @media ${props => props.theme.breakpoints.mobile} {
+    grid-column: 2 / 3;
+  }
+
   line-height: 20pt;
   display: grid;
   grid-template-columns: 100px 1fr;
@@ -32,6 +35,14 @@ export const ProfileContainer = styled.section`
     width: 100%;
     max-width: 200px;
   }
+`
+
+export const ProfilePageErrorContainer = styled.section`
+  grid-column: 2 / span 6;
+  @media ${props => props.theme.breakpoints.mobile} {
+    grid-column: 2 / 3;
+  }
+  text-align: center;
 `
 
 export const DatabaseProfileContainer = styled.section`

@@ -3,6 +3,7 @@ import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
 import { FirebaseProfile } from "../components/FirebaseProfile"
 import { Notification } from "../components/Notification"
+import { ProfilePageErrorContainer } from "../elements"
 import Seo from "../components/seo"
 import Svg from "../svg/lock.svg"
 
@@ -33,17 +34,19 @@ const ProfilePage = () => {
     return (
       <>
         <Seo title="Profile" />
-        <Notification message="You must be logged in to view your profile." />
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <Svg
-            style={{
-              width: "100%",
-              maxWidth: "25rem",
-              height: "100%",
-              opacity: 0.5,
-            }}
-          />
-        </div>
+        <ProfilePageErrorContainer>
+          <Notification message="You must be logged in to view your profile." />
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Svg
+              style={{
+                width: "100%",
+                maxWidth: "25rem",
+                height: "100%",
+                opacity: 0.5,
+              }}
+            />
+          </div>
+        </ProfilePageErrorContainer>
       </>
     )
   }

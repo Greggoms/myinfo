@@ -362,12 +362,7 @@ export const FirebaseProfile = () => {
     )
   } else {
     return (
-      <div
-        style={{
-          margin: "0 auto",
-          maxWidth: "500px",
-        }}
-      >
+      <>
         <h2 style={{ textAlign: "center", marginBottom: "10px" }}>
           Your profile has been removed
         </h2>
@@ -375,7 +370,7 @@ export const FirebaseProfile = () => {
           Email or DM me if you're seeing this message. Fix this by logging out
           and logging back in. You will have to start your profile over.
         </p>
-      </div>
+      </>
     )
   }
 }

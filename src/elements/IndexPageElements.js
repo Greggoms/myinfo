@@ -1,8 +1,11 @@
 import styled from "styled-components"
 
 export const IndexPageContainer = styled.div`
-  margin: 0 auto;
-  max-width: 960px;
+  grid-column: 2 / span 6;
+  @media ${props => props.theme.breakpoints.mobile} {
+    grid-column: 2 / 3;
+  }
+
   h1 {
     margin-bottom: 1.5rem;
     text-align: center;

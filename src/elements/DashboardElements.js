@@ -1,13 +1,16 @@
 import styled from "styled-components"
 
 export const DashboardPageContainer = styled.div`
-  margin: 0 auto;
-  margin-bottom: 3rem;
-  max-width: 100rem;
+  grid-column: 2 / span 6;
+  @media ${props => props.theme.breakpoints.mobile} {
+    grid-column: 2 / 3;
+  }
 `
 export const DashboardPageErrorContainer = styled.div`
-  margin: 0 auto;
-  max-width: 960px;
+  grid-column: 2 / span 6;
+  @media ${props => props.theme.breakpoints.mobile} {
+    grid-column: 2 / 3;
+  }
 `
 export const EmployeeViewContainer = styled.section`
   .selected-component {
