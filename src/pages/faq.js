@@ -25,39 +25,32 @@ const faq = () => {
             because you never had to before, don’t understand what it’s asking,
             or simply overlooked it, you WILL pay tax at tax time.
           </p>
-          <h4>Step 2 applies to you if:</h4>
+          <h4>Step 2 applies to you if at least one of these is true:</h4>
           <ul>
             <li>Step 1(c) has “married filing jointly” box checked.</li>
-            <li className="or">OR IF</li>
             <li>You have multiple jobs.</li>
-            <li className="or">OR IF</li>
             <li>
               You are married and share 2+ jobs between you and your spouse.
             </li>
           </ul>
 
-          <h4>Step 3 applies to you if:</h4>
+          <h4>Step 3 applies to you if at least one of these is true:</h4>
           <ul>
             <li>You claim a child(ren) as dependents.</li>
-            <li className="or">AND/OR IF</li>
             <li>You claim an adult(s) as dependents.</li>
           </ul>
-          <h4>Step 4 applies to you if:</h4>
+          <h4>Step 4 applies to you if at least one of these is true:</h4>
           <ul>
             <li>Step 1(c) has “married filing jointly” box checked.</li>
-            <li className="or">OR IF</li>
             <li>You have multiple jobs.</li>
-            <li className="or">OR IF</li>
             <li>
               You are married and share 2+ jobs between you and your spouse.
             </li>
-            <li className="or">OR IF</li>
             <li>
               You receive income from a job that doesn’t automatically withhold
               tax. (An income you receive without filing a w4 for it). This
               isn’t common.
             </li>
-            <li className="or">OR IF</li>
             <li>
               If you have deductions to claim (requires an estimate of your 2022
               itemized deductions from Schedule A (Form 1040). Includes things
@@ -121,7 +114,8 @@ const faq = () => {
           </p>
           <p>
             For any other situation (multiple jobs, married and spouse works),
-            step 2 offers three different ways to calculate this amount.
+            step 2 offers three different ways to calculate this amount. You can
+            only choose ONE of the options.
           </p>
           <ol>
             <li>
