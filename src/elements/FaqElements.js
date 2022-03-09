@@ -45,6 +45,10 @@ export const FaqContainer = styled.div`
     margin-bottom: 0.5em;
   }
 
+  .or {
+    margin: 5px 0 5px 10px !important;
+  }
+
   a:visited {
   }
   a:hover {
@@ -56,11 +60,5 @@ export const FaqContainer = styled.div`
     color: ${props => props.theme.colors.link};
     transition: all 0.3s ease;
     padding: 0.2rem 0.1rem 0.5rem;
-  }
-
-  .or {
-    list-style-type: none;
-
-    margin: 5px 0 5px 10px;
   }
 `

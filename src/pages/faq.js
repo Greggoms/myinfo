@@ -129,13 +129,13 @@ const faq = () => {
               </a>{" "}
               for the most accurate withholding. Put the result on step 4(c).
             </li>
-            <li className="or">OR</li>
+            <p className="or">OR</p>
             <li>
               Use the multiple jobs worksheet (step 2 (b)) on page 3. This
               approach can be intimidating and offers a roughly accurate answer,
               but I can help you make sense of it. Put the result on step 4(c).
             </li>
-            <li className="or">OR</li>
+            <p className="or">OR</p>
             <li>
               If there are 2 jobs maximum and both incomes are relatively the
               same (for example: one job pays $1000 and the other pays $1250),
