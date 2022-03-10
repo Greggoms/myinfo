@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
+import { graphql, useStaticQuery } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import { GatsbySeo } from "gatsby-plugin-next-seo"
 import { FaqContainer } from "../elements"
@@ -24,6 +25,19 @@ const Faq = () => {
       console.log("ERROR: ", err)
     }
   }, [user])
+
+  const data = useStaticQuery(graphql`
+    {
+      allFile(filter: { extension: { eq: "pdf" } }) {
+        edges {
+          node {
+            publicURL
+            name
+          }
+        }
+      }
+    }
+  `)
 
   return (
     <>
@@ -415,6 +429,41 @@ const Faq = () => {
                 to get started.
               </p>
             )}
+          </details>
+        </div>
+        <hr />
+        <div>
+          <h3>Insurance Forms</h3>
+          <details>
+            <summary>How do I get insurance?</summary>
+            <p>
+              Once you have reached 3 months of employment, you can opt-in to
+              receive health insurance. Our health insurance is provided by{" "}
+              <a
+                href="https://www.uhc.com/member-resources/new-member-checklist"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                United Healthcare
+              </a>
+              . Use the link below to download a copy of the form. The ability
+              to directly edit the file before saving it (as you can do with the
+              w-4 form) hasn't been setup yet. It will be available soon.
+            </p>
+            {data.allFile.edges.map((file, index) => {
+              return (
+                <div key={`pdf-${index}`}>
+                  <a
+                    href={file.node.publicURL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                  >
+                    {file.node.name}
+                  </a>
+                </div>
+              )
+            })}
           </details>
         </div>
       </FaqContainer>
