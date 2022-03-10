@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
 import { getFirestore, doc, getDoc } from "firebase/firestore"
-import Seo from "../components/seo"
+import { GatsbySeo } from "gatsby-plugin-next-seo"
 import { FirebaseDashboardProfile } from "../components/FirebaseDashboardProfile"
 import { ReactTable } from "../components/ReactTable"
 import { EditEmployee } from "../components/EditEmployee"
@@ -76,13 +76,12 @@ const DashboardPage = () => {
     }
     return (
       <DashboardPageContainer>
-        <Seo
-          title={
-            details && details.name
-              ? `${details.name}'s Dashboard`
-              : `Dashboard`
-          }
+        <GatsbySeo
+          nofollow={true}
+          noindex={true}
+          title={`${details.name}'s Dashboard | vwLogin`}
         />
+
         <EmployeeViewContainer>
           <div className="button-container">
             <button
@@ -164,7 +163,7 @@ const DashboardPage = () => {
   }
   return (
     <DashboardPageErrorContainer>
-      <Seo title="Dashboard" />
+      <GatsbySeo nofollow={true} noindex={true} title="Dashboard | vwLogin" />
       <Notification message="You need Admin Rights for this." />
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Svg

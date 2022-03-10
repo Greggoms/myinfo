@@ -9,6 +9,7 @@ module.exports = {
     author: `Greggoms`,
   },
   plugins: [
+    `gatsby-plugin-next-seo`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-smoothscroll`,
     {

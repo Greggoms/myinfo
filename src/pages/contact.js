@@ -1,12 +1,12 @@
 import React from "react"
-import Seo from "../components/seo"
+import { GatsbySeo } from "gatsby-plugin-next-seo"
 import { ContactContainer } from "../elements"
 import { ContactForm } from "../components/ContactForm"
 
 const contact = () => {
   return (
     <>
-      <Seo title="Contact" />
+      <GatsbySeo nofollow={true} noindex={true} title="Contact | vwLogin" />
       <ContactContainer>
         <ContactForm />
       </ContactContainer>

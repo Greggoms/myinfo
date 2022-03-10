@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react"
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
+import { GatsbySeo } from "gatsby-plugin-next-seo"
 import { FirebaseProfile } from "../components/FirebaseProfile"
 import { Notification } from "../components/Notification"
 import { ProfilePageErrorContainer } from "../elements"
-import Seo from "../components/seo"
 import Svg from "../svg/lock.svg"
 
 const ProfilePage = () => {
@@ -29,11 +29,20 @@ const ProfilePage = () => {
   }, [user])
 
   if (user) {
-    return <FirebaseProfile />
+    return (
+      <>
+        <GatsbySeo
+          nofollow={true}
+          noindex={true}
+          title={`${user.displayName}'s Profile | vwLogin`}
+        />
+        <FirebaseProfile />
+      </>
+    )
   } else {
     return (
       <>
-        <Seo title="Profile" />
+        <GatsbySeo nofollow={true} noindex={true} title={`Profile | vwLogin`} />
         <ProfilePageErrorContainer>
           <Notification message="You must be logged in to view your profile." />
           <div style={{ display: "flex", justifyContent: "center" }}>

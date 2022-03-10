@@ -7,7 +7,6 @@ import {
   differenceInCalendarDays,
   differenceInCalendarMonths,
 } from "date-fns"
-import Seo from "../components/seo"
 import {
   ProfileContainer,
   DatabaseProfileContainer,
@@ -132,13 +131,6 @@ export const FirebaseProfile = () => {
   if (details && hasDocument) {
     return (
       <>
-        <Seo
-          title={
-            user && user.displayName
-              ? `${user.displayName}'s Profile`
-              : `Profile`
-          }
-        />
         <ProfileContainer>
           <>
             <button

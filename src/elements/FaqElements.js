@@ -9,7 +9,20 @@ export const FaqContainer = styled.div`
   display: flex;
   flex-direction: column;
   grid-gap: 30px;
+
+  margin: 0 auto;
+  max-width: 825px;
   line-height: 22px;
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 60px;
+  }
+
+  h4 {
+    font-size: 18pt;
+  }
 
   details {
     border: 1px solid #aaa;

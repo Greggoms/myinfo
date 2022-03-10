@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
 import { Link } from "gatsby"
-import Seo from "../components/seo"
+import { GatsbySeo } from "gatsby-plugin-next-seo"
 import { IndexPageContainer, ButtonLinkContainer } from "../elements"
 
 const IndexPage = () => {
@@ -32,7 +32,7 @@ const IndexPage = () => {
 
   return (
     <IndexPageContainer>
-      <Seo title="Home" />
+      <GatsbySeo nofollow={true} noindex={true} title="Home | vwLogin" />
       <div>
         <h1>Hey {user ? firstName : "There"}!</h1>
         {user ? (
