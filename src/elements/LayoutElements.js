@@ -6,11 +6,10 @@ export const MainContainer = styled.main`
 
   #gatsby-focus-wrapper {
     display: grid;
-    grid-template-columns: 10vw repeat(6, 1fr) 10vw;
+    grid-template-columns: 5vw repeat(6, 1fr) 5vw;
 
     @media ${props => props.theme.breakpoints.mobile} {
       grid-template-columns: 10px 1fr 10px;
-      }
     }
   }
 `

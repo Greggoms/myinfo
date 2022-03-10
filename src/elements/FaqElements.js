@@ -20,6 +20,17 @@ export const FaqContainer = styled.div`
     grid-gap: 60px;
   }
 
+  h3 {
+    margin-bottom: 10px;
+  }
+
+  .w4 {
+    margin-bottom: 10px;
+    h3 {
+      margin-bottom: 0;
+    }
+  }
+
   h4 {
     font-size: 18pt;
   }
@@ -43,6 +54,9 @@ export const FaqContainer = styled.div`
     }
   }
 
+  details:not(:last-child) {
+    margin-bottom: 5px;
+  }
   summary {
     font-weight: bold;
     margin: -0.5em -0.5em 0;
@@ -58,8 +72,23 @@ export const FaqContainer = styled.div`
     margin-bottom: 0.5em;
   }
 
+  blockquote {
+    border-top: 2px solid ${props => props.theme.grayscale.light1};
+    border-right: 2px solid ${props => props.theme.grayscale.light1};
+    border-left: 2px solid ${props => props.theme.grayscale.light1};
+    width: max-content;
+    padding: 0 5px;
+  }
+
   .or {
     margin: 5px 0 5px 10px !important;
+  }
+
+  hr {
+    border: none;
+    border-top: 3px solid ${props => props.theme.colors.link};
+    width: 50%;
+    margin: 0;
   }
 
   a:visited {
