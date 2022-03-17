@@ -25,8 +25,10 @@ export const ProfileDetails = props => {
     )
     if (position === "Associate") {
       return result >= 3
-    } else {
+    } else if (position === "Assist Mngr" || position === "Manager") {
       return result >= 6
+    } else {
+      return null
     }
   }
 
@@ -155,11 +157,10 @@ export const ProfileDetails = props => {
         </div>
       ) : null}
     </DashboardProfileContainer>
-  ) : props.lastRaise &&
-    handleIsEligible(
-      props.lastRaise[0],
-      props.lastRaise[1],
-      props.lastRaise[2],
+  ) : handleIsEligible(
+      props.lastRaise ? props.lastRaise[0] : props.hireDate[0],
+      props.lastRaise ? props.lastRaise[1] : props.hireDate[1],
+      props.lastRaise ? props.lastRaise[2] : props.hireDate[2],
       props.position
     ) ? (
     <DashboardProfileContainer>
