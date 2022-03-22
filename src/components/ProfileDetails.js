@@ -18,17 +18,28 @@ export const ProfileDetails = props => {
     return result
   }
 
-  const handleIsEligible = (year, month, day, position) => {
-    const result = differenceInCalendarMonths(
-      new Date(currentYear, currentMonth, currentDay),
-      new Date(year, month, day)
-    )
-    if (position === "Associate") {
-      return result >= 3
-    } else if (position === "Assist Mngr" || position === "Manager") {
-      return result >= 6
+  const handleIsEligible = () => {
+    if (props.lastRaise || props.hireDate) {
+      const result = differenceInCalendarMonths(
+        new Date(currentYear, currentMonth, currentDay),
+        new Date(
+          props.lastRaise ? props.lastRaise[0] : props.hireDate[0],
+          props.lastRaise ? props.lastRaise[1] : props.hireDate[1],
+          props.lastRaise ? props.lastRaise[2] : props.hireDate[2]
+        )
+      )
+      if (props.position === "Associate") {
+        return result >= 3
+      } else if (
+        props.position === "Assist Mngr" ||
+        props.position === "Manager"
+      ) {
+        return result >= 6
+      } else {
+        return null
+      }
     } else {
-      return null
+      console.log("Someone is missing their Hire Date!")
     }
   }
 
@@ -46,6 +57,7 @@ export const ProfileDetails = props => {
     }
   }
 
+  // Dashboard -> Cards
   return props.layout === "profile" ? (
     <DashboardProfileContainer>
       <div className="basic-info">
@@ -157,12 +169,8 @@ export const ProfileDetails = props => {
         </div>
       ) : null}
     </DashboardProfileContainer>
-  ) : handleIsEligible(
-      props.lastRaise ? props.lastRaise[0] : props.hireDate[0],
-      props.lastRaise ? props.lastRaise[1] : props.hireDate[1],
-      props.lastRaise ? props.lastRaise[2] : props.hireDate[2],
-      props.position
-    ) ? (
+  ) : // Dashboard -> Pay Raises
+  handleIsEligible() ? (
     <DashboardProfileContainer>
       <div className="basic-info">
         <h2>{props.name}</h2>

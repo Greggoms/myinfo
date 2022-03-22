@@ -19,9 +19,9 @@ const DashboardPage = () => {
   const [user, setUser] = useState()
   const [uid, setUid] = useState("")
   const [details, setDetails] = useState([])
-  const [tableIsActive, setTableIsActive] = useState(false)
+  const [tableIsActive, setTableIsActive] = useState(true)
   const [profileIsActive, setProfileIsActive] = useState(false)
-  const [payRaiseIsActive, setPayRaiseIsActive] = useState(true)
+  const [payRaiseIsActive, setPayRaiseIsActive] = useState(false)
   const [editEmployeeIsActive, setEditEmployeeIsActive] = useState(false)
   const db = getFirestore()
 
@@ -81,7 +81,6 @@ const DashboardPage = () => {
           noindex={true}
           title={`${details.name}'s Dashboard | vwLogin`}
         />
-
         <EmployeeViewContainer>
           <div className="button-container">
             <button
