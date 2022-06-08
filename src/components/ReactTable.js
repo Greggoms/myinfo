@@ -1,65 +1,12 @@
-import React, { useState, useEffect, useMemo } from "react"
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  query,
-  orderBy,
-} from "firebase/firestore"
+import React, { useMemo } from "react"
+import { useSelector } from "react-redux"
 import { useSortBy, useTable } from "react-table"
-import { differenceInCalendarDays, differenceInCalendarMonths } from "date-fns"
-import { TableContainer } from "../elements"
+
+import { remainingPTO, daysUntil10Hrs, monthsWorked } from "../data/dateHelpers"
+import { TableContainer } from "../css"
 
 export const ReactTable = () => {
-  const [users, setUsers] = useState([])
-  const db = getFirestore()
-
-  useEffect(() => {
-    try {
-      async function getUsers() {
-        const q = query(collection(db, "users"), orderBy("name"))
-
-        const querySnapshot = await getDocs(q)
-        setUsers(querySnapshot.docs.map(res => res.data()))
-      }
-      getUsers()
-    } catch (err) {
-      console.log("ERROR: ", err)
-    }
-    // eslint-disable-next-line
-  }, [])
-
-  const currentYear = new Date().getFullYear()
-  const currentMonth = parseInt(new Date().getMonth() + 1)
-  const currentDay = new Date().getDate()
-
-  const remainingPTO = (hireYear, hireMonth, hireDay, hoursUsed, pending) => {
-    const result = differenceInCalendarDays(
-      new Date(currentYear, currentMonth, currentDay),
-      new Date(hireYear, hireMonth, hireDay)
-    )
-    return pending
-      ? `${Math.floor(result / 91) * 10 - hoursUsed} - (${pending
-          .map(({ hours }) => hours)
-          .join(` + `)} Pending)`
-      : Math.floor(result / 91) * 10 - hoursUsed
-  }
-
-  const daysUntil10Hrs = (hireYear, hireMonth, hireDay) => {
-    const result = differenceInCalendarDays(
-      new Date(currentYear, currentMonth, currentDay),
-      new Date(hireYear, hireMonth, hireDay)
-    )
-    return 91 - (result % 91)
-  }
-
-  const monthsWorked = (year, month, day) => {
-    const result = differenceInCalendarMonths(
-      new Date(currentYear, currentMonth, currentDay),
-      new Date(year, month, day)
-    )
-    return result
-  }
+  const users = useSelector(state => state.users.value)
 
   const data = useMemo(
     () =>
@@ -97,19 +44,12 @@ export const ReactTable = () => {
               ? `${hireDate[0]}/${hireDate[1]}/${hireDate[2]}`
               : `No Hire Date`,
             col8: insurance
-              ? "Yes"
+              ? "Opt-IN"
               : hireDate
               ? monthsWorked(hireDate[0], hireDate[1], hireDate[2]) < 3
                 ? "Not Eligible"
-                : "No"
+                : "Opt-OUT"
               : "No Hire Date",
-            // col8: insurance
-            //   ? "Yes"
-            //   : hireDate
-            //   ? monthsWorked(hireDate[0], hireDate[1], hireDate[2]) < 3
-            //     ? "Not Eligible"
-            //     : "No Hire Date"
-            //   : "No",
             col9: location ? location : "No Location",
           }
         }

@@ -1,182 +1,68 @@
-import React, { useState, useEffect } from "react"
-import firebase from "firebase/compat/app"
-import "firebase/compat/auth"
-import { Link } from "gatsby"
+import React from "react"
 import { GatsbySeo } from "gatsby-plugin-next-seo"
-import { IndexPageContainer, ButtonLinkContainer } from "../elements"
+import { IndexPageContainer } from "../css"
 
 const IndexPage = () => {
-  const [user, setUser] = useState([])
-  const [firstName, setFirstName] = useState("")
-
-  useEffect(() => {
-    try {
-      let isMounted = true
-      firebase.auth().onAuthStateChanged(user => {
-        if (user && isMounted) {
-          const str = user.displayName.split(" ")
-          setUser(user)
-          setFirstName(str[0])
-        } else {
-          setUser(null)
-          setFirstName(null)
-        }
-      })
-      return () => {
-        isMounted = false
-      }
-    } catch (err) {
-      console.log("ERROR: ", err)
-    }
-  }, [user])
-
   return (
-    <IndexPageContainer>
-      <GatsbySeo nofollow={true} noindex={true} title="Home | vwLogin" />
-      <div>
-        <h1>Hey {user ? firstName : "There"}!</h1>
-        {user ? (
-          <section className="welcome">
-            <h2>
-              Now that you're here, check out your{" "}
-              <ButtonLinkContainer>
-                <Link to="/profile">profile</Link>
-              </ButtonLinkContainer>
-              !
-            </h2>
-            {user.email && (
-              <>
-                <h3>Things to notify me about</h3>
-                <p>
-                  Reach me by sending an email to payroll@vhdistro.net. DM me on
-                  GroupMe for other inquiries or for something that needs
-                  attention ASAP.
-                </p>
-                <article>
-                  <div>
-                    <h4>This Website</h4>
-                    <hr />
-                    <ul>
-                      <li className="point">PTO Requests</li>
-                      <ul>
-                        <li>
-                          Send an email with the date(s) and hour amount you'd
-                          like to use. If I don't recieve an email, you won't
-                          get your PTO usage.
-                        </li>
-                        <li>
-                          "Hey Greggoms I'd like to use 13 hours from 4/20/69 to
-                          4/21/69"
-                        </li>
-                        <li>
-                          You should assume I know nothing about your on/off
-                          days, length of shifts, or sudden scheduling changes,
-                          because I won't.
-                        </li>
-                      </ul>
-                      <li className="point">Promotions</li>
-                      <ul>
-                        <li>
-                          If you are promoted, give me the date of your
-                          promotion
-                        </li>
-                      </ul>
-                      <li className="point">Employee Termination</li>
-                      <ul>
-                        <li>
-                          So I can remove them from{" "}
-                          <a
-                            href="https://firebase.google.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Firebase
-                          </a>
-                        </li>
-                      </ul>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4>Payroll</h4>
-                    <hr />
-                    <ul>
-                      <li className="point">Time Clock Modifications</li>
-                      <ul>
-                        <li>
-                          These should be handled by your manager. See{" "}
-                          <span>PTO Requests</span> subpoint #3.
-                        </li>
-                        <li>
-                          If you'd like to be extra sure, or if you're a
-                          manager, let me know of any changes.
-                        </li>
-                      </ul>
-                      <li className="point">Insurance Opt-In/Out</li>
-                      <ul>
-                        <li>
-                          If you would like insurance once it becomes available
-                          (3 months from hire date).
-                        </li>
-                        <li>
-                          If you would like to remove yourself from insurance.
-                        </li>
-                      </ul>
-                      <li className="point">Regarding New Hires</li>
-                      <ul>
-                        <li>I will notice them during payroll.</li>
-                        <li>
-                          If they'd like to get paid, have them visit the{" "}
-                          <Link to="/faq">FAQ</Link> page to get started.
-                        </li>
-                      </ul>
-                    </ul>
-                  </div>
-                </article>
-              </>
-            )}
-          </section>
-        ) : (
-          <div className="intro">
-            <p>
-              This is the place where you can view some of your employee
-              information.
-            </p>
-            <h4>Updates!</h4>
-            <ul>
-              <li>
-                Introducing{" "}
-                <a
-                  href="https://firebase.google.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Google Firebase
-                </a>
-                !
-              </li>
+    <>
+      <GatsbySeo nofollow={true} noindex={true} title="Home | AbbyHQ" />
+      <IndexPageContainer className="page-container">
+        <div className="page-content">
+          <h2>New and Improved Employee Hub</h2>
+          <div className="ctas">
+            <div className="cta">
+              <h2>Access Your Records</h2>
               <ul>
-                <li>
-                  Email doesn't matter anymore! You can now signup/login with
-                  any email you want. No need to keep me updated.
-                </li>
-                <li>
-                  Your profile will have a form you should fill out. Watch the
-                  magic happen!
-                </li>
-                <li>
-                  Once you sign up, I'll fill in your PTO <em>usage</em>{" "}
-                  information (if you have any) on the database end.
-                </li>
+                <li>PTO Hours</li>
+                <li>PTO Requests</li>
+                <li>Insurance Status</li>
+                <li>Hire Date</li>
               </ul>
-            </ul>
-            <h4 style={{ marginTop: "50px" }}>Coming Next</h4>
-            <ul>
-              <li>Let me know if there are any features you'd like to see!</li>
-            </ul>
+            </div>
+            <div className="cta">
+              <h2>Find Documents</h2>
+              <ul>
+                <li>Employee Handbooks</li>
+                <li>Direct Deposit</li>
+                <li>W-4</li>
+                <li>Insurance Opt-In Form</li>
+              </ul>
+            </div>
+            <div className="cta">
+              <h2>Stay Informed</h2>
+              <ul>
+                <li>Contact Emails</li>
+                <li>Company Policies</li>
+                <li>Product Adjustments</li>
+              </ul>
+            </div>
+            <div className="cta">
+              <h2>Browse Resources</h2>
+              <ul>
+                <li>IRS Tax Filing</li>
+              </ul>
+            </div>
+            <h2
+              style={{
+                textAlign: "center",
+                gridColumn: "1/-1",
+                margin: "20px auto 5px",
+              }}
+            >
+              Possible Future Features
+            </h2>
+            <div className="cta cta-special">
+              <h2>Take Control</h2>
+              <ul>
+                <li>Request PTO from here!</li>
+                <li>Send your Emails from here!</li>
+                <li>Adjust your profile</li>
+              </ul>
+            </div>
           </div>
-        )}
-      </div>
-    </IndexPageContainer>
+        </div>
+      </IndexPageContainer>
+    </>
   )
 }
 

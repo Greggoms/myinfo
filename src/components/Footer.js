@@ -1,14 +1,14 @@
 import React from "react"
-import { FooterContainer, FooterContents } from "../elements"
+import { FooterContainer } from "../css"
 
 export const Footer = () => {
   return (
-    <FooterContainer>
-      <FooterContents>
+    <FooterContainer className="page-container">
+      <div className="page-content footer-content">
         Built with
         {` `}
         <a href="https://www.gatsbyjs.com">Gatsby</a> by Greggoms
-      </FooterContents>
+      </div>
     </FooterContainer>
   )
 }

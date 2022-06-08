@@ -1,181 +1,102 @@
-import React, { useState, useEffect } from "react"
-import firebase from "firebase/compat/app"
-import "firebase/compat/auth"
-import { getFirestore, doc, getDoc } from "firebase/firestore"
+import React, { useState } from "react"
+import { useSelector } from "react-redux"
+import { selectUserFireDoc } from "../app/features/userSlice"
 import { GatsbySeo } from "gatsby-plugin-next-seo"
-import { FirebaseDashboardProfile } from "../components/FirebaseDashboardProfile"
+
+import { UserListing } from "../components/admin/UserListing"
 import { ReactTable } from "../components/ReactTable"
-import { EditEmployee } from "../components/EditEmployee"
 import { Notification } from "../components/Notification"
-import {
-  DashboardPageContainer,
-  DashboardPageErrorContainer,
-  EmployeeViewContainer,
-  DashboardProfilesContainer,
-} from "../elements"
 import Svg from "../svg/lock.svg"
+import { DashboardButtonsContainer } from "../css"
 
 const DashboardPage = () => {
-  const [user, setUser] = useState()
-  const [uid, setUid] = useState("")
-  const [details, setDetails] = useState([])
-  const [tableIsActive, setTableIsActive] = useState(true)
-  const [profileIsActive, setProfileIsActive] = useState(false)
-  const [payRaiseIsActive, setPayRaiseIsActive] = useState(false)
-  const [editEmployeeIsActive, setEditEmployeeIsActive] = useState(false)
-  const db = getFirestore()
+  const userFireDoc = useSelector(selectUserFireDoc)
 
-  useEffect(() => {
-    try {
-      let isMounted = true
-      firebase.auth().onAuthStateChanged(user => {
-        if (user && isMounted) {
-          setUser(user)
-          setUid(user.uid)
-        } else {
-          setUser(null)
-        }
-      })
-      return () => {
-        isMounted = false
-      }
-    } catch (err) {
-      console.log("ERROR: ", err)
-    }
-  }, [user])
+  const [panelView, setPanelView] = useState(true)
+  const [tableView, setTableView] = useState(false)
 
-  useEffect(() => {
-    try {
-      const docRef = doc(db, `users/${uid}`)
-      async function getUserDetails() {
-        const docSnap = await getDoc(docRef)
-        setDetails(docSnap.data())
-      }
-      getUserDetails()
-    } catch {
-      console.log(
-        "Re-running useEffect to fill a previously undefined variable"
-      )
+  const handleLayoutSelection = e => {
+    if (e.target.value === "panels") {
+      setPanelView(true)
+      setTableView(false)
+    } else if (e.target.value === "table") {
+      setTableView(true)
+      setPanelView(false)
     }
-    // eslint-disable-next-line
-  }, [uid])
+  }
 
-  // eslint-disable-next-line
-  if (user && details.role === "admin") {
-    const styles = {
-      active: {
-        gridRow: 1,
-        gridColumn: 1,
-        transform: "scale(1)",
-      },
-      inactive: {
-        gridRow: 2,
-        gridColumn: 2,
-        transform: "scale(0)",
-      },
-    }
+  const buttonStyles = {
+    active: {
+      background: "inherit",
+      border: `2px solid #00c5d6`,
+      color: "#F2F2F2",
+    },
+    inactive: {},
+  }
+
+  if (userFireDoc && userFireDoc.role === "admin") {
     return (
-      <DashboardPageContainer>
+      <>
         <GatsbySeo
           nofollow={true}
           noindex={true}
-          title={`${details.name}'s Dashboard | vwLogin`}
+          title={`${userFireDoc.name}'s Dashboard | AbbyHQ`}
         />
-        <EmployeeViewContainer>
-          <div className="button-container">
-            <button
-              onClick={() => {
-                setTableIsActive(true)
-                setProfileIsActive(false)
-                setPayRaiseIsActive(false)
-                setEditEmployeeIsActive(false)
-              }}
-              style={
-                tableIsActive ? { color: "#F2F2F2" } : { color: "#595959" }
-              }
-            >
-              Table
-            </button>
-            <button
-              onClick={() => {
-                setProfileIsActive(true)
-                setTableIsActive(false)
-                setPayRaiseIsActive(false)
-                setEditEmployeeIsActive(false)
-              }}
-              style={
-                profileIsActive ? { color: "#F2F2F2" } : { color: "#595959" }
-              }
-            >
-              Cards
-            </button>
-            <button
-              onClick={() => {
-                setPayRaiseIsActive(true)
-                setProfileIsActive(false)
-                setTableIsActive(false)
-                setEditEmployeeIsActive(false)
-              }}
-              style={
-                payRaiseIsActive ? { color: "#F2F2F2" } : { color: "#595959" }
-              }
-            >
-              Pay Raises
-            </button>
-            <button
-              onClick={() => {
-                setPayRaiseIsActive(false)
-                setProfileIsActive(false)
-                setTableIsActive(false)
-                setEditEmployeeIsActive(true)
-              }}
-              style={
-                editEmployeeIsActive
-                  ? { color: "#F2F2F2" }
-                  : { color: "#595959" }
-              }
-            >
-              Edit Employee
-            </button>
+        <div className="page-container">
+          <div className="page-content">
+            <DashboardButtonsContainer>
+              <h3>View</h3>
+              <div className="views">
+                <button
+                  type="button"
+                  onClick={handleLayoutSelection}
+                  value="panels"
+                  style={
+                    panelView ? buttonStyles.active : buttonStyles.inactive
+                  }
+                >
+                  Panels
+                </button>
+                <button
+                  onClick={handleLayoutSelection}
+                  value="table"
+                  type="button"
+                  style={
+                    tableView ? buttonStyles.active : buttonStyles.inactive
+                  }
+                >
+                  Table
+                </button>
+              </div>
+            </DashboardButtonsContainer>
+            {panelView && <UserListing />}
+            {tableView && <ReactTable />}
           </div>
-          <div className="selected-component">
-            <div style={tableIsActive ? styles.active : styles.inactive}>
-              <ReactTable />
-            </div>
-            <div style={profileIsActive ? styles.active : styles.inactive}>
-              <DashboardProfilesContainer>
-                <FirebaseDashboardProfile layout="profile" />
-              </DashboardProfilesContainer>
-            </div>
-            <div style={payRaiseIsActive ? styles.active : styles.inactive}>
-              <DashboardProfilesContainer>
-                <FirebaseDashboardProfile layout="payraise" />
-              </DashboardProfilesContainer>
-            </div>
-            <div style={editEmployeeIsActive ? styles.active : styles.inactive}>
-              <EditEmployee />
+        </div>
+      </>
+    )
+  } else {
+    return (
+      <>
+        <GatsbySeo nofollow={true} noindex={true} title="Dashboard | AbbyHQ" />
+        <div className="page-container">
+          <div className="page-content">
+            <Notification message="You need Admin Rights for this." />
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Svg
+                style={{
+                  width: "100%",
+                  maxWidth: "25rem",
+                  height: "100%",
+                  opacity: 0.5,
+                }}
+              />
             </div>
           </div>
-        </EmployeeViewContainer>
-      </DashboardPageContainer>
+        </div>
+      </>
     )
   }
-  return (
-    <DashboardPageErrorContainer>
-      <GatsbySeo nofollow={true} noindex={true} title="Dashboard | vwLogin" />
-      <Notification message="You need Admin Rights for this." />
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Svg
-          style={{
-            width: "100%",
-            maxWidth: "25rem",
-            height: "100%",
-            opacity: 0.5,
-          }}
-        />
-      </div>
-    </DashboardPageErrorContainer>
-  )
 }
 
 export default DashboardPage

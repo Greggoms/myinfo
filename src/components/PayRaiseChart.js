@@ -1,6 +1,6 @@
 import React from "react"
 import { PayRaiseTable } from "../services/PayRaiseGuide"
-import { PayRaiseChartContainer } from "../elements"
+import { PayRaiseChartContainer } from "../css"
 import "../components/animations.css"
 
 export const PayRaiseChart = props => {

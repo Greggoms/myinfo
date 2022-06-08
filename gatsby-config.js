@@ -4,14 +4,12 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `vwLogin`,
+    title: `AbbyHQ`,
     description: `Come here to see your employee stats. Made with some cool technology.`,
     author: `Greggoms`,
   },
   plugins: [
     `gatsby-plugin-next-seo`,
-    `gatsby-plugin-styled-components`,
-    `gatsby-plugin-smoothscroll`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -27,7 +25,6 @@ module.exports = {
         },
       },
     },
-    `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
