@@ -126,15 +126,15 @@ export const ModifyUserForm = props => {
             )}
           </>
         ))
-        async function updateUser() {
-          const userRef = doc(db, "users", id)
-          await updateDoc(userRef, data, {
-            hireDate: format(hireDateValue, `P`),
-            promotionDate: format(promotionDateValue, `P`),
-            lastRaise: format(raiseDateValue, `P`),
-          })
-        }
-        updateUser()
+        // async function updateUser() {
+        //   const userRef = doc(db, "users", id)
+        //   await updateDoc(userRef, data, {
+        //     hireDate: format(hireDateValue, `P`),
+        //     promotionDate: format(promotionDateValue, `P`),
+        //     lastRaise: format(raiseDateValue, `P`),
+        //   })
+        // }
+        // updateUser()
       }
     } catch (err) {
       toastifyFailed(err.message)

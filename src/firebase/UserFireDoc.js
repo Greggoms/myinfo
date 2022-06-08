@@ -29,12 +29,19 @@ export const UserFireDoc = () => {
   const user = useSelector(selectUser)
   const userFireDoc = useSelector(selectUserFireDoc)
   const [splitHireDate, setSplitHireDate] = useState("")
+  const [splitPromotionDate, setSplitPromotionDate] = useState("")
+  const [splitRaiseDate, setSplitRaiseDate] = useState("")
 
   useEffect(() => {
     if (userFireDoc && userFireDoc.hireDate) {
       setSplitHireDate(userFireDoc.hireDate.split("/"))
     }
-    console.log(splitHireDate)
+    if (userFireDoc && userFireDoc.promotionDate) {
+      setSplitPromotionDate(userFireDoc.promotionDate.split("/"))
+    }
+    if (userFireDoc && userFireDoc.lastRaise) {
+      setSplitRaiseDate(userFireDoc.lastRaise.split("/"))
+    }
     // eslint-disable-next-line
   }, [userFireDoc])
 
@@ -145,7 +152,7 @@ export const UserFireDoc = () => {
               )}
             </div>
             <div className="info info-badge">
-              {userFireDoc.hireDate ? (
+              {splitHireDate !== "" ? (
                 <>
                   <h2>
                     +10 hours in{" "}
@@ -158,7 +165,7 @@ export const UserFireDoc = () => {
                   </h2>
                   <p>on</p>
                   <p>
-                    {/* {format(
+                    {format(
                       new Date(
                         dateFor10Hrs(
                           splitHireDate[2],
@@ -167,7 +174,7 @@ export const UserFireDoc = () => {
                         )
                       ),
                       "PPPP"
-                    )} */}
+                    )}
                   </p>
                 </>
               ) : (
@@ -181,16 +188,16 @@ export const UserFireDoc = () => {
               <div className="spacer">
                 <div>
                   <span>Hire Date:</span>
-                  {userFireDoc.hireDate ? (
+                  {splitHireDate !== "" ? (
                     <p>
-                      {/* {format(
+                      {format(
                         new Date(
                           splitHireDate[2],
                           splitHireDate[0],
                           splitHireDate[1]
                         ),
                         "PPPP"
-                      )} */}
+                      )}
                       {"  "}(
                       {monthsWorked(
                         splitHireDate[2],
@@ -206,21 +213,21 @@ export const UserFireDoc = () => {
 
                 <div>
                   <span>Last Raise:</span>
-                  {userFireDoc.lastRaise ? (
+                  {splitRaiseDate !== "" ? (
                     <p>
-                      {/* {format(
+                      {format(
                         new Date(
-                          userFireDoc.lastRaise[0],
-                          userFireDoc.lastRaise[1],
-                          userFireDoc.lastRaise[2]
+                          splitRaiseDate[2],
+                          splitRaiseDate[0],
+                          splitRaiseDate[1]
                         ),
                         "PPPP"
-                      )}{" "} */}
+                      )}{" "}
                       (
                       {monthsWorked(
-                        userFireDoc.lastRaise[0],
-                        userFireDoc.lastRaise[1],
-                        userFireDoc.lastRaise[2]
+                        splitRaiseDate[2],
+                        splitRaiseDate[0],
+                        splitRaiseDate[1]
                       )}{" "}
                       months ago)
                     </p>
@@ -230,21 +237,21 @@ export const UserFireDoc = () => {
                 </div>
                 <div>
                   <span>Promotion Date:</span>
-                  {userFireDoc.promotionDate ? (
+                  {splitPromotionDate !== "" ? (
                     <p>
-                      {/* {format(
+                      {format(
                         new Date(
-                          userFireDoc.promotionDate[0],
-                          userFireDoc.promotionDate[1],
-                          userFireDoc.promotionDate[2]
+                          splitPromotionDate[2],
+                          splitPromotionDate[0],
+                          splitPromotionDate[1]
                         ),
                         "PPPP"
-                      )}{" "} */}
+                      )}{" "}
                       (
                       {monthsWorked(
-                        userFireDoc.promotionDate[0],
-                        userFireDoc.promotionDate[1],
-                        userFireDoc.promotionDate[2]
+                        splitPromotionDate[2],
+                        splitPromotionDate[0],
+                        splitPromotionDate[1]
                       )}{" "}
                       months ago)
                     </p>
