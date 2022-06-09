@@ -8,7 +8,7 @@ export const IndexPageContainer = styled.div`
 
   .ctas {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     justify-items: center;
     gap: 20px;
 

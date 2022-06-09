@@ -1,14 +1,9 @@
 import styled from "styled-components"
 
 export const DetailedUsersContainer = styled.section`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  align-items: flex-start;
-  gap: 30px;
-
-  @media ${props => props.theme.breakpoints.mobile} {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
   .user {
     display: flex;
@@ -20,19 +15,19 @@ export const DetailedUsersContainer = styled.section`
 
     &-general {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 10px;
+
       text-align: center;
     }
 
     &-employment {
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
+      flex-direction: column;
+      gap: 5px;
 
       &-dates {
+        align-self: center;
         display: flex;
         flex-direction: column;
         gap: 15px;
@@ -62,7 +57,6 @@ export const DetailedUsersContainer = styled.section`
       display: flex;
       flex-direction: column;
       gap: 10px;
-      /* margin: 20px 0; */
 
       h4,
       h5 {
@@ -126,22 +120,24 @@ export const DetailedUsersContainer = styled.section`
 export const MinimalDetailsContainer = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 
   .user {
-    display: grid;
-    grid-template-columns: 225px repeat(auto-fit, minmax(100px, 1fr));
-    grid-template-rows: 1fr;
-    align-items: center;
-
-    gap: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 
     background: ${props => props.theme.grayscale.dark3};
     padding: 10px;
+
+    span {
+      font-size: 10pt;
+    }
   }
 
   .action-buttons {
-    justify-self: flex-end;
+    display: flex;
+    justify-content: space-around;
   }
 
   .request {

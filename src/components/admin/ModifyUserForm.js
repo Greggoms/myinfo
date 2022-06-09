@@ -16,9 +16,7 @@ export const ModifyUserForm = props => {
   const {
     id,
     name,
-    accepted,
     hireDate,
-    hoursUsed,
     insurance,
     lastRaise,
     location,
@@ -101,8 +99,8 @@ export const ModifyUserForm = props => {
               </p>
             )}
             <p>
-              Insurance: <s>{insurance ? `Opt-IN` : `Opt-OUT`}</s> to{" "}
-              {data.insurance ? `Opt-IN` : `Opt-OUT`}
+              Insurance: <s>{insurance === "true" ? `Opt-IN` : `Opt-OUT`}</s> to{" "}
+              {data.insurance === "true" ? `Opt-IN` : `Opt-OUT`}
             </p>
             {hireDateValue && (
               <p>
@@ -126,15 +124,16 @@ export const ModifyUserForm = props => {
             )}
           </>
         ))
-        // async function updateUser() {
-        //   const userRef = doc(db, "users", id)
-        //   await updateDoc(userRef, data, {
-        //     hireDate: format(hireDateValue, `P`),
-        //     promotionDate: format(promotionDateValue, `P`),
-        //     lastRaise: format(raiseDateValue, `P`),
-        //   })
-        // }
-        // updateUser()
+        async function updateUser() {
+          const userRef = doc(db, "users", id)
+          await updateDoc(userRef, {
+            ...data,
+            hireDate: format(hireDateValue, `P`),
+            promotionDate: format(promotionDateValue, `P`),
+            lastRaise: format(raiseDateValue, `P`),
+          })
+        }
+        updateUser()
       }
     } catch (err) {
       toastifyFailed(err.message)
@@ -150,35 +149,10 @@ export const ModifyUserForm = props => {
       {modifyUser && (
         <ModifyUserContainer>
           <button className="modify-close" onClick={() => setModifyUser(false)}>
-            Close
+            Cancel
           </button>
-          <div className="modify-current">
-            <h2>Current</h2>
-            <div className="list">
-              <label>
-                <span>Accepted PTO:</span>
-                <p>
-                  {accepted
-                    ? `${accepted.length} accepted requests`
-                    : "No accepted requests"}
-                </p>
-              </label>
-              <label>
-                <span>Pending PTO:</span>
-                <p>
-                  {pending
-                    ? `${pending.length} pending requests`
-                    : "No pending requests"}
-                </p>
-              </label>
-              <label>
-                <span>Hours Used:</span>
-                <p>{hoursUsed} hours used</p>
-              </label>
-            </div>
-          </div>
           <form className="modify-form" onSubmit={handleSubmit(onSubmit)}>
-            <h2>Updated</h2>
+            <h2>Updating {name}...</h2>
             <div className="label">
               <span>Full Name:</span>
               <input
@@ -242,7 +216,7 @@ export const ModifyUserForm = props => {
             <div className="label">
               <span>Insurance</span>
               <select {...register("insurance")}>
-                {insurance ? (
+                {insurance === "true" ? (
                   <option value={true}>(current): Opt-IN</option>
                 ) : (
                   <option value={false}>(current): Opt-OUT</option>

@@ -1,14 +1,12 @@
 import styled from "styled-components"
 
 export const ModifyUserContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: min-content auto;
-  grid-template-areas: "close close" "current form";
-  row-gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 
   position: fixed;
-  top: 100px;
+  top: 0;
   left: 0;
   overflow: scroll;
 
@@ -18,20 +16,13 @@ export const ModifyUserContainer = styled.div`
   padding: 20px;
 
   .modify-close {
-    grid-area: close;
-    justify-self: center;
-    width: 150px;
     height: 30px;
-  }
-  .modify-current {
-    grid-area: current;
-  }
-  .modify-form {
-    grid-area: form;
+    cursor: pointer;
   }
 
   h2 {
     text-align: center;
+    margin-bottom: 15px;
   }
   span {
     font-size: 10pt;

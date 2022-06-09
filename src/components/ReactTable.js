@@ -1,12 +1,13 @@
 import React, { useMemo } from "react"
 import { useSelector } from "react-redux"
+import { selectUsers } from "../app/features/usersSlice"
 import { useSortBy, useTable } from "react-table"
 
 import { remainingPTO, daysUntil10Hrs, monthsWorked } from "../data/dateHelpers"
 import { TableContainer } from "../css"
 
 export const ReactTable = () => {
-  const users = useSelector(state => state.users.value)
+  const users = useSelector(selectUsers)
 
   const data = useMemo(
     () =>
@@ -22,6 +23,7 @@ export const ReactTable = () => {
           insurance,
         }) => {
           const fullName = name.split(" ")
+          const splitHireDate = hireDate ? hireDate.split("/") : ""
           // fname, lname, position, pay, remainingPTO, Daysuntil, HireDate, insurance, location
           return {
             col1: fullName[0],
@@ -30,23 +32,31 @@ export const ReactTable = () => {
             col4: pay ? pay : "No Pay",
             col5: hireDate
               ? `${remainingPTO(
-                  hireDate[0],
-                  hireDate[1],
-                  hireDate[2],
+                  splitHireDate[2],
+                  splitHireDate[0],
+                  splitHireDate[1],
                   hoursUsed ? hoursUsed : 0,
                   pending
                 )} hrs`
               : `No Hire Date`,
             col6: hireDate
-              ? `${daysUntil10Hrs(hireDate[0], hireDate[1], hireDate[2])} days`
+              ? `${daysUntil10Hrs(
+                  splitHireDate[0],
+                  splitHireDate[1],
+                  splitHireDate[2]
+                )} days`
               : `No Hire Date`,
             col7: hireDate
-              ? `${hireDate[0]}/${hireDate[1]}/${hireDate[2]}`
+              ? `${splitHireDate[0]}/${splitHireDate[1]}/${splitHireDate[2]}`
               : `No Hire Date`,
             col8: insurance
               ? "Opt-IN"
               : hireDate
-              ? monthsWorked(hireDate[0], hireDate[1], hireDate[2]) < 3
+              ? monthsWorked(
+                  splitHireDate[0],
+                  splitHireDate[1],
+                  splitHireDate[2]
+                ) < 3
                 ? "Not Eligible"
                 : "Opt-OUT"
               : "No Hire Date",

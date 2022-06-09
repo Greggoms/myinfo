@@ -32,18 +32,7 @@ const GlobalStyles = createGlobalStyle`
 }
 
 body, html {
-  font-family: ${Theme.fonts.main};
-  font-display: fallback; /* <- this can be added to each @font-face definition */
   background-color: ${Theme.grayscale.dark3};
-}
-
-.page-container {
-  display: grid;
-  grid-template-columns: 10vw repeat(6, 1fr) 10vw;
-}
-
-.page-content {
-  grid-column: 2 / span 6;
 }
 
 .Toastify__toast {

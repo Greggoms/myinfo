@@ -2,6 +2,7 @@ import {
   addDays,
   differenceInCalendarDays,
   differenceInCalendarMonths,
+  format,
 } from "date-fns"
 
 export const currentYear = new Date().getFullYear()
@@ -39,9 +40,7 @@ export const dateFor10Hrs = (hireYear, hireMonth, hireDay) => {
     new Date(currentYear, currentMonth, currentDay),
     daysUntil10Hrs(hireYear, hireMonth, hireDay)
   )
-  return `${parseInt(
-    result.getMonth()
-  )}/${result.getDate()}/${result.getFullYear()}`
+  return format(new Date(result), `PPPP`)
 }
 
 export const monthsWorked = (year, day, month) => {

@@ -1,12 +1,14 @@
 import styled from "styled-components"
 
 export const NavContainer = styled.nav`
-  @media ${props => props.theme.breakpoints.mobile} {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    justify-content: flex-end;
   }
+
   a:not(:last-child) {
     margin-right: 10px;
   }
@@ -18,6 +20,6 @@ export const NavContainer = styled.nav`
     color: ${props => props.theme.grayscale.dark4};
     cursor: pointer;
     padding: 5px;
-    margin-left: 30px;
+    margin-left: 5px;
   }
 `

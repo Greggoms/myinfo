@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import { useDispatch } from "react-redux"
+import { Helmet, HelmetProvider } from "react-helmet-async"
 import { auth, db } from "../firebase/firebaseInit"
 import {
   doc,
@@ -14,7 +15,6 @@ import { gatherUsers } from "../app/features/usersSlice"
 import { Header } from "./Header"
 import { Footer } from "./Footer"
 import { LayoutContainer, MainContainer } from "../css"
-import "./layout.css"
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch()
@@ -55,13 +55,21 @@ const Layout = ({ children }) => {
   }, [dispatch])
 
   return (
-    <LayoutContainer>
-      <Header siteTitle="AbbyHQ" />
-      <div className="content">
-        <MainContainer>{children}</MainContainer>
-      </div>
-      <Footer />
-    </LayoutContainer>
+    <HelmetProvider>
+      <LayoutContainer>
+        <Helmet>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Raleway:200,400,700&display=swap"
+          />
+        </Helmet>
+        <Header siteTitle="AbbyHQ" />
+        <div className="content">
+          <MainContainer>{children}</MainContainer>
+        </div>
+        <Footer />
+      </LayoutContainer>
+    </HelmetProvider>
   )
 }
 

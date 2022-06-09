@@ -1,9 +1,46 @@
 import styled from "styled-components"
 
 export const ProfileContainer = styled.section`
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  gap: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    display: grid;
+    grid-template-columns: fit-content 1fr;
+    grid-template-areas:
+      "aside-1 info-pto"
+      "aside-2 info-pto"
+      "requests requests"
+      "info-dates info-account";
+
+    .aside-1 {
+      grid-area: aside-1;
+    }
+    .aside-2 {
+      grid-area: aside-2;
+    }
+    .info-pto {
+      grid-area: info-pto;
+    }
+    .requests-container {
+      grid-area: requests;
+    }
+    .info-dates {
+      grid-area: info-dates;
+    }
+    .info-account {
+      grid-area: info-account;
+    }
+  }
+
+  @media ${props => props.theme.breakpoints.desktop} {
+    grid-template-columns: 1fr 2fr 2fr;
+    grid-template-areas:
+      "aside-1 info-pto info-dates"
+      "aside-2 info-pto info-account"
+      "requests requests requests";
+  }
 
   svg {
     font-size: 16pt;
@@ -11,103 +48,91 @@ export const ProfileContainer = styled.section`
   }
 
   aside {
-    grid-column: 1;
-
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
     background: ${props => props.theme.grayscale.dark1};
-    padding: 10px 20px;
-    align-self: flex-start;
+    padding: 10px;
 
     h2 {
       text-align: center;
     }
-  }
 
-  .stats {
-    grid-column: 1;
+    .aside-info {
+      &__piece {
+        display: flex;
+        gap: 10px;
 
-    h2 {
-      text-align: left;
+        &:not(:last-child) {
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    .stats {
+      h2 {
+        text-align: left;
+      }
+      .stat {
+        &:not(:last-child) {
+          margin-bottom: 10px;
+        }
+      }
     }
   }
 
   section {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-
-    .info {
-      padding: 10px 20px;
-
-      &-badge {
-        background: ${props => props.theme.grayscale.light1};
-        color: ${props => props.theme.grayscale.dark4};
-        text-align: center;
-        width: 100%;
-        min-width: 200px;
-        max-width: 350px;
-      }
-    }
-
-    .spacer {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
     span {
       font-size: 9pt;
     }
-  }
 
-  .info {
-    display: flex;
-    align-items: center;
-    column-gap: 20px;
-
-    &-container {
+    &.info-pto {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 5px;
+
+      .badge {
+        flex: 1;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        background: ${props => props.theme.grayscale.light1};
+        color: ${props => props.theme.grayscale.dark4};
+        padding: 10px;
+        text-align: center;
+      }
     }
 
-    &-long {
-      background: ${props => props.theme.grayscale.dark3};
-    }
-  }
-
-  .info-pto {
-    grid-column: 2;
-    grid-row: 1;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-
-    .info {
+    &.requests-container {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-content: space-around;
-      row-gap: 10px;
+      gap: 5px;
     }
-  }
 
-  .info-account {
-    grid-column: 2;
-  }
+    &.info-dates,
+    &.info-account {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
 
-  .info-pto-usage {
-    grid-column: 1/-1;
-  }
+      background: ${props => props.theme.grayscale.dark4};
+      color: ${props => props.theme.grayscale.light1};
+      padding: 10px;
 
-  .requests-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: flex-start;
+      @media ${props => props.theme.breakpoints.desktop} {
+        flex-direction: row;
+      }
+
+      .words {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      svg {
+        align-self: center;
+      }
+    }
   }
 
   .request {
@@ -130,7 +155,7 @@ export const ProfileContainer = styled.section`
     border-top: 1px solid ${props => props.theme.grayscale.light1};
 
     &.flexed {
-      margin: 0;
+      margin: 5px 0 10px;
     }
   }
 `

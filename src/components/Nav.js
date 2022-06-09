@@ -21,15 +21,24 @@ export const Nav = () => {
 
   return (
     <NavContainer>
-      <Link to="/profile" activeStyle={{ color: "#94BDF2" }}>
+      <Link
+        to="/profile"
+        activeStyle={{ color: "#94BDF2", textDecoration: "none" }}
+      >
         Profile
       </Link>
-      <Link to="/faq" activeStyle={{ color: "#94BDF2" }}>
+      <Link
+        to="/faq"
+        activeStyle={{ color: "#94BDF2", textDecoration: "none" }}
+      >
         FAQ
       </Link>
 
       {userDoc && userDoc.role === "admin" && (
-        <Link to="/dashboard" activeStyle={{ color: "#94BDF2" }}>
+        <Link
+          to="/dashboard"
+          activeStyle={{ color: "#94BDF2", textDecoration: "none" }}
+        >
           Admin
         </Link>
       )}

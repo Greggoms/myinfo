@@ -5,8 +5,8 @@ import { HeaderContainer } from "../css"
 
 export const Header = ({ siteTitle }) => {
   return (
-    <HeaderContainer className="page-container">
-      <div className="page-content header-content">
+    <HeaderContainer>
+      <div className="header-content">
         <h1>
           <Link to="/">{siteTitle}</Link>
         </h1>

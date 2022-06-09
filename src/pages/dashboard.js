@@ -42,57 +42,45 @@ const DashboardPage = () => {
           noindex={true}
           title={`${userFireDoc.name}'s Dashboard | AbbyHQ`}
         />
-        <div className="page-container">
-          <div className="page-content">
-            <DashboardButtonsContainer>
-              <h3>View</h3>
-              <div className="views">
-                <button
-                  type="button"
-                  onClick={handleLayoutSelection}
-                  value="panels"
-                  style={
-                    panelView ? buttonStyles.active : buttonStyles.inactive
-                  }
-                >
-                  Panels
-                </button>
-                <button
-                  onClick={handleLayoutSelection}
-                  value="table"
-                  type="button"
-                  style={
-                    tableView ? buttonStyles.active : buttonStyles.inactive
-                  }
-                >
-                  Table
-                </button>
-              </div>
-            </DashboardButtonsContainer>
-            {panelView && <UserListing />}
-            {tableView && <ReactTable />}
+        <DashboardButtonsContainer>
+          <h3>View</h3>
+          <div className="views">
+            <button
+              type="button"
+              onClick={handleLayoutSelection}
+              value="panels"
+              style={panelView ? buttonStyles.active : buttonStyles.inactive}
+            >
+              Panels
+            </button>
+            <button
+              onClick={handleLayoutSelection}
+              value="table"
+              type="button"
+              style={tableView ? buttonStyles.active : buttonStyles.inactive}
+            >
+              Table
+            </button>
           </div>
-        </div>
+        </DashboardButtonsContainer>
+        {panelView && <UserListing />}
+        {tableView && <ReactTable />}
       </>
     )
   } else {
     return (
       <>
         <GatsbySeo nofollow={true} noindex={true} title="Dashboard | AbbyHQ" />
-        <div className="page-container">
-          <div className="page-content">
-            <Notification message="You need Admin Rights for this." />
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <Svg
-                style={{
-                  width: "100%",
-                  maxWidth: "25rem",
-                  height: "100%",
-                  opacity: 0.5,
-                }}
-              />
-            </div>
-          </div>
+        <Notification message="You need Admin Rights for this." />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Svg
+            style={{
+              width: "100%",
+              maxWidth: "25rem",
+              height: "100%",
+              opacity: 0.5,
+            }}
+          />
         </div>
       </>
     )

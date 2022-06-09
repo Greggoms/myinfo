@@ -5,16 +5,18 @@ export const HeaderContainer = styled.header`
 
   .header-content {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 
-    padding: 10px 0;
+    padding: 15px;
+    max-width: 1500px;
+    margin: 0 auto;
 
-    @media ${props => props.theme.breakpoints.mobile} {
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      align-content: flex-end;
+    @media ${props => props.theme.breakpoints.tablet} {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
     }
 
     h1 {

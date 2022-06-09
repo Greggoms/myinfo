@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
-import { selectUser } from "../app/features/userSlice"
-import { selectUserFireDoc } from "../app/features/userSlice"
+import { selectUser, selectUserFireDoc } from "../app/features/userSlice"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faIdBadge,
@@ -28,9 +27,15 @@ import { ProfileContainer } from "../css"
 export const UserFireDoc = () => {
   const user = useSelector(selectUser)
   const userFireDoc = useSelector(selectUserFireDoc)
-  const [splitHireDate, setSplitHireDate] = useState("")
-  const [splitPromotionDate, setSplitPromotionDate] = useState("")
-  const [splitRaiseDate, setSplitRaiseDate] = useState("")
+  const [splitHireDate, setSplitHireDate] = useState(
+    format(new Date(), `P`).split("/")
+  )
+  const [splitPromotionDate, setSplitPromotionDate] = useState(
+    format(new Date(), `P`).split("/")
+  )
+  const [splitRaiseDate, setSplitRaiseDate] = useState(
+    format(new Date(), `P`).split("/")
+  )
 
   useEffect(() => {
     if (userFireDoc && userFireDoc.hireDate) {
@@ -42,7 +47,6 @@ export const UserFireDoc = () => {
     if (userFireDoc && userFireDoc.lastRaise) {
       setSplitRaiseDate(userFireDoc.lastRaise.split("/"))
     }
-    // eslint-disable-next-line
   }, [userFireDoc])
 
   return !user ? (
@@ -69,11 +73,11 @@ export const UserFireDoc = () => {
       />
       {userFireDoc ? (
         <ProfileContainer>
-          <aside>
+          <aside className="aside-1">
             <h2>{userFireDoc.name.split(" ")[0]}</h2>
             <hr className="flexed" />
-            <div className="info-container">
-              <div className="info">
+            <div className="aside-info">
+              <div className="aside-info__piece">
                 <FontAwesomeIcon icon={faIdBadge} />
                 {userFireDoc.position ? (
                   <p>{userFireDoc.position}</p>
@@ -82,7 +86,7 @@ export const UserFireDoc = () => {
                 )}
               </div>
 
-              <div className="info">
+              <div className="aside-info__piece">
                 <FontAwesomeIcon icon={faMoneyBill1Wave} />
                 {userFireDoc.pay ? (
                   <p>{userFireDoc.pay}</p>
@@ -91,7 +95,7 @@ export const UserFireDoc = () => {
                 )}
               </div>
 
-              <div className="info">
+              <div className="aside-info__piece">
                 <FontAwesomeIcon icon={faCashRegister} />
                 {userFireDoc.location ? (
                   <p>{userFireDoc.location}</p>
@@ -100,40 +104,42 @@ export const UserFireDoc = () => {
                 )}
               </div>
 
-              <div className="info">
+              <div className="aside-info__piece">
                 <FontAwesomeIcon icon={faBriefcaseMedical} />
-                <p>{userFireDoc.insurance ? "Opt-IN" : "Opt-OUT"}</p>
+                <p>{userFireDoc.insurance === "true" ? "Opt-IN" : "Opt-OUT"}</p>
               </div>
             </div>
           </aside>
-          <aside className="stats">
+          <aside className="aside-2">
             <h3>Stats</h3>
             <hr className="flexed" />
-            <div className="stat">
-              {userFireDoc.hireDate ? (
-                <p>
-                  Lifetime PTO:{" "}
-                  {lifetimePTO(
-                    splitHireDate[2],
-                    splitHireDate[0],
-                    splitHireDate[1]
-                  )}{" "}
-                  hours
-                </p>
-              ) : (
-                <p>No Hire Date</p>
-              )}
-            </div>
-            <div className="stat">
-              {userFireDoc.hireDate ? (
-                <p>PTO Used: {userFireDoc.hoursUsed ? "hours" : "None"}</p>
-              ) : (
-                <p>No Hire Date</p>
-              )}
+            <div className="stats">
+              <div className="stat">
+                {userFireDoc.hireDate ? (
+                  <p>
+                    Lifetime PTO:{" "}
+                    {lifetimePTO(
+                      splitHireDate[2],
+                      splitHireDate[0],
+                      splitHireDate[1]
+                    )}{" "}
+                    hours
+                  </p>
+                ) : (
+                  <p>No Hire Date</p>
+                )}
+              </div>
+              <div className="stat">
+                {userFireDoc.hireDate ? (
+                  <p>PTO Used: {userFireDoc.hoursUsed ? "hours" : "None"}</p>
+                ) : (
+                  <p>No Hire Date</p>
+                )}
+              </div>
             </div>
           </aside>
           <section className="info-pto">
-            <div className="info info-badge">
+            <div className="badge">
               {userFireDoc.hireDate ? (
                 <>
                   <h2>
@@ -151,8 +157,8 @@ export const UserFireDoc = () => {
                 <h2>No Hire Date</h2>
               )}
             </div>
-            <div className="info info-badge">
-              {splitHireDate !== "" ? (
+            <div className="badge">
+              {splitHireDate ? (
                 <>
                   <h2>
                     +10 hours in{" "}
@@ -165,15 +171,10 @@ export const UserFireDoc = () => {
                   </h2>
                   <p>on</p>
                   <p>
-                    {format(
-                      new Date(
-                        dateFor10Hrs(
-                          splitHireDate[2],
-                          splitHireDate[0],
-                          splitHireDate[1]
-                        )
-                      ),
-                      "PPPP"
+                    {dateFor10Hrs(
+                      splitHireDate[2],
+                      splitHireDate[0],
+                      splitHireDate[1]
                     )}
                   </p>
                 </>
@@ -182,97 +183,8 @@ export const UserFireDoc = () => {
               )}
             </div>
           </section>
-          <section className="info-account">
-            <div className="info info-long">
-              <FontAwesomeIcon icon={faCalendarDays} />
-              <div className="spacer">
-                <div>
-                  <span>Hire Date:</span>
-                  {splitHireDate !== "" ? (
-                    <p>
-                      {format(
-                        new Date(
-                          splitHireDate[2],
-                          splitHireDate[0],
-                          splitHireDate[1]
-                        ),
-                        "PPPP"
-                      )}
-                      {"  "}(
-                      {monthsWorked(
-                        splitHireDate[2],
-                        splitHireDate[0],
-                        splitHireDate[1]
-                      )}{" "}
-                      months ago)
-                    </p>
-                  ) : (
-                    <p>No hire date.</p>
-                  )}
-                </div>
-
-                <div>
-                  <span>Last Raise:</span>
-                  {splitRaiseDate !== "" ? (
-                    <p>
-                      {format(
-                        new Date(
-                          splitRaiseDate[2],
-                          splitRaiseDate[0],
-                          splitRaiseDate[1]
-                        ),
-                        "PPPP"
-                      )}{" "}
-                      (
-                      {monthsWorked(
-                        splitRaiseDate[2],
-                        splitRaiseDate[0],
-                        splitRaiseDate[1]
-                      )}{" "}
-                      months ago)
-                    </p>
-                  ) : (
-                    <p>No raise date.</p>
-                  )}
-                </div>
-                <div>
-                  <span>Promotion Date:</span>
-                  {splitPromotionDate !== "" ? (
-                    <p>
-                      {format(
-                        new Date(
-                          splitPromotionDate[2],
-                          splitPromotionDate[0],
-                          splitPromotionDate[1]
-                        ),
-                        "PPPP"
-                      )}{" "}
-                      (
-                      {monthsWorked(
-                        splitPromotionDate[2],
-                        splitPromotionDate[0],
-                        splitPromotionDate[1]
-                      )}{" "}
-                      months ago)
-                    </p>
-                  ) : (
-                    <p>No promotion date.</p>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="info info-long">
-              <FontAwesomeIcon icon={faUserGear} />
-              <div className="spacer">
-                <p>{userFireDoc.email}</p>
-                <p>Role: {userFireDoc.role}</p>
-                <p>Firebase ID: {userFireDoc.id}</p>
-              </div>
-            </div>
-          </section>
-          <section className="info-pto-usage requests-container">
-            <div className="info request">
+          <section className="requests-container">
+            <div className="request">
               {userFireDoc.pending ? (
                 <div>
                   <h2>Pending Requests ({userFireDoc.pending.length})</h2>
@@ -295,7 +207,7 @@ export const UserFireDoc = () => {
                 <p>No Pending Requests</p>
               )}
             </div>
-            <div className="info request">
+            <div className="request">
               {userFireDoc.accepted ? (
                 <div>
                   <h2>Accepted Requests ({userFireDoc.accepted.length})</h2>
@@ -318,6 +230,92 @@ export const UserFireDoc = () => {
               ) : (
                 <p>No Accepted Requests</p>
               )}
+            </div>
+          </section>
+          <section className="info-dates">
+            <FontAwesomeIcon icon={faCalendarDays} />
+            <div className="words">
+              <div>
+                <span>Hire Date:</span>
+                {splitHireDate ? (
+                  <p>
+                    {format(
+                      new Date(
+                        splitHireDate[2],
+                        splitHireDate[0],
+                        splitHireDate[1]
+                      ),
+                      `PPPP`
+                    )}
+                    {"  "}(
+                    {monthsWorked(
+                      splitHireDate[2],
+                      splitHireDate[0],
+                      splitHireDate[1]
+                    )}{" "}
+                    months ago)
+                  </p>
+                ) : (
+                  <p>No hire date.</p>
+                )}
+              </div>
+
+              <div>
+                <span>Last Raise:</span>
+                {splitRaiseDate ? (
+                  <p>
+                    {format(
+                      new Date(
+                        splitRaiseDate[2],
+                        splitRaiseDate[0],
+                        splitRaiseDate[1]
+                      ),
+                      `PPPP`
+                    )}{" "}
+                    (
+                    {monthsWorked(
+                      splitRaiseDate[2],
+                      splitRaiseDate[0],
+                      splitRaiseDate[1]
+                    )}{" "}
+                    months ago)
+                  </p>
+                ) : (
+                  <p>No raise date.</p>
+                )}
+              </div>
+              <div>
+                <span>Promotion Date:</span>
+                {splitPromotionDate ? (
+                  <p>
+                    {format(
+                      new Date(
+                        splitPromotionDate[2],
+                        splitPromotionDate[0],
+                        splitPromotionDate[1]
+                      ),
+                      `PPPP`
+                    )}{" "}
+                    (
+                    {monthsWorked(
+                      splitPromotionDate[2],
+                      splitPromotionDate[0],
+                      splitPromotionDate[1]
+                    )}{" "}
+                    months ago)
+                  </p>
+                ) : (
+                  <p>No promotion date.</p>
+                )}
+              </div>
+            </div>
+          </section>
+          <section className="info-account">
+            <FontAwesomeIcon icon={faUserGear} />
+            <div className="words">
+              <p>{userFireDoc.email}</p>
+              <p>Role: {userFireDoc.role}</p>
+              <p>Firebase ID: {userFireDoc.id}</p>
             </div>
           </section>
         </ProfileContainer>
