@@ -81,6 +81,7 @@ export const ProfileContainer = styled.section`
   section {
     span {
       font-size: 9pt;
+      color: ${props => props.theme.grayscale.light2};
     }
 
     &.info-pto {

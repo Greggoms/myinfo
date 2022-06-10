@@ -74,29 +74,36 @@ export const RegisterForm = () => {
   return (
     <FormContainer>
       <h3>For new users</h3>
-      <input
-        value={name}
-        onChange={e => setName(e.target.value)}
-        type="text"
-        placeholder="Full Name"
-      />
-      <input
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        type="email"
-        placeholder="Email"
-      />
-      <input
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        type="password"
-        placeholder="Password"
-      />
-      <div className="login-buttons">
-        <button className="register" onClick={handleRegister} type="submit">
-          Register
-        </button>
-      </div>
+      <label>
+        <span>Full Name</span>
+        <input
+          value={name}
+          onChange={e => setName(e.target.value)}
+          type="text"
+          placeholder="Bruce Wayne"
+        />
+      </label>
+      <label>
+        <span>Email</span>
+        <input
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          type="email"
+          placeholder="your@email.com"
+        />
+      </label>
+      <label>
+        <span>Set Password</span>
+        <input
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          type="password"
+          placeholder="Password"
+        />
+      </label>
+      <button className="register" onClick={handleRegister} type="submit">
+        Register
+      </button>
     </FormContainer>
   )
 }

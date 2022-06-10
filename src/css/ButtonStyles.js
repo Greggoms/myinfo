@@ -28,3 +28,22 @@ export const ModifyUserButton = styled.button`
 
   padding: 5px;
 `
+
+export const ButtonLink = styled.button`
+  border: 2px solid ${props => props.theme.grayscale.light4};
+  background: ${props => props.theme.grayscale.dark2};
+  cursor: pointer;
+
+  a {
+    display: flex;
+    gap: 5px;
+    color: ${props => props.theme.grayscale.light1};
+    text-decoration: none;
+    padding: 10px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      gap: 10px;
+    }
+  }
+`

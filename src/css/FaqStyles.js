@@ -6,6 +6,9 @@ export const FaqContainer = styled.div`
   grid-gap: 30px;
 
   line-height: 22px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 
   .steps {
     display: flex;
@@ -17,7 +20,8 @@ export const FaqContainer = styled.div`
     margin-bottom: 10px;
   }
 
-  .w4 {
+  .w4,
+  .direct-deposit {
     margin-bottom: 10px;
     h3 {
       margin-bottom: 0;
@@ -25,7 +29,7 @@ export const FaqContainer = styled.div`
   }
 
   h4 {
-    font-size: 18pt;
+    font-size: 14pt;
   }
 
   details {
@@ -69,7 +73,8 @@ export const FaqContainer = styled.div`
     border-top: 2px solid ${props => props.theme.grayscale.light1};
     border-right: 2px solid ${props => props.theme.grayscale.light1};
     border-left: 2px solid ${props => props.theme.grayscale.light1};
-    width: max-content;
+    width: 100%;
+    max-width: max-content;
     padding: 0 5px;
   }
 

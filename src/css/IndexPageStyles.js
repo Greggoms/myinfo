@@ -10,6 +10,7 @@ export const IndexPageContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     justify-items: center;
+    align-content: space-between;
     gap: 20px;
 
     max-width: 900px;
@@ -17,6 +18,10 @@ export const IndexPageContainer = styled.div`
   }
 
   .cta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
     min-width: 200px;
     width: 100%;
     max-width: 400px;
@@ -27,11 +32,19 @@ export const IndexPageContainer = styled.div`
     padding: 10px;
 
     h2 {
-      margin-bottom: 10px;
+      margin-bottom: 0;
+    }
+
+    ul {
+      flex: 1;
     }
 
     ul li {
       margin-left: 20px;
+    }
+
+    button {
+      align-self: center;
     }
 
     &-special {

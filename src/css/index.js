@@ -1,5 +1,6 @@
 export * from "./ButtonStyles"
 export * from "./DashboardPageStyles"
+export * from "./DocumentsStyles"
 export * from "./FaqStyles"
 export * from "./FooterStyles"
 export * from "./HeaderStyles"

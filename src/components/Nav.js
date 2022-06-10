@@ -28,6 +28,12 @@ export const Nav = () => {
         Profile
       </Link>
       <Link
+        to="/documents"
+        activeStyle={{ color: "#94BDF2", textDecoration: "none" }}
+      >
+        Documents
+      </Link>
+      <Link
         to="/faq"
         activeStyle={{ color: "#94BDF2", textDecoration: "none" }}
       >

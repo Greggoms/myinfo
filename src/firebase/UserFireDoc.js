@@ -238,23 +238,26 @@ export const UserFireDoc = () => {
               <div>
                 <span>Hire Date:</span>
                 {splitHireDate ? (
-                  <p>
-                    {format(
-                      new Date(
+                  <>
+                    <p>
+                      {format(
+                        new Date(
+                          splitHireDate[2],
+                          splitHireDate[0],
+                          splitHireDate[1]
+                        ),
+                        `PPPP`
+                      )}
+                    </p>
+                    <span>
+                      {monthsWorked(
                         splitHireDate[2],
                         splitHireDate[0],
                         splitHireDate[1]
-                      ),
-                      `PPPP`
-                    )}
-                    {"  "}(
-                    {monthsWorked(
-                      splitHireDate[2],
-                      splitHireDate[0],
-                      splitHireDate[1]
-                    )}{" "}
-                    months ago)
-                  </p>
+                      )}{" "}
+                      months ago
+                    </span>
+                  </>
                 ) : (
                   <p>No hire date.</p>
                 )}
@@ -263,23 +266,26 @@ export const UserFireDoc = () => {
               <div>
                 <span>Last Raise:</span>
                 {splitRaiseDate ? (
-                  <p>
-                    {format(
-                      new Date(
+                  <>
+                    <p>
+                      {format(
+                        new Date(
+                          splitRaiseDate[2],
+                          splitRaiseDate[0],
+                          splitRaiseDate[1]
+                        ),
+                        `PPPP`
+                      )}
+                    </p>
+                    <span>
+                      {monthsWorked(
                         splitRaiseDate[2],
                         splitRaiseDate[0],
                         splitRaiseDate[1]
-                      ),
-                      `PPPP`
-                    )}{" "}
-                    (
-                    {monthsWorked(
-                      splitRaiseDate[2],
-                      splitRaiseDate[0],
-                      splitRaiseDate[1]
-                    )}{" "}
-                    months ago)
-                  </p>
+                      )}{" "}
+                      months ago
+                    </span>
+                  </>
                 ) : (
                   <p>No raise date.</p>
                 )}
@@ -287,23 +293,26 @@ export const UserFireDoc = () => {
               <div>
                 <span>Promotion Date:</span>
                 {splitPromotionDate ? (
-                  <p>
-                    {format(
-                      new Date(
+                  <>
+                    <p>
+                      {format(
+                        new Date(
+                          splitPromotionDate[2],
+                          splitPromotionDate[0],
+                          splitPromotionDate[1]
+                        ),
+                        `PPPP`
+                      )}
+                    </p>
+                    <span>
+                      {monthsWorked(
                         splitPromotionDate[2],
                         splitPromotionDate[0],
                         splitPromotionDate[1]
-                      ),
-                      `PPPP`
-                    )}{" "}
-                    (
-                    {monthsWorked(
-                      splitPromotionDate[2],
-                      splitPromotionDate[0],
-                      splitPromotionDate[1]
-                    )}{" "}
-                    months ago)
-                  </p>
+                      )}{" "}
+                      months ago
+                    </span>
+                  </>
                 ) : (
                   <p>No promotion date.</p>
                 )}

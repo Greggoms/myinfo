@@ -1,27 +1,9 @@
 import React from "react"
-import { useSelector } from "react-redux"
-import { selectUser } from "../app/features/userSlice"
-import { graphql, useStaticQuery } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
 import { GatsbySeo } from "gatsby-plugin-next-seo"
+import { StaticImage } from "gatsby-plugin-image"
 import { FaqContainer } from "../css"
 
 const Faq = () => {
-  const user = useSelector(selectUser)
-
-  const data = useStaticQuery(graphql`
-    {
-      allFile(filter: { extension: { eq: "pdf" } }) {
-        edges {
-          node {
-            publicURL
-            name
-          }
-        }
-      }
-    }
-  `)
-
   return (
     <>
       <GatsbySeo nofollow={true} noindex={true} title="FAQ | AbbyHQ" />
@@ -258,7 +240,6 @@ const Faq = () => {
               Before you get started, please read the above information. Come
               prepared with your hire date and SSN.
             </p>
-            <h4>Option 1</h4>
             <p>
               You can view, complete, then download the official Form W-4{" "}
               <a
@@ -268,77 +249,10 @@ const Faq = () => {
               >
                 here
               </a>
-              . Email it the payroll email afterwards. Be sure to fill out all
-              required fields, and optional fields if they apply to you. We can
-              print this for you if needed, though handwritten w-4s are least
-              desirable.
-            </p>
-            <h4>Option 2</h4>
-            {!user && (
-              <p>You must be logged in to this website to view the link.</p>
-            )}
-            <p>
-              There is a system in place setup by our tax agency One Stop
-              Solutions using software made by{" "}
-              <a
-                href="https://www.pdffiller.com/en/link_to_fill/937375912.htm"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                pdfFiller
-              </a>
-              .
-            </p>
-            <p>What to know about filling out the form this way:</p>
-            <ul>
-              <li>
-                The password is:{" "}
-                {user ? "123456" : <em>please login to view the password.</em>}
-              </li>
-              <li>
-                You will need to enter your name and email address as an added
-                security measure
-              </li>
-              <li>
-                Read and consent to the Electronic Record and Signature
-                Disclosure (Agreement to do business with One Stop Solutions)
-              </li>
-              <li>
-                Finally, the pdfFiller software wants to make sure you
-                understand that your digital signature is{" "}
-                <a
-                  href="https://www.pdffiller.com/en/terms_of_services.htm"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  legally binding
-                </a>
-              </li>
-            </ul>
-            {user && (
-              <p>
-                Click{" "}
-                <a
-                  href="https://www.pdffiller.com/en/link_to_fill/937375912.htm"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  here
-                </a>{" "}
-                to get started.
-              </p>
-            )}
-            <p>
-              This is the best approach if you want to make sure you don't miss
-              any <span style={{ textDecoration: "underline" }}>required</span>{" "}
-              fields. It also ensures no errors and delays will be made from
-              misinterpreted handwriting.
-            </p>
-            <p>
-              This approach is also very secure, as the information is sent
-              straight from you to where it needs to be through a verified
-              service. It wouldn't be cool if your paper w-4 was laying around
-              and someone snapped a picture of your SSN.
+              . Email it to {`<payroll@vhdistro.net>`} afterwards. Be sure to
+              fill out all required fields, and optional fields if they apply to
+              you. We can print this for you if needed, though handwritten w-4s
+              are least desirable.
             </p>
             <p>
               It is required for all new employees to fill out the Form w-4 from
@@ -362,66 +276,74 @@ const Faq = () => {
         </div>
         <hr />
         <div>
-          <h3>Direct Deposit Forms</h3>
-          <details>
-            <summary>
-              How can I create/update my Direct Deposit details?
-            </summary>
+          <div className="direct-deposit">
+            <h3>Direct Deposit</h3>
             <p>
               You will be issued a paper check if no direct deposit form has
-              been submitted bewtween the time you are hired and the moment
+              been submitted between the time you are hired and the moment
               payroll has been processed.
             </p>
-            <h4>Option 1</h4>
+          </div>
+          <details>
+            <summary>How do I get Direct Deposit?</summary>
+            <h4>If you DO NOT have a checkbook</h4>
             <p>
-              Visit your bank and ask them for a Direct Deposit form and voided
-              check. Make sure you write VOID across the check and attach it to
-              the form. Bring this form to the warehouse, or scan it to send to
-              the payroll email.
+              You will need to request a Direct Deposit Authorization form from
+              your bank. Some banks allow you to request the form online, but it
+              will be faster to visit a physical location. Try to get it
+              prefilled with the account and routing numbers.
             </p>
-            <h4>Option 2</h4>
-            {!user && (
-              <p>You must be logged into this website to view the link.</p>
-            )}
+            <h4>If you DO have a checkbook</h4>
             <p>
-              Like with the w4 form, you can digitally fill this out online
-              through our tax agency One Stop Solutions using software made by{" "}
-              <a
-                href="https://www.pdffiller.com/en/link_to_fill/937375912.htm"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                pdfFiller
-              </a>
-              .
+              You can skip the authorization form (though it would still be nice
+              to have on file) if you have a checkbook. Take out one of your
+              checks and write VOID across it. Fill out the Millennium Direct
+              Deposit form and staple or tape it in the appropriate spot.
             </p>
             <p>
-              Refer to 'How can I create/update my w-4? - Option 2' above for
-              more details about this process.
+              Once you have the authorization form/VOID check, pick one of the
+              following options:
             </p>
-            {user && (
-              <p>
-                Click{" "}
-                <a
-                  href="https://www.pdffiller.com/en/link_to_fill/661161714.htm"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  here
-                </a>{" "}
-                to get started.
-              </p>
-            )}
+            <ul>
+              <li>Bring it to the warehouse</li>
+              <li>
+                Contact your store ops manager and have them come pick it up
+              </li>
+              <li>
+                ONLY IF time is of the essence, you can take a picture of the
+                form/check and send it to {`<payroll@vhdistro.net>`}
+              </li>
+              <ul>
+                <li>
+                  <em>
+                    The form/check WILL have to reach the warehouse eventually
+                    so it can be added to your employee file
+                  </em>
+                </li>
+              </ul>
+            </ul>
+          </details>
+          <details>
+            <summary>How can I update my Direct Deposit details?</summary>
+            <p>
+              If your bank account information changes, you will need to request
+              a new Direct Deposit Authorization form as soon as possible. If
+              you go the VOID check route, make sure the check has the new
+              account and routing numbers.
+            </p>
+            <p>
+              If I do not receive it by the time payroll is submitted then you
+              will NOT get paid on time.
+            </p>
           </details>
         </div>
         <hr />
         <div>
-          <h3>Insurance Forms</h3>
+          <h3>Insurance</h3>
           <details>
             <summary>How do I get insurance?</summary>
             <p>
-              Once you have reached 3 months of employment, you can opt-in to
-              receive health insurance. Our health insurance is provided by{" "}
+              Our health insurance is provided by{" "}
               <a
                 href="https://www.uhc.com/member-resources/new-member-checklist"
                 target="_blank"
@@ -429,24 +351,18 @@ const Faq = () => {
               >
                 United Healthcare
               </a>
-              . Use the link below to download a copy of the form. The ability
-              to directly edit the file before saving it (as you can do with the
-              w-4 form) hasn't been setup yet. It will be available soon.
+              .
             </p>
-            {data.allFile.edges.map((file, index) => {
-              return (
-                <div key={`pdf-${index}`}>
-                  <a
-                    href={file.node.publicURL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    download
-                  >
-                    {file.node.name}
-                  </a>
-                </div>
-              )
-            })}
+            <p>
+              You should have filled out the insurance form when you were hired.
+              The last page has two different signature fields. The bottom field
+              enrolls you into the insurance and marks you as OPT-IN. The top
+              field waives you from insurance and marks you as OPT-OUT.
+            </p>
+            <p>
+              Insurance benefits and check deductions become active once you
+              have reached 3 months of employment.
+            </p>
           </details>
         </div>
       </FaqContainer>

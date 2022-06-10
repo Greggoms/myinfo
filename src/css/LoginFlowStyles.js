@@ -6,7 +6,8 @@ export const LoginPageWrapper = styled.section`
   justify-content: center;
   align-items: center;
 
-  height: calc(100vh - 400px);
+  /* to center the login form */
+  height: 100%;
 
   .login-flow-content {
     width: 100%;
@@ -37,18 +38,38 @@ export const LoginPageWrapper = styled.section`
       border: none;
       cursor: pointer;
     }
+
+    .register {
+      border-left: 1px solid ${props => props.theme.grayscale.dark4};
+      border-right: 1px solid ${props => props.theme.grayscale.dark4};
+    }
   }
 `
 export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 10px;
+  padding: 0 20px 20px;
 
-  margin: 0 auto;
+  label {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      font-size: 10pt;
+    }
+  }
 
   h3 {
     margin: 0;
     margin-top: 15px;
+  }
+
+  button {
+    align-self: center;
+
+    cursor: pointer;
+    border: 3px solid ${props => props.theme.colors.link};
+    padding: 10px 15px;
   }
 `

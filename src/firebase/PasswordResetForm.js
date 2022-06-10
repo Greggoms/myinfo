@@ -32,12 +32,15 @@ export const PasswordResetForm = () => {
   return (
     <FormContainer>
       <h3>Forgot password? Reset it here.</h3>
-      <input
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        type="email"
-        placeholder="Email"
-      />
+      <label>
+        <span>Email</span>
+        <input
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          type="email"
+          placeholder="your@email.com"
+        />
+      </label>
       <button onClick={handlePasswordReset} type="submit">
         Send reset link
       </button>

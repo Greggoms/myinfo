@@ -42,18 +42,25 @@ export const LoginForm = () => {
   return (
     <FormContainer>
       <h3>For existing users</h3>
-      <input
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        type="email"
-        placeholder="Email"
-      />
-      <input
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        type="password"
-        placeholder="Password"
-      />
+      <label>
+        <span>Email</span>
+        <input
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          type="email"
+          placeholder="your@email.com"
+        />
+      </label>
+
+      <label>
+        <span>Password</span>
+        <input
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          type="password"
+          placeholder="Password"
+        />
+      </label>
       <button className="login" onClick={handleLogin} type="submit">
         Login
       </button>
