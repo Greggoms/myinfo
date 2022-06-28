@@ -13,8 +13,50 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `pdfs`,
-        path: `${__dirname}/src/pdfs/`,
+        name: `pdfsnewhire`,
+        path: `${__dirname}/src/pdfs/newhire`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `pdfsother`,
+        path: `${__dirname}/src/pdfs/other`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `pdfspoliciesabbyroad`,
+        path: `${__dirname}/src/pdfs/policies/abbyroad`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `pdfspoliciesvhd`,
+        path: `${__dirname}/src/pdfs/policies/vhd`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `pdfspoliciesvaporworld`,
+        path: `${__dirname}/src/pdfs/policies/vaporworld`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `pdfspolicieswonderland`,
+        path: `${__dirname}/src/pdfs/policies/wonderland`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `pdfspoliciesshared`,
+        path: `${__dirname}/src/pdfs/policies/shared`,
       },
     },
     {

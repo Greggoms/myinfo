@@ -1,10 +1,19 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { GatsbySeo } from "gatsby-plugin-next-seo"
 
 import Button from "../components/Button"
 import { IndexPageContainer } from "../css"
 
 const IndexPage = () => {
+  useEffect(() => {
+    if (window !== "undefined") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      })
+    }
+  }, [])
+
   return (
     <>
       <GatsbySeo nofollow={true} noindex={true} title="Home | AbbyHQ" />
@@ -28,13 +37,9 @@ const IndexPage = () => {
           <div className="cta">
             <h2>Find Documents</h2>
             <ul>
-              <li>W-4</li>
-              <li>Millennium Enrollment</li>
-              <li>Millennium Direct Deposit</li>
-              <li>Insurance Enrollment</li>
-              <li>Tobacco Server Awareness</li>
-              <li>Employee Contact Information</li>
-              <li>Employee Handbooks</li>
+              <li>New Hire Paperwork</li>
+              <li>Company Policies</li>
+              <li>Other Useful Forms</li>
             </ul>
             <Button link="/documents" text="Browse Documents">
               {">"}

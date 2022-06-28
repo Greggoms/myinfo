@@ -211,9 +211,6 @@ export const UserListing = () => {
                 pending,
                 accepted,
               }) => {
-                const splitHireDate = hireDate
-                  ? hireDate.split("/")
-                  : format(new Date().split("/"))
                 return (
                   <div className="user" key={id}>
                     <h3>{name}</h3>
@@ -249,9 +246,9 @@ export const UserListing = () => {
                             <p>{hireDate}</p>
                             <span>
                               {monthsWorked(
-                                splitHireDate[2],
-                                splitHireDate[0],
-                                splitHireDate[1]
+                                hireDate.split("/")[2],
+                                hireDate.split("/")[0],
+                                hireDate.split("/")[1]
                               )}{" "}
                               months ago
                             </span>
@@ -268,9 +265,9 @@ export const UserListing = () => {
                       {hireDate ? (
                         <p>
                           {remainingPTO(
-                            splitHireDate[2],
-                            splitHireDate[0],
-                            splitHireDate[1],
+                            hireDate.split("/")[2],
+                            hireDate.split("/")[0],
+                            hireDate.split("/")[1],
                             hoursUsed ? hoursUsed : 0,
                             pending ? pending : null
                           )}{" "}
@@ -283,9 +280,9 @@ export const UserListing = () => {
                         <p>
                           +10 hours in{" "}
                           {daysUntil10Hrs(
-                            splitHireDate[2],
-                            splitHireDate[0],
-                            splitHireDate[1]
+                            hireDate.split("/")[2],
+                            hireDate.split("/")[0],
+                            hireDate.split("/")[1]
                           )}{" "}
                           days
                         </p>

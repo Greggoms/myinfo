@@ -22,40 +22,40 @@ export const ReactTable = () => {
           hoursUsed,
           insurance,
         }) => {
-          const fullName = name.split(" ")
-          const splitHireDate = hireDate ? hireDate.split("/") : ""
           // fname, lname, position, pay, remainingPTO, Daysuntil, HireDate, insurance, location
           return {
-            col1: fullName[0],
-            col2: fullName[1],
+            col1: name.split(" ")[0],
+            col2: name.split(" ")[1],
             col3: position ? position : "No Position",
             col4: pay ? pay : "No Pay",
             col5: hireDate
               ? `${remainingPTO(
-                  splitHireDate[2],
-                  splitHireDate[0],
-                  splitHireDate[1],
+                  hireDate.split("/")[2],
+                  hireDate.split("/")[0],
+                  hireDate.split("/")[1],
                   hoursUsed ? hoursUsed : 0,
                   pending
                 )} hrs`
               : `No Hire Date`,
             col6: hireDate
               ? `${daysUntil10Hrs(
-                  splitHireDate[0],
-                  splitHireDate[1],
-                  splitHireDate[2]
+                  hireDate.split("/")[0],
+                  hireDate.split("/")[1],
+                  hireDate.split("/")[2]
                 )} days`
               : `No Hire Date`,
             col7: hireDate
-              ? `${splitHireDate[0]}/${splitHireDate[1]}/${splitHireDate[2]}`
+              ? `${hireDate.split("/")[0]}/${hireDate.split("/")[1]}/${
+                  hireDate.split("/")[2]
+                }`
               : `No Hire Date`,
             col8: insurance
               ? "Opt-IN"
               : hireDate
               ? monthsWorked(
-                  splitHireDate[0],
-                  splitHireDate[1],
-                  splitHireDate[2]
+                  hireDate.split("/")[0],
+                  hireDate.split("/")[1],
+                  hireDate.split("/")[2]
                 ) < 3
                 ? "Not Eligible"
                 : "Opt-OUT"

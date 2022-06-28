@@ -43,10 +43,10 @@ export const dateFor10Hrs = (hireYear, hireMonth, hireDay) => {
   return format(new Date(result), `PPPP`)
 }
 
-export const monthsWorked = (year, day, month) => {
+export const monthsWorked = (year, month, day) => {
   const result = differenceInCalendarMonths(
     new Date(currentYear, currentMonth, currentDay),
-    new Date(year, day, month)
+    new Date(year, month, day)
   )
   return result
 }

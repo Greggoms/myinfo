@@ -1,18 +1,21 @@
 import React from "react"
-import { GatsbySeo } from "gatsby-plugin-next-seo"
 import { graphql, useStaticQuery } from "gatsby"
+import { GatsbySeo } from "gatsby-plugin-next-seo"
 import { format } from "date-fns"
 import { Viewer, Worker } from "@react-pdf-viewer/core"
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout"
 
-import { DocumentsContainer } from "../css/DocumentsStyles"
+import { DocumentsContainer } from "../../css/DocumentsStyles"
 import "@react-pdf-viewer/core/lib/styles/index.css"
 import "@react-pdf-viewer/default-layout/lib/styles/index.css"
 
-const DocumentsPage = () => {
-  const documentsList = useStaticQuery(graphql`
+const OtherDocumentsPage = () => {
+  const otherDocuments = useStaticQuery(graphql`
     {
-      allFile(filter: { extension: { eq: "pdf" } }, sort: { fields: name }) {
+      allFile(
+        filter: { sourceInstanceName: { eq: "pdfsother" } }
+        sort: { fields: name }
+      ) {
         edges {
           node {
             publicURL
@@ -35,15 +38,18 @@ const DocumentsPage = () => {
     const defaultLayoutPluginInstance = defaultLayoutPlugin()
     return <Viewer fileUrl={fileUrl} theme="dark" plugins={[]} />
   }
-
   return (
     <>
-      <GatsbySeo nofollow={true} noindex={true} title={`Documents | AbbyHQ`} />
-      <h1 style={{ marginBottom: "20px", textAlign: "center" }}>
-        Useful Documents
+      <GatsbySeo
+        nofollow={true}
+        noindex={true}
+        title={`Other Documents | AbbyHQ`}
+      />
+      <h1 style={{ textAlign: "center", marginBottom: "20px" }}>
+        Other Documents
       </h1>
       <DocumentsContainer>
-        {documentsList.allFile.edges.map((file, index) => {
+        {otherDocuments.allFile.edges.map((file, index) => {
           return (
             <div className="document" key={`pdf-${index}`}>
               <div className="pdf-container">
@@ -73,4 +79,4 @@ const DocumentsPage = () => {
   )
 }
 
-export default DocumentsPage
+export default OtherDocumentsPage

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { updateUser } from "../../app/features/usersSlice"
 import { doc, updateDoc } from "firebase/firestore"
 import { db } from "../../firebase/firebaseInit"
 import { format } from "date-fns"
 import { useForm } from "react-hook-form"
+import emailjs, { init } from "@emailjs/browser"
 import DatePicker from "react-date-picker"
 
 import { locations } from "../../data/locations"
@@ -12,7 +14,10 @@ import { toastifyFailed, toastifyInfo } from "../toasts"
 import { ModifyUserButton, ModifyUserContainer } from "../../css"
 
 export const ModifyUserForm = props => {
+  const dispatch = useDispatch()
+
   const users = useSelector(state => state.users.value)
+
   const {
     id,
     name,
@@ -27,113 +32,81 @@ export const ModifyUserForm = props => {
   } = users.find(user => user.id === props.id)
 
   const [modifyUser, setModifyUser] = useState(false)
-  const [hireDateValue, onHireChange] = useState()
-  const [promotionDateValue, onPromotionChange] = useState()
-  const [raiseDateValue, onRaiseChange] = useState()
-
-  useEffect(() => {
-    if (hireDate) {
-      const splitHireDate = hireDate.split("/")
-      onHireChange(
-        new Date(splitHireDate[2], splitHireDate[0] - 1, splitHireDate[1])
-      )
-    } else {
-      onHireChange(new Date())
-    }
-  }, [hireDate])
-  useEffect(() => {
-    if (promotionDate) {
-      const splitPromotionDate = promotionDate.split("/")
-      onPromotionChange(
-        new Date(
-          splitPromotionDate[2],
-          splitPromotionDate[0] - 1,
-          splitPromotionDate[1]
-        )
-      )
-    } else {
-      onPromotionChange(new Date())
-    }
-  }, [promotionDate])
-  useEffect(() => {
-    if (lastRaise) {
-      const splitRaiseDate = lastRaise.split("/")
-      onRaiseChange(
-        new Date(splitRaiseDate[2], splitRaiseDate[0] - 1, splitRaiseDate[1])
-      )
-    } else {
-      onRaiseChange(new Date())
-    }
-  }, [lastRaise])
+  const [newHireDate, onHireChange] = useState()
+  const [newPromotionDate, onPromotionChange] = useState()
+  const [newRaiseDate, onRaiseChange] = useState()
 
   const { register, handleSubmit } = useForm()
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     try {
       if (
         data.name === "" &&
         data.pay === "" &&
-        hireDateValue === undefined &&
-        promotionDateValue === undefined &&
-        raiseDateValue === undefined
+        newHireDate === undefined &&
+        newPromotionDate === undefined &&
+        newRaiseDate === undefined
       ) {
         toastifyFailed(`You need to make at least 1 change before submitting`)
       } else {
-        toastifyInfo(() => (
-          <>
-            <h2>{data.name !== "" ? data.name : name} Updated!</h2>
-            {data.name !== "" && (
-              <p>
-                Full Name: <s>{name}</s> to {data.name}
-              </p>
-            )}
-            <p>
-              Location: <s>{location}</s> to {data.location}
-            </p>
-            <p>
-              Position: <s>{position}</s> to {data.position}
-            </p>
-            {data.pay !== "" && (
-              <p>
-                Pay Rate: <s>{pay}</s> to {data.pay}
-              </p>
-            )}
-            <p>
-              Insurance: <s>{insurance === "true" ? `Opt-IN` : `Opt-OUT`}</s> to{" "}
-              {data.insurance === "true" ? `Opt-IN` : `Opt-OUT`}
-            </p>
-            {hireDateValue && (
-              <p>
-                Hire Date: <s>{hireDate ? hireDate : `No Hire Date`}</s> to{" "}
-                {format(hireDateValue, `P`)}
-              </p>
-            )}
-            {promotionDateValue && (
-              <p>
-                Promotion Date:{" "}
-                <s>{promotionDate ? promotionDate : `No Promotion Date`} </s> to{" "}
-                {format(promotionDateValue, `P`)}
-              </p>
-            )}
-            {raiseDateValue && (
-              <p>
-                Last Raise:
-                <s>{lastRaise ? lastRaise : `No Previous Raise`}</s> to{" "}
-                {format(raiseDateValue, `P`)}
-              </p>
-            )}
-          </>
-        ))
-        async function updateUser() {
-          const userRef = doc(db, "users", id)
-          await updateDoc(userRef, {
-            ...data,
-            hireDate: format(hireDateValue, `P`),
-            promotionDate: format(promotionDateValue, `P`),
-            lastRaise: format(raiseDateValue, `P`),
-          })
+        init(`${process.env.GATSBY_EMAILJS_PUBLIC_KEY}`)
+        const { newName, newLocation, newPosition, newPay, newInsurance } = data
+        // These values can be used in the email template settings
+        const templateParams = {
+          name,
+          location,
+          position,
+          pay,
+          insurance,
+          hireDate,
+          promotionDate,
+          lastRaise,
+          newName,
+          newLocation,
+          newPosition,
+          newPay,
+          newInsurance,
+          newHireDate: format(newHireDate, `P`),
+          newPromotionDate: format(newPromotionDate, `P`),
+          newRaiseDate: format(newRaiseDate, `P`),
         }
-        updateUser()
+        // Send the email
+        // await emailjs.send(
+        //   `${process.env.GATSBY_PAYROLL_EMAILJS_SERVICE_ID}`,
+        //   `${process.env.GATSBY_PAYROLL_EMAILJS_TEMPLATE_ID}`,
+        //   templateParams,
+        //   `${process.env.GATSBY_EMAILJS_PUBLIC_KEY}`
+        // )
+        if (
+          data.newName === name &&
+          data.newLocation === location &&
+          data.newPosition === position &&
+          parseFloat(data.newPay) === pay &&
+          data.newInsurance === insurance &&
+          format(newHireDate, `P`) === hireDate &&
+          format(newPromotionDate, `P`) === promotionDate &&
+          format(newRaiseDate, `P`) === lastRaise
+        ) {
+          return toastifyFailed("No values were changed")
+        } else {
+          return toastifyInfo(<h2>{data.newName} Updated!</h2>)
+        }
+        // dispatch(updateUser({ id: id, info: data }))
+
+        // async function modifyUser() {
+        //   const userRef = doc(db, "users", id)
+        //   await updateDoc(userRef, {
+        //     name: data.newName,
+        //     insurance: data.newInsurance === "true" ? "OPT-IN" : "OPT-OUT",
+        //     location: data.newLocation,
+        //     position: data.newPosition,
+        //     pay: parseFloat(data.newPay),
+        //     hireDate: format(newHireDate, `P`),
+        //     promotionDate: format(newPromotionDate, `P`),
+        //     lastRaise: format(newRaiseDate, `P`),
+        //   })
+        // }
+        // modifyUser()
       }
     } catch (err) {
       toastifyFailed(err.message)
@@ -159,12 +132,12 @@ export const ModifyUserForm = props => {
                 placeholder={`(current): ${name}`}
                 defaultValue={name}
                 type="text"
-                {...register("name")}
+                {...register("newName")}
               />
             </div>
             <div className="label">
               <span>Location:</span>
-              <select {...register("location")}>
+              <select {...register("newLocation")}>
                 {location ? (
                   <option value={location}>(current): {location}</option>
                 ) : (
@@ -179,7 +152,7 @@ export const ModifyUserForm = props => {
             </div>
             <div className="label">
               <span>Position:</span>
-              <select {...register("position")}>
+              <select {...register("newPosition")}>
                 {position ? (
                   <option value={position}>(current): {position}</option>
                 ) : (
@@ -201,7 +174,7 @@ export const ModifyUserForm = props => {
                   step="0.01"
                   placeholder={`(current): $${pay}`}
                   defaultValue={pay}
-                  {...register("pay")}
+                  {...register("newPay")}
                 />
               ) : (
                 <input
@@ -209,19 +182,23 @@ export const ModifyUserForm = props => {
                   inputMode="numeric"
                   step="0.01"
                   placeholder="Pay Rate?"
-                  {...register("pay")}
+                  {...register("newPay")}
                 />
               )}
             </div>
             <div className="label">
               <span>Insurance</span>
-              <select {...register("insurance")}>
-                {insurance === "true" ? (
+              <select
+                {...register("newInsurance", {
+                  setValueAs: v => Boolean(v),
+                })}
+              >
+                {insurance === true ? (
                   <option value={true}>(current): Opt-IN</option>
                 ) : (
-                  <option value={false}>(current): Opt-OUT</option>
+                  <option value="">(current): Opt-OUT</option>
                 )}
-                <option value={false}>Opt-OUT</option>
+                <option value="">Opt-OUT</option>
                 <option value={true}>Opt-IN</option>
               </select>
             </div>
@@ -229,7 +206,7 @@ export const ModifyUserForm = props => {
               <span>Hire Date:</span>
               <DatePicker
                 onChange={onHireChange}
-                value={hireDateValue}
+                value={newHireDate}
                 calendarClassName="date-picker"
                 clearIcon={null}
               />
@@ -238,7 +215,7 @@ export const ModifyUserForm = props => {
               <span>Promotion Date:</span>
               <DatePicker
                 onChange={onPromotionChange}
-                value={promotionDateValue}
+                value={newPromotionDate}
                 calendarClassName="date-picker"
                 clearIcon={null}
               />
@@ -247,7 +224,7 @@ export const ModifyUserForm = props => {
               <span>Last Raise Date:</span>
               <DatePicker
                 onChange={onRaiseChange}
-                value={raiseDateValue}
+                value={newRaiseDate}
                 calendarClassName="date-picker"
                 clearIcon={null}
               />
@@ -255,7 +232,7 @@ export const ModifyUserForm = props => {
 
             <input
               type="submit"
-              value="Submit"
+              value="Save Changes"
               className="submit-btn"
               style={{
                 cursor: "pointer",

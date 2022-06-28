@@ -15,6 +15,10 @@ export const ModifyUserContainer = styled.div`
   height: 100%;
   padding: 20px;
 
+  .modify-form {
+    margin: 0 auto;
+  }
+
   .modify-close {
     height: 30px;
     cursor: pointer;
@@ -30,11 +34,22 @@ export const ModifyUserContainer = styled.div`
   .label {
     display: flex;
     flex-direction: column;
+    width: fit-content;
   }
   .label:not(:last-child) {
     margin-bottom: 10px;
   }
   .react-date-picker__inputGroup input {
     color: #fff;
+  }
+  .react-date-picker__calendar-button svg {
+    stroke: ${props => props.theme.colors.link};
+  }
+
+  .submit-btn {
+    margin-top: 30px;
+    padding: 5px;
+    border: 2px solid ${props => props.theme.colors.link};
+    width: 100%;
   }
 `

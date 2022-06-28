@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { useSelector } from "react-redux"
 import { selectUser, selectUserFireDoc } from "../app/features/userSlice"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -27,27 +27,6 @@ import { ProfileContainer } from "../css"
 export const UserFireDoc = () => {
   const user = useSelector(selectUser)
   const userFireDoc = useSelector(selectUserFireDoc)
-  const [splitHireDate, setSplitHireDate] = useState(
-    format(new Date(), `P`).split("/")
-  )
-  const [splitPromotionDate, setSplitPromotionDate] = useState(
-    format(new Date(), `P`).split("/")
-  )
-  const [splitRaiseDate, setSplitRaiseDate] = useState(
-    format(new Date(), `P`).split("/")
-  )
-
-  useEffect(() => {
-    if (userFireDoc && userFireDoc.hireDate) {
-      setSplitHireDate(userFireDoc.hireDate.split("/"))
-    }
-    if (userFireDoc && userFireDoc.promotionDate) {
-      setSplitPromotionDate(userFireDoc.promotionDate.split("/"))
-    }
-    if (userFireDoc && userFireDoc.lastRaise) {
-      setSplitRaiseDate(userFireDoc.lastRaise.split("/"))
-    }
-  }, [userFireDoc])
 
   return !user ? (
     <>
@@ -106,7 +85,7 @@ export const UserFireDoc = () => {
 
               <div className="aside-info__piece">
                 <FontAwesomeIcon icon={faBriefcaseMedical} />
-                <p>{userFireDoc.insurance === "true" ? "Opt-IN" : "Opt-OUT"}</p>
+                <p>{userFireDoc.insurance === true ? "Opt-IN" : "Opt-OUT"}</p>
               </div>
             </div>
           </aside>
@@ -119,9 +98,9 @@ export const UserFireDoc = () => {
                   <p>
                     Lifetime PTO:{" "}
                     {lifetimePTO(
-                      splitHireDate[2],
-                      splitHireDate[0],
-                      splitHireDate[1]
+                      userFireDoc.hireDate.split("/")[2],
+                      userFireDoc.hireDate.split("/")[0],
+                      userFireDoc.hireDate.split("/")[1]
                     )}{" "}
                     hours
                   </p>
@@ -130,10 +109,10 @@ export const UserFireDoc = () => {
                 )}
               </div>
               <div className="stat">
-                {userFireDoc.hireDate ? (
-                  <p>PTO Used: {userFireDoc.hoursUsed ? "hours" : "None"}</p>
+                {userFireDoc.hoursUsed ? (
+                  <p>PTO Used: {userFireDoc.hoursUsed} hours</p>
                 ) : (
-                  <p>No Hire Date</p>
+                  <p>No PTO Used</p>
                 )}
               </div>
             </div>
@@ -144,9 +123,9 @@ export const UserFireDoc = () => {
                 <>
                   <h2>
                     {remainingPTO(
-                      splitHireDate[2],
-                      splitHireDate[0],
-                      splitHireDate[1],
+                      userFireDoc.hireDate.split("/")[2],
+                      userFireDoc.hireDate.split("/")[0],
+                      userFireDoc.hireDate.split("/")[1],
                       userFireDoc.hoursUsed ? userFireDoc.hoursUsed : 0,
                       userFireDoc.pending ? userFireDoc.pending : null
                     )}
@@ -158,23 +137,23 @@ export const UserFireDoc = () => {
               )}
             </div>
             <div className="badge">
-              {splitHireDate ? (
+              {userFireDoc.hireDate ? (
                 <>
                   <h2>
                     +10 hours in{" "}
                     {daysUntil10Hrs(
-                      splitHireDate[2],
-                      splitHireDate[0],
-                      splitHireDate[1]
+                      userFireDoc.hireDate.split("/")[2],
+                      userFireDoc.hireDate.split("/")[0],
+                      userFireDoc.hireDate.split("/")[1]
                     )}{" "}
                     days
                   </h2>
                   <p>on</p>
                   <p>
                     {dateFor10Hrs(
-                      splitHireDate[2],
-                      splitHireDate[0],
-                      splitHireDate[1]
+                      userFireDoc.hireDate.split("/")[2],
+                      userFireDoc.hireDate.split("/")[0],
+                      userFireDoc.hireDate.split("/")[1]
                     )}
                   </p>
                 </>
@@ -237,23 +216,23 @@ export const UserFireDoc = () => {
             <div className="words">
               <div>
                 <span>Hire Date:</span>
-                {splitHireDate ? (
+                {userFireDoc.hireDate ? (
                   <>
                     <p>
                       {format(
                         new Date(
-                          splitHireDate[2],
-                          splitHireDate[0],
-                          splitHireDate[1]
+                          userFireDoc.hireDate.split("/")[2],
+                          userFireDoc.hireDate.split("/")[0] - 1,
+                          userFireDoc.hireDate.split("/")[1]
                         ),
                         `PPPP`
                       )}
                     </p>
                     <span>
                       {monthsWorked(
-                        splitHireDate[2],
-                        splitHireDate[0],
-                        splitHireDate[1]
+                        userFireDoc.hireDate.split("/")[2],
+                        userFireDoc.hireDate.split("/")[0],
+                        userFireDoc.hireDate.split("/")[1]
                       )}{" "}
                       months ago
                     </span>
@@ -265,23 +244,23 @@ export const UserFireDoc = () => {
 
               <div>
                 <span>Last Raise:</span>
-                {splitRaiseDate ? (
+                {userFireDoc.lastRaise ? (
                   <>
                     <p>
                       {format(
                         new Date(
-                          splitRaiseDate[2],
-                          splitRaiseDate[0],
-                          splitRaiseDate[1]
+                          userFireDoc.lastRaise.split("/")[2],
+                          userFireDoc.lastRaise.split("/")[0] - 1,
+                          userFireDoc.lastRaise.split("/")[1]
                         ),
                         `PPPP`
                       )}
                     </p>
                     <span>
                       {monthsWorked(
-                        splitRaiseDate[2],
-                        splitRaiseDate[0],
-                        splitRaiseDate[1]
+                        userFireDoc.lastRaise.split("/")[2],
+                        userFireDoc.lastRaise.split("/")[0],
+                        userFireDoc.lastRaise.split("/")[1]
                       )}{" "}
                       months ago
                     </span>
@@ -292,23 +271,23 @@ export const UserFireDoc = () => {
               </div>
               <div>
                 <span>Promotion Date:</span>
-                {splitPromotionDate ? (
+                {userFireDoc.promotionDate ? (
                   <>
                     <p>
                       {format(
                         new Date(
-                          splitPromotionDate[2],
-                          splitPromotionDate[0],
-                          splitPromotionDate[1]
+                          userFireDoc.promotionDate.split("/")[2],
+                          userFireDoc.promotionDate.split("/")[0] - 1,
+                          userFireDoc.promotionDate.split("/")[1]
                         ),
                         `PPPP`
                       )}
                     </p>
                     <span>
                       {monthsWorked(
-                        splitPromotionDate[2],
-                        splitPromotionDate[0],
-                        splitPromotionDate[1]
+                        userFireDoc.promotionDate.split("/")[2],
+                        userFireDoc.promotionDate.split("/")[0],
+                        userFireDoc.promotionDate.split("/")[1]
                       )}{" "}
                       months ago
                     </span>

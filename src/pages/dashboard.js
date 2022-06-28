@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
 import { selectUserFireDoc } from "../app/features/userSlice"
 import { GatsbySeo } from "gatsby-plugin-next-seo"
@@ -10,6 +10,15 @@ import Svg from "../svg/lock.svg"
 import { DashboardButtonsContainer } from "../css"
 
 const DashboardPage = () => {
+  useEffect(() => {
+    if (window !== "undefined") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      })
+    }
+  }, [])
+
   const userFireDoc = useSelector(selectUserFireDoc)
 
   const [panelView, setPanelView] = useState(true)
