@@ -89,6 +89,14 @@ export const FaqContainer = styled.div`
     margin: 0;
   }
 
+  .details-hr {
+    border: none;
+    border-top: 3px dotted ${props => props.theme.grayscale.light1};
+    width: 50%;
+    margin: 10px 0;
+    /* margin: 10px auto; */
+  }
+
   a:visited {
   }
   a:hover {

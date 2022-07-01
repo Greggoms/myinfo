@@ -1,113 +1,107 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { updateUser } from "../../app/features/usersSlice"
+import { modifyUser } from "../../app/features/usersSlice"
 import { doc, updateDoc } from "firebase/firestore"
 import { db } from "../../firebase/firebaseInit"
 import { format } from "date-fns"
-import { useForm } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 import emailjs, { init } from "@emailjs/browser"
 import DatePicker from "react-date-picker"
 
 import { locations } from "../../data/locations"
 import { positions } from "../../data/positions"
 import { toastifyFailed, toastifyInfo } from "../toasts"
-import { ModifyUserButton, ModifyUserContainer } from "../../css"
+import { ModifyUserContainer } from "../../css"
 
 export const ModifyUserForm = props => {
   const dispatch = useDispatch()
 
   const users = useSelector(state => state.users.value)
+  const user = users.find(person => person.id === props.id)
 
-  const {
-    id,
-    name,
-    hireDate,
-    insurance,
-    lastRaise,
-    location,
-    pay,
-    pending,
-    position,
-    promotionDate,
-  } = users.find(user => user.id === props.id)
-
-  const [modifyUser, setModifyUser] = useState(false)
-  const [newHireDate, onHireChange] = useState()
-  const [newPromotionDate, onPromotionChange] = useState()
-  const [newRaiseDate, onRaiseChange] = useState()
+  const [newHireDate, setNewHireDate] = useState(
+    user && user.hireDate
+      ? new Date(
+          user.hireDate.split("/")[2],
+          user.hireDate.split("/")[0] - 1,
+          user.hireDate.split("/")[1]
+        )
+      : ""
+  )
+  const [newPromotionDate, setNewPromotionDate] = useState(
+    user && user.promotionDate
+      ? new Date(
+          user.promotionDate.split("/")[2],
+          user.promotionDate.split("/")[0] - 1,
+          user.promotionDate.split("/")[1]
+        )
+      : ""
+  )
+  const [newRaiseDate, setNewRaiseDate] = useState(
+    user && user.lastRaise
+      ? new Date(
+          user.lastRaise.split("/")[2],
+          user.lastRaise.split("/")[0] - 1,
+          user.lastRaise.split("/")[1]
+        )
+      : ""
+  )
 
   const { register, handleSubmit } = useForm()
 
   const onSubmit = async data => {
+    console.log(data)
     try {
-      if (
-        data.name === "" &&
-        data.pay === "" &&
-        newHireDate === undefined &&
-        newPromotionDate === undefined &&
-        newRaiseDate === undefined
-      ) {
-        toastifyFailed(`You need to make at least 1 change before submitting`)
-      } else {
-        init(`${process.env.GATSBY_EMAILJS_PUBLIC_KEY}`)
-        const { newName, newLocation, newPosition, newPay, newInsurance } = data
-        // These values can be used in the email template settings
-        const templateParams = {
-          name,
-          location,
-          position,
-          pay,
-          insurance,
-          hireDate,
-          promotionDate,
-          lastRaise,
-          newName,
-          newLocation,
-          newPosition,
-          newPay,
-          newInsurance,
-          newHireDate: format(newHireDate, `P`),
-          newPromotionDate: format(newPromotionDate, `P`),
-          newRaiseDate: format(newRaiseDate, `P`),
-        }
-        // Send the email
-        // await emailjs.send(
-        //   `${process.env.GATSBY_PAYROLL_EMAILJS_SERVICE_ID}`,
-        //   `${process.env.GATSBY_PAYROLL_EMAILJS_TEMPLATE_ID}`,
-        //   templateParams,
-        //   `${process.env.GATSBY_EMAILJS_PUBLIC_KEY}`
-        // )
-        if (
-          data.newName === name &&
-          data.newLocation === location &&
-          data.newPosition === position &&
-          parseFloat(data.newPay) === pay &&
-          data.newInsurance === insurance &&
-          format(newHireDate, `P`) === hireDate &&
-          format(newPromotionDate, `P`) === promotionDate &&
-          format(newRaiseDate, `P`) === lastRaise
-        ) {
-          return toastifyFailed("No values were changed")
-        } else {
-          return toastifyInfo(<h2>{data.newName} Updated!</h2>)
-        }
-        // dispatch(updateUser({ id: id, info: data }))
-
-        // async function modifyUser() {
-        //   const userRef = doc(db, "users", id)
-        //   await updateDoc(userRef, {
-        //     name: data.newName,
-        //     insurance: data.newInsurance === "true" ? "OPT-IN" : "OPT-OUT",
-        //     location: data.newLocation,
-        //     position: data.newPosition,
-        //     pay: parseFloat(data.newPay),
-        //     hireDate: format(newHireDate, `P`),
-        //     promotionDate: format(newPromotionDate, `P`),
-        //     lastRaise: format(newRaiseDate, `P`),
-        //   })
-        // }
-        // modifyUser()
+      init(`${process.env.GATSBY_EMAILJS_PUBLIC_KEY}`)
+      // These values can be used in the email template settings
+      const templateParams = {
+        name: user.name,
+        location: user.location,
+        position: user.position,
+        pay: user.pay,
+        insurance: user.insurance,
+        hireDate: user.hireDate,
+        promotionDate: user.promotionDate,
+        lastRaise: user.lastRaise,
+        newName: data.name,
+        newLocation: data.location,
+        newPosition: data.position,
+        newPay: data.pay,
+        newInsurance: data.insurance,
+        newHireDate:
+          data.hireDate !== "" && format(new Date(data.hireDate), `P`),
+        promotionDate:
+          data.promotionDate !== "" &&
+          format(new Date(data.promotionDate), `P`),
+        newRaiseDate:
+          data.lastRaise !== "" && format(new Date(data.lastRaise), `P`),
       }
+      toastifyInfo(<h2>{data.name} Updated!</h2>)
+      dispatch(modifyUser(data))
+
+      // Send the email
+      // await emailjs.send(
+      //   `${process.env.GATSBY_PAYROLL_EMAILJS_SERVICE_ID}`,
+      //   `${process.env.GATSBY_PAYROLL_EMAILJS_TEMPLATE_ID}`,
+      //   templateParams,
+      //   `${process.env.GATSBY_EMAILJS_PUBLIC_KEY}`
+      // )
+
+      // async function modifyUser() {
+      //   const userRef = doc(db, "users", id)
+      //   await updateDoc(userRef, {
+      //     name: data.name,
+      //     insurance: data.insurance === "true" ? "OPT-IN" : "OPT-OUT",
+      //     location: data.location,
+      //     position: data.position,
+      //     pay: parseFloat(data.pay),
+      //     hireDate: format(data.hireDate, `P`),
+      //     promotionDate: format(data.promotionDate, `P`),
+      //     lastRaise: format(data.lastRaise, `P`),
+      //   })
+      // }
+      // modifyUser()
+      props.handleEditFunction()
     } catch (err) {
       toastifyFailed(err.message)
       console.log("Error! ->", err)
@@ -116,129 +110,172 @@ export const ModifyUserForm = props => {
 
   return (
     <>
-      <ModifyUserButton type="button" onClick={() => setModifyUser(true)}>
-        Modify
-      </ModifyUserButton>
-      {modifyUser && (
+      {props.editing && (
         <ModifyUserContainer>
-          <button className="modify-close" onClick={() => setModifyUser(false)}>
-            Cancel
-          </button>
-          <form className="modify-form" onSubmit={handleSubmit(onSubmit)}>
-            <h2>Updating {name}...</h2>
-            <div className="label">
-              <span>Full Name:</span>
-              <input
-                placeholder={`(current): ${name}`}
-                defaultValue={name}
-                type="text"
-                {...register("newName")}
-              />
-            </div>
-            <div className="label">
-              <span>Location:</span>
-              <select {...register("newLocation")}>
-                {location ? (
-                  <option value={location}>(current): {location}</option>
-                ) : (
-                  <option value="">Select a Location</option>
-                )}
-                {locations.map(location => (
-                  <option key={location} value={location}>
-                    {location}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="label">
-              <span>Position:</span>
-              <select {...register("newPosition")}>
-                {position ? (
-                  <option value={position}>(current): {position}</option>
-                ) : (
-                  <option value="">Select a Position</option>
-                )}
-                {positions.map(position => (
-                  <option key={position} value={position}>
-                    {position}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="label">
-              <span>Pay Rate:</span>
-              {pay ? (
+          <div className="grid">
+            <div className="main">
+              <h2>Updating {user.name}...</h2>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <input type="hidden" {...register("id")} value={user.id} />
                 <input
-                  type="number"
-                  inputMode="numeric"
-                  step="0.01"
-                  placeholder={`(current): $${pay}`}
-                  defaultValue={pay}
-                  {...register("newPay")}
+                  type="hidden"
+                  {...register("email")}
+                  value={user.email}
                 />
-              ) : (
                 <input
-                  type="number"
-                  inputMode="numeric"
-                  step="0.01"
-                  placeholder="Pay Rate?"
-                  {...register("newPay")}
+                  type="hidden"
+                  {...register("submitted")}
+                  value={user.submitted}
                 />
-              )}
-            </div>
-            <div className="label">
-              <span>Insurance</span>
-              <select
-                {...register("newInsurance", {
-                  setValueAs: v => Boolean(v),
-                })}
-              >
-                {insurance === true ? (
-                  <option value={true}>(current): Opt-IN</option>
-                ) : (
-                  <option value="">(current): Opt-OUT</option>
-                )}
-                <option value="">Opt-OUT</option>
-                <option value={true}>Opt-IN</option>
-              </select>
-            </div>
-            <div className="label">
-              <span>Hire Date:</span>
-              <DatePicker
-                onChange={onHireChange}
-                value={newHireDate}
-                calendarClassName="date-picker"
-                clearIcon={null}
-              />
-            </div>
-            <div className="label">
-              <span>Promotion Date:</span>
-              <DatePicker
-                onChange={onPromotionChange}
-                value={newPromotionDate}
-                calendarClassName="date-picker"
-                clearIcon={null}
-              />
-            </div>
-            <div className="label">
-              <span>Last Raise Date:</span>
-              <DatePicker
-                onChange={onRaiseChange}
-                value={newRaiseDate}
-                calendarClassName="date-picker"
-                clearIcon={null}
-              />
-            </div>
+                <input
+                  type="hidden"
+                  {...register("pending")}
+                  value={user.pending}
+                />
+                <input
+                  type="hidden"
+                  {...register("accepted")}
+                  value={user.accepted}
+                />
+                <label>
+                  <span>Full Name:</span>
+                  <input
+                    placeholder={`(current): ${user.name}`}
+                    defaultValue={user.name}
+                    type="text"
+                    {...register("name")}
+                  />
+                </label>
+                <label>
+                  <span>Location:</span>
+                  <select {...register("location")}>
+                    {user.location ? (
+                      <option value={user.location}>
+                        (current): {user.location}
+                      </option>
+                    ) : (
+                      <option value="">Select a Location</option>
+                    )}
+                    {locations.map(location => (
+                      <option key={location} value={location}>
+                        {location}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  <span>Position:</span>
+                  <select {...register("position")}>
+                    {user.position ? (
+                      <option value={user.position}>
+                        (current): {user.position}
+                      </option>
+                    ) : (
+                      <option value="">Select a Position</option>
+                    )}
+                    {positions.map(position => (
+                      <option key={position} value={position}>
+                        {position}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  <span>Pay Rate:</span>
+                  {user.pay ? (
+                    <input
+                      type="number"
+                      inputMode="numeric"
+                      step="0.01"
+                      placeholder={`(current): $${user.pay}`}
+                      defaultValue={user.pay}
+                      {...register("pay")}
+                    />
+                  ) : (
+                    <input
+                      type="number"
+                      inputMode="numeric"
+                      step="0.01"
+                      placeholder="Pay Rate?"
+                      {...register("pay")}
+                    />
+                  )}
+                </label>
+                <label>
+                  <span>Insurance</span>
+                  <select
+                    {...register("insurance", {
+                      setValueAs: v => Boolean(v),
+                    })}
+                  >
+                    {user.insurance === true ? (
+                      <option value={true}>(current): Opt-IN</option>
+                    ) : (
+                      <option value="">(current): Opt-OUT</option>
+                    )}
+                    <option value="">Opt-OUT</option>
+                    <option value={true}>Opt-IN</option>
+                  </select>
+                </label>
+                <label>
+                  <span>
+                    Hire Date: (current:{" "}
+                    {user.hireDate ? user.hireDate : "None"})
+                  </span>
+                  <input
+                    type="date"
+                    {...register("hireDate")}
+                    onChange={e => setNewHireDate(e.target.value)}
+                    value={newHireDate}
+                  />
+                </label>
+                <label>
+                  <span>
+                    Promotion Date: (current:{" "}
+                    {user.promotionDate ? user.promotionDate : "None"})
+                  </span>
+                  <input
+                    type="date"
+                    {...register("promotionDate")}
+                    onChange={e => setNewPromotionDate(e.target.value)}
+                    value={newPromotionDate}
+                  />
+                </label>
+                <label>
+                  <span>
+                    Last Raise Date: (current:{" "}
+                    {user.lastRaise ? user.lastRaise : "None"})
+                  </span>
+                  <input
+                    type="date"
+                    {...register("lastRaise")}
+                    onChange={e => setNewRaiseDate(e.target.value)}
+                    value={newRaiseDate}
+                  />
+                </label>
 
-            <input
-              type="submit"
-              value="Save Changes"
-              className="submit-btn"
-              style={{
-                cursor: "pointer",
-              }}
+                <input
+                  type="submit"
+                  value="Save Changes"
+                  className="submit-btn"
+                  style={{
+                    cursor: "pointer",
+                  }}
+                />
+              </form>
+              <button
+                className="modify-close"
+                onClick={() => props.handleEditFunction()}
+              >
+                Cancel
+              </button>
+            </div>
+            {/* eslint-disable-next-line */}
+            <div
+              className="overlay"
+              onClick={() => props.handleEditFunction()}
             />
-          </form>
+          </div>
         </ModifyUserContainer>
       )}
     </>

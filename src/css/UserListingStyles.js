@@ -1,14 +1,22 @@
 import styled from "styled-components"
 
 export const DetailedUsersContainer = styled.section`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  justify-items: center;
   gap: 10px;
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    grid-template-columns: repeat(auto-fit, minmax(470px, 1fr));
+  }
 
   .user {
     display: flex;
     flex-direction: column;
     gap: 5px;
+
+    width: 100%;
+    max-width: 470px;
 
     background-color: ${props => props.theme.grayscale.dark4};
     padding: 10px 20px;
@@ -71,10 +79,11 @@ export const DetailedUsersContainer = styled.section`
         border: 1px solid #aaa;
         border-radius: 4px;
         padding: 0.5em 0.5em 0;
-        cursor: pointer;
       }
 
       summary {
+        cursor: pointer;
+        text-align: center;
         font-weight: bold;
         margin: -0.5em -0.5em 0;
         padding: 0.5em;
@@ -96,6 +105,34 @@ export const DetailedUsersContainer = styled.section`
       margin: 30px 0 15px 0;
     }
 
+    .manage-request {
+      display: flex;
+      flex-direction: column;
+
+      .approve,
+      .deny {
+        margin-top: 5px;
+        cursor: pointer;
+      }
+
+      .approve {
+        padding: 5px;
+        border: 2px solid ${props => props.theme.colors.green};
+        background: ${props => props.theme.grayscale.light1};
+      }
+
+      .deny {
+        background: inherit;
+        border: none;
+        border-bottom: 1px solid ${props => props.theme.colors.red};
+        color: ${props => props.theme.grayscale.light1};
+      }
+
+      button:not(:last-child) {
+        margin-right: 30px;
+      }
+    }
+
     svg {
       font-size: 26pt;
     }
@@ -113,58 +150,6 @@ export const DetailedUsersContainer = styled.section`
       border-top: 2px solid ${props => props.theme.colors.link};
       width: 80%;
       margin: 10px auto;
-    }
-  }
-`
-
-export const MinimalDetailsContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  .user {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-    background: ${props => props.theme.grayscale.dark3};
-    padding: 10px;
-
-    span {
-      font-size: 10pt;
-    }
-  }
-
-  .action-buttons {
-    display: flex;
-    justify-content: space-around;
-  }
-
-  .request {
-    ul li {
-      margin-left: 20px;
-    }
-
-    details {
-      border: 1px solid #aaa;
-      border-radius: 4px;
-      padding: 0.5em 0.5em 0;
-      cursor: pointer;
-    }
-
-    summary {
-      font-weight: bold;
-      margin: -0.5em -0.5em 0;
-      padding: 0.5em;
-    }
-
-    details[open] {
-      padding: 0.5em;
-    }
-
-    details[open] summary {
-      border-bottom: 1px solid green;
-      margin-bottom: 0.5em;
     }
   }
 `

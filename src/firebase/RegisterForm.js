@@ -75,7 +75,7 @@ export const RegisterForm = () => {
     <FormContainer>
       <h3>For new users</h3>
       <label>
-        <span>Full Name</span>
+        <span>First and Last Name</span>
         <input
           value={name}
           onChange={e => setName(e.target.value)}

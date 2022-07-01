@@ -1,27 +1,54 @@
 import styled from "styled-components"
 
 export const ModifyUserContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-
   position: fixed;
   top: 0;
   left: 0;
-  overflow: scroll;
+  right: 0;
+  /* overflow-y: scroll; */
 
-  background: rgba(53, 53, 53, 0.9);
-  width: 100%;
-  height: 100%;
-  padding: 20px;
+  .grid {
+    display: grid;
+    width: 100%;
+    height: 100vh;
+  }
+  .main {
+    z-index: 1;
+    grid-column: 1;
+    grid-row: 1;
 
-  .modify-form {
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    justify-self: center;
+
+    width: fit-content;
+    height: fit-content;
+    background: ${props => props.theme.grayscale.dark4};
+    padding: 20px;
+  }
+  .overlay {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    height: 100%;
+    background: rgba(80, 80, 80, 0.5);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .modify-close {
-    height: 30px;
     cursor: pointer;
+    background: inherit;
+    border: none;
+    text-decoration: underline;
+    color: ${props => props.theme.grayscale.light1};
+    margin-top: 20px;
   }
 
   h2 {
@@ -31,7 +58,7 @@ export const ModifyUserContainer = styled.div`
   span {
     font-size: 10pt;
   }
-  .label {
+  label {
     display: flex;
     flex-direction: column;
     width: fit-content;

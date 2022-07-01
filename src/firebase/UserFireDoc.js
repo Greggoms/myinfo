@@ -23,6 +23,7 @@ import {
 import { Notification } from "../components/Notification"
 import Svg from "../svg/lock.svg"
 import { ProfileContainer } from "../css"
+import PtoRequestForm from "../components/PtoRequestForm"
 
 export const UserFireDoc = () => {
   const user = useSelector(selectUser)
@@ -162,21 +163,49 @@ export const UserFireDoc = () => {
               )}
             </div>
           </section>
+          <PtoRequestForm />
           <section className="requests-container">
+            <div className="request">
+              {userFireDoc.submitted ? (
+                <div>
+                  <h2>Submitted Requests ({userFireDoc.submitted.length})</h2>
+                  <ul>
+                    {userFireDoc.submitted.map((request, index) => {
+                      if (typeof request.dates === "string") {
+                        return (
+                          <li key={index}>
+                            {request.dates} using {request.hours} hours.
+                          </li>
+                        )
+                      } else {
+                        return (
+                          <li key={index}>
+                            {request.dates[0]} to {request.dates[1]} using{" "}
+                            {request.hours} hours.
+                          </li>
+                        )
+                      }
+                    })}
+                  </ul>
+                </div>
+              ) : (
+                <p>No Submitted Requests</p>
+              )}
+            </div>
             <div className="request">
               {userFireDoc.pending ? (
                 <div>
                   <h2>Pending Requests ({userFireDoc.pending.length})</h2>
                   <ul>
                     {userFireDoc.pending.map((request, index) =>
-                      request.dates.length > 1 ? (
+                      typeof request.dates === "string" ? (
                         <li key={index}>
-                          {request.dates[0]} to {request.dates[1]} using{" "}
-                          {request.hours} hours.
+                          {request.dates} using {request.hours} hours.
                         </li>
                       ) : (
                         <li key={index}>
-                          {request.dates} using {request.hours} hours.
+                          {request.dates[0]} to {request.dates[1]} using{" "}
+                          {request.hours} hours.
                         </li>
                       )
                     )}

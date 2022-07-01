@@ -2,7 +2,8 @@ export const Theme = {
   colors: {
     purple: "#B149BF",
     green: "#09A603",
-    link: "#00c5d6",
+    link: "#00DEF2",
+    linkLight: "#A7ECF2",
     red: "#F23D3D",
   },
   grayscale: {

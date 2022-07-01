@@ -295,6 +295,7 @@ const Faq = () => {
           </div>
           <details>
             <summary>How do I get Direct Deposit?</summary>
+            <p>This is the purpose of the Millennium Enrollment Form.</p>
             <h4>If you DO NOT have a checkbook</h4>
             <p>
               You will need to request a Direct Deposit Authorization form from
@@ -309,6 +310,7 @@ const Faq = () => {
               checks and write VOID across it. Fill out the Millennium Direct
               Deposit form and staple or tape it in the appropriate spot.
             </p>
+            <hr className="details-hr" />
             <p>
               Once you have the authorization form/VOID check, pick one of the
               following options:
@@ -334,6 +336,7 @@ const Faq = () => {
           </details>
           <details>
             <summary>How can I update my Direct Deposit details?</summary>
+            <p>This is the purpose of the Millennium Direct Deposit Form.</p>
             <p>
               If your bank account information changes, you will need to request
               a new Direct Deposit Authorization form as soon as possible. If
