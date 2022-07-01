@@ -6,7 +6,6 @@ import { db } from "../../firebase/firebaseInit"
 import { format } from "date-fns"
 import { useForm, Controller } from "react-hook-form"
 import emailjs, { init } from "@emailjs/browser"
-import DatePicker from "react-date-picker"
 
 import { locations } from "../../data/locations"
 import { positions } from "../../data/positions"
@@ -20,31 +19,13 @@ export const ModifyUserForm = props => {
   const user = users.find(person => person.id === props.id)
 
   const [newHireDate, setNewHireDate] = useState(
-    user && user.hireDate
-      ? new Date(
-          user.hireDate.split("/")[2],
-          user.hireDate.split("/")[0] - 1,
-          user.hireDate.split("/")[1]
-        )
-      : ""
+    user && user.hireDate ? user.hireDate : ""
   )
   const [newPromotionDate, setNewPromotionDate] = useState(
-    user && user.promotionDate
-      ? new Date(
-          user.promotionDate.split("/")[2],
-          user.promotionDate.split("/")[0] - 1,
-          user.promotionDate.split("/")[1]
-        )
-      : ""
+    user && user.promotionDate ? user.promotionDate : ""
   )
   const [newRaiseDate, setNewRaiseDate] = useState(
-    user && user.lastRaise
-      ? new Date(
-          user.lastRaise.split("/")[2],
-          user.lastRaise.split("/")[0] - 1,
-          user.lastRaise.split("/")[1]
-        )
-      : ""
+    user && user.lastRaise ? user.lastRaise : ""
   )
 
   const { register, handleSubmit } = useForm()
@@ -77,7 +58,13 @@ export const ModifyUserForm = props => {
           data.lastRaise !== "" && format(new Date(data.lastRaise), `P`),
       }
       toastifyInfo(<h2>{data.name} Updated!</h2>)
-      dispatch(modifyUser(data))
+      dispatch(
+        modifyUser(data, {
+          accepted: user.accepted,
+          pending: user.pending,
+          submitted: user.submitted,
+        })
+      )
 
       // Send the email
       // await emailjs.send(
@@ -121,21 +108,6 @@ export const ModifyUserForm = props => {
                   type="hidden"
                   {...register("email")}
                   value={user.email}
-                />
-                <input
-                  type="hidden"
-                  {...register("submitted")}
-                  value={user.submitted}
-                />
-                <input
-                  type="hidden"
-                  {...register("pending")}
-                  value={user.pending}
-                />
-                <input
-                  type="hidden"
-                  {...register("accepted")}
-                  value={user.accepted}
                 />
                 <label>
                   <span>Full Name:</span>

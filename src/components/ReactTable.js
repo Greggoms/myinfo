@@ -30,32 +30,28 @@ export const ReactTable = () => {
             col4: pay ? pay : "No Pay",
             col5: hireDate
               ? `${remainingPTO(
-                  hireDate.split("/")[2],
-                  hireDate.split("/")[0],
-                  hireDate.split("/")[1],
+                  hireDate.split("-")[0],
+                  hireDate.split("-")[1],
+                  hireDate.split("-")[2],
                   hoursUsed ? hoursUsed : 0,
                   pending
                 )} hrs`
               : `No Hire Date`,
             col6: hireDate
               ? `${daysUntil10Hrs(
-                  hireDate.split("/")[0],
-                  hireDate.split("/")[1],
-                  hireDate.split("/")[2]
+                  hireDate.split("-")[0],
+                  hireDate.split("-")[1],
+                  hireDate.split("-")[2]
                 )} days`
               : `No Hire Date`,
-            col7: hireDate
-              ? `${hireDate.split("/")[0]}/${hireDate.split("/")[1]}/${
-                  hireDate.split("/")[2]
-                }`
-              : `No Hire Date`,
+            col7: hireDate ? hireDate : `No Hire Date`,
             col8: insurance
               ? "Opt-IN"
               : hireDate
               ? monthsWorked(
-                  hireDate.split("/")[0],
-                  hireDate.split("/")[1],
-                  hireDate.split("/")[2]
+                  hireDate.split("-")[0],
+                  hireDate.split("-")[1],
+                  hireDate.split("-")[2]
                 ) < 3
                 ? "Not Eligible"
                 : "Opt-OUT"

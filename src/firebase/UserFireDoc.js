@@ -99,9 +99,9 @@ export const UserFireDoc = () => {
                   <p>
                     Lifetime PTO:{" "}
                     {lifetimePTO(
-                      userFireDoc.hireDate.split("/")[2],
-                      userFireDoc.hireDate.split("/")[0],
-                      userFireDoc.hireDate.split("/")[1]
+                      userFireDoc.hireDate.split("-")[0],
+                      userFireDoc.hireDate.split("-")[1],
+                      userFireDoc.hireDate.split("-")[2]
                     )}{" "}
                     hours
                   </p>
@@ -124,9 +124,9 @@ export const UserFireDoc = () => {
                 <>
                   <h2>
                     {remainingPTO(
-                      userFireDoc.hireDate.split("/")[2],
-                      userFireDoc.hireDate.split("/")[0],
-                      userFireDoc.hireDate.split("/")[1],
+                      userFireDoc.hireDate.split("-")[0],
+                      userFireDoc.hireDate.split("-")[1],
+                      userFireDoc.hireDate.split("-")[2],
                       userFireDoc.hoursUsed ? userFireDoc.hoursUsed : 0,
                       userFireDoc.pending ? userFireDoc.pending : null
                     )}
@@ -143,18 +143,18 @@ export const UserFireDoc = () => {
                   <h2>
                     +10 hours in{" "}
                     {daysUntil10Hrs(
-                      userFireDoc.hireDate.split("/")[2],
-                      userFireDoc.hireDate.split("/")[0],
-                      userFireDoc.hireDate.split("/")[1]
+                      userFireDoc.hireDate.split("-")[0],
+                      userFireDoc.hireDate.split("-")[1],
+                      userFireDoc.hireDate.split("-")[2]
                     )}{" "}
                     days
                   </h2>
                   <p>on</p>
                   <p>
                     {dateFor10Hrs(
-                      userFireDoc.hireDate.split("/")[2],
-                      userFireDoc.hireDate.split("/")[0],
-                      userFireDoc.hireDate.split("/")[1]
+                      userFireDoc.hireDate.split("-")[0],
+                      userFireDoc.hireDate.split("-")[1],
+                      userFireDoc.hireDate.split("-")[2]
                     )}
                   </p>
                 </>
@@ -250,18 +250,18 @@ export const UserFireDoc = () => {
                     <p>
                       {format(
                         new Date(
-                          userFireDoc.hireDate.split("/")[2],
-                          userFireDoc.hireDate.split("/")[0] - 1,
-                          userFireDoc.hireDate.split("/")[1]
+                          userFireDoc.hireDate.split("-")[0],
+                          userFireDoc.hireDate.split("-")[1] - 1,
+                          userFireDoc.hireDate.split("-")[2]
                         ),
                         `PPPP`
                       )}
                     </p>
                     <span>
                       {monthsWorked(
-                        userFireDoc.hireDate.split("/")[2],
-                        userFireDoc.hireDate.split("/")[0],
-                        userFireDoc.hireDate.split("/")[1]
+                        userFireDoc.hireDate.split("-")[0],
+                        userFireDoc.hireDate.split("-")[1],
+                        userFireDoc.hireDate.split("-")[2]
                       )}{" "}
                       months ago
                     </span>
@@ -278,18 +278,18 @@ export const UserFireDoc = () => {
                     <p>
                       {format(
                         new Date(
-                          userFireDoc.lastRaise.split("/")[2],
-                          userFireDoc.lastRaise.split("/")[0] - 1,
-                          userFireDoc.lastRaise.split("/")[1]
+                          userFireDoc.lastRaise.split("-")[0],
+                          userFireDoc.lastRaise.split("-")[1] - 1,
+                          userFireDoc.lastRaise.split("-")[2]
                         ),
                         `PPPP`
                       )}
                     </p>
                     <span>
                       {monthsWorked(
-                        userFireDoc.lastRaise.split("/")[2],
-                        userFireDoc.lastRaise.split("/")[0],
-                        userFireDoc.lastRaise.split("/")[1]
+                        userFireDoc.lastRaise.split("-")[0],
+                        userFireDoc.lastRaise.split("-")[1],
+                        userFireDoc.lastRaise.split("-")[2]
                       )}{" "}
                       months ago
                     </span>
@@ -305,18 +305,18 @@ export const UserFireDoc = () => {
                     <p>
                       {format(
                         new Date(
-                          userFireDoc.promotionDate.split("/")[2],
-                          userFireDoc.promotionDate.split("/")[0] - 1,
-                          userFireDoc.promotionDate.split("/")[1]
+                          userFireDoc.promotionDate.split("-")[0],
+                          userFireDoc.promotionDate.split("-")[1] - 1,
+                          userFireDoc.promotionDate.split("-")[2]
                         ),
                         `PPPP`
                       )}
                     </p>
                     <span>
                       {monthsWorked(
-                        userFireDoc.promotionDate.split("/")[2],
-                        userFireDoc.promotionDate.split("/")[0],
-                        userFireDoc.promotionDate.split("/")[1]
+                        userFireDoc.promotionDate.split("-")[0],
+                        userFireDoc.promotionDate.split("-")[1],
+                        userFireDoc.promotionDate.split("-")[2]
                       )}{" "}
                       months ago
                     </span>

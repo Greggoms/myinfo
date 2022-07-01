@@ -223,9 +223,9 @@ export const UserListing = () => {
                           <p>{hireDate}</p>
                           <span>
                             {monthsWorked(
-                              hireDate.split("/")[2],
-                              hireDate.split("/")[0],
-                              hireDate.split("/")[1]
+                              hireDate.split("-")[0],
+                              hireDate.split("-")[1],
+                              hireDate.split("-")[2]
                             )}{" "}
                             months ago
                           </span>
@@ -239,9 +239,9 @@ export const UserListing = () => {
                           <p>{promotionDate}</p>
                           <span>
                             {monthsWorked(
-                              promotionDate.split("/")[2],
-                              promotionDate.split("/")[0],
-                              promotionDate.split("/")[1]
+                              promotionDate.split("-")[0],
+                              promotionDate.split("-")[1],
+                              promotionDate.split("-")[2]
                             )}{" "}
                             months ago
                           </span>
@@ -255,9 +255,9 @@ export const UserListing = () => {
                           <p>{lastRaise}</p>
                           <span>
                             {monthsWorked(
-                              lastRaise.split("/")[2],
-                              lastRaise.split("/")[0],
-                              lastRaise.split("/")[1]
+                              lastRaise.split("-")[0],
+                              lastRaise.split("-")[1],
+                              lastRaise.split("-")[2]
                             )}{" "}
                             months ago
                           </span>
@@ -274,9 +274,9 @@ export const UserListing = () => {
                     {hireDate ? (
                       <p>
                         {remainingPTO(
-                          hireDate.split("/")[2],
-                          hireDate.split("/")[0],
-                          hireDate.split("/")[1],
+                          hireDate.split("-")[0],
+                          hireDate.split("-")[1],
+                          hireDate.split("-")[2],
                           hoursUsed ? hoursUsed : 0,
                           pending ? pending : null
                         )}{" "}
@@ -289,9 +289,9 @@ export const UserListing = () => {
                       <p>
                         +10 hours in{" "}
                         {daysUntil10Hrs(
-                          hireDate.split("/")[2],
-                          hireDate.split("/")[0],
-                          hireDate.split("/")[1]
+                          hireDate.split("-")[0],
+                          hireDate.split("-")[1],
+                          hireDate.split("-")[2]
                         )}{" "}
                         days
                       </p>
