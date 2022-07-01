@@ -23,8 +23,12 @@ export const usersSlice = createSlice({
       // 3) If there is a match, replace that array item with the new one.
       // https://stackoverflow.com/questions/5915789/how-to-replace-item-in-array
       // Eli answer
+      // EXTRA STEP ADDED:
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+      //// { ...state.value[index], ...action.payload }
+      //// This merges the existing values with the new ones.
       if (index !== -1) {
-        state.value[index] = action.payload
+        state.value[index] = { ...state.value[index], ...action.payload }
       }
       console.log(action.payload.name, "has been updated!")
     },

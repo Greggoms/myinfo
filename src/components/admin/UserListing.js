@@ -407,7 +407,10 @@ export const UserListing = () => {
                     </div>
                   </div>
                   <div className="action-buttons">
-                    <button onClick={() => handleSetEditing(id)}>
+                    <button
+                      onClick={() => handleSetEditing(id)}
+                      className="modify-button"
+                    >
                       {editing ? "Cancel" : "Edit"}
                     </button>
                     <DeleteUserForm id={id} />

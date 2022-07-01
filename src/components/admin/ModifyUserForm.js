@@ -31,7 +31,6 @@ export const ModifyUserForm = props => {
   const { register, handleSubmit } = useForm()
 
   const onSubmit = async data => {
-    console.log(data)
     try {
       init(`${process.env.GATSBY_EMAILJS_PUBLIC_KEY}`)
       // These values can be used in the email template settings
@@ -51,7 +50,7 @@ export const ModifyUserForm = props => {
         newInsurance: data.insurance,
         newHireDate:
           data.hireDate !== "" && format(new Date(data.hireDate), `P`),
-        promotionDate:
+        newPromotionDate:
           data.promotionDate !== "" &&
           format(new Date(data.promotionDate), `P`),
         newRaiseDate:

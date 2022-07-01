@@ -103,6 +103,15 @@ export const DetailedUsersContainer = styled.section`
       display: flex;
       justify-content: space-around;
       margin: 30px 0 15px 0;
+
+      .modify-button {
+        cursor: pointer;
+        background: ${props => props.theme.grayscale.light1};
+        border: 2px solid ${props => props.theme.colors.link};
+        width: 100%;
+        max-width: 150px;
+        padding: 8px;
+      }
     }
 
     .manage-request {
