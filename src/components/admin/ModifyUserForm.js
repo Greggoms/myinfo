@@ -4,7 +4,7 @@ import { modifyUser } from "../../app/features/usersSlice"
 import { doc, updateDoc } from "firebase/firestore"
 import { db } from "../../firebase/firebaseInit"
 import { format } from "date-fns"
-import { useForm, Controller } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import emailjs, { init } from "@emailjs/browser"
 
 import { locations } from "../../data/locations"
@@ -73,20 +73,12 @@ export const ModifyUserForm = props => {
       //   `${process.env.GATSBY_EMAILJS_PUBLIC_KEY}`
       // )
 
-      // async function modifyUser() {
-      //   const userRef = doc(db, "users", id)
-      //   await updateDoc(userRef, {
-      //     name: data.name,
-      //     insurance: data.insurance === "true" ? "OPT-IN" : "OPT-OUT",
-      //     location: data.location,
-      //     position: data.position,
-      //     pay: parseFloat(data.pay),
-      //     hireDate: format(data.hireDate, `P`),
-      //     promotionDate: format(data.promotionDate, `P`),
-      //     lastRaise: format(data.lastRaise, `P`),
-      //   })
-      // }
-      // modifyUser()
+      async function updateUser() {
+        const userRef = doc(db, "users", data.id)
+        await updateDoc(userRef, data)
+      }
+      updateUser()
+
       props.handleEditFunction()
     } catch (err) {
       toastifyFailed(err.message)

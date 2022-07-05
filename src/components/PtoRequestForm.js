@@ -28,9 +28,9 @@ const PtoRequestForm = () => {
       } else if (
         requestHours >
         remainingPTO(
-          userDoc.hireDate.split("/")[2],
-          userDoc.hireDate.split("/")[0],
-          userDoc.hireDate.split("/")[1],
+          userDoc.hireDate.split("-")[0],
+          userDoc.hireDate.split("-")[1],
+          userDoc.hireDate.split("-")[2],
           userDoc.hoursUsed ? userDoc.hoursUsed : 0,
           userDoc.pending ? userDoc.pending : null
         )
@@ -139,15 +139,16 @@ const PtoRequestForm = () => {
       </div>
       <div className="label">
         <span>
-          Hours:{" "}
-          {remainingPTO(
-            userDoc.hireDate.split("/")[2],
-            userDoc.hireDate.split("/")[0],
-            userDoc.hireDate.split("/")[1],
-            userDoc.hoursUsed ? userDoc.hoursUsed : 0,
-            userDoc.pending ? userDoc.pending : null
-          )}{" "}
-          Hours Remaining
+          Hours:
+          {userDoc.hireDate
+            ? `${remainingPTO(
+                userDoc.hireDate.split("-")[0],
+                userDoc.hireDate.split("-")[1],
+                userDoc.hireDate.split("-")[2],
+                userDoc.hoursUsed ? userDoc.hoursUsed : 0,
+                userDoc.pending ? userDoc.pending : null
+              )} Hours Remaining`
+            : " No hire date!"}
         </span>
         <div className="hour-container">
           <p>{requestHours}</p>
