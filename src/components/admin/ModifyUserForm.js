@@ -66,12 +66,12 @@ export const ModifyUserForm = props => {
       )
 
       // Send the email
-      // await emailjs.send(
-      //   `${process.env.GATSBY_PAYROLL_EMAILJS_SERVICE_ID}`,
-      //   `${process.env.GATSBY_PAYROLL_EMAILJS_TEMPLATE_ID}`,
-      //   templateParams,
-      //   `${process.env.GATSBY_EMAILJS_PUBLIC_KEY}`
-      // )
+      await emailjs.send(
+        `${process.env.GATSBY_PAYROLL_EMAILJS_SERVICE_ID}`,
+        `${process.env.GATSBY_PAYROLL_EMAILJS_TEMPLATE_ID}`,
+        templateParams,
+        `${process.env.GATSBY_EMAILJS_PUBLIC_KEY}`
+      )
 
       async function updateUser() {
         const userRef = doc(db, "users", data.id)

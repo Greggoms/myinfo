@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = { value: [] }
 
@@ -32,16 +32,20 @@ export const usersSlice = createSlice({
       }
       console.log(action.payload.name, "has been updated!")
     },
-    approvePtoRequestAdmin: (state, action) => {
+    managePtoRequest: (state, action) => {
       const user = state.value.find(person => person.id === action.payload.id)
-      console.log(action.payload.submitted)
-      console.log(current(user.submitted))
+      user.submitted = user.submitted.filter(
+        request => request.id !== action.payload.request.id
+      )
+      user.pending = user.pending
+        ? [...user.pending, action.payload.request]
+        : [action.payload.request]
     },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { gatherUsers, deleteUser, modifyUser, approvePtoRequestAdmin } =
+export const { gatherUsers, deleteUser, modifyUser, managePtoRequest } =
   usersSlice.actions
 
 // Selectors

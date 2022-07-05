@@ -24,16 +24,19 @@ const userSlice = createSlice({
           : [action.payload],
       }
     },
-    approvePtoRequest: (state, action) => {
-      state.userFireDoc = {
-        ...state.userFireDoc,
-        submitted: state.userFireDoc.submitted.filter(
-          request => request !== request
-        ),
-        pending: state.userFireDoc.pending
-          ? [...state.userFireDoc.pending, action.payload]
-          : [action.payload],
-      }
+    // https://stackoverflow.com/questions/67577835/same-action-triggering-in-multiple-slices-redux-toolkit
+    // slideshowp2 answer
+    // This allows for 1 action (modifyUser) to update
+    // 2 slice state values (this user.value & usersSlice's users.value)
+  },
+  extraReducers: {
+    "users/managePtoRequest": (state, action) => {
+      state.userFireDoc.submitted = state.userFireDoc.submitted.filter(
+        request => request.id !== action.payload.request.id
+      )
+      state.userFireDoc.pending = state.userFireDoc.pending
+        ? [...state.userFireDoc.pending, action.payload.request]
+        : [action.payload.request]
     },
   },
 })

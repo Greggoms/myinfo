@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { approvePtoRequest } from "../../app/features/userSlice"
-import { approvePtoRequestAdmin } from "../../app/features/usersSlice"
+import { managePtoRequest } from "../../app/features/usersSlice"
 import { differenceInCalendarMonths } from "date-fns"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -23,6 +22,7 @@ import {
   currentDay,
 } from "../../data/dateHelpers"
 import { DashboardButtonsContainer, DetailedUsersContainer } from "../../css"
+import { toast } from "react-toastify"
 
 export const UserListing = () => {
   const users = useSelector(state => state.users.value)
@@ -108,13 +108,17 @@ export const UserListing = () => {
   const handlePtoApproval = (e, id, index) => {
     const person = users.find(user => user.id === id)
     if (e.target.id === "approve") {
-      console.log(
+      dispatch(
+        managePtoRequest({
+          id: person.id,
+          request: person.submitted[index],
+        })
+      )
+      toast.success(
         `${person.name}'s request for ${person.submitted[index].dates} has been approved!`
       )
-      dispatch(approvePtoRequest(person.submitted[index]))
-      dispatch(approvePtoRequestAdmin(person))
     } else {
-      console.log(`${person.name}'s request has been denied.`)
+      toast.info(`${person.name}'s request has been denied.`)
     }
   }
 
@@ -307,7 +311,7 @@ export const UserListing = () => {
 
                   <div className="requests">
                     <div className="info request">
-                      {submitted ? (
+                      {submitted && submitted.length > 0 ? (
                         <details>
                           <summary>
                             Submitted Requests ({submitted.length})
@@ -363,14 +367,14 @@ export const UserListing = () => {
                           <summary>Pending Requests ({pending.length})</summary>
                           <ul>
                             {pending.map((request, index) =>
-                              request.dates.length > 1 ? (
+                              typeof request.dates === "string" ? (
                                 <li key={index}>
-                                  {request.dates[0]} to {request.dates[1]} using{" "}
-                                  {request.hours} hours.
+                                  {request.dates} using {request.hours} hours.
                                 </li>
                               ) : (
                                 <li key={index}>
-                                  {request.dates} using {request.hours} hours.
+                                  {request.dates[0]} to {request.dates[1]} using{" "}
+                                  {request.hours} hours.
                                 </li>
                               )
                             )}
@@ -388,14 +392,14 @@ export const UserListing = () => {
                           </summary>
                           <ul>
                             {accepted.map((request, index) =>
-                              request.dates.length > 1 ? (
+                              typeof request.dates === "string" ? (
                                 <li key={index}>
-                                  {request.dates[0]} to {request.dates[1]} using{" "}
-                                  {request.hours} hours.
+                                  {request.dates} using {request.hours} hours.
                                 </li>
                               ) : (
                                 <li key={index}>
-                                  {request.dates} using {request.hours} hours.
+                                  {request.dates[0]} to {request.dates[1]} using{" "}
+                                  {request.hours} hours.
                                 </li>
                               )
                             )}

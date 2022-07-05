@@ -11,6 +11,7 @@ export const ProfileContainer = styled.section`
     grid-template-areas:
       "aside-1 info-pto"
       "aside-2 info-pto"
+      "ptoRequestForm ptoRequestForm"
       "requests requests"
       "info-dates info-account";
 
@@ -39,6 +40,7 @@ export const ProfileContainer = styled.section`
     grid-template-areas:
       "aside-1 info-pto info-dates"
       "aside-2 info-pto info-account"
+      "ptoRequestForm ptoRequestForm ptoRequestForm"
       "requests requests requests";
   }
 
