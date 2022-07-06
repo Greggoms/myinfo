@@ -19,6 +19,11 @@ export const PtoRequestFormContainer = styled.section`
     }
   }
 
+  .dates {
+    display: flex;
+    gap: 10px;
+  }
+
   .form-help {
     position: fixed;
     top: 0;

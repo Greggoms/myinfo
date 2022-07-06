@@ -128,7 +128,9 @@ export const UserFireDoc = () => {
                       userFireDoc.hireDate.split("-")[1],
                       userFireDoc.hireDate.split("-")[2],
                       userFireDoc.hoursUsed ? userFireDoc.hoursUsed : 0,
-                      userFireDoc.pending ? userFireDoc.pending : null
+                      userFireDoc.pto && userFireDoc.pto.pending
+                        ? userFireDoc.pto.pending
+                        : null
                     )}
                   </h2>
                   <p>Available Hours</p>
@@ -166,11 +168,15 @@ export const UserFireDoc = () => {
           <PtoRequestForm />
           <section className="requests-container">
             <div className="request">
-              {userFireDoc.submitted ? (
+              {userFireDoc.pto &&
+              userFireDoc.pto.submitted &&
+              userFireDoc.pto.submitted.length >= 1 ? (
                 <div>
-                  <h2>Submitted Requests ({userFireDoc.submitted.length})</h2>
+                  <h2>
+                    Submitted Requests ({userFireDoc.pto.submitted.length})
+                  </h2>
                   <ul>
-                    {userFireDoc.submitted.map((request, index) => {
+                    {userFireDoc.pto.submitted.map((request, index) => {
                       if (typeof request.dates === "string") {
                         return (
                           <li key={index}>
@@ -193,11 +199,13 @@ export const UserFireDoc = () => {
               )}
             </div>
             <div className="request">
-              {userFireDoc.pending ? (
+              {userFireDoc.pto &&
+              userFireDoc.pto.pending &&
+              userFireDoc.pto.pending.length >= 1 ? (
                 <div>
-                  <h2>Pending Requests ({userFireDoc.pending.length})</h2>
+                  <h2>Pending Requests ({userFireDoc.pto.pending.length})</h2>
                   <ul>
-                    {userFireDoc.pending.map((request, index) =>
+                    {userFireDoc.pto.pending.map((request, index) =>
                       typeof request.dates === "string" ? (
                         <li key={index}>
                           {request.dates} using {request.hours} hours.
@@ -216,12 +224,14 @@ export const UserFireDoc = () => {
               )}
             </div>
             <div className="request">
-              {userFireDoc.accepted ? (
+              {userFireDoc.pto &&
+              userFireDoc.pto.accepted &&
+              userFireDoc.pto.accepted.length >= 1 ? (
                 <div>
-                  <h2>Accepted Requests ({userFireDoc.accepted.length})</h2>
+                  <h2>Accepted Requests ({userFireDoc.pto.accepted.length})</h2>
                   <hr />
                   <ul>
-                    {userFireDoc.accepted.map((request, index) =>
+                    {userFireDoc.pto.accepted.map((request, index) =>
                       request.dates.length > 1 ? (
                         <li key={index}>
                           {request.dates[0]} to {request.dates[1]} using{" "}
@@ -237,6 +247,31 @@ export const UserFireDoc = () => {
                 </div>
               ) : (
                 <p>No Accepted Requests</p>
+              )}
+            </div>
+            <div className="request">
+              {userFireDoc.pto &&
+              userFireDoc.pto.denied &&
+              userFireDoc.pto.denied.length >= 1 ? (
+                <div>
+                  <h2>Denied Requests ({userFireDoc.pto.denied.length})</h2>
+                  <ul>
+                    {userFireDoc.pto.denied.map((request, index) =>
+                      typeof request.dates === "string" ? (
+                        <li key={index}>
+                          {request.dates} using {request.hours} hours.
+                        </li>
+                      ) : (
+                        <li key={index}>
+                          {request.dates[0]} to {request.dates[1]} using{" "}
+                          {request.hours} hours.
+                        </li>
+                      )
+                    )}
+                  </ul>
+                </div>
+              ) : (
+                <p>No Denied Requests</p>
               )}
             </div>
           </section>

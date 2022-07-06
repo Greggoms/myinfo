@@ -5,8 +5,6 @@ import { doc, updateDoc, arrayUnion } from "firebase/firestore"
 import { db } from "../firebase/firebaseInit"
 
 import { v4 as uuid } from "uuid"
-import { format } from "date-fns"
-import DateRangePicker from "@wojtekmaj/react-daterange-picker"
 import emailjs, { init } from "@emailjs/browser"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons"
@@ -14,13 +12,10 @@ import { toast } from "react-toastify"
 import { remainingPTO } from "../data/dateHelpers"
 
 import { PtoRequestFormContainer } from "../css"
-import "@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css"
-import "react-calendar/dist/Calendar.css"
 
 const PtoRequestForm = () => {
-  // I may remove @wojtekmaj/react-daterange-picker and replace it with
-  // native <input type="date" /> logic
-  const [dateRangeValue, onChange] = useState([new Date(), new Date()])
+  const [beginDate, setBeginDate] = useState("")
+  const [endDate, setEndDate] = useState("")
   const [requestHours, setRequestHours] = useState(0)
   const [formHelp, setFormHelp] = useState(false)
 
@@ -53,12 +48,7 @@ const PtoRequestForm = () => {
           name: userDoc.name,
           email: userDoc.email,
           dates:
-            format(dateRangeValue[0], `P`) === format(dateRangeValue[1], `P`)
-              ? format(dateRangeValue[0], `P`)
-              : `${format(dateRangeValue[0], `P`)} to ${format(
-                  dateRangeValue[1],
-                  `P`
-                )}`,
+            beginDate === endDate ? beginDate : `${beginDate} to ${endDate}`,
           requestHours,
         }
 
@@ -73,16 +63,14 @@ const PtoRequestForm = () => {
         async function updateUser() {
           const userRef = doc(db, "users", userDoc.id)
           await updateDoc(userRef, {
-            submitted: arrayUnion({
+            // Update fields in nested objects
+            // https://firebase.google.com/docs/firestore/manage-data/add-data
+            "pto.submitted": arrayUnion({
               id: uuid(),
               dates:
-                format(dateRangeValue[0], `P`) ===
-                format(dateRangeValue[1], `P`)
-                  ? format(dateRangeValue[0], `P`)
-                  : [
-                      format(dateRangeValue[0], `P`),
-                      format(dateRangeValue[1], `P`),
-                    ],
+                beginDate === endDate || endDate === ""
+                  ? beginDate
+                  : [beginDate, endDate],
               hours: requestHours,
             }),
           })
@@ -91,15 +79,15 @@ const PtoRequestForm = () => {
         // update redux store
         dispatch(
           addPtoRequest({
-            id: uuid(),
-            dates:
-              format(dateRangeValue[0], `P`) === format(dateRangeValue[1], `P`)
-                ? format(dateRangeValue[0], `P`)
-                : [
-                    format(dateRangeValue[0], `P`),
-                    format(dateRangeValue[1], `P`),
-                  ],
-            hours: requestHours,
+            id: userDoc.id,
+            request: {
+              id: uuid(),
+              dates:
+                beginDate === endDate || endDate === ""
+                  ? beginDate
+                  : [beginDate, endDate],
+              hours: requestHours,
+            },
           })
         )
         // update UI
@@ -107,15 +95,13 @@ const PtoRequestForm = () => {
           <>
             <h3>Request Submitted!</h3>
             <p>StoreOps will review your request shortly.</p>
-            {format(dateRangeValue[0], `P`) ===
-            format(dateRangeValue[1], `P`) ? (
+            {beginDate === endDate || endDate === "" ? (
               <p>
-                {format(dateRangeValue[0], `P`)} using {requestHours} hours.
+                {beginDate} using {requestHours} hours.
               </p>
             ) : (
               <p>
-                {format(dateRangeValue[0], `P`)} to{" "}
-                {format(dateRangeValue[1], `P`)} using {requestHours} hours.
+                {beginDate} to {endDate} using {requestHours} hours.
               </p>
             )}
           </>
@@ -123,6 +109,7 @@ const PtoRequestForm = () => {
       }
       setRequestHours(0)
     } catch (e) {
+      console.log(e)
       toast.error(() => (
         <>
           <h3>Something went wrong</h3>
@@ -146,7 +133,24 @@ const PtoRequestForm = () => {
       </div>
       <div className="label">
         <span>Dates:</span>
-        <DateRangePicker onChange={onChange} value={dateRangeValue} />
+        <div className="dates">
+          <div>
+            <input
+              type="date"
+              value={beginDate}
+              onChange={e => setBeginDate(e.target.value)}
+            />
+          </div>
+          <p>to</p>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <input
+              type="date"
+              value={endDate}
+              onChange={e => setEndDate(e.target.value)}
+            />
+            <span>(optional)</span>
+          </div>
+        </div>
       </div>
       <div className="label">
         <span>

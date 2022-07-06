@@ -17,11 +17,20 @@ const userSlice = createSlice({
       state.userFireDoc = action.payload
     },
     addPtoRequest: (state, action) => {
-      state.userFireDoc = {
-        ...state.userFireDoc,
-        submitted: state.userFireDoc.submitted
-          ? [...state.userFireDoc.submitted, action.payload]
-          : [action.payload],
+      if (state.userFireDoc.pto) {
+        state.userFireDoc.pto = {
+          ...state.userFireDoc.pto,
+          submitted: state.userFireDoc.pto.submitted
+            ? [...state.userFireDoc.pto.submitted, action.payload.request]
+            : [action.payload.request],
+        }
+      } else {
+        state.userFireDoc = {
+          ...state.userFireDoc,
+          pto: {
+            submitted: [action.payload.request],
+          },
+        }
       }
     },
     // https://stackoverflow.com/questions/67577835/same-action-triggering-in-multiple-slices-redux-toolkit
@@ -30,12 +39,20 @@ const userSlice = createSlice({
     // 2 slice state values (this user.value & usersSlice's users.value)
   },
   extraReducers: {
-    "users/managePtoRequest": (state, action) => {
-      state.userFireDoc.submitted = state.userFireDoc.submitted.filter(
-        request => request.id !== action.payload.request.id
+    "users/approvePtoRequest": (state, action) => {
+      state.userFireDoc.pto.submitted = state.userFireDoc.pto.submitted.filter(
+        req => req.id !== action.payload.request.id
       )
-      state.userFireDoc.pending = state.userFireDoc.pending
-        ? [...state.userFireDoc.pending, action.payload.request]
+      state.userFireDoc.pto.pending = state.userFireDoc.pto.pending
+        ? [...state.userFireDoc.pto.pending, action.payload.request]
+        : [action.payload.request]
+    },
+    "users/denyPtoRequest": (state, action) => {
+      state.userFireDoc.pto.submitted = state.userFireDoc.pto.submitted.filter(
+        req => req.id !== action.payload.request.id
+      )
+      state.userFireDoc.pto.denied = state.userFireDoc.pto.denied
+        ? [...state.userFireDoc.pto.denied, action.payload.request]
         : [action.payload.request]
     },
   },

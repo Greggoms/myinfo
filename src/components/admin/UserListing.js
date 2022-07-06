@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { managePtoRequest } from "../../app/features/usersSlice"
+import {
+  approvePtoRequest,
+  denyPtoRequest,
+} from "../../app/features/usersSlice"
+import { doc, updateDoc, arrayRemove, arrayUnion } from "firebase/firestore"
+import { db } from "../../firebase/firebaseInit"
 import { differenceInCalendarMonths } from "date-fns"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -107,17 +112,35 @@ export const UserListing = () => {
 
   const handlePtoApproval = (e, id, index) => {
     const person = users.find(user => user.id === id)
+    const userRef = doc(db, "users", person.id)
     if (e.target.id === "approve") {
       dispatch(
-        managePtoRequest({
+        approvePtoRequest({
           id: person.id,
-          request: person.submitted[index],
+          request: person.pto.submitted[index],
         })
       )
+      async function approvePto() {
+        await updateDoc(userRef, {
+          "pto.submitted": arrayRemove(person.pto.submitted[index]),
+          "pto.pending": arrayUnion(person.pto.submitted[index]),
+        })
+      }
+      approvePto()
       toast.success(
-        `${person.name}'s request for ${person.submitted[index].dates} has been approved!`
+        `${person.name}'s request for ${person.pto.submitted[index].dates} has been approved!`
       )
     } else {
+      dispatch(
+        denyPtoRequest({ id: person.id, request: person.pto.submitted[index] })
+      )
+      async function denyPto() {
+        await updateDoc(userRef, {
+          "pto.submitted": arrayRemove(person.pto.submitted[index]),
+          "pto.denied": arrayUnion(person.pto.submitted[index]),
+        })
+      }
+      denyPto()
       toast.info(`${person.name}'s request has been denied.`)
     }
   }
@@ -188,9 +211,7 @@ export const UserListing = () => {
               position,
               location,
               hoursUsed,
-              submitted,
-              pending,
-              accepted,
+              pto,
             }) => {
               return (
                 <div className="user" key={id}>
@@ -282,7 +303,7 @@ export const UserListing = () => {
                           hireDate.split("-")[1],
                           hireDate.split("-")[2],
                           hoursUsed ? hoursUsed : 0,
-                          pending ? pending : null
+                          pto && pto.pending ? pto.pending : null
                         )}{" "}
                         Available Hours
                       </p>
@@ -311,13 +332,13 @@ export const UserListing = () => {
 
                   <div className="requests">
                     <div className="info request">
-                      {submitted && submitted.length > 0 ? (
+                      {pto && pto.submitted && pto.submitted.length > 0 ? (
                         <details>
                           <summary>
-                            Submitted Requests ({submitted.length})
+                            Submitted Requests ({pto.submitted.length})
                           </summary>
                           <ul>
-                            {submitted.map((request, index) => {
+                            {pto.submitted.map((request, index) => {
                               return (
                                 <li key={index}>
                                   <div className="manage-request">
@@ -345,7 +366,9 @@ export const UserListing = () => {
                                       <button
                                         id="deny"
                                         className="deny"
-                                        onClick={e => handlePtoApproval(e, id)}
+                                        onClick={e =>
+                                          handlePtoApproval(e, id, index)
+                                        }
                                       >
                                         Deny
                                       </button>
@@ -362,11 +385,13 @@ export const UserListing = () => {
                     </div>
 
                     <div className="info request">
-                      {pending ? (
+                      {pto && pto.pending ? (
                         <details>
-                          <summary>Pending Requests ({pending.length})</summary>
+                          <summary>
+                            Pending Requests ({pto.pending.length})
+                          </summary>
                           <ul>
-                            {pending.map((request, index) =>
+                            {pto.pending.map((request, index) =>
                               typeof request.dates === "string" ? (
                                 <li key={index}>
                                   {request.dates} using {request.hours} hours.
@@ -385,13 +410,13 @@ export const UserListing = () => {
                       )}
                     </div>
                     <div className="info request">
-                      {accepted ? (
+                      {pto && pto.accepted ? (
                         <details>
                           <summary>
-                            Accepted Requests ({accepted.length})
+                            Accepted Requests ({pto.accepted.length})
                           </summary>
                           <ul>
-                            {accepted.map((request, index) =>
+                            {pto.accepted.map((request, index) =>
                               typeof request.dates === "string" ? (
                                 <li key={index}>
                                   {request.dates} using {request.hours} hours.
@@ -407,6 +432,31 @@ export const UserListing = () => {
                         </details>
                       ) : (
                         <h5>No Accepted Requests</h5>
+                      )}
+                    </div>
+                    <div className="info request">
+                      {pto && pto.denied ? (
+                        <details>
+                          <summary>
+                            Denied Requests ({pto.denied.length})
+                          </summary>
+                          <ul>
+                            {pto.denied.map((request, index) =>
+                              typeof request.dates === "string" ? (
+                                <li key={index}>
+                                  {request.dates} using {request.hours} hours.
+                                </li>
+                              ) : (
+                                <li key={index}>
+                                  {request.dates[0]} to {request.dates[1]} using{" "}
+                                  {request.hours} hours.
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        </details>
+                      ) : (
+                        <h5>No Denied Requests</h5>
                       )}
                     </div>
                   </div>

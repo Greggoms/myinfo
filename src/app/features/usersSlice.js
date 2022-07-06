@@ -32,21 +32,56 @@ export const usersSlice = createSlice({
       }
       console.log(action.payload.name, "has been updated!")
     },
-    managePtoRequest: (state, action) => {
+    approvePtoRequest: (state, action) => {
       const user = state.value.find(person => person.id === action.payload.id)
-      user.submitted = user.submitted.filter(
+      user.pto.submitted = user.pto.submitted.filter(
         request => request.id !== action.payload.request.id
       )
-      user.pending = user.pending
-        ? [...user.pending, action.payload.request]
+      user.pto.pending = user.pto.pending
+        ? [...user.pto.pending, action.payload.request]
         : [action.payload.request]
+    },
+    denyPtoRequest: (state, action) => {
+      const user = state.value.find(person => person.id === action.payload.id)
+      user.pto.submitted = user.pto.submitted.filter(
+        request => request.id !== action.payload.request.id
+      )
+      user.pto.denied = user.pto.denied
+        ? [...user.pto.denied, action.payload.request]
+        : [action.payload.request]
+    },
+  },
+  extraReducers: {
+    "user/addPtoRequest": (state, action) => {
+      const user = state.value.find(person => person.id === action.payload.id)
+      const index = state.value.indexOf(user)
+      if (index !== -1) {
+        if (state.value[index].pto) {
+          state.value[index].pto.submitted = [
+            ...state.value[index].pto.submitted,
+            action.payload.request,
+          ]
+        } else {
+          state.value[index] = {
+            ...state.value[index],
+            pto: {
+              submitted: [action.payload.request],
+            },
+          }
+        }
+      }
     },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { gatherUsers, deleteUser, modifyUser, managePtoRequest } =
-  usersSlice.actions
+export const {
+  gatherUsers,
+  deleteUser,
+  modifyUser,
+  approvePtoRequest,
+  denyPtoRequest,
+} = usersSlice.actions
 
 // Selectors
 export const selectUsers = state => state.users.value
