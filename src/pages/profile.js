@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { UserFireDoc } from "../firebase/UserFireDoc"
+import { UserFireDoc } from "../components/UserFireDoc"
 
 const ProfilePage = () => {
   useEffect(() => {

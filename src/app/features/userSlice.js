@@ -58,8 +58,7 @@ const userSlice = createSlice({
   },
 })
 
-export const { login, logout, userFireDoc, addPtoRequest, approvePtoRequest } =
-  userSlice.actions
+export const { login, logout, userFireDoc, addPtoRequest } = userSlice.actions
 
 // Selectors
 export const selectUser = state => state.user.user

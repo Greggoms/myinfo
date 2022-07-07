@@ -10,8 +10,7 @@ import {
   userFireDoc,
 } from "../app/features/userSlice"
 import { gatherUsers } from "../app/features/usersSlice"
-
-import { toastifyFailed, toastifyInfo } from "./toasts"
+import { toast } from "react-toastify"
 import { NavContainer } from "../css"
 
 export const Nav = () => {
@@ -42,7 +41,7 @@ export const Nav = () => {
 
       {userDoc && userDoc.role === "admin" && (
         <Link
-          to="/dashboard"
+          to="/admin"
           activeStyle={{ color: "#94BDF2", textDecoration: "none" }}
         >
           Admin
@@ -60,13 +59,13 @@ export const Nav = () => {
                 dispatch(userFireDoc(null))
                 dispatch(gatherUsers(null))
                 navigate("/")
-                toastifyInfo(`Successful Logout!`)
+                toast.info(`Successful Logout!`)
               })
               .catch(error => {
                 const errorCode = error.code
                 const errorMessage = error.message
                 console.log(errorCode, "=>", errorMessage)
-                toastifyFailed(errorMessage)
+                toast.error(errorMessage)
               })
           }}
         >

@@ -7,9 +7,9 @@ import { UserListing } from "../components/admin/UserListing"
 import { ReactTable } from "../components/ReactTable"
 import { Notification } from "../components/Notification"
 import Svg from "../svg/lock.svg"
-import { DashboardButtonsContainer } from "../css"
+import { AdminButtonsContainer } from "../css"
 
-const DashboardPage = () => {
+const AdminPage = () => {
   useEffect(() => {
     if (window !== "undefined") {
       window.scrollTo({
@@ -49,9 +49,9 @@ const DashboardPage = () => {
         <GatsbySeo
           nofollow={true}
           noindex={true}
-          title={`${userFireDoc.name}'s Dashboard | AbbyHQ`}
+          title={`${userFireDoc.name}'s Admin | AbbyHQ`}
         />
-        <DashboardButtonsContainer>
+        <AdminButtonsContainer>
           <h3>View</h3>
           <div className="views">
             <button
@@ -71,7 +71,7 @@ const DashboardPage = () => {
               Table
             </button>
           </div>
-        </DashboardButtonsContainer>
+        </AdminButtonsContainer>
         {panelView && <UserListing />}
         {tableView && <ReactTable />}
       </>
@@ -79,7 +79,7 @@ const DashboardPage = () => {
   } else {
     return (
       <>
-        <GatsbySeo nofollow={true} noindex={true} title="Dashboard | AbbyHQ" />
+        <GatsbySeo nofollow={true} noindex={true} title="Admin | AbbyHQ" />
         <Notification message="You need Admin Rights for this." />
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Svg
@@ -96,4 +96,4 @@ const DashboardPage = () => {
   }
 }
 
-export default DashboardPage
+export default AdminPage

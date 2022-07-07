@@ -48,7 +48,9 @@ const PtoRequestForm = () => {
           name: userDoc.name,
           email: userDoc.email,
           dates:
-            beginDate === endDate ? beginDate : `${beginDate} to ${endDate}`,
+            beginDate === endDate || endDate === ""
+              ? beginDate
+              : `${beginDate} to ${endDate}`,
           requestHours,
         }
 
@@ -132,7 +134,7 @@ const PtoRequestForm = () => {
         />
       </div>
       <div className="label">
-        <span>Dates:</span>
+        <span>Date(s):</span>
         <div className="dates">
           <div>
             <input

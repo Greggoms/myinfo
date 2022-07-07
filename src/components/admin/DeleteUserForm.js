@@ -1,11 +1,9 @@
 import React from "react"
 import { doc, deleteDoc } from "firebase/firestore"
 import { db } from "../../firebase/firebaseInit"
-
 import { useSelector, useDispatch } from "react-redux"
 import { deleteUser } from "../../app/features/usersSlice"
-
-import { toastifyDeleteUser, toastifyFailed } from "../toasts"
+import { toast } from "react-toastify"
 import { DeleteUserButton } from "../../css"
 
 export const DeleteUserForm = props => {
@@ -19,11 +17,14 @@ export const DeleteUserForm = props => {
         await deleteDoc(doc(db, "users", id))
         dispatch(deleteUser(id))
         console.log("User deleted: ", name, id)
-        toastifyDeleteUser(name)
+        toast.info(name, {
+          autoClose: false,
+          closeOnClick: true,
+        })
       }
       removeUser()
     } catch (err) {
-      toastifyFailed()
+      toast.error(err.message)
       console.log("Error! ->", err)
     }
   }

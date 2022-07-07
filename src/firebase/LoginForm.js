@@ -1,10 +1,9 @@
 import React, { useState } from "react"
+import { navigate } from "gatsby"
 import { auth } from "./firebaseInit"
 import { signInWithEmailAndPassword } from "firebase/auth"
-
-import { toastifySignIn, toastifyFailed } from "../components/toasts"
+import { toast } from "react-toastify"
 import { FormContainer } from "../css"
-import { navigate } from "gatsby"
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("")
@@ -16,7 +15,7 @@ export const LoginForm = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(userAuth => {
         const user = userAuth.user
-        toastifySignIn(email)
+        toast(email)
         console.log(email)
 
         navigate("/profile")
@@ -30,11 +29,11 @@ export const LoginForm = () => {
         const errorMessage = error.message
         console.log(errorCode, "=>", errorMessage)
         if (errorCode === "auth/user-not-found") {
-          toastifyFailed("No account detected! Try registering instead.")
+          toast.error("No account detected! Try registering instead.")
         } else if (errorCode === "auth/invalid-email") {
-          toastifyFailed("Please use a valid email format.")
+          toast.error("Please use a valid email format.")
         } else {
-          toastifyFailed(errorMessage)
+          toast.error(errorMessage)
         }
       })
   }

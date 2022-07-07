@@ -1,40 +1,8 @@
 import styled from "styled-components"
 
 export const ModifyUserContainer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  /* overflow-y: scroll; */
-
-  .grid {
-    display: grid;
-    width: 100%;
-    height: 100vh;
-  }
-  .main {
-    z-index: 1;
-    grid-column: 1;
-    grid-row: 1;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-self: center;
-    justify-self: center;
-
-    width: fit-content;
-    height: fit-content;
-    background: ${props => props.theme.grayscale.dark4};
-    padding: 20px;
-  }
-  .overlay {
-    grid-column: 1;
-    grid-row: 1;
-    width: 100%;
-    height: 100%;
-    background: rgba(80, 80, 80, 0.5);
-  }
+  width: fit-content;
+  margin: 0 auto;
 
   form {
     display: flex;

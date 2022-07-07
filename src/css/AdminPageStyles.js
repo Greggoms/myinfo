@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const DashboardButtonsContainer = styled.div`
+export const AdminButtonsContainer = styled.div`
   margin-bottom: 20px;
 
   h3 {

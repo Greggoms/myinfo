@@ -1,11 +1,11 @@
 import React, { useState } from "react"
+import { navigate } from "gatsby"
 import { auth, db } from "./firebaseInit"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { doc, setDoc } from "firebase/firestore"
 import format from "date-fns/format"
-import { toastifyAccountCreation, toastifyFailed } from "../components/toasts"
+import { toast } from "react-toastify"
 import { FormContainer } from "../css"
-import { navigate } from "gatsby"
 
 export const RegisterForm = () => {
   const [name, setName] = useState("")
@@ -37,7 +37,7 @@ export const RegisterForm = () => {
     e.preventDefault()
 
     if (!name) {
-      return toastifyFailed("Please fill in your name for your new account.")
+      return toast.error("Please fill in your name for your new account.")
     }
 
     createUserWithEmailAndPassword(auth, email, password)
@@ -46,8 +46,8 @@ export const RegisterForm = () => {
         updateProfile(auth.currentUser, {
           displayName: name,
         })
-        toastifyAccountCreation(email)
         handleUserDocCreation()
+        toast.success(email)
       })
       .then(() => {
         navigate("/profile")
@@ -60,13 +60,13 @@ export const RegisterForm = () => {
         const errorMessage = error.message
         console.log(errorCode, "=>", errorMessage)
         if (errorCode === "auth/email-already-in-use") {
-          toastifyFailed(
+          toast.error(
             "Cannot create new account! This email is already in use. Try logging in instead."
           )
         } else if (errorCode === "auth/weak-password") {
-          toastifyFailed("Password should be at least 6 characters")
+          toast.error("Password should be at least 6 characters")
         } else {
-          toastifyFailed(errorMessage)
+          toast.error(errorMessage)
         }
       })
   }

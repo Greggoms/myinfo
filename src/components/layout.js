@@ -39,10 +39,12 @@ const Layout = ({ children }) => {
           }
         }
         async function getUsers() {
-          console.log("Calling firebase...")
           const q = query(collection(db, "users"), orderBy("name"))
           const querySnapshot = await getDocs(q)
-          gatherUsers(querySnapshot.docs.map(res => res.data()))
+          console.log(
+            "Gathered Assets: ",
+            querySnapshot.docs.map(res => res.data())
+          )
           dispatch(gatherUsers(querySnapshot.docs.map(res => res.data())))
         }
         grabUserDoc()
@@ -51,8 +53,8 @@ const Layout = ({ children }) => {
         console.log("No logged in user detected.")
       }
     })
-    // not sure if dispatch dependency is actually needed..
-  }, [dispatch])
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <HelmetProvider>

@@ -57,3 +57,32 @@ export const lifetimePTO = (hireYear, hireMonth, hireDay) => {
   )
   return Math.floor(result / 91) * 10
 }
+
+export const timeForReview = (name, lastRaise, hireDate, position) => {
+  // if (!lastRaise) {
+  //   console.log(`${name} has never been reviewed!`)
+  // }
+  // if (!hireDate) {
+  //   console.log(`${name} has no hire date!`)
+  // }
+  if (lastRaise || hireDate) {
+    const result = differenceInCalendarMonths(
+      new Date(currentYear, currentMonth, currentDay),
+      new Date(
+        lastRaise ? lastRaise.split("-")[0] : hireDate.split("-")[0],
+        lastRaise ? lastRaise.split("-")[1] : hireDate.split("-")[1],
+        lastRaise ? lastRaise.split("-")[2] : hireDate.split("-")[2]
+      )
+    )
+    if (
+      position !== "Assist Mngr" &&
+      position !== "Manager" &&
+      position !== "VHD Manager"
+    ) {
+      return result >= 3
+    } else {
+      return result >= 6
+    }
+  }
+  return null
+}

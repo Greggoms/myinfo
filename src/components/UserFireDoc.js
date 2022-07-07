@@ -20,10 +20,10 @@ import {
   remainingPTO,
 } from "../data/dateHelpers"
 
-import { Notification } from "../components/Notification"
+import { Notification } from "./Notification"
 import Svg from "../svg/lock.svg"
 import { ProfileContainer } from "../css"
-import PtoRequestForm from "../components/PtoRequestForm"
+import PtoRequestForm from "./PtoRequestForm"
 
 export const UserFireDoc = () => {
   const user = useSelector(selectUser)
@@ -307,7 +307,7 @@ export const UserFireDoc = () => {
               </div>
 
               <div>
-                <span>Last Raise:</span>
+                <span>Last Review:</span>
                 {userFireDoc.lastRaise ? (
                   <>
                     <p>
@@ -330,7 +330,7 @@ export const UserFireDoc = () => {
                     </span>
                   </>
                 ) : (
-                  <p>No raise date.</p>
+                  <p>No review date.</p>
                 )}
               </div>
               <div>

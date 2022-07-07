@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { auth } from "./firebaseInit"
 import { sendPasswordResetEmail } from "firebase/auth"
-import { toastifyPasswordReset, toastifyFailed } from "../components/toasts"
+import { toast } from "react-toastify"
 import { FormContainer } from "../css"
 
 export const PasswordResetForm = () => {
@@ -14,7 +14,7 @@ export const PasswordResetForm = () => {
       .then(() => {
         // Password reset email sent!
         console.log("Password Reset Link Sent", "=>", email)
-        toastifyPasswordReset(email)
+        toast.info(email)
         setEmail("")
       })
       .catch(error => {
@@ -22,7 +22,7 @@ export const PasswordResetForm = () => {
         const errorMessage = error.message
         console.log(errorCode, "=>", errorMessage)
         if (errorCode === "auth/missing-email") {
-          toastifyFailed(
+          toast.error(
             "Please fill in your email before sending the reset link."
           )
         }
