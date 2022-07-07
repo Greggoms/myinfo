@@ -80,7 +80,7 @@ export const ModifyUserForm = props => {
 
       toast.info(() => <h2>{data.name} Updated!</h2>)
 
-      props.handleEditFunction()
+      props.handleEditFunction && props.handleEditFunction()
     } catch (err) {
       toast.error(err.message)
       console.log("Error! ->", err)

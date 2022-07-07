@@ -472,7 +472,10 @@ export const UserListing = () => {
             <div className="grid">
               <div className="main">
                 <h3>Editing {userName}...</h3>
-                <ModifyUserForm id={userId} />
+                <ModifyUserForm
+                  id={userId}
+                  handleEditFunction={handleSetEditing}
+                />
               </div>
               {/* eslint-disable-next-line */}
               <div className="overlay" onClick={handleSetEditing} />
