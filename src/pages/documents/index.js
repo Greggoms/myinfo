@@ -36,7 +36,7 @@ const DocumentsPage = () => {
       <DocumentsPageContainer>
         <div className="document-sections">
           <div className="document-section">
-            <h2>New Hires</h2>
+            <h2>For New Hires</h2>
             <ul>
               <li>W-4</li>
               <li>Millennium Enrollment</li>
@@ -76,8 +76,99 @@ const DocumentsPage = () => {
           </div>
         </div>
         <div className="doc-list">
-          <h2>List of all Documents</h2>
-          <ul>
+          <h2>List of all Documents ({documentsList.allFile.edges.length})</h2>
+          <div className="columns">
+            <ul>
+              <h3>New Hire & Other</h3>
+              <hr />
+              {documentsList.allFile.edges.map(doc => {
+                if (
+                  !doc.node.name.includes("Abby Road") &&
+                  !doc.node.name.includes("Vapor World") &&
+                  !doc.node.name.includes("Vapor House Distro") &&
+                  !doc.node.name.includes("Wonderland")
+                ) {
+                  return (
+                    <li key={doc.node.name}>
+                      <a
+                        href={doc.node.publicURL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download
+                      >
+                        {doc.node.name}
+                      </a>
+                    </li>
+                  )
+                } else {
+                  return null
+                }
+              })}
+            </ul>
+            <ul>
+              <h3>Policies</h3>
+              <hr />
+              {documentsList.allFile.edges.map(doc => {
+                if (doc.node.name.includes("Abby Road")) {
+                  return (
+                    <li key={doc.node.name}>
+                      <a
+                        href={doc.node.publicURL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download
+                      >
+                        {doc.node.name}
+                      </a>
+                    </li>
+                  )
+                } else if (doc.node.name.includes("Vapor World")) {
+                  return (
+                    <li key={doc.node.name}>
+                      <a
+                        href={doc.node.publicURL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download
+                      >
+                        {doc.node.name}
+                      </a>
+                    </li>
+                  )
+                } else if (doc.node.name.includes("Vapor House Distro")) {
+                  return (
+                    <li key={doc.node.name}>
+                      <a
+                        href={doc.node.publicURL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download
+                      >
+                        {doc.node.name}
+                      </a>
+                    </li>
+                  )
+                } else if (doc.node.name.includes("Wonderland")) {
+                  return (
+                    <li key={doc.node.name}>
+                      <a
+                        href={doc.node.publicURL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download
+                      >
+                        {doc.node.name}
+                      </a>
+                    </li>
+                  )
+                } else {
+                  return null
+                }
+              })}
+            </ul>
+          </div>
+
+          {/* <ul>
             {documentsList.allFile.edges.map(doc => (
               <li key={doc.node.name}>
                 <a
@@ -90,7 +181,7 @@ const DocumentsPage = () => {
                 </a>
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       </DocumentsPageContainer>
     </>

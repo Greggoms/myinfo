@@ -1,14 +1,25 @@
 import styled from "styled-components"
 
 export const DocumentsPageContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  /* @media ${props => props.theme.breakpoints.desktop} {
+    flex-direction: row-reverse;
+    justify-content: center;
+  } */
+
   .document-sections {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
     gap: 25px;
 
-    margin: 0 auto;
-    width: fit-content;
+    @media ${props => props.theme.breakpoints.tablet} {
+      flex-direction: row;
+    }
   }
 
   .document-section {
@@ -18,6 +29,8 @@ export const DocumentsPageContainer = styled.section`
     background: ${props => props.theme.grayscale.light1};
     color: ${props => props.theme.grayscale.dark4};
     padding: 10px;
+    min-width: 240px;
+    max-width: 300px;
 
     h2 {
       margin-bottom: 5px;
@@ -39,7 +52,12 @@ export const DocumentsPageContainer = styled.section`
   .doc-list {
     width: 100%;
     max-width: fit-content;
-    margin: 20px auto;
+    margin: 0 auto;
+
+    h2 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
 
     ul {
       margin-left: 15px;
@@ -47,6 +65,22 @@ export const DocumentsPageContainer = styled.section`
 
     li:not(:last-child) {
       margin-bottom: 5px;
+    }
+
+    .columns {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      hr {
+        border: none;
+        border-bottom: 2px solid ${props => props.theme.grayscale.light1};
+        margin: 5px 0;
+      }
+
+      @media ${props => props.theme.breakpoints.tablet} {
+        flex-direction: row;
+      }
     }
 
     a:link {
