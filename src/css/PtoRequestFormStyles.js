@@ -21,7 +21,8 @@ export const PtoRequestFormContainer = styled.section`
 
   .dates {
     display: flex;
-    align-items: baseline;
+    align-items: flex-start;
+    justify-content: space-between;
     gap: 10px;
   }
 
@@ -82,7 +83,6 @@ export const PtoRequestFormContainer = styled.section`
   .hour {
     &-container {
       width: 100%;
-      max-width: 240px;
       border: 2px solid ${props => props.theme.grayscale.light1};
       padding: 5px;
       text-align: center;
@@ -101,6 +101,20 @@ export const PtoRequestFormContainer = styled.section`
         width: fit-content;
         font-size: 16pt;
       }
+    }
+  }
+
+  .request-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .reset {
+      background: inherit;
+      border: none;
+      color: ${props => props.theme.grayscale.light1};
+      text-decoration: underline;
+      cursor: pointer;
     }
   }
 

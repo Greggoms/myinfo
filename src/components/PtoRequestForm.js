@@ -23,6 +23,12 @@ const PtoRequestForm = () => {
   const dispatch = useDispatch()
   const userDoc = useSelector(selectUserFireDoc)
 
+  const clearPtoRequest = () => {
+    setBeginDate("")
+    setEndDate("")
+    setRequestHours(0)
+  }
+
   const handlePtoRequest = async () => {
     try {
       setSubmitting(true)
@@ -147,7 +153,6 @@ const PtoRequestForm = () => {
             <input
               type="date"
               value={beginDate}
-              placeholder="test"
               onChange={e => setBeginDate(e.target.value)}
             />
             <span>Begin - (required)</span>
@@ -188,9 +193,14 @@ const PtoRequestForm = () => {
           </div>
         </div>
       </div>
-      <button type="submit" onClick={handlePtoRequest}>
-        Submit Request
-      </button>
+      <div className="request-buttons">
+        <button type="submit" onClick={handlePtoRequest}>
+          Submit Request
+        </button>
+        <button onClick={clearPtoRequest} className="reset">
+          Reset
+        </button>
+      </div>
       {formHelp && (
         <div className="form-help">
           <div className="help">
