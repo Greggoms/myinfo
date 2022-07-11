@@ -49,11 +49,6 @@ const PolicyDocumentsPage = () => {
       />
       <h1 style={{ textAlign: "center", marginBottom: "20px" }}>Policies</h1>
       <PoliciesContainer>
-        <div className="policies-shared">
-          <h2>Shared Policies</h2>
-          <SharedPolicies />
-          <hr />
-        </div>
         <p style={{ textAlign: "center", marginBottom: "20px" }}>
           Please select your company
         </p>
@@ -87,6 +82,11 @@ const PolicyDocumentsPage = () => {
             <VhdPolicies />
           </div>
         )}
+        <div className="policies-shared">
+          <h2>Shared Policies</h2>
+          <SharedPolicies />
+          <hr />
+        </div>
       </PoliciesContainer>
     </>
   )

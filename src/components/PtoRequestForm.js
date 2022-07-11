@@ -18,12 +18,14 @@ const PtoRequestForm = () => {
   const [endDate, setEndDate] = useState("")
   const [requestHours, setRequestHours] = useState(0)
   const [formHelp, setFormHelp] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
   const dispatch = useDispatch()
   const userDoc = useSelector(selectUserFireDoc)
 
   const handlePtoRequest = async () => {
     try {
+      setSubmitting(true)
       // Error Handling
       if (requestHours <= 0) {
         toast.error(`You must use more than 0 hours on a request.`)
@@ -40,6 +42,8 @@ const PtoRequestForm = () => {
         toast.error(`You don't have enough hours for this request.`)
       } else if (requestHours > 40) {
         toast.error(`You can't use more than 40 hours per request.`)
+      } else if (beginDate === "") {
+        toast.error(`You must choose a beginning date for this PTO request.`)
       } else {
         // No errors? Send an email update and update the UserFireDoc
         init(`${process.env.GATSBY_EMAILJS_PUBLIC_KEY}`)
@@ -110,6 +114,9 @@ const PtoRequestForm = () => {
         ))
       }
       setRequestHours(0)
+      setBeginDate("")
+      setEndDate("")
+      setSubmitting(false)
     } catch (e) {
       console.log(e)
       toast.error(() => (
@@ -127,7 +134,7 @@ const PtoRequestForm = () => {
   return (
     <PtoRequestFormContainer>
       <div className="form-heading">
-        <h2>Make a PTO Request</h2>
+        <h2>{submitting ? `Submitting Request...` : `Make a PTO Request`}</h2>
         <FontAwesomeIcon
           icon={faCircleQuestion}
           onClick={() => setFormHelp(!formHelp)}
@@ -136,21 +143,25 @@ const PtoRequestForm = () => {
       <div className="label">
         <span>Date(s):</span>
         <div className="dates">
-          <div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
             <input
               type="date"
               value={beginDate}
+              placeholder="test"
               onChange={e => setBeginDate(e.target.value)}
             />
+            <span>Begin - (required)</span>
           </div>
           <p>to</p>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
             <input
               type="date"
               value={endDate}
               onChange={e => setEndDate(e.target.value)}
+              min={beginDate}
+              disabled={beginDate === ""}
             />
-            <span>(optional)</span>
+            <span>End - (optional)</span>
           </div>
         </div>
       </div>
@@ -168,7 +179,9 @@ const PtoRequestForm = () => {
             : " No hire date!"}
         </span>
         <div className="hour-container">
-          <p>{requestHours}</p>
+          <p>
+            {requestHours} {requestHours > 0 && `hours`}
+          </p>
           <div className="hour-buttons">
             <button onClick={() => setRequestHours(requestHours - 4)}>-</button>
             <button onClick={() => setRequestHours(requestHours + 4)}>+</button>

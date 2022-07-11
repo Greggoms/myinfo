@@ -21,6 +21,7 @@ export const PtoRequestFormContainer = styled.section`
 
   .dates {
     display: flex;
+    align-items: baseline;
     gap: 10px;
   }
 
