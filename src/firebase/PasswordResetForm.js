@@ -4,7 +4,7 @@ import { sendPasswordResetEmail } from "firebase/auth"
 import { toast } from "react-toastify"
 import { FormContainer } from "../css"
 
-export const PasswordResetForm = () => {
+export const PasswordResetForm = props => {
   const [email, setEmail] = useState("")
 
   const handlePasswordReset = e => {
@@ -33,7 +33,7 @@ export const PasswordResetForm = () => {
 
   return (
     <FormContainer>
-      <h3>Forgot password? Reset it here.</h3>
+      <h2>Password Reset</h2>
       <label>
         <span>Email</span>
         <input
@@ -46,6 +46,32 @@ export const PasswordResetForm = () => {
       <button onClick={handlePasswordReset} type="submit">
         Send reset link
       </button>
+      <p>
+        Email will be sent from: <br /> noreply@vwlogin-5ddeb.firebase.app
+      </p>
+      <p>Be sure to check your spam folder!</p>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          marginTop: "20px",
+        }}
+      >
+        <button
+          name="login"
+          onClick={props.handleFormNavigation}
+          className="form-nav"
+        >
+          Sign in
+        </button>
+        <button
+          name="register"
+          onClick={props.handleFormNavigation}
+          className="form-nav"
+        >
+          Register
+        </button>
+      </div>
     </FormContainer>
   )
 }

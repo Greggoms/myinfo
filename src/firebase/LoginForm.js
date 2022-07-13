@@ -5,7 +5,7 @@ import { signInWithEmailAndPassword } from "firebase/auth"
 import { toast } from "react-toastify"
 import { FormContainer } from "../css"
 
-export const LoginForm = () => {
+export const LoginForm = props => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
@@ -36,7 +36,7 @@ export const LoginForm = () => {
 
   return (
     <FormContainer>
-      <h3>For existing users</h3>
+      <h2>Login</h2>
       <label>
         <span>Email</span>
         <input
@@ -59,6 +59,26 @@ export const LoginForm = () => {
       <button className="login" onClick={handleLogin} type="submit">
         Login
       </button>
+      <p>
+        Need an account?{" "}
+        <button
+          name="register"
+          onClick={props.handleFormNavigation}
+          className="form-nav"
+        >
+          Register
+        </button>
+      </p>
+      <p>
+        Forgot Password?{" "}
+        <button
+          name="passwordreset"
+          onClick={props.handleFormNavigation}
+          className="form-nav"
+        >
+          Reset it
+        </button>
+      </p>
     </FormContainer>
   )
 }

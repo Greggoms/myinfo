@@ -7,7 +7,7 @@ import format from "date-fns/format"
 import { toast } from "react-toastify"
 import { FormContainer } from "../css"
 
-export const RegisterForm = () => {
+export const RegisterForm = props => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -73,7 +73,7 @@ export const RegisterForm = () => {
 
   return (
     <FormContainer>
-      <h3>For new users</h3>
+      <h2>Register</h2>
       <label>
         <span>First and Last Name</span>
         <input
@@ -104,6 +104,16 @@ export const RegisterForm = () => {
       <button className="register" onClick={handleRegister} type="submit">
         Register
       </button>
+      <p>
+        Have an account?{" "}
+        <button
+          name="login"
+          onClick={props.handleFormNavigation}
+          className="form-nav"
+        >
+          Sign in
+        </button>
+      </p>
     </FormContainer>
   )
 }

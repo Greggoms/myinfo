@@ -1,30 +1,8 @@
 import styled from "styled-components"
 
 export const LoginPageWrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
   /* to center the login form */
-  height: 100%;
-
-  .login-flow-content {
-    width: 100%;
-    max-width: 800px;
-    min-height: 250px;
-    background: linear-gradient(
-        217deg,
-        rgba(191, 191, 191, 0.8),
-        rgba(255, 0, 0, 0) 70.71%
-      ),
-      linear-gradient(127deg, rgba(89, 88, 86, 0.8), rgba(0, 255, 0, 0) 70.71%),
-      linear-gradient(
-        336deg,
-        rgba(115, 114, 111, 0.8),
-        rgba(0, 0, 255, 0) 70.71%
-      );
-  }
+  /* height: 100%; */
 
   .form-select-buttons {
     display: grid;
@@ -49,7 +27,14 @@ export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 0 20px 20px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+
+  h2 {
+    font-size: 26pt;
+    font-weight: 200;
+  }
 
   label {
     display: flex;
@@ -60,16 +45,22 @@ export const FormContainer = styled.form`
     }
   }
 
-  h3 {
-    margin: 0;
-    margin-top: 15px;
+  input {
+    padding: 4px;
   }
 
   button {
-    align-self: center;
+    align-self: flex-start;
 
     cursor: pointer;
     border: 3px solid ${props => props.theme.colors.link};
     padding: 10px 15px;
+  }
+
+  .form-nav {
+    background: inherit;
+    border: none;
+    padding: 0;
+    color: ${props => props.theme.colors.linkLight};
   }
 `

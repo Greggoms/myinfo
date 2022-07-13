@@ -22,8 +22,9 @@ export const LayoutContainer = styled.div`
   }
 
   /* to center the login form */
-  .main,
-  #gatsby-focus-wrapper {
+  main,
+  #gatsby-focus-wrapper,
+  #gatsby-focus-wrapper > div {
     height: 100%;
   }
 

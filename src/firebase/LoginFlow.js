@@ -9,66 +9,36 @@ const LoginFlow = () => {
   const [registerForm, setRegisterForm] = useState(false)
   const [passwordResetForm, setPasswordResetForm] = useState(false)
 
-  const buttonStyles = {
-    active: {
-      background: "#333",
-      color: "#f9f9f9",
-      transform: "translateY(-20px)",
-      borderTopLeftRadius: "10px",
-      borderTopRightRadius: "10px",
-    },
-    inactive: {
-      background: "#ccc",
-      color: "#333",
-      transform: "translateY(0)",
-    },
+  const handleFormNavigation = e => {
+    e.preventDefault()
+    try {
+      if (e.target.name === "login") {
+        setRegisterForm(false)
+        setPasswordResetForm(false)
+        setLoginForm(true)
+      } else if (e.target.name === "register") {
+        setLoginForm(false)
+        setPasswordResetForm(false)
+        setRegisterForm(true)
+      } else if (e.target.name === "passwordreset") {
+        setLoginForm(false)
+        setRegisterForm(false)
+        setPasswordResetForm(true)
+      }
+    } catch (e) {
+      console.error(e.message)
+    }
   }
 
   return (
     <LoginPageWrapper>
-      <div className="login-flow-content">
-        <div className="form-select-buttons">
-          <button
-            onClick={() => {
-              setRegisterForm(false)
-              setPasswordResetForm(false)
-              setLoginForm(true)
-            }}
-            type="button"
-            style={loginForm ? buttonStyles.active : buttonStyles.inactive}
-          >
-            Log in
-          </button>
-          <button
-            onClick={() => {
-              setLoginForm(false)
-              setPasswordResetForm(false)
-              setRegisterForm(true)
-            }}
-            type="button"
-            style={registerForm ? buttonStyles.active : buttonStyles.inactive}
-            className="register"
-          >
-            Register
-          </button>
-          <button
-            onClick={() => {
-              setLoginForm(false)
-              setRegisterForm(false)
-              setPasswordResetForm(true)
-            }}
-            type="button"
-            style={
-              passwordResetForm ? buttonStyles.active : buttonStyles.inactive
-            }
-          >
-            Reset Password
-          </button>
-        </div>
-        {loginForm && <LoginForm />}
-        {registerForm && <RegisterForm />}
-        {passwordResetForm && <PasswordResetForm />}
-      </div>
+      {loginForm && <LoginForm handleFormNavigation={handleFormNavigation} />}
+      {registerForm && (
+        <RegisterForm handleFormNavigation={handleFormNavigation} />
+      )}
+      {passwordResetForm && (
+        <PasswordResetForm handleFormNavigation={handleFormNavigation} />
+      )}
     </LoginPageWrapper>
   )
 }
