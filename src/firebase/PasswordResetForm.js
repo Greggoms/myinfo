@@ -14,7 +14,9 @@ export const PasswordResetForm = () => {
       .then(() => {
         // Password reset email sent!
         console.log("Password Reset Link Sent", "=>", email)
-        toast.info(email)
+        toast.info(
+          `Password reset link sent to ${email}. Check your spam folder!`
+        )
         setEmail("")
       })
       .catch(error => {

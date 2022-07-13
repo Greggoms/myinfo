@@ -30,7 +30,7 @@ const IndexPage = () => {
               <li>Pay Rate</li>
               <li>Other General Info</li>
             </ul>
-            <Button link="/profile" text="Your profile">
+            <Button link="/app/profile" text="Your profile">
               {">"}
             </Button>
           </div>

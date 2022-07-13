@@ -21,7 +21,7 @@ export const Nav = () => {
   return (
     <NavContainer>
       <Link
-        to="/profile"
+        to="/app/profile"
         activeStyle={{ color: "#94BDF2", textDecoration: "none" }}
       >
         Profile
@@ -41,7 +41,7 @@ export const Nav = () => {
 
       {userDoc && userDoc.role === "admin" && (
         <Link
-          to="/admin"
+          to="/app/admin"
           activeStyle={{ color: "#94BDF2", textDecoration: "none" }}
         >
           Admin
@@ -57,22 +57,20 @@ export const Nav = () => {
                 // set user to null in redux state
                 dispatch(logout())
                 dispatch(userFireDoc(null))
-                dispatch(gatherUsers(null))
+                dispatch(gatherUsers([]))
                 navigate("/")
                 toast.info(`Successful Logout!`)
               })
               .catch(error => {
-                const errorCode = error.code
-                const errorMessage = error.message
-                console.log(errorCode, "=>", errorMessage)
-                toast.error(errorMessage)
+                console.log(error.code, "=>", error.message)
+                toast.error(error.message)
               })
           }}
         >
           Logout
         </button>
       ) : (
-        <Link to="/login" activeStyle={{ color: "#94BDF2" }}>
+        <Link to="/app/login" activeStyle={{ color: "#94BDF2" }}>
           Login/Register
         </Link>
       )}

@@ -1,16 +1,19 @@
 import React from "react"
 import { useSelector } from "react-redux"
 import { selectUsers } from "../../app/features/usersSlice"
+import { selectUserFireDoc } from "../../app/features/userSlice"
 import handlePtoRequest from "../../utils/handlePtoRequest"
 import { UserDetailsContainer } from "../../css"
 import { monthsWorked, timeForReview } from "../../data/dateHelpers"
 import { ModifyUserForm } from "./ModifyUserForm"
+import { Notification } from "../Notification"
 
 const UserDetails = props => {
+  const currentUser = useSelector(selectUserFireDoc)
   const users = useSelector(selectUsers)
-  const user = users.find(user => props.params["*"] === user.id)
 
-  if (user) {
+  if (currentUser && currentUser.role === "admin" && users) {
+    const user = users.find(user => props.params["*"] === user.id)
     return (
       <UserDetailsContainer>
         <h2>{user.name}'s Page</h2>
@@ -95,7 +98,9 @@ const UserDetails = props => {
       </UserDetailsContainer>
     )
   } else {
-    return <p style={{ textAlign: "center" }}>Loading...</p>
+    return (
+      <Notification lock={true}>You need Admin Rights for this.</Notification>
+    )
   }
 }
 

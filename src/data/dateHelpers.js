@@ -6,7 +6,7 @@ import {
 } from "date-fns"
 
 export const currentYear = new Date().getFullYear()
-export const currentMonth = parseInt(new Date().getMonth() + 1)
+export const currentMonth = new Date().getMonth() + 1
 export const currentDay = new Date().getDate()
 
 export const remainingPTO = (
@@ -17,7 +17,7 @@ export const remainingPTO = (
   pending
 ) => {
   const result = differenceInCalendarDays(
-    new Date(currentYear, currentMonth, currentDay),
+    new Date(),
     new Date(hireYear, hireMonth, hireDay)
   )
   return pending
@@ -37,22 +37,22 @@ export const daysUntil10Hrs = (hireYear, hireMonth, hireDay) => {
 
 export const dateFor10Hrs = (hireYear, hireMonth, hireDay) => {
   const result = addDays(
-    new Date(currentYear, currentMonth, currentDay),
+    new Date(),
     daysUntil10Hrs(hireYear, hireMonth, hireDay)
   )
-  return format(new Date(result), `PPPP`)
+  return format(result, `PPPP`)
 }
 
 export const monthsWorked = (year, month, day) => {
   const result = differenceInCalendarMonths(
-    new Date(currentYear, currentMonth, currentDay),
-    new Date(year, month, day)
+    new Date(),
+    new Date(year, month - 1, day)
   )
   return result
 }
 export const lifetimePTO = (hireYear, hireMonth, hireDay) => {
   const result = differenceInCalendarDays(
-    new Date(currentYear, currentMonth, currentDay),
+    new Date(),
     new Date(hireYear, hireMonth, hireDay)
   )
   return Math.floor(result / 91) * 10

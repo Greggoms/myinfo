@@ -15,14 +15,10 @@ export const LoginForm = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(userAuth => {
         const user = userAuth.user
-        toast(email)
-        console.log(email)
-
-        navigate("/profile")
-
-        console.log("Signed in!", "=>", user)
+        toast(`Welcome ${user.displayName}!`)
         setEmail("")
         setPassword("")
+        navigate("/app/profile")
       })
       .catch(error => {
         const errorCode = error.code

@@ -2,16 +2,8 @@ import React, { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { Helmet, HelmetProvider } from "react-helmet-async"
 import { auth, db } from "../firebase/firebaseInit"
-import {
-  doc,
-  getDoc,
-  getDocs,
-  collection,
-  query,
-  orderBy,
-} from "firebase/firestore"
+import { doc, getDoc } from "firebase/firestore"
 import { login, userFireDoc } from "../app/features/userSlice"
-import { gatherUsers } from "../app/features/usersSlice"
 import { Header } from "./Header"
 import { Footer } from "./Footer"
 import { LayoutContainer, MainContainer } from "../css"
@@ -22,8 +14,8 @@ const Layout = ({ children }) => {
   // This useEffect persists user session through hard refreshes
   useEffect(() => {
     auth.onAuthStateChanged(userAuth => {
+      console.log("Page refreshed. Fetching user...")
       if (userAuth) {
-        console.log("Page refreshed. Fetching user...")
         dispatch(
           login({
             id: userAuth.uid,
@@ -38,17 +30,7 @@ const Layout = ({ children }) => {
             dispatch(userFireDoc(docSnap.data()))
           }
         }
-        async function getUsers() {
-          const q = query(collection(db, "users"), orderBy("name"))
-          const querySnapshot = await getDocs(q)
-          console.log(
-            "Gathered Assets: ",
-            querySnapshot.docs.map(res => res.data())
-          )
-          dispatch(gatherUsers(querySnapshot.docs.map(res => res.data())))
-        }
         grabUserDoc()
-        getUsers()
       } else {
         console.log("No logged in user detected.")
       }

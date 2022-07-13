@@ -1,26 +1,15 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useSelector } from "react-redux"
-import { selectUserFireDoc } from "../app/features/userSlice"
+import { selectUserFireDoc } from "../../app/features/userSlice"
 import { GatsbySeo } from "gatsby-plugin-next-seo"
 
-import { UserListing } from "../components/admin/UserListing"
-import { ReactTable } from "../components/ReactTable"
-import { Notification } from "../components/Notification"
-import Svg from "../svg/lock.svg"
-import { AdminButtonsContainer } from "../css"
+import { UserListing } from "./UserListing"
+import { ReactTable } from "../ReactTable"
+import { AdminButtonsContainer } from "../../css"
+import { Notification } from "../Notification"
 
 const AdminPage = () => {
-  useEffect(() => {
-    if (window !== "undefined") {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      })
-    }
-  }, [])
-
   const userFireDoc = useSelector(selectUserFireDoc)
-
   const [panelView, setPanelView] = useState(true)
   const [tableView, setTableView] = useState(false)
 
@@ -80,17 +69,7 @@ const AdminPage = () => {
     return (
       <>
         <GatsbySeo nofollow={true} noindex={true} title="Admin | AbbyHQ" />
-        <Notification message="You need Admin Rights for this." />
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <Svg
-            style={{
-              width: "100%",
-              maxWidth: "25rem",
-              height: "100%",
-              opacity: 0.5,
-            }}
-          />
-        </div>
+        <Notification lock={true}>You need Admin Rights for this.</Notification>
       </>
     )
   }

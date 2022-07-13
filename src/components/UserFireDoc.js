@@ -20,31 +20,14 @@ import {
   remainingPTO,
 } from "../data/dateHelpers"
 
-import { Notification } from "./Notification"
-import Svg from "../svg/lock.svg"
-import { ProfileContainer } from "../css"
 import PtoRequestForm from "./PtoRequestForm"
+import { ProfileContainer } from "../css"
 
-export const UserFireDoc = () => {
+const UserFireDoc = () => {
   const user = useSelector(selectUser)
   const userFireDoc = useSelector(selectUserFireDoc)
 
-  return !user ? (
-    <>
-      <GatsbySeo nofollow={true} noindex={true} title={`Profile | AbbyHQ`} />
-      <Notification message="You must be logged in to view your profile." />
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Svg
-          style={{
-            width: "100%",
-            maxWidth: "25rem",
-            height: "100%",
-            opacity: 0.5,
-          }}
-        />
-      </div>
-    </>
-  ) : (
+  return (
     <>
       <GatsbySeo
         nofollow={true}
@@ -229,7 +212,6 @@ export const UserFireDoc = () => {
               userFireDoc.pto.accepted.length >= 1 ? (
                 <div>
                   <h2>Accepted Requests ({userFireDoc.pto.accepted.length})</h2>
-                  <hr />
                   <ul>
                     {userFireDoc.pto.accepted.map((request, index) =>
                       request.dates.length > 1 ? (
@@ -379,3 +361,5 @@ export const UserFireDoc = () => {
     </>
   )
 }
+
+export default UserFireDoc

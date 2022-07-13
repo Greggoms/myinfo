@@ -17,10 +17,15 @@ export const DeleteUserForm = props => {
         await deleteDoc(doc(db, "users", id))
         dispatch(deleteUser(id))
         console.log("User deleted: ", name, id)
-        toast.info(name, {
-          autoClose: false,
-          closeOnClick: true,
-        })
+        toast.info(
+          `${name}'s
+      FireDoc has been deleted. Visit https://console.firebase.google.com/u/4/project/abbyhq-35b53/authentication/users
+      to manually remove their Auth.`,
+          {
+            autoClose: false,
+            closeOnClick: true,
+          }
+        )
       }
       removeUser()
     } catch (err) {

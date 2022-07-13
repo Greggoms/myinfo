@@ -4,7 +4,7 @@ import { PasswordResetForm } from "./PasswordResetForm"
 import { RegisterForm } from "./RegisterForm"
 import { LoginPageWrapper } from "../css"
 
-export const LoginFlow = () => {
+const LoginFlow = () => {
   const [loginForm, setLoginForm] = useState(true)
   const [registerForm, setRegisterForm] = useState(false)
   const [passwordResetForm, setPasswordResetForm] = useState(false)
@@ -72,3 +72,5 @@ export const LoginFlow = () => {
     </LoginPageWrapper>
   )
 }
+
+export default LoginFlow

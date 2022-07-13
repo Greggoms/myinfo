@@ -47,10 +47,10 @@ export const RegisterForm = () => {
           displayName: name,
         })
         handleUserDocCreation()
-        toast.success(email)
+        toast.success(`Account Created for ${name}! - ${email}`)
       })
       .then(() => {
-        navigate("/profile")
+        navigate("/app/profile")
         setName("")
         setEmail("")
         setPassword("")
