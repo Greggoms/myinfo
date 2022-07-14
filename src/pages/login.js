@@ -1,8 +1,9 @@
 import React, { useState } from "react"
-import { LoginForm } from "./LoginForm"
-import { PasswordResetForm } from "./PasswordResetForm"
-import { RegisterForm } from "./RegisterForm"
+import { LoginForm } from "../firebase/LoginForm"
+import { PasswordResetForm } from "../firebase/PasswordResetForm"
+import { RegisterForm } from "../firebase/RegisterForm"
 import { LoginPageWrapper } from "../css"
+import { GatsbySeo } from "gatsby-plugin-next-seo"
 
 const LoginFlow = () => {
   const [loginForm, setLoginForm] = useState(true)
@@ -32,12 +33,32 @@ const LoginFlow = () => {
 
   return (
     <LoginPageWrapper>
-      {loginForm && <LoginForm handleFormNavigation={handleFormNavigation} />}
+      {loginForm && (
+        <>
+          <GatsbySeo nofollow={true} noindex={true} title={`Login | AbbyHQ`} />
+          <LoginForm handleFormNavigation={handleFormNavigation} />
+        </>
+      )}
+
       {registerForm && (
-        <RegisterForm handleFormNavigation={handleFormNavigation} />
+        <>
+          <GatsbySeo
+            nofollow={true}
+            noindex={true}
+            title={`Register | AbbyHQ`}
+          />
+          <RegisterForm handleFormNavigation={handleFormNavigation} />
+        </>
       )}
       {passwordResetForm && (
-        <PasswordResetForm handleFormNavigation={handleFormNavigation} />
+        <>
+          <GatsbySeo
+            nofollow={true}
+            noindex={true}
+            title={`Reset Password | AbbyHQ`}
+          />
+          <PasswordResetForm handleFormNavigation={handleFormNavigation} />
+        </>
       )}
     </LoginPageWrapper>
   )

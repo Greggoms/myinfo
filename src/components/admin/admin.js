@@ -5,8 +5,8 @@ import { GatsbySeo } from "gatsby-plugin-next-seo"
 
 import { UserListing } from "./UserListing"
 import { ReactTable } from "../ReactTable"
-import { AdminButtonsContainer } from "../../css"
 import { Notification } from "../Notification"
+import { AdminButtonsContainer } from "../../css"
 
 const AdminPage = () => {
   const userFireDoc = useSelector(selectUserFireDoc)
@@ -31,8 +31,9 @@ const AdminPage = () => {
     },
     inactive: {},
   }
-
-  if (userFireDoc && userFireDoc.role === "admin") {
+  if (!userFireDoc || userFireDoc.role !== "admin") {
+    return <Notification lock={true}>Access Denied</Notification>
+  } else {
     return (
       <>
         <GatsbySeo
@@ -63,13 +64,6 @@ const AdminPage = () => {
         </AdminButtonsContainer>
         {panelView && <UserListing />}
         {tableView && <ReactTable />}
-      </>
-    )
-  } else {
-    return (
-      <>
-        <GatsbySeo nofollow={true} noindex={true} title="Admin | AbbyHQ" />
-        <Notification lock={true}>You need Admin Rights for this.</Notification>
       </>
     )
   }

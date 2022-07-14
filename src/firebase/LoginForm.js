@@ -1,37 +1,17 @@
 import React, { useState } from "react"
-import { navigate } from "gatsby"
-import { auth } from "./firebaseInit"
-import { signInWithEmailAndPassword } from "firebase/auth"
-import { toast } from "react-toastify"
+import { useSelector } from "react-redux/es/exports"
+import { selectUserFireDoc } from "../app/features/userSlice"
+import handleLogin from "../utils/handleLogin"
+import { navigate } from "@reach/router"
 import { FormContainer } from "../css"
 
 export const LoginForm = props => {
+  const currentUserFireDoc = useSelector(selectUserFireDoc)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const handleLogin = e => {
-    e.preventDefault()
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then(userAuth => {
-        const user = userAuth.user
-        toast(`Welcome ${user.displayName}!`)
-        setEmail("")
-        setPassword("")
-        navigate("/app/profile")
-      })
-      .catch(error => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        console.log(errorCode, "=>", errorMessage)
-        if (errorCode === "auth/user-not-found") {
-          toast.error("No account detected! Try registering instead.")
-        } else if (errorCode === "auth/invalid-email") {
-          toast.error("Please use a valid email format.")
-        } else {
-          toast.error(errorMessage)
-        }
-      })
+  if (currentUserFireDoc) {
+    navigate(`/app/profile`)
   }
 
   return (
@@ -56,29 +36,30 @@ export const LoginForm = props => {
           placeholder="Password"
         />
       </label>
-      <button className="login" onClick={handleLogin} type="submit">
+      <button
+        className="login"
+        onClick={e => handleLogin(e, { email: email, password: password })}
+        type="submit"
+      >
         Login
       </button>
-      <p>
-        Need an account?{" "}
-        <button
-          name="register"
-          onClick={props.handleFormNavigation}
-          className="form-nav"
-        >
-          Register
-        </button>
-      </p>
-      <p>
-        Forgot Password?{" "}
-        <button
-          name="passwordreset"
-          onClick={props.handleFormNavigation}
-          className="form-nav"
-        >
-          Reset it
-        </button>
-      </p>
+
+      <hr />
+
+      <div className="form-nav">
+        <div className="label">
+          Need an account?{" "}
+          <button name="register" onClick={props.handleFormNavigation}>
+            Register
+          </button>
+        </div>
+        <div className="label">
+          Forgot Password?{" "}
+          <button name="passwordreset" onClick={props.handleFormNavigation}>
+            Reset it
+          </button>
+        </div>
+      </div>
     </FormContainer>
   )
 }

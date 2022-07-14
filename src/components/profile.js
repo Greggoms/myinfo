@@ -1,6 +1,6 @@
 import React from "react"
 import { useSelector } from "react-redux"
-import { selectUser, selectUserFireDoc } from "../app/features/userSlice"
+import { selectUserFireDoc, selectUser } from "../app/features/userSlice"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faIdBadge,
@@ -20,21 +20,31 @@ import {
   remainingPTO,
 } from "../data/dateHelpers"
 
+import { Notification } from "../components/Notification"
 import PtoRequestForm from "./PtoRequestForm"
 import { ProfileContainer } from "../css"
+import { Link } from "gatsby"
 
 const UserFireDoc = () => {
-  const user = useSelector(selectUser)
+  const userAuth = useSelector(selectUser)
   const userFireDoc = useSelector(selectUserFireDoc)
 
-  return (
-    <>
-      <GatsbySeo
-        nofollow={true}
-        noindex={true}
-        title={`${user.name}'s Profile | AbbyHQ`}
-      />
-      {userFireDoc ? (
+  if (userAuth && !userFireDoc) {
+    return <h2 style={{ textAlign: "center" }}>Fetching your Profile...</h2>
+  } else if (!userAuth || !userFireDoc) {
+    return (
+      <Notification lock={true}>
+        You need to be <Link to="/login">logged in</Link> to view this page.
+      </Notification>
+    )
+  } else if (userAuth && userFireDoc) {
+    return (
+      <>
+        <GatsbySeo
+          nofollow={true}
+          noindex={true}
+          title={`${userFireDoc.name}'s Profile | AbbyHQ`}
+        />
         <ProfileContainer>
           <aside className="aside-1">
             <h2>{userFireDoc.name.split(" ")[0]}</h2>
@@ -353,13 +363,9 @@ const UserFireDoc = () => {
             </div>
           </section>
         </ProfileContainer>
-      ) : (
-        <h2 style={{ textAlign: "center", fontSize: "32pt" }}>
-          Fetching your profile...
-        </h2>
-      )}
-    </>
-  )
+      </>
+    )
+  }
 }
 
 export default UserFireDoc

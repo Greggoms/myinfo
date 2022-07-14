@@ -57,10 +57,26 @@ export const FormContainer = styled.form`
     padding: 10px 15px;
   }
 
-  .form-nav {
-    background: inherit;
+  hr {
+    margin: 15px 0;
     border: none;
-    padding: 0;
-    color: ${props => props.theme.colors.linkLight};
+    border: 1px solid ${props => props.theme.grayscale.light1};
+  }
+
+  .form-nav {
+    display: flex;
+    gap: 50px;
+
+    button {
+      padding: 0;
+      background: inherit;
+      border: none;
+      color: ${props => props.theme.colors.linkLight};
+    }
+
+    .label {
+      display: flex;
+      flex-direction: column;
+    }
   }
 `

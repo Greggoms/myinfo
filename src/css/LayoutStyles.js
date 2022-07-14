@@ -22,11 +22,11 @@ export const LayoutContainer = styled.div`
   }
 
   /* to center the login form */
-  main,
+  /* main,
   #gatsby-focus-wrapper,
   #gatsby-focus-wrapper > div {
     height: 100%;
-  }
+  } */
 
   .content {
     flex: 1;

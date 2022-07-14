@@ -70,7 +70,7 @@ export const Nav = () => {
           Logout
         </button>
       ) : (
-        <Link to="/app/login" activeStyle={{ color: "#94BDF2" }}>
+        <Link to="/login" activeStyle={{ color: "#94BDF2" }}>
           Login/Register
         </Link>
       )}

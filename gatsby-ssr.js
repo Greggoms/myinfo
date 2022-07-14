@@ -14,7 +14,7 @@ export const wrapRootElement = ({ element, props }) => {
         <GlobalStyles />
         <Layout {...props}>{element}</Layout>
       </ThemeProvider>
-      <ToastContainer newestOnTop={true} containerId="notifyToast" />
+      <ToastContainer newestOnTop={true} position="top-center" />
     </Provider>
   )
 }
@@ -33,18 +33,6 @@ const GlobalStyles = createGlobalStyle`
 
 body, html {
   background-color: ${Theme.grayscale.dark3};
-}
-
-.Toastify__toast {
-  min-width: min-content;
-  width: 100% !important;
-  max-width: 600px;
-}
-
-.Toastify__toast-container {
-  min-width: min-content;
-  width: 100% !important;
-  max-width: 600px;
 }
 
 @media only screen and (max-width: 400px) {

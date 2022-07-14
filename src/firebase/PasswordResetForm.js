@@ -50,27 +50,22 @@ export const PasswordResetForm = props => {
         Email will be sent from: <br /> noreply@vwlogin-5ddeb.firebase.app
       </p>
       <p>Be sure to check your spam folder!</p>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          marginTop: "20px",
-        }}
-      >
-        <button
-          name="login"
-          onClick={props.handleFormNavigation}
-          className="form-nav"
-        >
-          Sign in
-        </button>
-        <button
-          name="register"
-          onClick={props.handleFormNavigation}
-          className="form-nav"
-        >
-          Register
-        </button>
+
+      <hr />
+
+      <div className="form-nav">
+        <div className="label">
+          Have an account?
+          <button name="login" onClick={props.handleFormNavigation}>
+            Sign in
+          </button>
+        </div>
+        <div className="label">
+          Need an account?
+          <button name="register" onClick={props.handleFormNavigation}>
+            Register
+          </button>
+        </div>
       </div>
     </FormContainer>
   )

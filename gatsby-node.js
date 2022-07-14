@@ -4,9 +4,18 @@ exports.onCreatePage = async ({ page, actions }) => {
 
   if (page.path.match(/^\/app/)) {
     page.matchPath = `/app/*`
-
-    // Update the page.
-    createPage(page)
+    createPage({
+      path: "/app/profile",
+      component: path.resolve("src/components/profile.js"),
+    })
+    createPage({
+      path: "/app/admin",
+      component: path.resolve("src/components/admin/admin.js"),
+    })
+    // createPage({
+    //   path: "/app/login",
+    //   component: path.resolve("src/components/login.js"),
+    // })
     createPage({
       path: "/app/admin/users",
       matchPath: "/app/admin/users/*",

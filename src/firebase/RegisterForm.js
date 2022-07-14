@@ -104,16 +104,17 @@ export const RegisterForm = props => {
       <button className="register" onClick={handleRegister} type="submit">
         Register
       </button>
-      <p>
-        Have an account?{" "}
-        <button
-          name="login"
-          onClick={props.handleFormNavigation}
-          className="form-nav"
-        >
-          Sign in
-        </button>
-      </p>
+
+      <hr />
+
+      <div className="form-nav">
+        <div className="label">
+          Have an account?{" "}
+          <button name="login" onClick={props.handleFormNavigation}>
+            Sign in
+          </button>
+        </div>
+      </div>
     </FormContainer>
   )
 }
