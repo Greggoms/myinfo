@@ -33,11 +33,11 @@ const userSlice = createSlice({
         }
       }
     },
-    // https://stackoverflow.com/questions/67577835/same-action-triggering-in-multiple-slices-redux-toolkit
-    // slideshowp2 answer
-    // This allows for 1 action (modifyUser) to update
-    // 2 slice state values (this user.value & usersSlice's users.value)
   },
+  // https://stackoverflow.com/questions/67577835/same-action-triggering-in-multiple-slices-redux-toolkit
+  // slideshowp2 answer
+  // This allows for 1 action (modifyUser) to update
+  // 2 slice state values (this user.value & usersSlice's users.value)
   extraReducers: {
     "users/approvePtoRequest": (state, action) => {
       state.userFireDoc.pto.submitted = state.userFireDoc.pto.submitted.filter(

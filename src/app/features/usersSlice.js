@@ -51,29 +51,29 @@ export const usersSlice = createSlice({
         : [action.payload.request]
     },
   },
-  // // Commented out because it throws a toast error anytime a non-admin user
-  // // submits a request. This code isn't tooo vital anyway. I dont think...
-  // extraReducers: {
-  //   "user/addPtoRequest": (state, action) => {
-  //     const user = state.value.find(person => person.id === action.payload.id)
-  //     const index = state.value.indexOf(user)
-  //     if (index !== -1) {
-  //       if (state.value[index].pto) {
-  //         state.value[index].pto.submitted = [
-  //           ...state.value[index].pto.submitted,
-  //           action.payload.request,
-  //         ]
-  //       } else {
-  //         state.value[index] = {
-  //           ...state.value[index],
-  //           pto: {
-  //             submitted: [action.payload.request],
-  //           },
-  //         }
-  //       }
-  //     }
-  //   },
-  // },
+  // Commented out because it throws a toast error anytime a non-admin user
+  // submits a request. This code isn't tooo vital anyway. I dont think...
+  extraReducers: {
+    "user/addPtoRequest": (state, action) => {
+      const user = state.value.find(person => person.id === action.payload.id)
+      const index = state.value.indexOf(user)
+      if (index !== -1 && user.role === "admin") {
+        if (state.value[index].pto) {
+          state.value[index].pto.submitted = [
+            ...state.value[index].pto.submitted,
+            action.payload.request,
+          ]
+        } else {
+          state.value[index] = {
+            ...state.value[index],
+            pto: {
+              submitted: [action.payload.request],
+            },
+          }
+        }
+      }
+    },
+  },
 })
 
 // Action creators are generated for each case reducer function
