@@ -41,6 +41,21 @@ const AdminPage = () => {
           noindex={true}
           title={`${userFireDoc.name}'s Admin | AbbyHQ`}
         />
+
+        <div
+          style={{
+            width: "fit-content",
+            maxWidth: "500px",
+            margin: "0 auto",
+            background: "#A7ECF2",
+            color: "#333",
+            padding: "10px",
+          }}
+        >
+          Bug spotted! - Admins cannot accept/deny requests unless they themself
+          have a PTO submission... Working on a solution.
+        </div>
+
         <AdminButtonsContainer>
           <h3>View</h3>
           <div className="views">
