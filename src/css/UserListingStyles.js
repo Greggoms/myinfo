@@ -101,9 +101,9 @@ export const DetailedUsersContainer = styled.section`
 
         width: 100%;
 
-        @media ${props => props.theme.breakpoints.tablet} {
+        @media only screen and (min-width: 25rem) {
           flex-direction: row;
-          justify-content: space-evenly;
+          justify-items: center;
         }
       }
       span {
@@ -172,6 +172,11 @@ export const DetailedUsersContainer = styled.section`
 
     ul li {
       margin-left: 20px;
+    }
+
+    span {
+      font-size: 9pt;
+      color: ${props => props.theme.grayscale.light2};
     }
 
     details {

@@ -33,10 +33,14 @@ export const UserDetailsContainer = styled.section`
     }
 
     .request {
+      span {
+        font-size: 9pt;
+        color: ${props => props.theme.grayscale.light2};
+      }
       @media ${props => props.theme.breakpoints.tablet} {
         display: flex;
         gap: 10px;
-        align-items: center;
+        align-items: baseline;
       }
     }
 

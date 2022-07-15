@@ -17,16 +17,31 @@ const PtoRequestForm = () => {
   const [beginDate, setBeginDate] = useState("")
   const [endDate, setEndDate] = useState("")
   const [requestHours, setRequestHours] = useState(0)
+  const [ptoType, setPtoType] = useState("")
   const [formHelp, setFormHelp] = useState(false)
   const [submitting, setSubmitting] = useState(false)
 
   const dispatch = useDispatch()
   const userDoc = useSelector(selectUserFireDoc)
 
+  const handleSetPtoType = e => {
+    switch (e.target.value) {
+      case "cashout":
+        setPtoType("Cash Out")
+        break
+      case "missinghours":
+        setPtoType("Missing Hours")
+        break
+      default:
+        break
+    }
+  }
+
   const clearPtoRequest = () => {
     setBeginDate("")
     setEndDate("")
     setRequestHours(0)
+    setPtoType("")
   }
 
   const handlePtoRequest = async () => {
@@ -50,6 +65,8 @@ const PtoRequestForm = () => {
         toast.error(`You can't use more than 40 hours per request.`)
       } else if (beginDate === "") {
         toast.error(`You must choose a beginning date for this PTO request.`)
+      } else if (ptoType === "") {
+        toast.error(`Please choose the type of PTO Request.`)
       } else {
         // No errors? Send an email update and update the UserFireDoc
         init(`${process.env.GATSBY_EMAILJS_PUBLIC_KEY}`)
@@ -62,6 +79,7 @@ const PtoRequestForm = () => {
               ? beginDate
               : `${beginDate} to ${endDate}`,
           requestHours,
+          ptoType,
         }
 
         // Send the email
@@ -84,6 +102,7 @@ const PtoRequestForm = () => {
                   ? beginDate
                   : [beginDate, endDate],
               hours: requestHours,
+              type: ptoType,
             }),
           })
         }
@@ -99,6 +118,7 @@ const PtoRequestForm = () => {
                   ? beginDate
                   : [beginDate, endDate],
               hours: requestHours,
+              type: ptoType,
             },
           })
         )
@@ -118,10 +138,10 @@ const PtoRequestForm = () => {
             )}
           </>
         ))
+        setRequestHours(0)
+        setBeginDate("")
+        setEndDate("")
       }
-      setRequestHours(0)
-      setBeginDate("")
-      setEndDate("")
       setSubmitting(false)
     } catch (e) {
       console.log(e)
@@ -193,23 +213,74 @@ const PtoRequestForm = () => {
           </div>
         </div>
       </div>
+
+      <div className="radios">
+        <h3>Specify request type</h3>
+        <label>
+          <input
+            type="radio"
+            value="cashout"
+            name="cashout"
+            checked={ptoType === "Cash Out"}
+            onChange={handleSetPtoType}
+          />
+          <span>Cash Out - I haven't missed any work</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="missinghours"
+            name="missinghours"
+            checked={ptoType === "Missing Hours"}
+            onChange={handleSetPtoType}
+          />
+          <span>Missing Hours - I missed work and need to cover the hours</span>
+        </label>
+        {ptoType === "Cash Out" && (
+          <p>
+            Cashing out PTO may push you into a higher tax bracket{" "}
+            <strong>if you are NOT missing hours</strong>. This would increase
+            the taxes taken from your check.
+          </p>
+        )}
+      </div>
+
       <div className="request-buttons">
         <button type="submit" onClick={handlePtoRequest}>
           Submit Request
         </button>
         <button onClick={clearPtoRequest} className="reset">
-          Reset
+          Reset Form
         </button>
       </div>
       {formHelp && (
         <div className="form-help">
           <div className="help">
+            <button onClick={() => setFormHelp(false)}>X</button>
             <h2>PTO Request Rules</h2>
             <ul>
               <li>Must have enough available hours to cover the request.</li>
               <li>Requests must be in 4 hour increments.</li>
               <li>Must use at least 4 hours.</li>
               <li>Cannot request more than 40 hours at once.</li>
+              <li>Must specify the request type.</li>
+            </ul>
+            <h2 style={{ marginTop: "10px" }}>Specifying Request Type</h2>
+            <ul>
+              <li>Cash Out</li>
+              <ul>
+                <li>
+                  This option tells payroll that you would like to cash out the
+                  requested hours even if you havent missed any work.
+                </li>
+              </ul>
+              <li>Missing Hours</li>
+              <ul>
+                <li>
+                  This option informs payroll that you have missed work and
+                  would like to use PTO to make up those missed hours.
+                </li>
+              </ul>
             </ul>
           </div>
           {/* eslint-disable-next-line */}

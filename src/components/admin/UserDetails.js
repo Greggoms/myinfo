@@ -40,7 +40,8 @@ const UserDetails = props => {
                   <li key={index}>
                     <div className="request">
                       <p>
-                        {request.dates} using {request.hours} hours.
+                        {request.dates} using {request.hours} hours.{" "}
+                        {request.type && <span>- {request.type}</span>}
                       </p>
                       <div className="approve-deny">
                         <button

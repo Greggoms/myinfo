@@ -335,13 +335,19 @@ export const UserListing = () => {
                                       {typeof request.dates === "string" ? (
                                         <div>
                                           {request.dates} using {request.hours}{" "}
-                                          hours.
+                                          hours.{" "}
+                                          {request.type && (
+                                            <span>- {request.type}</span>
+                                          )}
                                         </div>
                                       ) : (
                                         <div>
                                           {request.dates[0]} to{" "}
                                           {request.dates[1]} using{" "}
-                                          {request.hours} hours.
+                                          {request.hours} hours.{" "}
+                                          {request.type && (
+                                            <span>- {request.type}</span>
+                                          )}
                                         </div>
                                       )}
                                       <div className="approve-deny">
@@ -385,12 +391,18 @@ export const UserListing = () => {
                               {pto.pending.map((request, index) =>
                                 typeof request.dates === "string" ? (
                                   <li key={index}>
-                                    {request.dates} using {request.hours} hours.
+                                    {request.dates} using {request.hours} hours.{" "}
+                                    {request.type && (
+                                      <span>- {request.type}</span>
+                                    )}
                                   </li>
                                 ) : (
                                   <li key={index}>
                                     {request.dates[0]} to {request.dates[1]}{" "}
-                                    using {request.hours} hours.
+                                    using {request.hours} hours.{" "}
+                                    {request.type && (
+                                      <span>- {request.type}</span>
+                                    )}
                                   </li>
                                 )
                               )}
@@ -410,12 +422,18 @@ export const UserListing = () => {
                               {pto.accepted.map((request, index) =>
                                 typeof request.dates === "string" ? (
                                   <li key={index}>
-                                    {request.dates} using {request.hours} hours.
+                                    {request.dates} using {request.hours} hours.{" "}
+                                    {request.type && (
+                                      <span>- {request.type}</span>
+                                    )}
                                   </li>
                                 ) : (
                                   <li key={index}>
                                     {request.dates[0]} to {request.dates[1]}{" "}
-                                    using {request.hours} hours.
+                                    using {request.hours} hours.{" "}
+                                    {request.type && (
+                                      <span>- {request.type}</span>
+                                    )}
                                   </li>
                                 )
                               )}
@@ -435,12 +453,18 @@ export const UserListing = () => {
                               {pto.denied.map((request, index) =>
                                 typeof request.dates === "string" ? (
                                   <li key={index}>
-                                    {request.dates} using {request.hours} hours.
+                                    {request.dates} using {request.hours} hours.{" "}
+                                    {request.type && (
+                                      <span>- {request.type}</span>
+                                    )}
                                   </li>
                                 ) : (
                                   <li key={index}>
                                     {request.dates[0]} to {request.dates[1]}{" "}
-                                    using {request.hours} hours.
+                                    using {request.hours} hours.{" "}
+                                    {request.type && (
+                                      <span>- {request.type}</span>
+                                    )}
                                   </li>
                                 )
                               )}

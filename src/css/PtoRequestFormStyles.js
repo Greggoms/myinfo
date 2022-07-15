@@ -3,11 +3,14 @@ import styled from "styled-components"
 export const PtoRequestFormContainer = styled.section`
   grid-area: ptoRequestForm;
   justify-self: center;
-  align-self: center;
 
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
 
   .form-heading {
     display: flex;
@@ -26,6 +29,27 @@ export const PtoRequestFormContainer = styled.section`
     gap: 10px;
   }
 
+  .radios {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    label {
+      display: flex;
+      cursor: pointer;
+    }
+
+    input {
+      margin-right: 5px;
+    }
+    span {
+      color: ${props => props.theme.grayscale.light1};
+    }
+    p {
+      font-size: 10pt;
+    }
+  }
+
   .form-help {
     position: fixed;
     top: 0;
@@ -34,6 +58,21 @@ export const PtoRequestFormContainer = styled.section`
     align-items: center;
     height: 100%;
     width: 100%;
+    overflow-y: scroll;
+
+    button {
+      align-self: center;
+
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      background: inherit;
+      padding: 5px;
+      border: 2px solid ${props => props.theme.grayscale.light1};
+      color: ${props => props.theme.grayscale.light1};
+      cursor: pointer;
+      margin: 10px auto;
+    }
 
     .help {
       z-index: 1;
@@ -41,9 +80,13 @@ export const PtoRequestFormContainer = styled.section`
       grid-row: 1;
       justify-self: center;
 
+      display: flex;
+      flex-direction: column;
+
       height: fit-content;
       width: fit-content;
-      padding: 10px;
+      max-width: 500px;
+      padding: 0 10px 10px;
       background: ${props => props.theme.grayscale.dark1};
 
       h2 {

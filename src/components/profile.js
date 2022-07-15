@@ -173,14 +173,16 @@ const UserFireDoc = () => {
                       if (typeof request.dates === "string") {
                         return (
                           <li key={index}>
-                            {request.dates} using {request.hours} hours.
+                            {request.dates} using {request.hours} hours.{" "}
+                            {request.type && <span>- {request.type}</span>}
                           </li>
                         )
                       } else {
                         return (
                           <li key={index}>
                             {request.dates[0]} to {request.dates[1]} using{" "}
-                            {request.hours} hours.
+                            {request.hours} hours.{" "}
+                            {request.type && <span>- {request.type}</span>}
                           </li>
                         )
                       }
@@ -201,12 +203,14 @@ const UserFireDoc = () => {
                     {userFireDoc.pto.pending.map((request, index) =>
                       typeof request.dates === "string" ? (
                         <li key={index}>
-                          {request.dates} using {request.hours} hours.
+                          {request.dates} using {request.hours} hours.{" "}
+                          {request.type && <span>- {request.type}</span>}
                         </li>
                       ) : (
                         <li key={index}>
                           {request.dates[0]} to {request.dates[1]} using{" "}
-                          {request.hours} hours.
+                          {request.hours} hours.{" "}
+                          {request.type && <span>- {request.type}</span>}
                         </li>
                       )
                     )}
@@ -227,11 +231,13 @@ const UserFireDoc = () => {
                       request.dates.length > 1 ? (
                         <li key={index}>
                           {request.dates[0]} to {request.dates[1]} using{" "}
-                          {request.hours} hours.
+                          {request.hours} hours.{" "}
+                          {request.type && <span>- {request.type}</span>}
                         </li>
                       ) : (
                         <li key={index}>
-                          {request.dates} using {request.hours} hours.
+                          {request.dates} using {request.hours} hours.{" "}
+                          {request.type && <span>- {request.type}</span>}
                         </li>
                       )
                     )}
@@ -251,12 +257,14 @@ const UserFireDoc = () => {
                     {userFireDoc.pto.denied.map((request, index) =>
                       typeof request.dates === "string" ? (
                         <li key={index}>
-                          {request.dates} using {request.hours} hours.
+                          {request.dates} using {request.hours} hours.{" "}
+                          {request.type && <span>- {request.type}</span>}
                         </li>
                       ) : (
                         <li key={index}>
                           {request.dates[0]} to {request.dates[1]} using{" "}
-                          {request.hours} hours.
+                          {request.hours} hours.{" "}
+                          {request.type && <span>- {request.type}</span>}
                         </li>
                       )
                     )}
