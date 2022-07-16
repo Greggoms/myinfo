@@ -3,7 +3,11 @@ import { useSelector } from "react-redux"
 import { selectUsers } from "../app/features/usersSlice"
 import { useSortBy, useTable } from "react-table"
 
-import { remainingPTO, daysUntil10Hrs, monthsWorked } from "../data/dateHelpers"
+import {
+  getRemainingPto,
+  daysUntil10Hrs,
+  monthsWorked,
+} from "../utils/dateHelpers"
 import { TableContainer } from "../css"
 
 export const ReactTable = () => {
@@ -22,14 +26,14 @@ export const ReactTable = () => {
           hoursUsed,
           insurance,
         }) => {
-          // fname, lname, position, pay, remainingPTO, Daysuntil, HireDate, insurance, location
+          // fname, lname, position, pay, getRemainingPto, Daysuntil, HireDate, insurance, location
           return {
             col1: name.split(" ")[0],
             col2: name.split(" ")[1],
             col3: position ? position : "No Position",
             col4: pay ? pay : "No Pay",
             col5: hireDate
-              ? `${remainingPTO(
+              ? `${getRemainingPto(
                   hireDate.split("-")[0],
                   hireDate.split("-")[1],
                   hireDate.split("-")[2],

@@ -5,8 +5,8 @@ import { GatsbySeo } from "gatsby-plugin-next-seo"
 
 import { UserListing } from "./UserListing"
 import { ReactTable } from "../ReactTable"
-import { Notification } from "../Notification"
 import { AdminButtonsContainer } from "../../css"
+import { navigate } from "@reach/router"
 
 const AdminPage = () => {
   const userFireDoc = useSelector(selectUserFireDoc)
@@ -32,7 +32,7 @@ const AdminPage = () => {
     inactive: {},
   }
   if (!userFireDoc || userFireDoc.role !== "admin") {
-    return <Notification lock={true}>Access Denied</Notification>
+    navigate("/app/profile")
   } else {
     return (
       <>

@@ -1,18 +1,25 @@
 import React, { useState } from "react"
-import { useSelector } from "react-redux/es/exports"
-import { selectUserFireDoc } from "../app/features/userSlice"
-import handleLogin from "../utils/handleLogin"
 import { navigate } from "@reach/router"
-import { FormContainer } from "../css"
+import { useSelector } from "react-redux/es/exports"
+import { selectUserAuth } from "../../app/features/userSlice"
+
+import useAutoFocus from "../../hooks/useAutoFocus"
+import handleLogin from "../../utils/handleLogin"
+import { FormContainer } from "../../css"
 
 export const LoginForm = props => {
-  const currentUserFireDoc = useSelector(selectUserFireDoc)
+  const userAuth = useSelector(selectUserAuth)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  if (currentUserFireDoc) {
-    navigate(`/app/profile`)
+  if (userAuth) {
+    navigate("/app/profile")
   }
+
+  // https://blog.logrocket.com/how-to-autofocus-using-react-hooks/
+  // do this instead of <input type="email" autoFocus />
+  // Create a custom hook so it can be reused.
+  const emailInput = useAutoFocus()
 
   return (
     <FormContainer>
@@ -20,6 +27,7 @@ export const LoginForm = props => {
       <label>
         <span>Email</span>
         <input
+          ref={emailInput}
           value={email}
           onChange={e => setEmail(e.target.value)}
           type="email"

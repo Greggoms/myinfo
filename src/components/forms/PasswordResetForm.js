@@ -1,11 +1,15 @@
 import React, { useState } from "react"
-import { auth } from "./firebaseInit"
+import { auth } from "../../services/firebaseInit"
 import { sendPasswordResetEmail } from "firebase/auth"
 import { toast } from "react-toastify"
-import { FormContainer } from "../css"
+
+import useAutoFocus from "../../hooks/useAutoFocus"
+import { FormContainer } from "../../css"
 
 export const PasswordResetForm = props => {
   const [email, setEmail] = useState("")
+  // see ./LoginForm.js
+  const emailInput = useAutoFocus()
 
   const handlePasswordReset = e => {
     e.preventDefault()
@@ -37,6 +41,7 @@ export const PasswordResetForm = props => {
       <label>
         <span>Email</span>
         <input
+          ref={emailInput}
           value={email}
           onChange={e => setEmail(e.target.value)}
           type="email"

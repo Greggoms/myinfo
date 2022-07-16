@@ -9,6 +9,7 @@ import VhdPolicies from "../../components/policies/VhdPolicies"
 import "@react-pdf-viewer/core/lib/styles/index.css"
 import "@react-pdf-viewer/default-layout/lib/styles/index.css"
 import { PoliciesContainer } from "../../css"
+import { StaticImage } from "gatsby-plugin-image"
 
 const PolicyDocumentsPage = () => {
   const [vaporworld, setVaporworld] = useState(false)
@@ -16,23 +17,23 @@ const PolicyDocumentsPage = () => {
   const [wonderland, setWonderland] = useState(false)
   const [vhd, setVhd] = useState(false)
 
-  const handleCompanySelect = e => {
-    if (e.target.textContent === "Vapor World") {
+  const handleCompanySelect = ({ value }) => {
+    if (value === "Vapor World") {
       setAbbyroad(false)
       setWonderland(false)
       setVhd(false)
       setVaporworld(true)
-    } else if (e.target.textContent === "Abby Road") {
+    } else if (value === "Abby Road") {
       setVaporworld(false)
       setWonderland(false)
       setVhd(false)
       setAbbyroad(true)
-    } else if (e.target.textContent === "Wonderland") {
+    } else if (value === "Wonderland") {
       setAbbyroad(false)
       setVaporworld(false)
       setVhd(false)
       setWonderland(true)
-    } else if (e.target.textContent === "Vapor House Distro") {
+    } else if (value === "Vapor House Distro") {
       setAbbyroad(false)
       setVaporworld(false)
       setWonderland(false)
@@ -52,11 +53,37 @@ const PolicyDocumentsPage = () => {
         <p style={{ textAlign: "center", marginBottom: "20px" }}>
           Please select your company
         </p>
-        <div className="button-container">
-          <button onClick={handleCompanySelect}>Vapor World</button>
-          <button onClick={handleCompanySelect}>Abby Road</button>
-          <button onClick={handleCompanySelect}>Wonderland</button>
-          <button onClick={handleCompanySelect}>Vapor House Distro</button>
+        <div className="image-list">
+          <button onClick={() => handleCompanySelect({ value: "Vapor World" })}>
+            <StaticImage
+              src="../../images/logos/vaporworld_logo.png"
+              alt="Vapor World Logo"
+              onClick={() => handleCompanySelect({ value: "Vapor World" })}
+            />
+          </button>
+          <button onClick={() => handleCompanySelect({ value: "Abby Road" })}>
+            {" "}
+            <StaticImage
+              src="../../images/logos/abbyroad_logo.png"
+              alt="Abby Road Logo"
+            />
+          </button>
+          <button onClick={() => handleCompanySelect({ value: "Wonderland" })}>
+            {" "}
+            <StaticImage
+              src="../../images/logos/wonderland_logo.png"
+              alt="Wonderland Logo"
+            />
+          </button>
+          <button
+            onClick={() => handleCompanySelect({ value: "Vapor House Distro" })}
+          >
+            {" "}
+            <StaticImage
+              src="../../images/logos/vaporhousedistro_logo.png"
+              alt="Vapor House Distro Logo"
+            />
+          </button>
         </div>
         {abbyroad && (
           <div>

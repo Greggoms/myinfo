@@ -1,8 +1,12 @@
 import styled from "styled-components"
 
 export const PtoRequestFormContainer = styled.section`
+  /*
+  Moving this to /css/ProfileStyles.js 
+  inside the ProfileContainer.
+  
   grid-area: ptoRequestForm;
-  justify-self: center;
+  */
 
   display: flex;
   flex-direction: column;
@@ -10,7 +14,6 @@ export const PtoRequestFormContainer = styled.section`
 
   width: 100%;
   max-width: 300px;
-  margin: 0 auto;
 
   .form-heading {
     display: flex;

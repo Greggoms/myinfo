@@ -109,16 +109,33 @@ export const PoliciesContainer = styled.section`
     }
   }
 
-  .button-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto 30px;
+  .image-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 20px;
 
+    margin: 0 auto 30px;
+    max-width: 300px;
+
+    @media ${props => props.theme.breakpoints.tablet} {
+      grid-template-columns: 1fr 1fr;
+      max-width: 800px;
+      column-gap: 80px;
+      row-gap: 40px;
+    }
     button {
-      padding: 10px;
+      background: inherit;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:active {
+      background: ${props => props.theme.grayscale.dark4};
+    }
+
+    .gatsby-image-wrapper {
+      /* height: 100%; */
     }
   }
 `

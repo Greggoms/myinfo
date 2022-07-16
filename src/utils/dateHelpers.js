@@ -9,7 +9,7 @@ export const currentYear = new Date().getFullYear()
 export const currentMonth = new Date().getMonth() + 1
 export const currentDay = new Date().getDate()
 
-export const remainingPTO = (
+export const getRemainingPto = (
   hireYear,
   hireMonth,
   hireDay,

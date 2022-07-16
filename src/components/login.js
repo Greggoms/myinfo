@@ -1,7 +1,7 @@
 import React, { useState } from "react"
-import { LoginForm } from "../firebase/LoginForm"
-import { PasswordResetForm } from "../firebase/PasswordResetForm"
-import { RegisterForm } from "../firebase/RegisterForm"
+import { LoginForm } from "./forms/LoginForm"
+import { PasswordResetForm } from "./forms/PasswordResetForm"
+import { RegisterForm } from "./forms/RegisterForm"
 import { LoginPageWrapper } from "../css"
 import { GatsbySeo } from "gatsby-plugin-next-seo"
 

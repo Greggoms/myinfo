@@ -1,4 +1,4 @@
-export const Theme = {
+const theme = {
   colors: {
     green: "#09A603",
     link: "#00DEF2",
@@ -20,6 +20,9 @@ export const Theme = {
   breakpoints: {
     tablet: "only screen and (min-width: 46.75rem)", // 748px
     desktop: "only screen and (min-width: 75rem)", // 1200px
+    huge: "only screen and (min-width: 106.25rem)", // 1700px
     imax: "only screen and (min-width: 125rem)", // 2000px
   },
 }
+
+export default theme

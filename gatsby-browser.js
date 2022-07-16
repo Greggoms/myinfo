@@ -1,7 +1,7 @@
 import React from "react"
 import { Provider } from "react-redux"
 import { store } from "./src/app/store"
-import { Theme } from "./src/themes/Theme"
+import theme from "./src/theme"
 import { createGlobalStyle, ThemeProvider } from "styled-components"
 import Layout from "./src/components/layout"
 import { ToastContainer } from "react-toastify"
@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.min.css"
 export const wrapRootElement = ({ element, props }) => {
   return (
     <Provider store={store}>
-      <ThemeProvider theme={Theme}>
+      <ThemeProvider theme={theme}>
         <GlobalStyles />
         <Layout {...props}>{element}</Layout>
       </ThemeProvider>
@@ -32,7 +32,7 @@ const GlobalStyles = createGlobalStyle`
 }
 
 body, html {
-  background-color: ${Theme.grayscale.dark3};
+  background-color: ${theme.grayscale.dark3};
 }
 
 @media only screen and (max-width: 400px) {

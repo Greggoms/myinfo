@@ -1,16 +1,20 @@
 import React, { useState } from "react"
-import { navigate } from "gatsby"
-import { auth, db } from "./firebaseInit"
+import { navigate } from "@reach/router"
+import { auth, db } from "../../services/firebaseInit"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { doc, setDoc } from "firebase/firestore"
 import format from "date-fns/format"
+
+import useAutoFocus from "../../hooks/useAutoFocus"
 import { toast } from "react-toastify"
-import { FormContainer } from "../css"
+import { FormContainer } from "../../css"
 
 export const RegisterForm = props => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  // see ./LoginForm.js
+  const fullNameInput = useAutoFocus()
 
   const timestamp = format(new Date(), "PPPPpp")
 
@@ -77,6 +81,7 @@ export const RegisterForm = props => {
       <label>
         <span>First and Last Name</span>
         <input
+          ref={fullNameInput}
           value={name}
           onChange={e => setName(e.target.value)}
           type="text"

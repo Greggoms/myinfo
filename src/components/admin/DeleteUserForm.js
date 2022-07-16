@@ -1,6 +1,6 @@
 import React from "react"
 import { doc, deleteDoc } from "firebase/firestore"
-import { db } from "../../firebase/firebaseInit"
+import { db } from "../../services/firebaseInit"
 import { useSelector, useDispatch } from "react-redux"
 import { deleteUser } from "../../app/features/usersSlice"
 import { toast } from "react-toastify"

@@ -1,17 +1,17 @@
 import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { selectUserFireDoc, addPtoRequest } from "../app/features/userSlice"
+import { selectUserFireDoc, addPtoRequest } from "../../app/features/userSlice"
 import { doc, updateDoc, arrayUnion } from "firebase/firestore"
-import { db } from "../firebase/firebaseInit"
+import { db } from "../../services/firebaseInit"
 
 import { v4 as uuid } from "uuid"
 import emailjs, { init } from "@emailjs/browser"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons"
 import { toast } from "react-toastify"
-import { remainingPTO } from "../data/dateHelpers"
+import { getRemainingPto } from "../../utils/dateHelpers"
 
-import { PtoRequestFormContainer } from "../css"
+import { PtoRequestFormContainer } from "../../css"
 
 const PtoRequestForm = () => {
   const [beginDate, setBeginDate] = useState("")
@@ -52,7 +52,7 @@ const PtoRequestForm = () => {
         toast.error(`You must use more than 0 hours on a request.`)
       } else if (
         requestHours >
-        remainingPTO(
+        getRemainingPto(
           userDoc.hireDate.split("-")[0],
           userDoc.hireDate.split("-")[1],
           userDoc.hireDate.split("-")[2],
@@ -82,13 +82,13 @@ const PtoRequestForm = () => {
           ptoType,
         }
 
-        // Send the email
-        await emailjs.send(
-          `${process.env.GATSBY_PAYROLL_EMAILJS_SERVICE_ID}`,
-          `${process.env.GATSBY_PTO_EMAILJS_TEMPLATE_ID}`,
-          templateParams,
-          `${process.env.GATSBY_EMAILJS_PUBLIC_KEY}`
-        )
+        // // Send the email
+        // await emailjs.send(
+        //   `${process.env.GATSBY_PAYROLL_EMAILJS_SERVICE_ID}`,
+        //   `${process.env.GATSBY_PTO_EMAILJS_TEMPLATE_ID}`,
+        //   templateParams,
+        //   `${process.env.GATSBY_EMAILJS_PUBLIC_KEY}`
+        // )
 
         async function updateUser() {
           const userRef = doc(db, "users", userDoc.id)
@@ -106,7 +106,7 @@ const PtoRequestForm = () => {
             }),
           })
         }
-        updateUser()
+        // updateUser()
         // update redux store
         dispatch(
           addPtoRequest({
@@ -194,7 +194,7 @@ const PtoRequestForm = () => {
         <span>
           Hours:{" "}
           {userDoc.hireDate
-            ? `${remainingPTO(
+            ? `${getRemainingPto(
                 userDoc.hireDate.split("-")[0],
                 userDoc.hireDate.split("-")[1],
                 userDoc.hireDate.split("-")[2],
@@ -271,7 +271,7 @@ const PtoRequestForm = () => {
               <ul>
                 <li>
                   This option tells payroll that you would like to cash out the
-                  requested hours even if you havent missed any work.
+                  requested hours even if you have not missed any work.
                 </li>
               </ul>
               <li>Missing Hours</li>

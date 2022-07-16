@@ -1,42 +1,49 @@
 import { doc, updateDoc, arrayRemove, arrayUnion } from "firebase/firestore"
-import { db } from "../firebase/firebaseInit"
+import { db } from "../services/firebaseInit"
 import { store } from "../app/store"
 import { approvePtoRequest, denyPtoRequest } from "../app/features/usersSlice"
 import { toast } from "react-toastify"
 
-const handlePtoRequest = (e, id, index) => {
-  const person = store.getState().users.value.find(person => person.id === id)
+const handlePtoRequest = ({ event, user, reqIndex }) => {
+  const person = store
+    .getState()
+    .users.value.find(person => person.id === user.id)
   const userRef = doc(db, "users", person.id)
+
   try {
-    if (e.target.id === "approve") {
+    if (event.target.id === "approve") {
       store.dispatch(
         approvePtoRequest({
-          id: person.id,
-          request: person.pto.submitted[index],
+          id: user.id,
+          request: user.pto.submitted[reqIndex],
         })
       )
+
       async function approvePto() {
         await updateDoc(userRef, {
-          "pto.submitted": arrayRemove(person.pto.submitted[index]),
-          "pto.pending": arrayUnion(person.pto.submitted[index]),
+          "pto.submitted": arrayRemove(user.pto.submitted[reqIndex]),
+          "pto.pending": arrayUnion(user.pto.submitted[reqIndex]),
         })
       }
       approvePto()
+
       toast.success(
-        `${person.name}'s request for ${person.pto.submitted[index].dates} has been approved!`
+        `${user.name}'s request for ${user.pto.submitted[reqIndex].dates} has been approved!`
       )
     } else {
       store.dispatch(
-        denyPtoRequest({ id: person.id, request: person.pto.submitted[index] })
+        denyPtoRequest({ id: user.id, request: user.pto.submitted[reqIndex] })
       )
+
       async function denyPto() {
         await updateDoc(userRef, {
-          "pto.submitted": arrayRemove(person.pto.submitted[index]),
-          "pto.denied": arrayUnion(person.pto.submitted[index]),
+          "pto.submitted": arrayRemove(user.pto.submitted[reqIndex]),
+          "pto.denied": arrayUnion(user.pto.submitted[reqIndex]),
         })
       }
       denyPto()
-      toast.info(`${person.name}'s request has been denied.`)
+
+      toast.info(`${user.name}'s request has been denied.`)
     }
   } catch (e) {
     console.error(e.message)

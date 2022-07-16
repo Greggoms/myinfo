@@ -1,4 +1,4 @@
-import { auth } from "../firebase/firebaseInit"
+import { auth } from "../services/firebaseInit"
 import { navigate } from "@reach/router"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { toast } from "react-toastify"
@@ -8,7 +8,11 @@ const handleLogin = async (e, { email, password }) => {
   signInWithEmailAndPassword(auth, email, password)
     .then(userAuth => {
       const user = userAuth.user
-      toast(`Welcome ${user.displayName}!`)
+      toast(`Welcome ${user.displayName}!`, {
+        position: "top-center",
+        autoClose: 1500,
+        draggable: false,
+      })
       navigate("/app/profile")
     })
     .catch(error => {

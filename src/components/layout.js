@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { auth, db } from "../firebase/firebaseInit"
+import { auth, db } from "../services/firebaseInit"
 import {
   collection,
   doc,

@@ -1,11 +1,11 @@
 import React from "react"
-import { auth } from "../firebase/firebaseInit"
+import { auth } from "../services/firebaseInit"
 import { signOut } from "firebase/auth"
 import { Link, navigate } from "gatsby"
 import { useSelector, useDispatch } from "react-redux"
 import {
   logout,
-  selectUser,
+  selectUserAuth,
   selectUserFireDoc,
   userFireDoc,
 } from "../app/features/userSlice"
@@ -15,7 +15,7 @@ import { NavContainer } from "../css"
 
 export const Nav = () => {
   const userDoc = useSelector(selectUserFireDoc)
-  const user = useSelector(selectUser)
+  const user = useSelector(selectUserAuth)
   const dispatch = useDispatch()
 
   return (
@@ -54,11 +54,11 @@ export const Nav = () => {
           onClick={() => {
             signOut(auth)
               .then(() => {
+                navigate("/")
                 // set user to null in redux state
                 dispatch(logout())
                 dispatch(userFireDoc(null))
                 dispatch(gatherUsers([]))
-                navigate("/")
                 toast.info(`Successful Logout!`)
               })
               .catch(error => {
@@ -70,7 +70,7 @@ export const Nav = () => {
           Logout
         </button>
       ) : (
-        <Link to="/login" activeStyle={{ color: "#94BDF2" }}>
+        <Link to="/app/login" activeStyle={{ color: "#94BDF2" }}>
           Login/Register
         </Link>
       )}

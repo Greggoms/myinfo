@@ -3,15 +3,14 @@ import { useSelector } from "react-redux"
 import { selectUsers } from "../../app/features/usersSlice"
 import handlePtoRequest from "../../utils/handlePtoRequest"
 import { UserDetailsContainer } from "../../css"
-import { monthsWorked, timeForReview } from "../../data/dateHelpers"
+import { monthsWorked, timeForReview } from "../../utils/dateHelpers"
 import { ModifyUserForm } from "./ModifyUserForm"
-import { Notification } from "../Notification"
 
 const UserDetails = props => {
   const users = useSelector(selectUsers)
   const user = users.find(user => props.params["*"] === user.id)
   if (!user) {
-    return <Notification lock={true}>Access Denied</Notification>
+    return <p>Nothing Here...</p>
   } else {
     return (
       <UserDetailsContainer>
@@ -47,14 +46,20 @@ const UserDetails = props => {
                         <button
                           id="approve"
                           className="approve"
-                          onClick={e => handlePtoRequest(e, user.id, index)}
+                          onClick={e =>
+                            handlePtoRequest({
+                              event: e,
+                              user: user,
+                              reqIndex: index,
+                            })
+                          }
                         >
                           Approve
                         </button>
                         <button
                           id="deny"
                           className="deny"
-                          onClick={e => handlePtoRequest(e, user.id, index)}
+                          onClick={e => handlePtoRequest(e, user, index)}
                         >
                           Deny
                         </button>

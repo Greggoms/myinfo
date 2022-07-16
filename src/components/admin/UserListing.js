@@ -15,9 +15,9 @@ import { DeleteUserForm } from "./DeleteUserForm"
 import {
   daysUntil10Hrs,
   monthsWorked,
-  remainingPTO,
+  getRemainingPto,
   timeForReview,
-} from "../../data/dateHelpers"
+} from "../../utils/dateHelpers"
 import handlePtoRequest from "../../utils/handlePtoRequest"
 import { AdminButtonsContainer, DetailedUsersContainer } from "../../css"
 
@@ -175,319 +175,319 @@ export const UserListing = () => {
         </div>
         <div className="list">
           {users !== undefined && users.length >= 1 ? (
-            filtered.map(
-              ({
-                id,
-                name,
-                email,
-                pay,
-                insurance,
-                hireDate,
-                lastRaise,
-                promotionDate,
-                position,
-                location,
-                hoursUsed,
-                pto,
-              }) => {
-                return (
-                  <div className="user" key={id}>
-                    <div className="heading">
-                      <div className="heading__info">
-                        <h3>
-                          <Link to={`/app/admin/users/${id}`}>{name}</Link>
-                        </h3>
-                        <p>{email}</p>
-                      </div>
-                      <div className="dots">
-                        {pto && pto.submitted && pto.submitted.length > 0 && (
+            filtered.map(user => {
+              return (
+                <div className="user" key={user.id}>
+                  <div className="heading">
+                    <div className="heading__info">
+                      <h3>
+                        <Link to={`/app/admin/users/${user.id}`}>
+                          {user.name}
+                        </Link>
+                      </h3>
+                      <p>{user.email}</p>
+                    </div>
+                    <div className="dots">
+                      {user.pto &&
+                        user.pto.submitted &&
+                        user.pto.submitted.length > 0 && (
                           <div className="dots__dot green" />
                         )}
-                        {timeForReview(name, lastRaise, hireDate, position) ===
-                          true && <div className="dots__dot yellow" />}
-                      </div>
-                    </div>
-                    <hr />
-                    <div className="user-general">
-                      <div className="item">
-                        <FontAwesomeIcon icon={faIdBadge} />
-                        <p>{position ? position : "Position not set"}</p>
-                      </div>
-                      <div className="item">
-                        <FontAwesomeIcon icon={faCashRegister} />
-                        <p>{location ? location : "Location not set"}</p>
-                      </div>
-                      <div className="item">
-                        <FontAwesomeIcon icon={faMoneyBill1Wave} />
-                        <p>{pay ? `$${pay}` : "Pay rate not set"}</p>
-                      </div>
-                      <div className="item">
-                        <FontAwesomeIcon icon={faBriefcaseMedical} />
-                        <p>{insurance ? "Opt-IN" : "Opt-OUT"}</p>
-                      </div>
-                    </div>
-
-                    <hr className="admin-hr" />
-
-                    <div className="user-employment">
-                      <FontAwesomeIcon icon={faCalendarDays} />
-                      <div className="user-employment-dates">
-                        {hireDate ? (
-                          <div>
-                            <span>Hire Date:</span>
-                            <p>{hireDate}</p>
-                            <span>
-                              {monthsWorked(
-                                hireDate.split("-")[0],
-                                hireDate.split("-")[1],
-                                hireDate.split("-")[2]
-                              )}{" "}
-                              months ago
-                            </span>
-                          </div>
-                        ) : (
-                          <p>No hire date</p>
-                        )}
-                        {lastRaise ? (
-                          <div>
-                            <span>Last Review Date:</span>
-                            <p>{lastRaise}</p>
-                            <span>
-                              {monthsWorked(
-                                lastRaise.split("-")[0],
-                                lastRaise.split("-")[1],
-                                lastRaise.split("-")[2]
-                              )}{" "}
-                              months ago
-                            </span>
-                          </div>
-                        ) : (
-                          <p>No review given</p>
-                        )}
-                        {promotionDate ? (
-                          <div>
-                            <span>Promotion Date:</span>
-                            <p>{promotionDate}</p>
-                            <span>
-                              {monthsWorked(
-                                promotionDate.split("-")[0],
-                                promotionDate.split("-")[1],
-                                promotionDate.split("-")[2]
-                              )}{" "}
-                              months ago
-                            </span>
-                          </div>
-                        ) : (
-                          <p>No promotion date</p>
-                        )}
-                      </div>
-                    </div>
-
-                    <hr className="admin-hr" />
-
-                    <div className="pto-numbers">
-                      {hireDate ? (
-                        <p>
-                          {remainingPTO(
-                            hireDate.split("-")[0],
-                            hireDate.split("-")[1],
-                            hireDate.split("-")[2],
-                            hoursUsed ? hoursUsed : 0,
-                            pto && pto.pending ? pto.pending : null
-                          )}{" "}
-                          Available Hours
-                        </p>
-                      ) : (
-                        <p>No Hire Date</p>
-                      )}
-                      {hireDate ? (
-                        <p>
-                          +10 hours in{" "}
-                          {daysUntil10Hrs(
-                            hireDate.split("-")[0],
-                            hireDate.split("-")[1],
-                            hireDate.split("-")[2]
-                          )}{" "}
-                          days
-                        </p>
-                      ) : (
-                        <p>No Hire Date</p>
-                      )}
-                      <p>
-                        {hoursUsed ? `${hoursUsed} hours used` : "No PTO used"}
-                      </p>
-                    </div>
-
-                    <hr className="admin-hr" />
-
-                    <div className="requests">
-                      <div className="info request">
-                        {pto && pto.submitted && pto.submitted.length > 0 ? (
-                          <details>
-                            <summary>
-                              Submitted Requests ({pto.submitted.length})
-                            </summary>
-                            <ul>
-                              {pto.submitted.map((request, index) => {
-                                return (
-                                  <li key={index}>
-                                    <div className="manage-request">
-                                      {typeof request.dates === "string" ? (
-                                        <div>
-                                          {request.dates} using {request.hours}{" "}
-                                          hours.{" "}
-                                          {request.type && (
-                                            <span>- {request.type}</span>
-                                          )}
-                                        </div>
-                                      ) : (
-                                        <div>
-                                          {request.dates[0]} to{" "}
-                                          {request.dates[1]} using{" "}
-                                          {request.hours} hours.{" "}
-                                          {request.type && (
-                                            <span>- {request.type}</span>
-                                          )}
-                                        </div>
-                                      )}
-                                      <div className="approve-deny">
-                                        <button
-                                          id="approve"
-                                          className="approve"
-                                          onClick={e =>
-                                            handlePtoRequest(e, id, index)
-                                          }
-                                        >
-                                          Approve
-                                        </button>
-                                        <button
-                                          id="deny"
-                                          className="deny"
-                                          onClick={e =>
-                                            handlePtoRequest(e, id, index)
-                                          }
-                                        >
-                                          Deny
-                                        </button>
-                                      </div>
-                                    </div>
-                                  </li>
-                                )
-                              })}
-                            </ul>
-                          </details>
-                        ) : (
-                          <h5>No Submitted Requests</h5>
-                        )}
-                      </div>
-
-                      <div className="info request">
-                        {pto && pto.pending ? (
-                          <details>
-                            <summary>
-                              Pending Requests ({pto.pending.length})
-                            </summary>
-                            <ul>
-                              {pto.pending.map((request, index) =>
-                                typeof request.dates === "string" ? (
-                                  <li key={index}>
-                                    {request.dates} using {request.hours} hours.{" "}
-                                    {request.type && (
-                                      <span>- {request.type}</span>
-                                    )}
-                                  </li>
-                                ) : (
-                                  <li key={index}>
-                                    {request.dates[0]} to {request.dates[1]}{" "}
-                                    using {request.hours} hours.{" "}
-                                    {request.type && (
-                                      <span>- {request.type}</span>
-                                    )}
-                                  </li>
-                                )
-                              )}
-                            </ul>
-                          </details>
-                        ) : (
-                          <h5>No Pending Requests</h5>
-                        )}
-                      </div>
-                      <div className="info request">
-                        {pto && pto.accepted ? (
-                          <details>
-                            <summary>
-                              Accepted Requests ({pto.accepted.length})
-                            </summary>
-                            <ul>
-                              {pto.accepted.map((request, index) =>
-                                typeof request.dates === "string" ? (
-                                  <li key={index}>
-                                    {request.dates} using {request.hours} hours.{" "}
-                                    {request.type && (
-                                      <span>- {request.type}</span>
-                                    )}
-                                  </li>
-                                ) : (
-                                  <li key={index}>
-                                    {request.dates[0]} to {request.dates[1]}{" "}
-                                    using {request.hours} hours.{" "}
-                                    {request.type && (
-                                      <span>- {request.type}</span>
-                                    )}
-                                  </li>
-                                )
-                              )}
-                            </ul>
-                          </details>
-                        ) : (
-                          <h5>No Accepted Requests</h5>
-                        )}
-                      </div>
-                      <div className="info request">
-                        {pto && pto.denied ? (
-                          <details>
-                            <summary>
-                              Denied Requests ({pto.denied.length})
-                            </summary>
-                            <ul>
-                              {pto.denied.map((request, index) =>
-                                typeof request.dates === "string" ? (
-                                  <li key={index}>
-                                    {request.dates} using {request.hours} hours.{" "}
-                                    {request.type && (
-                                      <span>- {request.type}</span>
-                                    )}
-                                  </li>
-                                ) : (
-                                  <li key={index}>
-                                    {request.dates[0]} to {request.dates[1]}{" "}
-                                    using {request.hours} hours.{" "}
-                                    {request.type && (
-                                      <span>- {request.type}</span>
-                                    )}
-                                  </li>
-                                )
-                              )}
-                            </ul>
-                          </details>
-                        ) : (
-                          <h5>No Denied Requests</h5>
-                        )}
-                      </div>
-                    </div>
-                    <div className="action-buttons">
-                      <button
-                        onClick={() => handleSetEditing(id, name)}
-                        className="modify-button"
-                      >
-                        {editing ? "Cancel" : "Edit"}
-                      </button>
-                      <DeleteUserForm id={id} />
+                      {timeForReview(
+                        user.name,
+                        user.lastRaise,
+                        user.hireDate,
+                        user.position
+                      ) === true && <div className="dots__dot yellow" />}
                     </div>
                   </div>
-                )
-              }
-            )
+                  <hr />
+                  <div className="user-general">
+                    <div className="item">
+                      <FontAwesomeIcon icon={faIdBadge} />
+                      <p>
+                        {user.position ? user.position : "Position not set"}
+                      </p>
+                    </div>
+                    <div className="item">
+                      <FontAwesomeIcon icon={faCashRegister} />
+                      <p>
+                        {user.location ? user.location : "Location not set"}
+                      </p>
+                    </div>
+                    <div className="item">
+                      <FontAwesomeIcon icon={faMoneyBill1Wave} />
+                      <p>{user.pay ? `$${user.pay}` : "Pay rate not set"}</p>
+                    </div>
+                    <div className="item">
+                      <FontAwesomeIcon icon={faBriefcaseMedical} />
+                      <p>{user.insurance ? "Opt-IN" : "Opt-OUT"}</p>
+                    </div>
+                  </div>
+
+                  <hr className="admin-hr" />
+
+                  <div className="user-employment">
+                    <FontAwesomeIcon icon={faCalendarDays} />
+                    <div className="user-employment-dates">
+                      {user.hireDate ? (
+                        <div>
+                          <span>Hire Date:</span>
+                          <p>{user.hireDate}</p>
+                          <span>
+                            {monthsWorked(
+                              user.hireDate.split("-")[0],
+                              user.hireDate.split("-")[1],
+                              user.hireDate.split("-")[2]
+                            )}{" "}
+                            months ago
+                          </span>
+                        </div>
+                      ) : (
+                        <p>No hire date</p>
+                      )}
+                      {user.lastRaise ? (
+                        <div>
+                          <span>Last Review Date:</span>
+                          <p>{user.lastRaise}</p>
+                          <span>
+                            {monthsWorked(
+                              user.lastRaise.split("-")[0],
+                              user.lastRaise.split("-")[1],
+                              user.lastRaise.split("-")[2]
+                            )}{" "}
+                            months ago
+                          </span>
+                        </div>
+                      ) : (
+                        <p>No review given</p>
+                      )}
+                      {user.promotionDate ? (
+                        <div>
+                          <span>Promotion Date:</span>
+                          <p>{user.promotionDate}</p>
+                          <span>
+                            {monthsWorked(
+                              user.promotionDate.split("-")[0],
+                              user.promotionDate.split("-")[1],
+                              user.promotionDate.split("-")[2]
+                            )}{" "}
+                            months ago
+                          </span>
+                        </div>
+                      ) : (
+                        <p>No promotion date</p>
+                      )}
+                    </div>
+                  </div>
+
+                  <hr className="admin-hr" />
+
+                  <div className="pto-numbers">
+                    {user.hireDate ? (
+                      <p>
+                        {getRemainingPto(
+                          user.hireDate.split("-")[0],
+                          user.hireDate.split("-")[1],
+                          user.hireDate.split("-")[2],
+                          user.hoursUsed ? user.hoursUsed : 0,
+                          user.pto && user.pto.pending ? user.pto.pending : null
+                        )}{" "}
+                        Available Hours
+                      </p>
+                    ) : (
+                      <p>No Hire Date</p>
+                    )}
+                    {user.hireDate ? (
+                      <p>
+                        +10 hours in{" "}
+                        {daysUntil10Hrs(
+                          user.hireDate.split("-")[0],
+                          user.hireDate.split("-")[1],
+                          user.hireDate.split("-")[2]
+                        )}{" "}
+                        days
+                      </p>
+                    ) : (
+                      <p>No Hire Date</p>
+                    )}
+                    <p>
+                      {user.hoursUsed
+                        ? `${user.hoursUsed} hours used`
+                        : "No PTO used"}
+                    </p>
+                  </div>
+
+                  <hr className="admin-hr" />
+
+                  <div className="requests">
+                    <div className="info request">
+                      {user.pto &&
+                      user.pto.submitted &&
+                      user.pto.submitted.length > 0 ? (
+                        <details>
+                          <summary>
+                            Submitted Requests ({user.pto.submitted.length})
+                          </summary>
+                          <ul>
+                            {user.pto.submitted.map((request, index) => {
+                              return (
+                                <li key={index}>
+                                  <div className="manage-request">
+                                    {typeof request.dates === "string" ? (
+                                      <div>
+                                        {request.dates} using {request.hours}{" "}
+                                        hours.{" "}
+                                        {request.type && (
+                                          <span>- {request.type}</span>
+                                        )}
+                                      </div>
+                                    ) : (
+                                      <div>
+                                        {request.dates[0]} to {request.dates[1]}{" "}
+                                        using {request.hours} hours.{" "}
+                                        {request.type && (
+                                          <span>- {request.type}</span>
+                                        )}
+                                      </div>
+                                    )}
+                                    <div className="approve-deny">
+                                      <button
+                                        id="approve"
+                                        className="approve"
+                                        onClick={e =>
+                                          handlePtoRequest(e, user, index)
+                                        }
+                                      >
+                                        Approve
+                                      </button>
+                                      <button
+                                        id="deny"
+                                        className="deny"
+                                        onClick={e =>
+                                          handlePtoRequest(e, user, index)
+                                        }
+                                      >
+                                        Deny
+                                      </button>
+                                    </div>
+                                  </div>
+                                </li>
+                              )
+                            })}
+                          </ul>
+                        </details>
+                      ) : (
+                        <h5>No Submitted Requests</h5>
+                      )}
+                    </div>
+
+                    <div className="info request">
+                      {user.pto && user.pto.pending ? (
+                        <details>
+                          <summary>
+                            Pending Requests ({user.pto.pending.length})
+                          </summary>
+                          <ul>
+                            {user.pto.pending.map((request, index) =>
+                              typeof request.dates === "string" ? (
+                                <li key={index}>
+                                  {request.dates} using {request.hours} hours.{" "}
+                                  {request.type && (
+                                    <span>- {request.type}</span>
+                                  )}
+                                </li>
+                              ) : (
+                                <li key={index}>
+                                  {request.dates[0]} to {request.dates[1]} using{" "}
+                                  {request.hours} hours.{" "}
+                                  {request.type && (
+                                    <span>- {request.type}</span>
+                                  )}
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        </details>
+                      ) : (
+                        <h5>No Pending Requests</h5>
+                      )}
+                    </div>
+                    <div className="info request">
+                      {user.pto && user.pto.accepted ? (
+                        <details>
+                          <summary>
+                            Accepted Requests ({user.pto.accepted.length})
+                          </summary>
+                          <ul>
+                            {user.pto.accepted.map((request, index) =>
+                              typeof request.dates === "string" ? (
+                                <li key={index}>
+                                  {request.dates} using {request.hours} hours.{" "}
+                                  {request.type && (
+                                    <span>- {request.type}</span>
+                                  )}
+                                </li>
+                              ) : (
+                                <li key={index}>
+                                  {request.dates[0]} to {request.dates[1]} using{" "}
+                                  {request.hours} hours.{" "}
+                                  {request.type && (
+                                    <span>- {request.type}</span>
+                                  )}
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        </details>
+                      ) : (
+                        <h5>No Accepted Requests</h5>
+                      )}
+                    </div>
+                    <div className="info request">
+                      {user.pto && user.pto.denied ? (
+                        <details>
+                          <summary>
+                            Denied Requests ({user.pto.denied.length})
+                          </summary>
+                          <ul>
+                            {user.pto.denied.map((request, index) =>
+                              typeof request.dates === "string" ? (
+                                <li key={index}>
+                                  {request.dates} using {request.hours} hours.{" "}
+                                  {request.type && (
+                                    <span>- {request.type}</span>
+                                  )}
+                                </li>
+                              ) : (
+                                <li key={index}>
+                                  {request.dates[0]} to {request.dates[1]} using{" "}
+                                  {request.hours} hours.{" "}
+                                  {request.type && (
+                                    <span>- {request.type}</span>
+                                  )}
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        </details>
+                      ) : (
+                        <h5>No Denied Requests</h5>
+                      )}
+                    </div>
+                  </div>
+                  <div className="action-buttons">
+                    <button
+                      onClick={() => handleSetEditing(user.id, user.name)}
+                      className="modify-button"
+                    >
+                      {editing ? "Cancel" : "Edit"}
+                    </button>
+                    <DeleteUserForm id={user.id} />
+                  </div>
+                </div>
+              )
+            })
           ) : (
             <h3>Gathering Users...</h3>
           )}
