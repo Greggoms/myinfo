@@ -106,7 +106,7 @@ const PtoRequestForm = () => {
             }),
           })
         }
-        // updateUser()
+        updateUser()
         // update redux store
         dispatch(
           addPtoRequest({
