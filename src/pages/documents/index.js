@@ -1,19 +1,10 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import { GatsbySeo } from "gatsby-plugin-next-seo"
 import Button from "../../components/Button"
 import { DocumentsPageContainer } from "../../css"
 
 const DocumentsPage = () => {
-  useEffect(() => {
-    if (window !== "undefined") {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      })
-    }
-  }, [])
-
   const documentsList = useStaticQuery(graphql`
     {
       allFile(filter: { ext: { eq: ".pdf" } }, sort: { fields: name }) {

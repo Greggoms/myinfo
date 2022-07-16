@@ -5,28 +5,29 @@ import { approvePtoRequest, denyPtoRequest } from "../app/features/usersSlice"
 import { toast } from "react-toastify"
 
 const handlePtoRequest = ({ event, user, reqIndex }) => {
-  const person = store
-    .getState()
-    .users.value.find(person => person.id === user.id)
-  const userRef = doc(db, "users", person.id)
+  const userRef = doc(db, "users", user.id)
+  async function approvePto() {
+    await updateDoc(userRef, {
+      "pto.submitted": arrayRemove(user.pto.submitted[reqIndex]),
+      "pto.pending": arrayUnion(user.pto.submitted[reqIndex]),
+    })
+  }
+  async function denyPto() {
+    await updateDoc(userRef, {
+      "pto.submitted": arrayRemove(user.pto.submitted[reqIndex]),
+      "pto.denied": arrayUnion(user.pto.submitted[reqIndex]),
+    })
+  }
 
   try {
-    if (event.target.id === "approve") {
+    if (event.target.name === "approve") {
       store.dispatch(
         approvePtoRequest({
           id: user.id,
           request: user.pto.submitted[reqIndex],
         })
       )
-
-      async function approvePto() {
-        await updateDoc(userRef, {
-          "pto.submitted": arrayRemove(user.pto.submitted[reqIndex]),
-          "pto.pending": arrayUnion(user.pto.submitted[reqIndex]),
-        })
-      }
       approvePto()
-
       toast.success(
         `${user.name}'s request for ${user.pto.submitted[reqIndex].dates} has been approved!`
       )
@@ -34,15 +35,7 @@ const handlePtoRequest = ({ event, user, reqIndex }) => {
       store.dispatch(
         denyPtoRequest({ id: user.id, request: user.pto.submitted[reqIndex] })
       )
-
-      async function denyPto() {
-        await updateDoc(userRef, {
-          "pto.submitted": arrayRemove(user.pto.submitted[reqIndex]),
-          "pto.denied": arrayUnion(user.pto.submitted[reqIndex]),
-        })
-      }
       denyPto()
-
       toast.info(`${user.name}'s request has been denied.`)
     }
   } catch (e) {

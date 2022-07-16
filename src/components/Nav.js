@@ -59,7 +59,9 @@ export const Nav = () => {
                 dispatch(logout())
                 dispatch(userFireDoc(null))
                 dispatch(gatherUsers([]))
-                toast.info(`Successful Logout!`)
+                toast.info(`Successful Logout!`, {
+                  autoClose: 1000,
+                })
               })
               .catch(error => {
                 console.log(error.code, "=>", error.message)

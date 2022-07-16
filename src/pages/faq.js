@@ -1,18 +1,9 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { GatsbySeo } from "gatsby-plugin-next-seo"
 import { StaticImage } from "gatsby-plugin-image"
 import { FaqContainer } from "../css"
 
 const Faq = () => {
-  useEffect(() => {
-    if (window !== "undefined") {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      })
-    }
-  }, [])
-
   return (
     <>
       <GatsbySeo nofollow={true} noindex={true} title="FAQ | AbbyHQ" />

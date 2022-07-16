@@ -1,18 +1,18 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { GatsbySeo } from "gatsby-plugin-next-seo"
 
 import Button from "../components/Button"
 import { IndexPageContainer } from "../css"
 
 const IndexPage = () => {
-  useEffect(() => {
-    if (window !== "undefined") {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      })
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (window !== "undefined") {
+  //     window.scrollTo({
+  //       top: 0,
+  //       behavior: "smooth",
+  //     })
+  //   }
+  // }, [])
 
   return (
     <>

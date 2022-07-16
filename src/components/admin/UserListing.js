@@ -353,19 +353,27 @@ export const UserListing = () => {
                                     )}
                                     <div className="approve-deny">
                                       <button
-                                        id="approve"
+                                        name="approve"
                                         className="approve"
                                         onClick={e =>
-                                          handlePtoRequest(e, user, index)
+                                          handlePtoRequest({
+                                            event: e,
+                                            user: user,
+                                            reqIndex: index,
+                                          })
                                         }
                                       >
                                         Approve
                                       </button>
                                       <button
-                                        id="deny"
+                                        name="deny"
                                         className="deny"
                                         onClick={e =>
-                                          handlePtoRequest(e, user, index)
+                                          handlePtoRequest({
+                                            event: e,
+                                            user: user,
+                                            reqIndex: index,
+                                          })
                                         }
                                       >
                                         Deny

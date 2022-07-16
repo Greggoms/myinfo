@@ -32,6 +32,10 @@ export const UserDetailsContainer = styled.section`
       margin-left: 15px;
     }
 
+    li:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
     .request {
       span {
         font-size: 9pt;

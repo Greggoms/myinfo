@@ -38,13 +38,21 @@ const UserDetails = props => {
                 {user.pto.submitted.map((request, index) => (
                   <li key={index}>
                     <div className="request">
-                      <p>
-                        {request.dates} using {request.hours} hours.{" "}
-                        {request.type && <span>- {request.type}</span>}
-                      </p>
+                      {typeof request.dates === "string" ? (
+                        <div>
+                          {request.dates} using {request.hours} hours.{" "}
+                          {request.type && <span>- {request.type}</span>}
+                        </div>
+                      ) : (
+                        <div>
+                          {request.dates[0]} to {request.dates[1]} using{" "}
+                          {request.hours} hours.{" "}
+                          {request.type && <span>- {request.type}</span>}
+                        </div>
+                      )}
                       <div className="approve-deny">
                         <button
-                          id="approve"
+                          name="approve"
                           className="approve"
                           onClick={e =>
                             handlePtoRequest({
@@ -57,9 +65,15 @@ const UserDetails = props => {
                           Approve
                         </button>
                         <button
-                          id="deny"
+                          name="deny"
                           className="deny"
-                          onClick={e => handlePtoRequest(e, user, index)}
+                          onClick={e =>
+                            handlePtoRequest({
+                              event: e,
+                              user: user,
+                              reqIndex: index,
+                            })
+                          }
                         >
                           Deny
                         </button>

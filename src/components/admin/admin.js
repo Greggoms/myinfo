@@ -42,7 +42,7 @@ const AdminPage = () => {
           title={`${userFireDoc.name}'s Admin | AbbyHQ`}
         />
 
-        <div
+        {/* <div
           style={{
             width: "fit-content",
             maxWidth: "500px",
@@ -54,7 +54,7 @@ const AdminPage = () => {
         >
           Bug spotted! - Admins cannot accept/deny requests unless they themself
           have a PTO submission... Working on a solution.
-        </div>
+        </div> */}
 
         <AdminButtonsContainer>
           <h3>View</h3>

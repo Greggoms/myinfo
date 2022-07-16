@@ -119,6 +119,12 @@ export const RegisterForm = props => {
             Sign in
           </button>
         </div>
+        <div className="label">
+          Forgot Password?{" "}
+          <button name="passwordreset" onClick={props.handleFormNavigation}>
+            Reset it
+          </button>
+        </div>
       </div>
     </FormContainer>
   )
