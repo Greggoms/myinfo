@@ -185,7 +185,9 @@ export const EmploymentDatesContainer = styled.section`
     display: grid;
     justify-content: space-around;
     gap: 25px;
-    height: 100%;
+
+    /* think this is causing a bug on mobile */
+    /* height: 100%; */
 
     @media ${props => props.theme.breakpoints.huge} {
       grid-template-columns: 1fr 1fr 1fr;
