@@ -18,16 +18,20 @@ const PtoRequestStatus = () => {
                 if (typeof request.dates === "string") {
                   return (
                     <li key={index}>
-                      {request.dates} using {request.hours} hours.{" "}
-                      {request.type && <span>- {request.type}</span>}
+                      <p>
+                        {request.dates} using {request.hours} hours.
+                      </p>
+                      {request.type && <span>{request.type}</span>}
                     </li>
                   )
                 } else {
                   return (
                     <li key={index}>
-                      {request.dates[0]} to {request.dates[1]} using{" "}
-                      {request.hours} hours.{" "}
-                      {request.type && <span>- {request.type}</span>}
+                      <p>
+                        {request.dates[0]} to {request.dates[1]} using{" "}
+                        {request.hours} hours.
+                      </p>
+                      {request.type && <span>{request.type}</span>}
                     </li>
                   )
                 }
@@ -48,14 +52,18 @@ const PtoRequestStatus = () => {
               {userFireDoc.pto.pending.map((request, index) =>
                 typeof request.dates === "string" ? (
                   <li key={index}>
-                    {request.dates} using {request.hours} hours.{" "}
-                    {request.type && <span>- {request.type}</span>}
+                    <p>
+                      {request.dates} using {request.hours} hours.
+                    </p>
+                    {request.type && <span>{request.type}</span>}
                   </li>
                 ) : (
                   <li key={index}>
-                    {request.dates[0]} to {request.dates[1]} using{" "}
-                    {request.hours} hours.{" "}
-                    {request.type && <span>- {request.type}</span>}
+                    <p>
+                      {request.dates[0]} to {request.dates[1]} using{" "}
+                      {request.hours} hours.
+                    </p>
+                    {request.type && <span>{request.type}</span>}
                   </li>
                 )
               )}
@@ -75,14 +83,18 @@ const PtoRequestStatus = () => {
               {userFireDoc.pto.accepted.map((request, index) =>
                 request.dates.length > 1 ? (
                   <li key={index}>
-                    {request.dates[0]} to {request.dates[1]} using{" "}
-                    {request.hours} hours.{" "}
-                    {request.type && <span>- {request.type}</span>}
+                    <p>
+                      {request.dates[0]} to {request.dates[1]} using{" "}
+                      {request.hours} hours.
+                    </p>
+                    {request.type && <span>{request.type}</span>}
                   </li>
                 ) : (
                   <li key={index}>
-                    {request.dates} using {request.hours} hours.{" "}
-                    {request.type && <span>- {request.type}</span>}
+                    <p>
+                      {request.dates} using {request.hours} hours.
+                    </p>
+                    {request.type && <span>{request.type}</span>}
                   </li>
                 )
               )}
@@ -102,14 +114,18 @@ const PtoRequestStatus = () => {
               {userFireDoc.pto.denied.map((request, index) =>
                 typeof request.dates === "string" ? (
                   <li key={index}>
-                    {request.dates} using {request.hours} hours.{" "}
-                    {request.type && <span>- {request.type}</span>}
+                    <p>
+                      {request.dates} using {request.hours} hours.
+                    </p>
+                    {request.type && <span>{request.type}</span>}
                   </li>
                 ) : (
                   <li key={index}>
-                    {request.dates[0]} to {request.dates[1]} using{" "}
-                    {request.hours} hours.{" "}
-                    {request.type && <span>- {request.type}</span>}
+                    <p>
+                      {request.dates[0]} to {request.dates[1]} using{" "}
+                      {request.hours} hours.
+                    </p>
+                    {request.type && <span>{request.type}</span>}
                   </li>
                 )
               )}

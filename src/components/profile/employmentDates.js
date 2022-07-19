@@ -4,7 +4,7 @@ import { selectUserFireDoc } from "../../app/features/userSlice"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCalendarDays } from "@fortawesome/free-solid-svg-icons"
 import { format } from "date-fns"
-import { monthsWorked } from "../../utils/dateHelpers"
+import { timeWorkedLong } from "../../utils/dateHelpers"
 import { EmploymentDatesContainer } from "../../css"
 
 const EmploymentDates = () => {
@@ -28,16 +28,15 @@ const EmploymentDates = () => {
                 )}
               </p>
               <span>
-                {monthsWorked(
+                {timeWorkedLong(
                   userFireDoc.hireDate.split("-")[0],
                   userFireDoc.hireDate.split("-")[1],
                   userFireDoc.hireDate.split("-")[2]
-                )}{" "}
-                months ago
+                )}
               </span>
             </>
           ) : (
-            <p>No hire date.</p>
+            <p>No hire date</p>
           )}
         </div>
 
@@ -56,16 +55,15 @@ const EmploymentDates = () => {
                 )}
               </p>
               <span>
-                {monthsWorked(
+                {timeWorkedLong(
                   userFireDoc.lastRaise.split("-")[0],
                   userFireDoc.lastRaise.split("-")[1],
                   userFireDoc.lastRaise.split("-")[2]
-                )}{" "}
-                months ago
+                )}
               </span>
             </>
           ) : (
-            <p>No review date.</p>
+            <p>No review date</p>
           )}
         </div>
         <div>
@@ -83,16 +81,15 @@ const EmploymentDates = () => {
                 )}
               </p>
               <span>
-                {monthsWorked(
+                {timeWorkedLong(
                   userFireDoc.promotionDate.split("-")[0],
                   userFireDoc.promotionDate.split("-")[1],
                   userFireDoc.promotionDate.split("-")[2]
-                )}{" "}
-                months ago
+                )}
               </span>
             </>
           ) : (
-            <p>No promotion date.</p>
+            <p>No promotion date</p>
           )}
         </div>
       </div>

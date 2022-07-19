@@ -14,7 +14,12 @@ const Faq = () => {
             <p>
               Some breaking changes happened to the w4 form in 2020. The
               following can help you understand how to properly fill a w4 form
-              so you can be better prepared for tax return time.
+              so you can be better prepared for tax return time. I{" "}
+              <strong>
+                <em>strongly</em>
+              </strong>{" "}
+              recommend married or multi-income individuals to fill out a new
+              form to calculate for federal withholdings.
             </p>
           </div>
           <details>
@@ -133,24 +138,23 @@ const Faq = () => {
             </p>
             <p>
               Imagine you have an invisible bank account with the IRS. The
-              balance starts at $0 every year. By the end of the year, the IRS
-              expects this balance to reach the amount you are expected to owe
-              in taxes based on your income(s). If your balance falls short of
-              what is owed, you will have a negative balance and have to pay the
-              amount necessary to zero it out. If your balance exceeds what is
-              owed, you get a refund for the difference.
+              balance starts at $0 every year. Each check you receive
+              automatically adds funds to this bank account. By the end of the
+              year, the IRS expects this balance to reach the amount you are
+              expected to owe in taxes based on your income(s). If your balance
+              falls short of what is owed, you will have a negative balance and
+              have to pay the amount necessary to zero it out. If your balance
+              exceeds what is owed, you get a refund for the difference.
             </p>
             <p>
               In a simple example, I file as single, have only 1 job, have no
               dependents, have no deductions to claim. The IRS will
               automatically figure the amount needed to be withheld (shown on
               the stub) and it will be deposited into this invisible bank
-              account. Each check I receive adds the federal withholdings to
-              this bank account. At the end of the year, let’s say I’m expected
-              to pay $1,000 in taxes. Lucky for me, I’ve deposited (withheld) X
-              amount from each paycheck and it added up to $1,400 (visible on
-              stub under YTD column). $1,400 balance - $1,000 owed = $400
-              refund!
+              account. At the end of the year, let’s say I’m expected to pay
+              $1,000 in taxes. Lucky for me, I’ve deposited (withheld) X amount
+              from each paycheck and it added up to $1,400 (visible on stub
+              under YTD column). $1,400 balance - $1,000 owed = $400 refund!
             </p>
             <p>
               In a complicated example, I’m married and my spouse and I both
@@ -178,11 +182,15 @@ const Faq = () => {
               How in the world am I supposed to know how much to withhold?
             </summary>
             <p>
+              The amount you're expected to pay in taxes can change every year
+              due to various circumstances such as rising minimum wage, breaking
+              changes to the w4 form, and marital status changes. This is why
+              it's hard to know exactly how much you'll owe until you file and
+              get your result.
+            </p>
+            <p>
               If you file as single or married filing separately and only have
-              one job, you typically won’t have to worry about it. At the end of
-              the day, it's a game of trial and error. The amount you're
-              expected to pay in taxes can change every year due to various
-              circumstances, so there is no definite answer
+              one job, you typically won’t have to worry about it.
             </p>
             <p>
               For any other situation (multiple jobs, married and spouse works),
@@ -214,13 +222,12 @@ const Faq = () => {
                 same (for example: one job pays $1000 and the other pays $1250),
                 you can check the box on step 2(c). This will perform the
                 automatic withholdings as though you're filing as single and you
-                shouldn’t need to specify an extra amount to be withheld, but it
-                could be a smart idea anyway. If I check this box and my first
-                job pays $1000 while my second job pays $5000, one of these jobs
-                will withhold way more than necessary and will result in a very
-                small net pay (total amount of your pay after tax) on the pay
-                stub. You most likely wouldn't have to worry about paying in
-                though and could receive a refund!
+                shouldn’t need to specify an extra amount to be withheld. If I
+                check this box and my first job pays $1000 while my second job
+                pays $5000, one of these jobs will withhold way more than
+                necessary and will result in a very small net pay (total amount
+                of your pay after tax) on the pay stub. You most likely wouldn't
+                have to worry about paying in though and could receive a refund!
               </li>
             </ol>
             <p>
@@ -258,9 +265,7 @@ const Faq = () => {
               It is required for all new employees to fill out the Form w-4 from
               2020 or later. It is <em>not</em> required to submit a new w-4 for
               existing employees, though I recommend you consider your situation
-              in accordance with the changes made to the form. I{" "}
-              <em>strongly</em> recommend married or multi-income individuals to
-              fill out a new form to calculate for federal withholdings.
+              in accordance with the changes made to the form.
             </p>
           </details>
           <details>
@@ -284,6 +289,18 @@ const Faq = () => {
               payroll has been processed.
             </p>
           </div>
+          <details>
+            <summary>How do I view my paystubs?</summary>
+            <p>
+              Paystubs are available through{" "}
+              <a href="https://identity.payentry.com/Account/Login">Payentry</a>
+              . You must recieve an invitation link from noreply@payentry.com to
+              activate your account. It is likely to be in your spam folder. If
+              you have not recieved an invite, email payroll@vhdistro.net and
+              tell them "I have not recieved a Payentry Invitation. I would like
+              to use 'your@email.com' to sign into Payentry".
+            </p>
+          </details>
           <details>
             <summary>How do I get Direct Deposit?</summary>
             <p>This is the purpose of the Millennium Enrollment Form.</p>

@@ -1,9 +1,19 @@
 import styled from "styled-components"
 
 export const IndexPageContainer = styled.div`
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
+  .paystub-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    background: ${props => props.theme.grayscale.light1};
+    color: ${props => props.theme.grayscale.dark4};
+    padding: 8px;
+    width: fit-content;
+    margin: 0 auto 10px;
+    a {
+      color: ${props => props.theme.colors.linkDark};
+    }
   }
 
   .ctas {
@@ -32,6 +42,7 @@ export const IndexPageContainer = styled.div`
     padding: 10px;
 
     h2 {
+      text-align: center;
       margin-bottom: 0;
     }
 

@@ -3,12 +3,13 @@ import styled from "styled-components"
 export const ProfileContainer = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 
   @media ${props => props.theme.breakpoints.tablet} {
     display: grid;
     grid-template-columns: fit-content 1fr;
     grid-template-areas:
+      "paystubInfo paystubInfo"
       "aside info-pto"
       "ptoRequestForm ptoRequestForm"
       "requests requests"
@@ -18,6 +19,7 @@ export const ProfileContainer = styled.section`
   @media ${props => props.theme.breakpoints.desktop} {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
+      "paystubInfo paystubInfo paystubInfo"
       "aside info-pto info-dates"
       "ptoRequestForm requests requests"
       ". info-account info-account";
@@ -25,8 +27,25 @@ export const ProfileContainer = styled.section`
   @media ${props => props.theme.breakpoints.huge} {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
+      "paystubInfo paystubInfo paystubInfo paystubInfo"
       "aside info-pto info-dates info-dates"
       "ptoRequestForm requests requests info-account";
+  }
+
+  .paystub-info {
+    grid-area: paystubInfo;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    background: ${props => props.theme.grayscale.light1};
+    color: ${props => props.theme.grayscale.dark4};
+    padding: 8px;
+    width: fit-content;
+    margin: 0 auto;
+    a {
+      color: ${props => props.theme.colors.linkDark};
+    }
   }
 
   .pto-request-form {
@@ -159,6 +178,10 @@ export const PtoStatusContainer = styled.section`
 
   ul li {
     margin-left: 20px;
+  }
+
+  li:not(:last-child) {
+    margin-bottom: 15px;
   }
 
   span {

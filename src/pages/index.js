@@ -1,6 +1,7 @@
 import React from "react"
 import { GatsbySeo } from "gatsby-plugin-next-seo"
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons"
 import Button from "../components/Button"
 import { IndexPageContainer } from "../css"
 
@@ -18,7 +19,13 @@ const IndexPage = () => {
     <>
       <GatsbySeo nofollow={true} noindex={true} title="Home | AbbyHQ" />
       <IndexPageContainer>
-        <h2>New and Improved Employee Hub</h2>
+        <div className="paystub-info">
+          <FontAwesomeIcon icon={faCircleInfo} />
+          <p>
+            Paystubs are available through{" "}
+            <a href="https://identity.payentry.com/Account/Login">Payentry</a>
+          </p>
+        </div>
         <div className="ctas">
           <div className="cta">
             <h2>Access Your Records</h2>

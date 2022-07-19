@@ -2,6 +2,8 @@ import React from "react"
 import { useSelector } from "react-redux"
 import { selectUserAuth, selectUserFireDoc } from "../../app/features/userSlice"
 import { GatsbySeo } from "gatsby-plugin-next-seo"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons"
 
 import EmployeeInfo from "./employeeInfo"
 import RemainingPto from "./remainingPto"
@@ -27,6 +29,13 @@ const UserFireDoc = () => {
         title={`${userFireDoc.name}'s Profile | AbbyHQ`}
       />
       <ProfileContainer>
+        <div className="paystub-info">
+          <FontAwesomeIcon icon={faCircleInfo} />
+          <p>
+            Paystubs are available through{" "}
+            <a href="https://identity.payentry.com/Account/Login">Payentry</a>
+          </p>
+        </div>
         <EmployeeInfo />
         <RemainingPto />
         {/*

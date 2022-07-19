@@ -120,12 +120,12 @@ export const UserListing = () => {
       value: "submitted-pto",
     },
     {
-      name: "Pending PTO",
-      value: "pending-pto",
-    },
-    {
       name: "Due For Review",
       value: "raises",
+    },
+    {
+      name: "Pending PTO",
+      value: "pending-pto",
     },
   ]
 
@@ -230,10 +230,10 @@ export const UserListing = () => {
                   <div className="user-employment">
                     <FontAwesomeIcon icon={faCalendarDays} />
                     <div className="user-employment-dates">
-                      {user.hireDate ? (
-                        <div>
-                          <span>Hire Date:</span>
-                          <p>{user.hireDate}</p>
+                      <div>
+                        <span>Hire Date:</span>
+                        <p>{user.hireDate ? user.hireDate : `None`}</p>
+                        {user.hireDate && (
                           <span>
                             {monthsWorked(
                               user.hireDate.split("-")[0],
@@ -242,14 +242,12 @@ export const UserListing = () => {
                             )}{" "}
                             months ago
                           </span>
-                        </div>
-                      ) : (
-                        <p>No hire date</p>
-                      )}
-                      {user.lastRaise ? (
-                        <div>
-                          <span>Last Review Date:</span>
-                          <p>{user.lastRaise}</p>
+                        )}
+                      </div>
+                      <div>
+                        <span>Last Review Date:</span>
+                        <p>{user.lastRaise ? user.lastRaise : `None`}</p>
+                        {user.lastRaise && (
                           <span>
                             {monthsWorked(
                               user.lastRaise.split("-")[0],
@@ -258,14 +256,14 @@ export const UserListing = () => {
                             )}{" "}
                             months ago
                           </span>
-                        </div>
-                      ) : (
-                        <p>No review given</p>
-                      )}
-                      {user.promotionDate ? (
-                        <div>
-                          <span>Promotion Date:</span>
-                          <p>{user.promotionDate}</p>
+                        )}
+                      </div>
+                      <div>
+                        <span>Promotion Date:</span>
+                        <p>
+                          {user.promotionDate ? user.promotionDate : `None`}
+                        </p>
+                        {user.promotionDate && (
                           <span>
                             {monthsWorked(
                               user.promotionDate.split("-")[0],
@@ -274,10 +272,8 @@ export const UserListing = () => {
                             )}{" "}
                             months ago
                           </span>
-                        </div>
-                      ) : (
-                        <p>No promotion date</p>
-                      )}
+                        )}
+                      </div>
                     </div>
                   </div>
 

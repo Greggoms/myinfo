@@ -82,13 +82,13 @@ const PtoRequestForm = () => {
           ptoType,
         }
 
-        // // Send the email
-        // await emailjs.send(
-        //   `${process.env.GATSBY_PAYROLL_EMAILJS_SERVICE_ID}`,
-        //   `${process.env.GATSBY_PTO_EMAILJS_TEMPLATE_ID}`,
-        //   templateParams,
-        //   `${process.env.GATSBY_EMAILJS_PUBLIC_KEY}`
-        // )
+        // Send the email
+        await emailjs.send(
+          `${process.env.GATSBY_PAYROLL_EMAILJS_SERVICE_ID}`,
+          `${process.env.GATSBY_PTO_EMAILJS_TEMPLATE_ID}`,
+          templateParams,
+          `${process.env.GATSBY_EMAILJS_PUBLIC_KEY}`
+        )
 
         async function updateUser() {
           const userRef = doc(db, "users", userDoc.id)
@@ -157,6 +157,15 @@ const PtoRequestForm = () => {
     }
   }
 
+  const checkedStyles = {
+    active: {
+      border: `2px solid #00DEF2`,
+    },
+    inactive: {
+      border: `2px solid #8C8C8C`,
+    },
+  }
+
   return (
     <PtoRequestFormContainer>
       <div className="form-heading">
@@ -216,17 +225,14 @@ const PtoRequestForm = () => {
 
       <div className="radios">
         <h3>Specify request type</h3>
-        <label>
-          <input
-            type="radio"
-            value="cashout"
-            name="cashout"
-            checked={ptoType === "Cash Out"}
-            onChange={handleSetPtoType}
-          />
-          <span>Cash Out - I haven't missed any work</span>
-        </label>
-        <label>
+
+        <label
+          style={
+            ptoType === "Missing Hours"
+              ? checkedStyles.active
+              : checkedStyles.inactive
+          }
+        >
           <input
             type="radio"
             value="missinghours"
@@ -234,13 +240,35 @@ const PtoRequestForm = () => {
             checked={ptoType === "Missing Hours"}
             onChange={handleSetPtoType}
           />
-          <span>Missing Hours - I missed work and need to cover the hours</span>
+          <div className="desc">
+            <p>Vacation / Missing Hours</p>
+            <span>I missed work and need to cover the hours</span>
+          </div>
+        </label>
+        <label
+          style={
+            ptoType === "Cash Out"
+              ? checkedStyles.active
+              : checkedStyles.inactive
+          }
+        >
+          <input
+            type="radio"
+            value="cashout"
+            name="cashout"
+            checked={ptoType === "Cash Out"}
+            onChange={handleSetPtoType}
+          />
+          <div className="desc">
+            <p>Cash Out</p>
+            <span>I haven't missed any work</span>
+          </div>
         </label>
         {ptoType === "Cash Out" && (
           <p>
-            Cashing out PTO may push you into a higher tax bracket{" "}
-            <strong>if you are NOT missing hours</strong>. This would increase
-            the taxes taken from your check.
+            Cashing out PTO may push you into a higher tax bracket if you worked
+            full hours and plan to use this request to give yourself a bonus.
+            This would increase the taxes taken from your check.
           </p>
         )}
       </div>
@@ -267,18 +295,19 @@ const PtoRequestForm = () => {
             </ul>
             <h2 style={{ marginTop: "10px" }}>Specifying Request Type</h2>
             <ul>
+              <li>Missing Hours</li>
+              <ul>
+                <li>
+                  This option informs payroll that you are planning a vacation
+                  or have missed work and would like to use PTO to make up those
+                  missed hours.
+                </li>
+              </ul>
               <li>Cash Out</li>
               <ul>
                 <li>
                   This option tells payroll that you would like to cash out the
                   requested hours even if you have not missed any work.
-                </li>
-              </ul>
-              <li>Missing Hours</li>
-              <ul>
-                <li>
-                  This option informs payroll that you have missed work and
-                  would like to use PTO to make up those missed hours.
                 </li>
               </ul>
             </ul>

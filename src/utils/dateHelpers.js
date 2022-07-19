@@ -3,6 +3,7 @@ import {
   differenceInCalendarDays,
   differenceInCalendarMonths,
   format,
+  intervalToDuration,
 } from "date-fns"
 
 export const currentYear = new Date().getFullYear()
@@ -17,7 +18,7 @@ export const getRemainingPto = (
   pending
 ) => {
   const result = differenceInCalendarDays(
-    new Date(),
+    new Date(currentYear, currentMonth, currentDay),
     new Date(hireYear, hireMonth, hireDay)
   )
   return pending
@@ -37,7 +38,7 @@ export const daysUntil10Hrs = (hireYear, hireMonth, hireDay) => {
 
 export const dateFor10Hrs = (hireYear, hireMonth, hireDay) => {
   const result = addDays(
-    new Date(),
+    new Date(currentYear, currentMonth, currentDay),
     daysUntil10Hrs(hireYear, hireMonth, hireDay)
   )
   return format(result, `PPPP`)
@@ -45,14 +46,21 @@ export const dateFor10Hrs = (hireYear, hireMonth, hireDay) => {
 
 export const monthsWorked = (year, month, day) => {
   const result = differenceInCalendarMonths(
-    new Date(),
+    new Date(currentYear, currentMonth, currentDay),
     new Date(year, month - 1, day)
   )
   return result
 }
+export const timeWorkedLong = (year, month, day) => {
+  const result = intervalToDuration({
+    start: new Date(currentYear, currentMonth, currentDay),
+    end: new Date(year, month, day),
+  })
+  return `${result.years} years, ${result.months} months, ${result.days} days`
+}
 export const lifetimePTO = (hireYear, hireMonth, hireDay) => {
   const result = differenceInCalendarDays(
-    new Date(),
+    new Date(currentYear, currentMonth, currentDay),
     new Date(hireYear, hireMonth, hireDay)
   )
   return Math.floor(result / 91) * 10

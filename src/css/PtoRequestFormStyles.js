@@ -38,15 +38,28 @@ export const PtoRequestFormContainer = styled.section`
     gap: 5px;
 
     label {
-      display: flex;
+      display: grid;
       cursor: pointer;
+      border-radius: 2px;
     }
 
     input {
+      grid-column: 1;
+      grid-row: 1;
+
       margin-right: 5px;
     }
+
+    .desc {
+      z-index: 1;
+      grid-column: 1;
+      grid-row: 1;
+      background: ${props => props.theme.grayscale.dark2};
+      padding: 8px;
+    }
     span {
-      color: ${props => props.theme.grayscale.light1};
+      font-size: 9pt;
+      color: ${props => props.theme.grayscale.light2};
     }
     p {
       font-size: 10pt;
@@ -54,6 +67,7 @@ export const PtoRequestFormContainer = styled.section`
   }
 
   .form-help {
+    z-index: 100;
     position: fixed;
     top: 0;
     left: 0;

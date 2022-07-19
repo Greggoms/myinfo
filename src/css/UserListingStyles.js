@@ -58,13 +58,16 @@ export const DetailedUsersContainer = styled.section`
   }
 
   .list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 10px;
 
     @media ${props => props.theme.breakpoints.tablet} {
+      display: grid;
       grid-template-columns: repeat(auto-fit, minmax(470px, 1fr));
+      align-items: stretch;
+      justify-items: center;
     }
   }
 
@@ -81,10 +84,14 @@ export const DetailedUsersContainer = styled.section`
 
     &-general {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
       gap: 10px;
 
       text-align: center;
+
+      @media only screen and (max-width: 414px) {
+        grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+      }
     }
 
     &-employment {
@@ -93,18 +100,19 @@ export const DetailedUsersContainer = styled.section`
       gap: 5px;
 
       &-dates {
-        align-self: center;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        column-gap: 30px;
+        row-gap: 15px;
 
-        width: 100%;
-
-        @media only screen and (min-width: 25rem) {
+        /* @media only screen and (min-width: 25rem) { */
+        /* @media ${props => props.theme.breakpoints.tablet} {
           flex-direction: row;
+          align-items: flex-start;
           justify-items: center;
-        }
+          justify-content: space-around;
+        } */
       }
       span {
         font-size: 9pt;
