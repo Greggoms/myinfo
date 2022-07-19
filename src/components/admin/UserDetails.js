@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { selectUsers } from "../../app/features/usersSlice"
 import handlePtoRequest from "../../utils/handlePtoRequest"
 import { UserDetailsContainer } from "../../css"
-import { monthsWorked, timeForReview } from "../../utils/dateHelpers"
+import { timeForReview, timeWorkedLong } from "../../utils/dateHelpers"
 import { ModifyUserForm } from "./ModifyUserForm"
 
 const UserDetails = props => {
@@ -95,17 +95,17 @@ const UserDetails = props => {
               <p>
                 {user.name} ({user.position}) has gone{" "}
                 {user.lastRaise
-                  ? monthsWorked(
+                  ? timeWorkedLong(
                       user.lastRaise.split("-")[0],
                       user.lastRaise.split("-")[1],
                       user.lastRaise.split("-")[2]
                     )
-                  : monthsWorked(
+                  : timeWorkedLong(
                       user.hireDate.split("-")[0],
                       user.hireDate.split("-")[1],
                       user.hireDate.split("-")[2]
                     )}{" "}
-                months without a review!
+                without a review!
               </p>
               <p style={{ margin: "15px auto" }}>
                 Update their info if this seems wrong

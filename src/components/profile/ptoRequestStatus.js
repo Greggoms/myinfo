@@ -47,7 +47,7 @@ const PtoRequestStatus = () => {
         userFireDoc.pto.pending &&
         userFireDoc.pto.pending.length >= 1 ? (
           <div>
-            <h2>Pending Requests ({userFireDoc.pto.pending.length})</h2>
+            <h2>Approved Requests ({userFireDoc.pto.pending.length})</h2>
             <ul>
               {userFireDoc.pto.pending.map((request, index) =>
                 typeof request.dates === "string" ? (
@@ -70,38 +70,7 @@ const PtoRequestStatus = () => {
             </ul>
           </div>
         ) : (
-          <p>No Pending Requests</p>
-        )}
-      </div>
-      <div className="request">
-        {userFireDoc.pto &&
-        userFireDoc.pto.accepted &&
-        userFireDoc.pto.accepted.length >= 1 ? (
-          <div>
-            <h2>Accepted Requests ({userFireDoc.pto.accepted.length})</h2>
-            <ul>
-              {userFireDoc.pto.accepted.map((request, index) =>
-                request.dates.length > 1 ? (
-                  <li key={index}>
-                    <p>
-                      {request.dates[0]} to {request.dates[1]} using{" "}
-                      {request.hours} hours.
-                    </p>
-                    {request.type && <span>{request.type}</span>}
-                  </li>
-                ) : (
-                  <li key={index}>
-                    <p>
-                      {request.dates} using {request.hours} hours.
-                    </p>
-                    {request.type && <span>{request.type}</span>}
-                  </li>
-                )
-              )}
-            </ul>
-          </div>
-        ) : (
-          <p>No Accepted Requests</p>
+          <p>No Approved Requests</p>
         )}
       </div>
       <div className="request">
@@ -133,6 +102,37 @@ const PtoRequestStatus = () => {
           </div>
         ) : (
           <p>No Denied Requests</p>
+        )}
+      </div>
+      <div className="request">
+        {userFireDoc.pto &&
+        userFireDoc.pto.accepted &&
+        userFireDoc.pto.accepted.length >= 1 ? (
+          <div>
+            <h2>Completed Requests ({userFireDoc.pto.accepted.length})</h2>
+            <ul>
+              {userFireDoc.pto.accepted.map((request, index) =>
+                request.dates.length > 1 ? (
+                  <li key={index}>
+                    <p>
+                      {request.dates[0]} to {request.dates[1]} using{" "}
+                      {request.hours} hours.
+                    </p>
+                    {request.type && <span>{request.type}</span>}
+                  </li>
+                ) : (
+                  <li key={index}>
+                    <p>
+                      {request.dates} using {request.hours} hours.
+                    </p>
+                    {request.type && <span>{request.type}</span>}
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
+        ) : (
+          <p>No Completed Requests</p>
         )}
       </div>
     </PtoStatusContainer>

@@ -390,7 +390,7 @@ export const UserListing = () => {
                       {user.pto && user.pto.pending ? (
                         <details>
                           <summary>
-                            Pending Requests ({user.pto.pending.length})
+                            Approved Requests ({user.pto.pending.length})
                           </summary>
                           <ul>
                             {user.pto.pending.map((request, index) =>
@@ -414,40 +414,10 @@ export const UserListing = () => {
                           </ul>
                         </details>
                       ) : (
-                        <h5>No Pending Requests</h5>
+                        <h5>No Approved Requests</h5>
                       )}
                     </div>
-                    <div className="info request">
-                      {user.pto && user.pto.accepted ? (
-                        <details>
-                          <summary>
-                            Accepted Requests ({user.pto.accepted.length})
-                          </summary>
-                          <ul>
-                            {user.pto.accepted.map((request, index) =>
-                              typeof request.dates === "string" ? (
-                                <li key={index}>
-                                  {request.dates} using {request.hours} hours.{" "}
-                                  {request.type && (
-                                    <span>- {request.type}</span>
-                                  )}
-                                </li>
-                              ) : (
-                                <li key={index}>
-                                  {request.dates[0]} to {request.dates[1]} using{" "}
-                                  {request.hours} hours.{" "}
-                                  {request.type && (
-                                    <span>- {request.type}</span>
-                                  )}
-                                </li>
-                              )
-                            )}
-                          </ul>
-                        </details>
-                      ) : (
-                        <h5>No Accepted Requests</h5>
-                      )}
-                    </div>
+
                     <div className="info request">
                       {user.pto && user.pto.denied ? (
                         <details>
@@ -477,6 +447,37 @@ export const UserListing = () => {
                         </details>
                       ) : (
                         <h5>No Denied Requests</h5>
+                      )}
+                    </div>
+                    <div className="info request">
+                      {user.pto && user.pto.accepted ? (
+                        <details>
+                          <summary>
+                            Completed Requests ({user.pto.accepted.length})
+                          </summary>
+                          <ul>
+                            {user.pto.accepted.map((request, index) =>
+                              typeof request.dates === "string" ? (
+                                <li key={index}>
+                                  {request.dates} using {request.hours} hours.{" "}
+                                  {request.type && (
+                                    <span>- {request.type}</span>
+                                  )}
+                                </li>
+                              ) : (
+                                <li key={index}>
+                                  {request.dates[0]} to {request.dates[1]} using{" "}
+                                  {request.hours} hours.{" "}
+                                  {request.type && (
+                                    <span>- {request.type}</span>
+                                  )}
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        </details>
+                      ) : (
+                        <h5>No Completed Requests</h5>
                       )}
                     </div>
                   </div>
