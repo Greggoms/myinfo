@@ -3,8 +3,8 @@ import { useSelector } from "react-redux"
 import { selectUserFireDoc } from "../../app/features/userSlice"
 import { GatsbySeo } from "gatsby-plugin-next-seo"
 
+import ReactTableV8 from "../ReactTableV8"
 import { UserListing } from "./UserListing"
-import { ReactTable } from "../ReactTable"
 import { AdminButtonsContainer } from "../../css"
 import { navigate } from "@reach/router"
 
@@ -64,7 +64,8 @@ const AdminPage = () => {
           </div>
         </AdminButtonsContainer>
         {panelView && <UserListing />}
-        {tableView && <ReactTable />}
+        {/* {tableView && <ReactTable />} */}
+        {tableView && <ReactTableV8 />}
       </>
     )
   }
