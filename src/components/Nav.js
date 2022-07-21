@@ -12,29 +12,42 @@ import {
 import { gatherUsers } from "../app/features/usersSlice"
 import { toast } from "react-toastify"
 import { NavContainer } from "../css"
+import theme from "../theme"
 
-export const Nav = () => {
-  const userDoc = useSelector(selectUserFireDoc)
-  const user = useSelector(selectUserAuth)
+export const Nav = props => {
   const dispatch = useDispatch()
+  const user = useSelector(selectUserAuth)
+  const userDoc = useSelector(selectUserFireDoc)
 
   return (
-    <NavContainer>
+    <NavContainer style={props.style}>
       <Link
         to="/app/profile"
-        activeStyle={{ color: "#94BDF2", textDecoration: "none" }}
+        activeStyle={{
+          color: props.mobile ? theme.colors.linkDark : theme.colors.linkLight,
+          textDecoration: "none",
+        }}
+        onClick={props.closeNav}
       >
         Profile
       </Link>
       <Link
         to="/documents"
-        activeStyle={{ color: "#94BDF2", textDecoration: "none" }}
+        activeStyle={{
+          color: props.mobile ? theme.colors.linkDark : theme.colors.linkLight,
+          textDecoration: "none",
+        }}
+        onClick={props.closeNav}
       >
         Documents
       </Link>
       <Link
         to="/faq"
-        activeStyle={{ color: "#94BDF2", textDecoration: "none" }}
+        activeStyle={{
+          color: props.mobile ? theme.colors.linkDark : theme.colors.linkLight,
+          textDecoration: "none",
+        }}
+        onClick={props.closeNav}
       >
         FAQ
       </Link>
@@ -42,7 +55,13 @@ export const Nav = () => {
       {userDoc && userDoc.role === "admin" && (
         <Link
           to="/app/admin"
-          activeStyle={{ color: "#94BDF2", textDecoration: "none" }}
+          activeStyle={{
+            color: props.mobile
+              ? theme.colors.linkDark
+              : theme.colors.linkLight,
+            textDecoration: "none",
+          }}
+          onClick={props.closeNav}
         >
           Admin
         </Link>
@@ -52,6 +71,7 @@ export const Nav = () => {
         <button
           type="button"
           onClick={() => {
+            props.closeNav()
             signOut(auth)
               .then(() => {
                 navigate("/")
@@ -72,7 +92,15 @@ export const Nav = () => {
           Logout
         </button>
       ) : (
-        <Link to="/app/login" activeStyle={{ color: "#94BDF2" }}>
+        <Link
+          to="/app/login"
+          activeStyle={{
+            color: props.mobile
+              ? theme.colors.linkDark
+              : theme.colors.linkLight,
+          }}
+          onClick={props.closeNav}
+        >
           Login/Register
         </Link>
       )}

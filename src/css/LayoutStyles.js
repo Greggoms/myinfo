@@ -21,13 +21,6 @@ export const LayoutContainer = styled.div`
     padding: 10px;
   }
 
-  /* to center the login form */
-  /* main,
-  #gatsby-focus-wrapper,
-  #gatsby-focus-wrapper > div {
-    height: 100%;
-  } */
-
   .content {
     flex: 1;
     background: ${props => props.theme.grayscale.dark2};
